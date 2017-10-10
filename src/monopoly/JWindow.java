@@ -5,6 +5,8 @@
  */
 package monopoly;
 
+import java.util.Random;
+
 /**
  *
  * @author hesha
@@ -27,40 +29,103 @@ public class JWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        BoardPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
         setPreferredSize(new java.awt.Dimension(1280, 760));
         setSize(new java.awt.Dimension(1280, 760));
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(1280, 720));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1280, 720));
-        jPanel1.setName(""); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-        jPanel1.setLayout(null);
+        BoardPanel.setMaximumSize(new java.awt.Dimension(1280, 720));
+        BoardPanel.setMinimumSize(new java.awt.Dimension(1280, 720));
+        BoardPanel.setName(""); // NOI18N
+        BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
+        BoardPanel.setLayout(null);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft.png"))); // NOI18N
+        BoardPanel.add(jLabel2);
+        jLabel2.setBounds(636, 650, 40, 27);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1280, 720));
         jLabel1.setMinimumSize(new java.awt.Dimension(720, 720));
         jLabel1.setPreferredSize(new java.awt.Dimension(720, 720));
-        jPanel1.add(jLabel1);
+        BoardPanel.add(jLabel1);
         jLabel1.setBounds(0, 0, 720, 720);
+
+        jButton1.setText("Roll Dices");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        BoardPanel.add(jButton1);
+        jButton1.setBounds(823, 310, 130, 23);
+
+        jTextField1.setText("Dice1 value");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        BoardPanel.add(jTextField1);
+        jTextField1.setBounds(790, 210, 61, 20);
+
+        jTextField2.setText("Dice2 value");
+        BoardPanel.add(jTextField2);
+        jTextField2.setBounds(890, 210, 61, 20);
+
+        jTextField3.setText("for debugging");
+        BoardPanel.add(jTextField3);
+        jTextField3.setBounds(820, 260, 110, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BoardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(BoardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    Random r1 = new Random();
+    int d1 = r1.nextInt(6) + 1;
+    
+    jTextField1.setText(""+d1);
+    
+    Random r2 = new Random();
+    int d2 = r2.nextInt(6) + 1;
+    jTextField2.setText(""+d2);
+    //check if d1 == d2 to play again
+    
+    int res = d1 + d2;
+    
+    jLabel2.setBounds(jLabel2.getX() - res*Constants.CityWidth, jLabel2.getY(), 64, 28);
+     jTextField3.setText(""+res*Constants.CityWidth);
+    
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+       
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,7 +164,12 @@ public class JWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BoardPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
