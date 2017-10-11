@@ -10,14 +10,21 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class Player {
-
+    
+    //Player number
     public int num;
+    
+    //Player label (pic)
     public JLabel label;
+    
+    //City Number
     public int currentCity;
 
     //Array of all the players
     public static ArrayList<Player> playersList = new ArrayList<>();
+    
     public static int playersCount = 0;
+    
     public static int playerTurn = 0;
 
     public Player() {
@@ -25,10 +32,10 @@ public class Player {
         //initialize current city to zero
         currentCity = 0;
 
-        //initialize player number to the playersCount
+        //initialize player number to the playersCount and increment
         num = ++playersCount;
 
-        //add player in allPlayers
+        //add player in allPlayers List
         playersList.add(this);
 
         //create a label for the player
@@ -36,9 +43,7 @@ public class Player {
             @Override
             public void run() {
                 label = new JLabel();
-
                 label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + num + ".png")));
-
                 label.setBounds(620, 620, 45, 50);
                 Constants.gameWindow.getJlabel1().add(label);
                 Constants.gameWindow.getJlabel1().validate();

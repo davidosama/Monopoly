@@ -4,13 +4,14 @@ public class Constants {
 
     //Main window
     public static JGameWindow gameWindow = new JGameWindow();
+    
     //Players Number window
     public static JChoosePlayersWindow choosePlayersWindow = new JChoosePlayersWindow();
 
     //useless for now
     public static Boolean testing = true;
 
-    //Create the Car and Dice System
+    //Car and Dice System
     public static CarAndDiceSystem carSys = new CarAndDiceSystem();
 
     public static int BoardWidth = 680;

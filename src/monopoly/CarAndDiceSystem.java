@@ -24,10 +24,11 @@ public class CarAndDiceSystem {
         //load dice image
         ImageIcon icon = loadImageOfDice(d1);
         Constants.gameWindow.get_d1_label().setIcon(icon);
-
+        //load dice image
         icon = loadImageOfDice(d2);
         Constants.gameWindow.get_d2_label().setIcon(icon);
 
+        //Move the car ely 3aleha el door by the result of the dices
         MoveCarNCities(Player.getPlayerTurn(), res);
     }
 
@@ -54,10 +55,10 @@ public class CarAndDiceSystem {
     public void MoveCarNCities(Player player, int movesNum) {
 
         JLabel playerJlbl = player.label;
-        
+
         //increment the player current city by the extra moves (movesNum)
         player.currentCity += movesNum;
-        
+
         //beacuse there are 40 cities
         player.currentCity = player.currentCity % 40;
 
