@@ -13,7 +13,7 @@ public class Constants {
     
     
     
-    
+    //two imaginary  lines to help in pixel movements
     public static int VLine = 120; 
     public static int HLine = 85;
     

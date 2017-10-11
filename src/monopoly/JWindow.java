@@ -169,7 +169,7 @@ public class JWindow extends javax.swing.JFrame {
                    MoveCarDown();
                
                Constants.CurPos++;
-               if(Constants.CurPos == 40) Constants.CurPos = 0;
+               if(Constants.CurPos == 40) Constants.CurPos = 0; //reaching 40 means you went back to GO
            }
        }
     
