@@ -2,6 +2,7 @@
 package monopoly;
 
 import java.util.Random;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -34,10 +35,10 @@ public class JWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -68,28 +69,21 @@ public class JWindow extends javax.swing.JFrame {
             }
         });
         BoardPanel.add(jButton1);
-        jButton1.setBounds(823, 310, 130, 23);
-
-        jTextField1.setText("Dice1 value");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        BoardPanel.add(jTextField1);
-        jTextField1.setBounds(790, 210, 61, 20);
-
-        jTextField2.setText("Dice2 value");
-        BoardPanel.add(jTextField2);
-        jTextField2.setBounds(890, 210, 61, 20);
+        jButton1.setBounds(823, 310, 130, 29);
 
         jTextField3.setText("jTextField3");
         BoardPanel.add(jTextField3);
-        jTextField3.setBounds(810, 90, 59, 20);
+        jTextField3.setBounds(810, 90, 80, 26);
 
         jLabel3.setText("just for debugging");
         BoardPanel.add(jLabel3);
-        jLabel3.setBounds(804, 70, 90, 14);
+        jLabel3.setBounds(804, 70, 90, 16);
+
+        jLabel4.setBounds(new java.awt.Rectangle(920, 150, 110, 110));
+        BoardPanel.add(jLabel4);
+        jLabel4.setBounds(920, 150, 110, 100);
+        BoardPanel.add(jLabel5);
+        jLabel5.setBounds(760, 150, 110, 100);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,19 +106,18 @@ public class JWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
     Random r1 = new Random();
     int d1 = r1.nextInt(6) + 1;
-    
-    jTextField1.setText(""+d1);
+    ImageIcon icon = loadImageOfDice(d1);
+    jLabel4.setIcon(icon);
     
     Random r2 = new Random();
     int d2 = r2.nextInt(6) + 1;
-    jTextField2.setText(""+d2);
-    //check if d1 == d2 to play again
+    icon= loadImageOfDice(d2);
+    jLabel5.setIcon(icon);
     
     int res = d1 + d2;
-    
-    
     MoveCar(res);
     
     
@@ -149,6 +142,30 @@ public class JWindow extends javax.swing.JFrame {
                 after moving one step we check again if we reached the number of dice, if not, move again.
     
        */
+    public ImageIcon loadImageOfDice(int dice)
+    {
+        ImageIcon i;
+        switch(dice){
+            case 1: 
+                return new javax.swing.ImageIcon(getClass().getResource("/drawables/1.png"));
+            case 2:
+                return new javax.swing.ImageIcon(getClass().getResource("/drawables/2.png"));
+            case 3:
+                return new javax.swing.ImageIcon(getClass().getResource("/drawables/3.png"));
+            case 4:
+                return new javax.swing.ImageIcon(getClass().getResource("/drawables/4.png"));
+            case 5:
+                return new javax.swing.ImageIcon(getClass().getResource("/drawables/5.png"));
+            case 6:
+                return new javax.swing.ImageIcon(getClass().getResource("/drawables/6.png"));
+            default :
+                System.out.println("SOMETHING IS WRONG IN THE loadImageOfDice");
+        }
+        
+        return new ImageIcon();
+                    
+    }
+    
        public void MoveCar(int dice)
        {
            int cx = jLabel2.getX();
@@ -203,10 +220,6 @@ public class JWindow extends javax.swing.JFrame {
    
       
       
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-       
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -249,8 +262,8 @@ public class JWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
