@@ -13,31 +13,27 @@ public class CarAndDiceSystem {
 
     public void GenerateDiceAndMove() {
         Random rand = new Random();
-        
-        int d1 = rand.nextInt(6) + 1;
 
+        int d1 = rand.nextInt(6) + 1;
         int d2 = rand.nextInt(6) + 1;
 
         //check if d1 == d2 to play again
         int res = d1 + d2;
 
         //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
-
         //load dice image
         ImageIcon icon = loadImageOfDice(d1);
-        Constants.window.get_d1_label().setIcon(icon);
+        Constants.gameWindow.get_d1_label().setIcon(icon);
 
         icon = loadImageOfDice(d2);
-        Constants.window.get_d2_label().setIcon(icon);
+        Constants.gameWindow.get_d2_label().setIcon(icon);
 
-        //FOR TESTING
-        MoveCarNCities(Monopoly.p1, res);
+        MoveCarNCities(Player.getPlayerTurn(), res);
     }
-    
-     public ImageIcon loadImageOfDice(int dice)
-    {
-        switch(dice){
-            case 1: 
+
+    public ImageIcon loadImageOfDice(int dice) {
+        switch (dice) {
+            case 1:
                 return new javax.swing.ImageIcon(getClass().getResource("/drawables/1.png"));
             case 2:
                 return new javax.swing.ImageIcon(getClass().getResource("/drawables/2.png"));
@@ -49,7 +45,7 @@ public class CarAndDiceSystem {
                 return new javax.swing.ImageIcon(getClass().getResource("/drawables/5.png"));
             case 6:
                 return new javax.swing.ImageIcon(getClass().getResource("/drawables/6.png"));
-            default :
+            default:
                 System.out.println("SOMETHING IS WRONG IN THE loadImageOfDice");
         }
         return new ImageIcon();
@@ -58,27 +54,25 @@ public class CarAndDiceSystem {
     public void MoveCarNCities(Player player, int movesNum) {
 
         JLabel playerJlbl = player.label;
+        
+        //increment the player current city by the extra moves (movesNum)
         player.currentCity += movesNum;
+        
+        //beacuse there are 40 cities
         player.currentCity = player.currentCity % 40;
 
-        int CityNo = player.currentCity;
-
         //Setting car icon base on position (Right,Left,Up..)
-        if (CityNo == 0 || CityNo == 1 || CityNo == 2 || CityNo == 3 || CityNo == 4 || CityNo == 5
-                || CityNo == 6 || CityNo == 7 || CityNo == 8 || CityNo == 9) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft.png")));
-        } else if (CityNo == 10 || CityNo == 11 || CityNo == 12 || CityNo == 13 || CityNo == 14 || CityNo == 15
-                || CityNo == 16 || CityNo == 17 || CityNo == 18 || CityNo == 19) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarUP.png")));
-        } else if (CityNo == 20 || CityNo == 21 || CityNo == 22 || CityNo == 23 || CityNo == 24 || CityNo == 25
-                || CityNo == 26 || CityNo == 27 || CityNo == 28 || CityNo == 29) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarRight.png")));
-        } else if (CityNo == 30 || CityNo == 31 || CityNo == 32 || CityNo == 33 || CityNo == 34 || CityNo == 35
-                || CityNo == 36 || CityNo == 37 || CityNo == 38 || CityNo == 39) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarDown.png")));
+        if (player.currentCity >= 0 && player.currentCity <= 9) {
+            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + player.num + ".png")));
+        } else if (player.currentCity >= 10 && player.currentCity <= 19) {
+            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarUP" + player.num + ".png")));
+        } else if (player.currentCity >= 20 && player.currentCity <= 29) {
+            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarRight" + player.num + ".png")));
+        } else if (player.currentCity >= 30 && player.currentCity <= 39) {
+            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarDown" + player.num + ".png")));
         }
 
-        switch (CityNo) {
+        switch (player.currentCity) {
             //bottom cities
             case 1:
                 playerJlbl.setBounds(570, 620, Constants.CarDim, Constants.CarDim);
