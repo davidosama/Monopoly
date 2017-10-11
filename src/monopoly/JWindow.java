@@ -16,8 +16,13 @@ public class JWindow extends javax.swing.JFrame {
     /**
      * Creates new form BoardWindow
      */
+    
+    
+    
     public JWindow() {
         initComponents();
+        jLabel2.setBounds(Constants.CarStartX, Constants.CarStartY, Constants.CarWidth, Constants.CarHeight);
+
     }
 
     /**
@@ -36,6 +41,7 @@ public class JWindow extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -50,7 +56,7 @@ public class JWindow extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft.png"))); // NOI18N
         BoardPanel.add(jLabel2);
-        jLabel2.setBounds(636, 650, 40, 27);
+        jLabel2.setBounds(470, 330, 50, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -81,9 +87,13 @@ public class JWindow extends javax.swing.JFrame {
         BoardPanel.add(jTextField2);
         jTextField2.setBounds(890, 210, 61, 20);
 
-        jTextField3.setText("for debugging");
+        jTextField3.setText("jTextField3");
         BoardPanel.add(jTextField3);
-        jTextField3.setBounds(820, 260, 110, 20);
+        jTextField3.setBounds(810, 90, 59, 20);
+
+        jLabel3.setText("just for debugging");
+        BoardPanel.add(jLabel3);
+        jLabel3.setBounds(804, 70, 90, 14);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,11 +128,86 @@ public class JWindow extends javax.swing.JFrame {
     
     int res = d1 + d2;
     
-    jLabel2.setBounds(jLabel2.getX() - res*Constants.CityWidth, jLabel2.getY(), 64, 28);
-     jTextField3.setText(""+res*Constants.CityWidth);
+    
+    MoveCar(res);
+    
+    
     
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void MoveCarLeft()
+    {
+        
+        jLabel2.setBounds(jLabel2.getX() - Constants.CityWidth, Constants.BoardHeight - Constants.HLine/2, Constants.CarWidth, Constants.CarHeight);       
+        
+    }
+     public void MoveCarRight()
+    {
+        jLabel2.setBounds(jLabel2.getX() + Constants.CityWidth, Constants.HLine/2, Constants.CarWidth, Constants.CarHeight);       
+    }
+     
+      public void MoveCarUP()
+    {
+        jLabel2.setBounds(Constants.VLine/2, jLabel2.getY() - Constants.CityWidth , Constants.CarWidth, Constants.CarHeight);       
+    }
+      
+       public void MoveCarDown()
+    {
+        jLabel2.setBounds(Constants.BoardWidth - Constants.VLine/2 , jLabel2.getY() + Constants.CityWidth, 64, 28);       
+    }
+    
+       public void MoveCar(int dice)
+       {
+            dice = 2;
+           int cx = jLabel2.getX();
+           int cy = jLabel2.getY();
+           for(int i=0; i<dice; i++)
+           {
+               jTextField3.setText(cx + "   " + cy);
+               if(getDirection(cx,cy).equals("left"))
+                    MoveCarLeft();
+               
+               else if(getDirection(cx,cy).equals("up"))
+                   MoveCarUP();
+               
+                else if(getDirection(cx,cy).equals("right"))
+                   MoveCarRight();
+               
+                else if(getDirection(cx,cy).equals("down"))
+                   MoveCarDown();
+           }
+       }
+       
+       public String getDirection(int x, int y)
+       {
+           
+           
+            if(y <= Constants.HLine && !(x >= Constants.BoardWidth - Constants.VLine))
+           {
+               jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarRight.png")));
+               return "right";
+           }
+            
+            else if(x <= Constants.VLine)
+           {
+               jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarUP.png")));
+               return "up";
+           }
+            
+            else if(y >= Constants.BoardHeight - Constants.HLine)
+           {
+               jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft.png")));
+               return "left";
+           }
+            
+            else if(x >= Constants.BoardWidth - Constants.VLine)
+            {
+               jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarDown.png")));
+               return "down";
+           }          
+           return null;
+       }
+    
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
        
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -168,6 +253,7 @@ public class JWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
