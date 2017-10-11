@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package monopoly;
 
 import java.util.Random;
@@ -21,7 +17,7 @@ public class JWindow extends javax.swing.JFrame {
     
     public JWindow() {
         initComponents();
-        jLabel2.setBounds(Constants.CarStartX, Constants.CarStartY, Constants.CarWidth, Constants.CarHeight);
+        //jLabel2.setBounds(Constants.CarStartX, Constants.CarStartY, Constants.CarDim, Constants.CarDim);
 
     }
 
@@ -56,7 +52,7 @@ public class JWindow extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft.png"))); // NOI18N
         BoardPanel.add(jLabel2);
-        jLabel2.setBounds(470, 330, 50, 40);
+        jLabel2.setBounds(640, 600, 45, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -137,77 +133,55 @@ public class JWindow extends javax.swing.JFrame {
 
     public void MoveCarLeft()
     {
-        
-        jLabel2.setBounds(jLabel2.getX() - Constants.CityWidth, Constants.BoardHeight - Constants.HLine/2, Constants.CarWidth, Constants.CarHeight);       
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft.png")));
+        jLabel2.setBounds(jLabel2.getX() - Constants.CityWidth, Constants.BoardHeight - Constants.HLine , Constants.CarDim, Constants.CarDim);       
         
     }
      public void MoveCarRight()
     {
-        jLabel2.setBounds(jLabel2.getX() + Constants.CityWidth, Constants.HLine/2, Constants.CarWidth, Constants.CarHeight);       
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarRight.png")));
+        jLabel2.setBounds(jLabel2.getX() + Constants.CityWidth, Constants.HLine/2, Constants.CarDim, Constants.CarDim);       
     }
      
       public void MoveCarUP()
     {
-        jLabel2.setBounds(Constants.VLine/2, jLabel2.getY() - Constants.CityWidth , Constants.CarWidth, Constants.CarHeight);       
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarUP.png")));
+        jLabel2.setBounds(Constants.VLine/2, jLabel2.getY() - Constants.CityWidth , Constants.CarDim, Constants.CarDim);       
     }
       
        public void MoveCarDown()
     {
-        jLabel2.setBounds(Constants.BoardWidth - Constants.VLine/2 , jLabel2.getY() + Constants.CityWidth, 64, 28);       
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarDown.png")));
+        jLabel2.setBounds(Constants.BoardWidth - Constants.VLine/2 , jLabel2.getY() + Constants.CarDim, Constants.CarDim, Constants.CarDim);       
     }
     
        public void MoveCar(int dice)
        {
-            dice = 2;
            int cx = jLabel2.getX();
            int cy = jLabel2.getY();
            for(int i=0; i<dice; i++)
            {
                jTextField3.setText(cx + "   " + cy);
-               if(getDirection(cx,cy).equals("left"))
+               if(Constants.CurPos >= 0 && Constants.CurPos < 10)
                     MoveCarLeft();
                
-               else if(getDirection(cx,cy).equals("up"))
+                if(Constants.CurPos >= 10 && Constants.CurPos < 20)
                    MoveCarUP();
                
-                else if(getDirection(cx,cy).equals("right"))
+                 if(Constants.CurPos >= 20 && Constants.CurPos < 30)
                    MoveCarRight();
                
-                else if(getDirection(cx,cy).equals("down"))
+                 if(Constants.CurPos >= 30 && Constants.CurPos < 40)
                    MoveCarDown();
+               
+               Constants.CurPos++;
+               if(Constants.CurPos == 40) Constants.CurPos = 0;
            }
        }
-       
-       public String getDirection(int x, int y)
-       {
-           
-           
-            if(y <= Constants.HLine && !(x >= Constants.BoardWidth - Constants.VLine))
-           {
-               jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarRight.png")));
-               return "right";
-           }
-            
-            else if(x <= Constants.VLine)
-           {
-               jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarUP.png")));
-               return "up";
-           }
-            
-            else if(y >= Constants.BoardHeight - Constants.HLine)
-           {
-               jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft.png")));
-               return "left";
-           }
-            
-            else if(x >= Constants.BoardWidth - Constants.VLine)
-            {
-               jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarDown.png")));
-               return "down";
-           }          
-           return null;
-       }
-    
+
+   
+      
+      
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
        
     }//GEN-LAST:event_jTextField1ActionPerformed
