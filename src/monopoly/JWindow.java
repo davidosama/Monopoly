@@ -78,12 +78,10 @@ public class JWindow extends javax.swing.JFrame {
         jLabel3.setText("just for debugging");
         BoardPanel.add(jLabel3);
         jLabel3.setBounds(804, 70, 90, 16);
-
-        jLabel4.setBounds(new java.awt.Rectangle(920, 150, 110, 110));
         BoardPanel.add(jLabel4);
-        jLabel4.setBounds(920, 150, 110, 100);
+        jLabel4.setBounds(920, 140, 110, 110);
         BoardPanel.add(jLabel5);
-        jLabel5.setBounds(760, 150, 110, 100);
+        jLabel5.setBounds(760, 140, 110, 110);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
