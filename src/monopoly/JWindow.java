@@ -131,6 +131,48 @@ public class JWindow extends javax.swing.JFrame {
     
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+       /* 
+       the idea of move function is that
+       CurPos Counter starts with zero end with 40 (from go to go)
+       every time the car move a city the counter++
+       first ten steps move left >=0 & <10
+       second ten steps move up >= 10 & <20
+       third move steps move left 
+       fourth move step move down
+        
+    move is a for loop starts from 1 until the sum of dice
+    each iteration moves 1 step using MoveCarLeft,Right,UP,Down functions
+       MoveCarLeft loads the CarLeft.png and moves one step (58 pixel which is the city width) to the left
+       the same goes for right, up and down functons
+       
+                after moving one step we check again if we reached the number of dice, if not, move again.
+    
+       */
+       public void MoveCar(int dice)
+       {
+           int cx = jLabel2.getX();
+           int cy = jLabel2.getY();
+           for(int i=0; i<dice; i++)
+           {
+               jTextField3.setText(cx + "   " + cy);
+               if(Constants.CurPos >= 0 && Constants.CurPos < 10)
+                    MoveCarLeft();
+               
+                if(Constants.CurPos >= 10 && Constants.CurPos < 20)
+                   MoveCarUP();
+               
+                 if(Constants.CurPos >= 20 && Constants.CurPos < 30)
+                   MoveCarRight();
+               
+                 if(Constants.CurPos >= 30 && Constants.CurPos < 40)
+                   MoveCarDown();
+               
+               Constants.CurPos++;
+               if(Constants.CurPos == 40) Constants.CurPos = 0;
+           }
+       }
+    
     public void MoveCarLeft()
     {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft.png")));
@@ -155,29 +197,8 @@ public class JWindow extends javax.swing.JFrame {
         jLabel2.setBounds(Constants.BoardWidth - Constants.VLine/2 , jLabel2.getY() + Constants.CarDim, Constants.CarDim, Constants.CarDim);       
     }
     
-       public void MoveCar(int dice)
-       {
-           int cx = jLabel2.getX();
-           int cy = jLabel2.getY();
-           for(int i=0; i<dice; i++)
-           {
-               jTextField3.setText(cx + "   " + cy);
-               if(Constants.CurPos >= 0 && Constants.CurPos < 10)
-                    MoveCarLeft();
-               
-                if(Constants.CurPos >= 10 && Constants.CurPos < 20)
-                   MoveCarUP();
-               
-                 if(Constants.CurPos >= 20 && Constants.CurPos < 30)
-                   MoveCarRight();
-               
-                 if(Constants.CurPos >= 30 && Constants.CurPos < 40)
-                   MoveCarDown();
-               
-               Constants.CurPos++;
-               if(Constants.CurPos == 40) Constants.CurPos = 0;
-           }
-       }
+       
+    
 
    
       
