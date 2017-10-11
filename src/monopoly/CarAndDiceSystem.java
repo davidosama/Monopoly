@@ -12,16 +12,16 @@ import javax.swing.JLabel;
 public class CarAndDiceSystem {
 
     public void GenerateDiceAndMove() {
-        Random r1 = new Random();
-        int d1 = r1.nextInt(6) + 1;
+        Random rand = new Random();
+        
+        int d1 = rand.nextInt(6) + 1;
 
-        Random r2 = new Random();
-        int d2 = r2.nextInt(6) + 1;
+        int d2 = rand.nextInt(6) + 1;
 
         //check if d1 == d2 to play again
         int res = d1 + d2;
 
-        Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
+        //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
 
         //load dice image
         ImageIcon icon = loadImageOfDice(d1);
@@ -52,9 +52,7 @@ public class CarAndDiceSystem {
             default :
                 System.out.println("SOMETHING IS WRONG IN THE loadImageOfDice");
         }
-        
         return new ImageIcon();
-                    
     }
 
     public void MoveCarNCities(Player player, int movesNum) {

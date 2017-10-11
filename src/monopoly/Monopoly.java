@@ -7,6 +7,8 @@ public class Monopoly {
     
     //TESTING ONLY
     public static Player p1;
+    public static Player p2;
+
 
     public static void main(String[] args) {
 
@@ -17,6 +19,8 @@ public class Monopoly {
         //Show window
         Constants.window.setVisible(true);
         
+        //Create player 1
         p1 = new Player();
+        p2 = new Player();
     }
 }
