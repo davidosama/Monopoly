@@ -10,21 +10,21 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class Player {
-    
+
     //Player number
     public int num;
-    
+
     //Player label (pic)
     public JLabel label;
-    
+
     //City Number
     public int currentCity;
 
     //Array of all the players
     public static ArrayList<Player> playersList = new ArrayList<>();
-    
+
     public static int playersCount = 0;
-    
+
     private static int Turn = 0;
 
     public Player() {
@@ -57,11 +57,10 @@ public class Player {
     public static void MoveTurn() {
 
         Turn = (Turn + 1) % playersCount;
-        
+
     }
-    
-    public static Player getPlayer()
-    {
+
+    public static Player getPlayer() {
         return playersList.get(Turn);
     }
 

@@ -9,7 +9,7 @@ public class Monopoly {
     private static Dimension dim;
 
     public static void main(String[] args) {
-        
+
         Board board = new Board();
 
         //get dimens of screen
@@ -34,7 +34,7 @@ public class Monopoly {
         for (int i = 0; i < number; i++) {
             new Player();
         }
-        
+
         startGameWindow();
     }
 

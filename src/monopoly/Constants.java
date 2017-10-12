@@ -4,7 +4,7 @@ public class Constants {
 
     //Main window
     public static JGameWindow gameWindow = new JGameWindow();
-    
+
     //Players Number window
     public static JChoosePlayersWindow choosePlayersWindow = new JChoosePlayersWindow();
 

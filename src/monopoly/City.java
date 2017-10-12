@@ -1,17 +1,16 @@
 package monopoly;
 
-
 public abstract class City {
-    
+
     String name;
     int price;
     int rent;
     int mortgage;
-    Boolean owned= false;
+    Boolean owned = false;
 }
 
-class normalCity extends City{
-    
+class normalCity extends City {
+
     String color;
     int rent_1house;
     int rent_2house;
@@ -35,8 +34,8 @@ class normalCity extends City{
     }
 }
 
-class RailRoad extends City{
-    
+class RailRoad extends City {
+
     int rent2;
     int rent3;
     int rent4;
@@ -52,14 +51,14 @@ class RailRoad extends City{
     }
 }
 
-class Company extends City{
+class Company extends City {
 
     public Company(String name, int price, int mortgage) {
         this.name = name;
         this.price = price;
         this.mortgage = mortgage;
-        
+
         //rent is 4 times the amount shown on dice for 1 company & 10 times if the 2 companies are owned
-        this.rent = 0; 
+        this.rent = 0;
     }
 }
