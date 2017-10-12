@@ -19,7 +19,8 @@ public class CarAndDiceSystem {
 
         //check if d1 == d2 to play again
         int res = d1 + d2;
-
+        
+        
         //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
         //load dice image
         ImageIcon icon = loadImageOfDice(d1);
@@ -29,7 +30,8 @@ public class CarAndDiceSystem {
         Constants.gameWindow.get_d2_label().setIcon(icon);
 
         //Move the car ely 3aleha el door by the result of the dices
-        MoveCarNCities(Player.getPlayerTurn(), res);
+        MoveCarNCities(Player.getPlayer(), res);
+        if(!(d1 == d2)) Player.MoveTurn();
     }
 
     public ImageIcon loadImageOfDice(int dice) {

@@ -25,7 +25,7 @@ public class Player {
     
     public static int playersCount = 0;
     
-    public static int playerTurn = 0;
+    public static int Turn = 0;
 
     public Player() {
 
@@ -54,17 +54,22 @@ public class Player {
         //debugPrintPlayer();
     }
 
-    public static Player getPlayerTurn() {
+    public static void MoveTurn() {
 
-        playerTurn = (playerTurn + 1) % playersCount;
-        return playersList.get(playerTurn);
+        Turn = (Turn + 1) % playersCount;
+        
+    }
+    
+    public static Player getPlayer()
+    {
+        return playersList.get(Turn);
     }
 
     private void debugPrintPlayer() {
 
         System.out.print("\n\nplayer Number: " + num
                 + "\nplayers Count: " + playersCount
-                + "\nplayer Turn: " + playerTurn
+                + "\nplayer Turn: " + Turn
                 + "\ncurrentCity: " + currentCity
         );
     }
