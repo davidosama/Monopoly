@@ -2,7 +2,10 @@ package monopoly;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> test
 
 public class Monopoly {
 
@@ -10,6 +13,7 @@ public class Monopoly {
 
     public static void main(String[] args) {
 
+<<<<<<< HEAD
         Board board = new Board();
 
         //get dimens of screen
@@ -51,4 +55,16 @@ public class Monopoly {
         Constants.gameWindow.setVisible(true);
     }
 
+=======
+        //Creating window
+        JWindow window = new JWindow();
+
+        //Sets the window position to the screen center
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        window.setLocation(dim.width / 2 - window.getSize().width / 2, dim.height / 2 - window.getSize().height / 2);
+
+        //Show window
+        window.setVisible(true);
+    }
+>>>>>>> test
 }
