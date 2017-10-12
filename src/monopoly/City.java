@@ -19,9 +19,8 @@ class normalCity extends City{
     int rent_4house;
     int rent_hotel;
     int houseCost;
-    int hotelCost;
 
-    public normalCity(String name, String color, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost, int hotelCost) {
+    public normalCity(String name, String color, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost) {
         this.name = name;
         this.color = color;
         this.price = price;
@@ -33,7 +32,6 @@ class normalCity extends City{
         this.rent_hotel = rent_hotel;
         this.mortgage = mortgage;
         this.houseCost = houseCost;
-        this.hotelCost = hotelCost;
     }
 }
 
