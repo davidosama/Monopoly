@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Projects/NetBeans%20Projects/Monopoly/src/monopoly/Monopoly.java</file>
             <file>file:/D:/Projects/NetBeans%20Projects/Monopoly/src/monopoly/Board.java</file>
             <file>file:/D:/Projects/NetBeans%20Projects/Monopoly/src/monopoly/City.java</file>
+=======
+            <file>file:/C:/Users/Kord/Documents/GitHub/Monopoly/src/monopoly/Monopoly.java</file>
+            <file>file:/C:/Users/Kord/Documents/GitHub/Monopoly/src/monopoly/City.java</file>
+            <file>file:/C:/Users/Kord/Documents/GitHub/Monopoly/src/monopoly/Board.java</file>
+>>>>>>> 6986b00c0895c198b8f23b833dcd0e70fc9dc760
         </group>
     </open-files>
 </project-private>
