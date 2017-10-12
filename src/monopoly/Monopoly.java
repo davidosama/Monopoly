@@ -9,6 +9,8 @@ public class Monopoly {
     private static Dimension dim;
 
     public static void main(String[] args) {
+        
+        Board board = new Board();
 
         //get dimens of screen
         dim = Toolkit.getDefaultToolkit().getScreenSize();
