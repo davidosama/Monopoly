@@ -146,7 +146,8 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       // Constants.carSys.MoveCarNCities(Player.getPlayerTurn(), 1);
+       Constants.carSys.MoveCarNCities(Player.getPlayer(), 1);
+       Player.MoveTurn();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

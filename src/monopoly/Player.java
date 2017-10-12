@@ -25,7 +25,7 @@ public class Player {
     
     public static int playersCount = 0;
     
-    public static int Turn = 0;
+    private static int Turn = 0;
 
     public Player() {
 
