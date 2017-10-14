@@ -145,9 +145,21 @@ public class JGameWindow extends javax.swing.JFrame {
         return d1_label;
     }
 
+    public void disableRollDiceBtn() {
+
+        jButton1.setEnabled(false);
+        
+    } 
+    
+    public void enableRollDiceBtn() {
+
+        jButton1.setEnabled(true);
+        
+    }
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       Constants.carSys.MoveCarNCities(Player.getPlayer(), 1);
-       Player.MoveTurn();
+        Constants.carSys.MoveCarNCities(Player.getPlayer(), 1);
+        Player.MoveTurn();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

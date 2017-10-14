@@ -18,21 +18,22 @@ public class CarAndDiceSystem {
 
     public CarAndDiceSystem() {
 
-        t = new javax.swing.Timer(500, new ActionListener() {
+        t = new javax.swing.Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MoveCarNCities(Player.getPlayer(), 1);
 
-                res --;
+                MoveCarNCities(Player.getPlayer(), 1);
+                res--;
 
                 if (res == 0) {
-                    if (!(d1 == d2)) 
+                    Constants.gameWindow.enableRollDiceBtn();
+                    if (!(d1 == d2)) {
                         Player.MoveTurn();
-                    
+                    }
 
                     t.stop();
-
                 }
+
             }
         }
         );
@@ -55,6 +56,7 @@ public class CarAndDiceSystem {
         icon = loadImageOfDice(d2);
         Constants.gameWindow.get_d2_label().setIcon(icon);
 
+        Constants.gameWindow.disableRollDiceBtn();
         t.start();
 
         //Move the car ely 3aleha el door by the result of the dices

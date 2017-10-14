@@ -14,6 +14,14 @@ public class Player {
     //Player number
     public int num;
 
+    private String name;
+
+    private ArrayList<Integer> citiesOwned;
+
+    private int money;
+
+    private boolean active; //will be used if the player is in jail
+
     //Player label (pic)
     public JLabel label;
 
@@ -72,4 +80,40 @@ public class Player {
                 + "\ncurrentCity: " + currentCity
         );
     }
+
+    public boolean buy(int city, int cost) {
+        if (money >= cost) {
+            citiesOwned.add(city);
+            money -= cost;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean sell(int city, int cost) {
+        if (citiesOwned.contains(city)) {
+            citiesOwned.remove(new Integer(city));
+            money += cost;
+            return true;
+        }
+        return false;
+    }
+
+//    abstract boolean mortgage(int city, int mortgageCost);
+//    abstract boolean trade(int city1, int city2);
+    
+    public void addMoney(int money) {
+        this.money += money;
+    }
+
+    public boolean deductMoney(int money) {
+        if (this.money >= money) {
+            this.money -= money;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
