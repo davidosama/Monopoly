@@ -5,20 +5,52 @@
  */
 package monopoly;
 
+import java.awt.event.ActionEvent;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
 
 public class CarAndDiceSystem {
+        int counter = 0;
+        int d1, d2, res;
+        javax.swing.Timer t;
+    public CarAndDiceSystem() {
+    
+       t = new javax.swing.Timer(500,new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MoveCarNCities(Player.getPlayer(), 1);
+                
+                counter++;
+                
+                if(counter == res)
+                {
+                if (!(d1 == d2)) 
+                    Player.MoveTurn();
+                
+                counter = 0;
+                t.stop();
+                
+                }
+            }
+        }
+                
+    
+        );
+    
+    }
 
-    public void GenerateDiceAndMove() {
+        
+        
+        public void GenerateDiceAndMove() {
         Random rand = new Random();
-
-        int d1 = rand.nextInt(6) + 1;
-        int d2 = rand.nextInt(6) + 1;
+        d1 = rand.nextInt(6) + 1;
+        d2 = rand.nextInt(6) + 1;
 
         //check if d1 == d2 to play again
-        int res = d1 + d2;
+        res = d1 + d2;
 
         //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
         //load dice image
@@ -27,12 +59,13 @@ public class CarAndDiceSystem {
         //load dice image
         icon = loadImageOfDice(d2);
         Constants.gameWindow.get_d2_label().setIcon(icon);
+        
+        t.start();
 
         //Move the car ely 3aleha el door by the result of the dices
-        MoveCarNCities(Player.getPlayer(), res);
-        if (!(d1 == d2)) {
-            Player.MoveTurn();
-        }
+        
+       
+        
     }
 
     public ImageIcon loadImageOfDice(int dice) {
