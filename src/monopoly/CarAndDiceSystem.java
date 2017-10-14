@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 
 public class CarAndDiceSystem {
 
-    int counter = 0;
     int d1, d2, res;
     javax.swing.Timer t;
 
@@ -24,14 +23,13 @@ public class CarAndDiceSystem {
             public void actionPerformed(ActionEvent e) {
                 MoveCarNCities(Player.getPlayer(), 1);
 
-                counter++;
+                res --;
 
-                if (counter == res) {
-                    if (!(d1 == d2)) {
+                if (res == 0) {
+                    if (!(d1 == d2)) 
                         Player.MoveTurn();
-                    }
+                    
 
-                    counter = 0;
                     t.stop();
 
                 }
