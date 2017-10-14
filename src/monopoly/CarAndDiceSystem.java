@@ -41,6 +41,11 @@ public class CarAndDiceSystem {
     }
 
     public void GenerateDiceAndMove() {
+
+        if (Constants.carSys.t.isRunning()) {
+            return;
+        }
+
         Random rand = new Random();
         d1 = rand.nextInt(6) + 1;
         d2 = rand.nextInt(6) + 1;
