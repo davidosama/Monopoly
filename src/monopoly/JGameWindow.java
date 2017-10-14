@@ -107,7 +107,8 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Constants.carSys.GenerateDiceAndMove();
+        if(!Constants.carSys.t.isRunning())
+            Constants.carSys.GenerateDiceAndMove();
 
     }//GEN-LAST:event_jButton1ActionPerformed
     /* 
