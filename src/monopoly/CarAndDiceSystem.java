@@ -29,9 +29,9 @@ public class CarAndDiceSystem {
                     if (!(d1 == d2)) 
                         Player.MoveTurn();
                     
-
+                    
                     t.stop();
-
+                    
                 }
             }
         }
@@ -56,7 +56,8 @@ public class CarAndDiceSystem {
         Constants.gameWindow.get_d2_label().setIcon(icon);
 
         t.start();
-
+        
+        
         //Move the car ely 3aleha el door by the result of the dices
     }
 
