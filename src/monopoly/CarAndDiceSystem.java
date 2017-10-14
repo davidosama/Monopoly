@@ -12,39 +12,36 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 
 public class CarAndDiceSystem {
-        int counter = 0;
-        int d1, d2, res;
-        javax.swing.Timer t;
+
+    int counter = 0;
+    int d1, d2, res;
+    javax.swing.Timer t;
+
     public CarAndDiceSystem() {
-    
-       t = new javax.swing.Timer(500,new ActionListener()
-        {
+
+        t = new javax.swing.Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MoveCarNCities(Player.getPlayer(), 1);
-                
+
                 counter++;
-                
-                if(counter == res)
-                {
-                if (!(d1 == d2)) 
-                    Player.MoveTurn();
-                
-                counter = 0;
-                t.stop();
-                
+
+                if (counter == res) {
+                    if (!(d1 == d2)) {
+                        Player.MoveTurn();
+                    }
+
+                    counter = 0;
+                    t.stop();
+
                 }
             }
         }
-                
-    
         );
-    
+
     }
 
-        
-        
-        public void GenerateDiceAndMove() {
+    public void GenerateDiceAndMove() {
         Random rand = new Random();
         d1 = rand.nextInt(6) + 1;
         d2 = rand.nextInt(6) + 1;
@@ -59,13 +56,10 @@ public class CarAndDiceSystem {
         //load dice image
         icon = loadImageOfDice(d2);
         Constants.gameWindow.get_d2_label().setIcon(icon);
-        
+
         t.start();
 
         //Move the car ely 3aleha el door by the result of the dices
-        
-       
-        
     }
 
     public ImageIcon loadImageOfDice(int dice) {
