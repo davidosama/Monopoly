@@ -115,7 +115,7 @@ public class JGameWindow extends javax.swing.JFrame {
         );
 
         BoardPanel.add(currentCardPanel);
-        currentCardPanel.setBounds(230, 240, 252, 284);
+        currentCardPanel.setBounds(1030, 20, 252, 284);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
