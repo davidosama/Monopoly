@@ -8,8 +8,8 @@ public class Constants {
     //Players Number window
     public static JChoosePlayersWindow choosePlayersWindow = new JChoosePlayersWindow();
 
-    //useless for now
-    public static Boolean testing = true;
+    //set true for fast debugging
+    public static Boolean testing = false;
 
     //Car and Dice System
     public static CarAndDiceSystem carSys = new CarAndDiceSystem();
