@@ -51,8 +51,11 @@ public class Player {
             @Override
             public void run() {
                 label = new JLabel();
-                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + num + ".png")));
-                label.setBounds(620, 620, 45, 50);
+                javax.swing.ImageIcon icon = new javax.swing.ImageIcon
+                                            (getClass().getResource("/drawables/CarLeft" + num + ".png"));
+                label.setIcon(icon);
+                label.setBounds(Constants.BoardWidth - icon.getIconWidth(), Constants.BoardHeight - icon.getIconHeight() - 20,
+                                icon.getIconWidth(), icon.getIconHeight());
                 Constants.gameWindow.getJlabel1().add(label);
                 Constants.gameWindow.getJlabel1().validate();
                 Constants.gameWindow.getJlabel1().repaint();

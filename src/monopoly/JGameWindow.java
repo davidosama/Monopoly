@@ -10,7 +10,10 @@ public class JGameWindow extends javax.swing.JFrame {
      */
     public JGameWindow() {
         initComponents();
-        
+        Constants.BoardHeight = jLabel1.getHeight();
+        Constants.BoardWidth = jLabel1.getWidth();
+        Constants.CarHeight = jLabel2.getHeight();
+        Constants.CarWidth = jLabel2.getWidth();
     }
 
     /**

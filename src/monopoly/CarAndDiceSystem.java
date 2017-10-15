@@ -75,7 +75,7 @@ public class CarAndDiceSystem {
             
     }
     
-    public void loadImageOfPlayer(String dist)
+    public void UpdateImageOfPlayer(String dist)
     {
           JLabel playerJlbl = Constants.curPlayer.label;
             javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" +  Constants.curPlayer.num + ".png"));
@@ -91,20 +91,33 @@ public class CarAndDiceSystem {
         JLabel playerJlbl = player.label;
 
         //increment the player current city by the extra moves (movesNum)
+        player.currentCity ++;
 
         //beacuse there are 40 cities
         player.currentCity = player.currentCity % 40;
 
-        //Setting car icon base on position (Right,Left,Up..)
-        if (player.currentCity >= 0 && player.currentCity <= 9) {
-            loadImageOfPlayer("Left");
-        } else if (player.currentCity >= 10 && player.currentCity <= 19) {
-            loadImageOfPlayer("UP");
-        } else if (player.currentCity >= 20 && player.currentCity <= 29) {
-            loadImageOfPlayer("Right");
-        } else if (player.currentCity >= 30 && player.currentCity <= 39) {
-            loadImageOfPlayer("Down");
-        }
+        //Setting car icon based on position (Right,Left,Up..)
+//      if (player.currentCity == 9 || player.currentCity == 19 || player.currentCity == 29 || player.currentCity == 39 )
+               switch(player.currentCity) 
+               {
+                   case 10:
+                     UpdateImageOfPlayer("UP");
+                     break;
+            
+                   case 20:
+                       UpdateImageOfPlayer("Right");
+                       break;
+                       
+                   case 30:
+                       UpdateImageOfPlayer("Down");
+                       break;
+                   case 0:
+                       UpdateImageOfPlayer("Left");
+                       break;
+                }
+               
+               
+               //playerJlbl.setLocation(d1, Constants.BoardHeight );
 
         switch (player.currentCity) {
             //bottom cities
@@ -234,7 +247,5 @@ public class CarAndDiceSystem {
             default:
                 break;
         }
-    
-    player.currentCity ++;
     }
 }

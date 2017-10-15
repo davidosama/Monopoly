@@ -14,19 +14,25 @@ public class Constants {
     //Car and Dice System
     public static CarAndDiceSystem carSys = new CarAndDiceSystem();
 
-    public static int BoardWidth = 680;
-    public static int BoardHeight = 690;
+    public static int BoardWidth;
+    public static int BoardHeight;
 
     public static int CityWidth = 58;
 
-    public static int CarStartX = 630;
-    public static int CarStartY = 660;
+    public static int CarHeight;
+    public static int CarWidth;
 
     public static int CarDim = 64; // 28
 
     public static Player curPlayer;
     
-
-    public static int CurPos = 0;
+    
+    public void swapCarDimensions()
+    {
+        int tmp = CarHeight;
+        CarHeight = CarWidth;
+        CarWidth = tmp;
+        
+    }
 
 }
