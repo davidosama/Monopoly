@@ -18,11 +18,13 @@ public class CarAndDiceSystem {
 
     public CarAndDiceSystem() {
 
-        t = new javax.swing.Timer(50, new ActionListener() {
+        t = new javax.swing.Timer(150, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                MoveCarNCities(Player.getPlayer(), 1);
+                Player p = Player.getPlayer();
+                MoveCarNCities(p, 1);
+                Constants.gameWindow.drawCurrentCard(p.currentCity);
                 res--;
 
                 if (res == 0) {
@@ -33,7 +35,6 @@ public class CarAndDiceSystem {
 
                     t.stop();
                 }
-
             }
         }
         );

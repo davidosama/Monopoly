@@ -24,11 +24,14 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
         d1_label = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        currentCardPanel = new javax.swing.JPanel();
+        currentCardLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -47,7 +50,7 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(jLabel1);
         jLabel1.setBounds(0, 0, 720, 720);
 
-        jButton1.setText("Roll Dices");
+        jButton1.setText("Roll Dice");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -55,17 +58,6 @@ public class JGameWindow extends javax.swing.JFrame {
         });
         BoardPanel.add(jButton1);
         jButton1.setBounds(790, 310, 160, 60);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        BoardPanel.add(jScrollPane1);
-        jScrollPane1.setBounds(770, 90, 223, 83);
-
-        jLabel2.setText("DEBUGGING LOG");
-        BoardPanel.add(jLabel2);
-        jLabel2.setBounds(820, 70, 140, 16);
         BoardPanel.add(d2_label);
         d2_label.setBounds(900, 180, 110, 110);
         d2_label.getAccessibleContext().setAccessibleName("d2_label");
@@ -74,6 +66,56 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(d1_label);
         d1_label.setBounds(770, 180, 110, 110);
         d1_label.getAccessibleContext().setAccessibleName("d1_label");
+
+        jLabel2.setText("DEBUGGING LOG");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
+        );
+
+        BoardPanel.add(jPanel1);
+        jPanel1.setBounds(780, 400, 190, 140);
+
+        currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
+        currentCardPanel.setPreferredSize(new java.awt.Dimension(252, 284));
+
+        javax.swing.GroupLayout currentCardPanelLayout = new javax.swing.GroupLayout(currentCardPanel);
+        currentCardPanel.setLayout(currentCardPanelLayout);
+        currentCardPanelLayout.setHorizontalGroup(
+            currentCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentCardPanelLayout.createSequentialGroup()
+                .addComponent(currentCardLabel)
+                .addGap(0, 252, Short.MAX_VALUE))
+        );
+        currentCardPanelLayout.setVerticalGroup(
+            currentCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentCardPanelLayout.createSequentialGroup()
+                .addComponent(currentCardLabel)
+                .addGap(0, 284, Short.MAX_VALUE))
+        );
+
+        BoardPanel.add(currentCardPanel);
+        currentCardPanel.setBounds(1010, 20, 252, 284);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,6 +189,15 @@ public class JGameWindow extends javax.swing.JFrame {
         jButton1.setEnabled(true);
         
     }
+    public void drawCurrentCard(int curPosition)
+    {
+        // to-do, adding more images and loading the images to an array of icons at the beginning
+        
+        try{
+        currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Cards/"+curPosition+".png")));
+        }
+        catch(Exception e){}
+    }
 
     /**
      * @param args the command line arguments
@@ -188,11 +239,14 @@ public class JGameWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BoardPanel;
+    private javax.swing.JLabel currentCardLabel;
+    private javax.swing.JPanel currentCardPanel;
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
