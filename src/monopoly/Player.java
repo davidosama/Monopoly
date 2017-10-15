@@ -56,6 +56,7 @@ public class Player {
                 Constants.gameWindow.getJlabel1().add(label);
                 Constants.gameWindow.getJlabel1().validate();
                 Constants.gameWindow.getJlabel1().repaint();
+                Constants.curPlayer = Player.getPlayer();
             }
         });
 
@@ -65,6 +66,7 @@ public class Player {
     public static void MoveTurn() {
 
         Turn = (Turn + 1) % playersCount;
+        Constants.curPlayer = getPlayer();
 
     }
 

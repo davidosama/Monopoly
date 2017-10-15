@@ -24,8 +24,8 @@ public class Constants {
 
     public static int CarDim = 64; // 28
 
-    public static int VLine = 120;
-    public static int HLine = 85;
+    public static Player curPlayer;
+    
 
     public static int CurPos = 0;
 

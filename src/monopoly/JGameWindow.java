@@ -10,6 +10,7 @@ public class JGameWindow extends javax.swing.JFrame {
      */
     public JGameWindow() {
         initComponents();
+        
     }
 
     /**

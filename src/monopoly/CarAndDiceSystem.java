@@ -23,7 +23,7 @@ public class CarAndDiceSystem {
             public void actionPerformed(ActionEvent e) {
 
                 Player p = Player.getPlayer();
-                MoveCarNCities(p, 1);
+                MoveOneCity();
                 Constants.gameWindow.drawCurrentCard(p.currentCity);
                 res--;
 
@@ -69,45 +69,41 @@ public class CarAndDiceSystem {
         //Move the car ely 3aleha el door by the result of the dices
     }
 
-    public ImageIcon loadImageOfDice(int dice) {
-        switch (dice) {
-            case 1:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/1.png"));
-            case 2:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/2.png"));
-            case 3:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/3.png"));
-            case 4:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/4.png"));
-            case 5:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/5.png"));
-            case 6:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/6.png"));
-            default:
-                System.out.println("SOMETHING IS WRONG IN THE loadImageOfDice");
-        }
-        return new ImageIcon();
+    public ImageIcon loadImageOfDice(int dice)
+    {
+       return new javax.swing.ImageIcon(getClass().getResource("/drawables/" + dice + ".png"));
+            
+    }
+    
+    public void loadImageOfPlayer(String dist)
+    {
+          JLabel playerJlbl = Constants.curPlayer.label;
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" +  Constants.curPlayer.num + ".png"));
+            playerJlbl.setIcon(icon);
+            playerJlbl.setBounds(playerJlbl.getX(),playerJlbl.getY(), icon.getIconWidth(), icon.getIconHeight());
+        
     }
 
-    public void MoveCarNCities(Player player, int movesNum) {
+    
+    public void MoveOneCity() {
 
+        Player player = Constants.curPlayer;
         JLabel playerJlbl = player.label;
 
         //increment the player current city by the extra moves (movesNum)
-        player.currentCity += movesNum;
 
         //beacuse there are 40 cities
         player.currentCity = player.currentCity % 40;
 
         //Setting car icon base on position (Right,Left,Up..)
         if (player.currentCity >= 0 && player.currentCity <= 9) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + player.num + ".png")));
+            loadImageOfPlayer("Left");
         } else if (player.currentCity >= 10 && player.currentCity <= 19) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarUP" + player.num + ".png")));
+            loadImageOfPlayer("UP");
         } else if (player.currentCity >= 20 && player.currentCity <= 29) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarRight" + player.num + ".png")));
+            loadImageOfPlayer("Right");
         } else if (player.currentCity >= 30 && player.currentCity <= 39) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarDown" + player.num + ".png")));
+            loadImageOfPlayer("Down");
         }
 
         switch (player.currentCity) {
@@ -238,5 +234,7 @@ public class CarAndDiceSystem {
             default:
                 break;
         }
+    
+    player.currentCity ++;
     }
 }
