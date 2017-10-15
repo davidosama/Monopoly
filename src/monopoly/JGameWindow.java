@@ -24,7 +24,6 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -56,15 +55,6 @@ public class JGameWindow extends javax.swing.JFrame {
         });
         BoardPanel.add(jButton1);
         jButton1.setBounds(790, 310, 160, 60);
-
-        jButton2.setText("moveONE");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        BoardPanel.add(jButton2);
-        jButton2.setBounds(800, 450, 140, 60);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -107,7 +97,8 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Constants.carSys.GenerateDiceAndMove();
+        if(!Constants.carSys.t.isRunning())
+            Constants.carSys.GenerateDiceAndMove();
 
     }//GEN-LAST:event_jButton1ActionPerformed
     /* 
@@ -157,11 +148,6 @@ public class JGameWindow extends javax.swing.JFrame {
         
     }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Constants.carSys.MoveCarNCities(Player.getPlayer(), 1);
-        Player.MoveTurn();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -205,7 +191,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
