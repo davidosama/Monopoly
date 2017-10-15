@@ -16,9 +16,21 @@ public class CarAndDiceSystem {
     int d1, d2, res;
     javax.swing.Timer t;
 
+    //For dice shuffling
+    private int diceTimerCounter;
+    private javax.swing.Timer diceTimer;
+
+    //Timer milliseconds
+    private int timerMs = 150;
+
     public CarAndDiceSystem() {
 
-        t = new javax.swing.Timer(150, new ActionListener() {
+        //For testing, speed things up
+        if (Constants.testing) {
+            timerMs = 20;
+        }
+
+        t = new javax.swing.Timer(timerMs, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -40,33 +52,46 @@ public class CarAndDiceSystem {
         }
         );
 
+        //For dice shuffling
+        diceTimer = new javax.swing.Timer(timerMs, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                diceTimerCounter--;
+                Random rand = new Random();
+                d1 = rand.nextInt(6) + 1;
+                d2 = rand.nextInt(6) + 1;
+                //check if d1 == d2 to play again
+                res = d1 + d2;
+                //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
+                //load dice image
+                ImageIcon icon = loadImageOfDice(d1);
+                Constants.gameWindow.get_d1_label().setIcon(icon);
+                //load dice image
+                icon = loadImageOfDice(d2);
+                Constants.gameWindow.get_d2_label().setIcon(icon);
+
+                if (diceTimerCounter == 0) {
+                    t.start();
+                    diceTimer.stop();
+                }
+            }
+        }
+        );
+
     }
 
     public void GenerateDiceAndMove() {
 
+        /*useless tbh
         if (Constants.carSys.t.isRunning()) {
             return;
-        }
-
-        Random rand = new Random();
-        d1 = rand.nextInt(6) + 1;
-        d2 = rand.nextInt(6) + 1;
-
-        //check if d1 == d2 to play again
-        res = d1 + d2;
-
-        //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
-        //load dice image
-        ImageIcon icon = loadImageOfDice(d1);
-        Constants.gameWindow.get_d1_label().setIcon(icon);
-        //load dice image
-        icon = loadImageOfDice(d2);
-        Constants.gameWindow.get_d2_label().setIcon(icon);
-
+        }*/
         Constants.gameWindow.disableRollDiceBtn();
-        t.start();
 
-        //Move the car ely 3aleha el door by the result of the dices
+        //Start Dice Throw
+        diceTimerCounter = 5;
+        diceTimer.start();
     }
 
     public ImageIcon loadImageOfDice(int dice) {
@@ -113,127 +138,127 @@ public class CarAndDiceSystem {
         switch (player.currentCity) {
             //bottom cities
             case 1:
-                playerJlbl.setBounds(570, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(570, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 2:
-                playerJlbl.setBounds(510, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(510, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 3:
-                playerJlbl.setBounds(460, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(460, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 4:
-                playerJlbl.setBounds(400, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(400, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 5:
-                playerJlbl.setBounds(340, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(340, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 6:
-                playerJlbl.setBounds(290, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(290, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 7:
-                playerJlbl.setBounds(230, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(230, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 8:
-                playerJlbl.setBounds(180, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(180, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 9:
-                playerJlbl.setBounds(120, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(120, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             //left cities
             case 10:
-                playerJlbl.setBounds(60, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 620, Constants.CarDim, Constants.CarDim);
                 break;
             case 11:
-                playerJlbl.setBounds(60, 560, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 560, Constants.CarDim, Constants.CarDim);
                 break;
             case 12:
-                playerJlbl.setBounds(60, 500, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 500, Constants.CarDim, Constants.CarDim);
                 break;
             case 13:
-                playerJlbl.setBounds(60, 450, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 450, Constants.CarDim, Constants.CarDim);
                 break;
             case 14:
-                playerJlbl.setBounds(60, 390, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 390, Constants.CarDim, Constants.CarDim);
                 break;
             case 15:
-                playerJlbl.setBounds(60, 340, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 340, Constants.CarDim, Constants.CarDim);
                 break;
             case 16:
-                playerJlbl.setBounds(60, 280, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 280, Constants.CarDim, Constants.CarDim);
                 break;
             case 17:
-                playerJlbl.setBounds(60, 220, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 220, Constants.CarDim, Constants.CarDim);
                 break;
             case 18:
-                playerJlbl.setBounds(60, 170, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 170, Constants.CarDim, Constants.CarDim);
                 break;
             case 19:
-                playerJlbl.setBounds(60, 110, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 110, Constants.CarDim, Constants.CarDim);
                 break;
             case 20:
-                playerJlbl.setBounds(60, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 50, Constants.CarDim, Constants.CarDim);
                 break;
             //UP cities
             case 21:
-                playerJlbl.setBounds(120, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(120, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 22:
-                playerJlbl.setBounds(180, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(180, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 23:
-                playerJlbl.setBounds(230, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(230, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 24:
-                playerJlbl.setBounds(290, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(290, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 25:
-                playerJlbl.setBounds(340, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(340, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 26:
-                playerJlbl.setBounds(400, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(400, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 27:
-                playerJlbl.setBounds(460, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(460, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 28:
-                playerJlbl.setBounds(510, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(510, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             case 29:
-                playerJlbl.setBounds(570, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(570, 60 - ((player.num - 1) * 18), Constants.CarDim, Constants.CarDim);
                 break;
             case 30:
-                playerJlbl.setBounds(640, 50, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(640, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
                 break;
             //Right cities
             case 31:
-                playerJlbl.setBounds(640, 110, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 110, Constants.CarDim, Constants.CarDim);
                 break;
             case 32:
-                playerJlbl.setBounds(640, 170, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 170, Constants.CarDim, Constants.CarDim);
                 break;
             case 33:
-                playerJlbl.setBounds(640, 220, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 220, Constants.CarDim, Constants.CarDim);
                 break;
             case 34:
-                playerJlbl.setBounds(640, 280, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 280, Constants.CarDim, Constants.CarDim);
                 break;
             case 35:
-                playerJlbl.setBounds(640, 340, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 340, Constants.CarDim, Constants.CarDim);
                 break;
             case 36:
-                playerJlbl.setBounds(640, 390, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 390, Constants.CarDim, Constants.CarDim);
                 break;
             case 37:
-                playerJlbl.setBounds(640, 450, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 450, Constants.CarDim, Constants.CarDim);
                 break;
             case 38:
-                playerJlbl.setBounds(640, 500, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 500, Constants.CarDim, Constants.CarDim);
                 break;
             case 39:
-                playerJlbl.setBounds(640, 560, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(630 + ((player.num - 1) * 20), 560, Constants.CarDim, Constants.CarDim);
                 break;
             case 0:
-                playerJlbl.setBounds(640, 620, Constants.CarDim, Constants.CarDim);
+                playerJlbl.setBounds(630 + ((player.num - 1) * 20), 620, Constants.CarDim, Constants.CarDim);
                 break;
             default:
                 break;

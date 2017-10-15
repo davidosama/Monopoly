@@ -15,7 +15,12 @@ public class Monopoly {
         //get dimens of screen
         dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        startChoosePlayersWindow();
+         //For testing, start with 5 players
+        if (Constants.testing) {
+            CreatePlayers(5);
+        } else {
+            startChoosePlayersWindow();
+        }
     }
 
     private static void startChoosePlayersWindow() {
