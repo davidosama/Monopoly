@@ -29,6 +29,7 @@ public class CarAndDiceSystem {
 
                 if (res == 0) {
                     Constants.gameWindow.enableRollDiceBtn();
+                    Constants.gameWindow.drawCity(p.currentCity);
                     if (!(d1 == d2)) {
                         Player.MoveTurn();
                     }
