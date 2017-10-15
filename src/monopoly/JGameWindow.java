@@ -115,7 +115,7 @@ public class JGameWindow extends javax.swing.JFrame {
         );
 
         BoardPanel.add(currentCardPanel);
-        currentCardPanel.setBounds(1010, 20, 252, 284);
+        currentCardPanel.setBounds(1020, 20, 252, 284);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,9 +138,10 @@ public class JGameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        if(!Constants.carSys.t.isRunning())
+        
+        if (!Constants.carSys.t.isRunning()) {
             Constants.carSys.GenerateDiceAndMove();
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
     /* 
@@ -165,38 +166,46 @@ public class JGameWindow extends javax.swing.JFrame {
     public JLabel getJlabel1() {
         return jLabel1;
     }
-
+    
     public javax.swing.JTextArea getjTextArea1() {
         return jTextArea1;
     }
-
+    
     public JLabel get_d2_label() {
         return d2_label;
     }
-
+    
     public JLabel get_d1_label() {
         return d1_label;
     }
-
+    
     public void disableRollDiceBtn() {
-
+        
         jButton1.setEnabled(false);
         
-    } 
+    }    
     
     public void enableRollDiceBtn() {
-
+        
         jButton1.setEnabled(true);
         
     }
-    public void drawCurrentCard(int curPosition)
-    {
+
+    public void drawCity(int curPosition) {
+        try {
+            currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Cities/" + curPosition + ".png")));
+        } catch (Exception e) {
+            currentCardLabel.setIcon(null);
+        }
+    }
+
+    public void drawCurrentCard(int curPosition) {
         // to-do, adding more images and loading the images to an array of icons at the beginning
         
-        try{
-        currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Cards/"+curPosition+".png")));
+        try {
+            currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Cards/" + curPosition + ".png")));
+        } catch (Exception e) {
         }
-        catch(Exception e){}
     }
 
     /**
