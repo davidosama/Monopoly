@@ -28,16 +28,16 @@ public class JGameWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         BoardPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         d2_label = new javax.swing.JLabel();
         d1_label = new javax.swing.JLabel();
+        currentCardPanel = new javax.swing.JPanel();
+        currentCardLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        currentCardPanel = new javax.swing.JPanel();
-        currentCardLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -48,6 +48,35 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setName(""); // NOI18N
         BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         BoardPanel.setLayout(null);
+        BoardPanel.add(d2_label);
+        d2_label.setBounds(380, 120, 110, 110);
+        d2_label.getAccessibleContext().setAccessibleName("d2_label");
+        d2_label.getAccessibleContext().setAccessibleDescription("");
+
+        BoardPanel.add(d1_label);
+        d1_label.setBounds(250, 120, 110, 110);
+        d1_label.getAccessibleContext().setAccessibleName("d1_label");
+
+        currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
+        currentCardPanel.setPreferredSize(new java.awt.Dimension(252, 284));
+
+        javax.swing.GroupLayout currentCardPanelLayout = new javax.swing.GroupLayout(currentCardPanel);
+        currentCardPanel.setLayout(currentCardPanelLayout);
+        currentCardPanelLayout.setHorizontalGroup(
+            currentCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentCardPanelLayout.createSequentialGroup()
+                .addComponent(currentCardLabel)
+                .addGap(0, 252, Short.MAX_VALUE))
+        );
+        currentCardPanelLayout.setVerticalGroup(
+            currentCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(currentCardPanelLayout.createSequentialGroup()
+                .addComponent(currentCardLabel)
+                .addGap(0, 284, Short.MAX_VALUE))
+        );
+
+        BoardPanel.add(currentCardPanel);
+        currentCardPanel.setBounds(250, 240, 252, 284);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -64,14 +93,6 @@ public class JGameWindow extends javax.swing.JFrame {
         });
         BoardPanel.add(jButton1);
         jButton1.setBounds(790, 310, 160, 60);
-        BoardPanel.add(d2_label);
-        d2_label.setBounds(900, 180, 110, 110);
-        d2_label.getAccessibleContext().setAccessibleName("d2_label");
-        d2_label.getAccessibleContext().setAccessibleDescription("");
-
-        BoardPanel.add(d1_label);
-        d1_label.setBounds(770, 180, 110, 110);
-        d1_label.getAccessibleContext().setAccessibleName("d1_label");
 
         jLabel2.setText("DEBUGGING LOG");
 
@@ -101,27 +122,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel.add(jPanel1);
         jPanel1.setBounds(780, 400, 190, 140);
-
-        currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
-        currentCardPanel.setPreferredSize(new java.awt.Dimension(252, 284));
-
-        javax.swing.GroupLayout currentCardPanelLayout = new javax.swing.GroupLayout(currentCardPanel);
-        currentCardPanel.setLayout(currentCardPanelLayout);
-        currentCardPanelLayout.setHorizontalGroup(
-            currentCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(currentCardPanelLayout.createSequentialGroup()
-                .addComponent(currentCardLabel)
-                .addGap(0, 252, Short.MAX_VALUE))
-        );
-        currentCardPanelLayout.setVerticalGroup(
-            currentCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(currentCardPanelLayout.createSequentialGroup()
-                .addComponent(currentCardLabel)
-                .addGap(0, 284, Short.MAX_VALUE))
-        );
-
-        BoardPanel.add(currentCardPanel);
-        currentCardPanel.setBounds(1030, 20, 252, 284);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

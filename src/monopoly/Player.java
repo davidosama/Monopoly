@@ -44,34 +44,27 @@ public class Player {
         num = ++playersCount;
 
         //add player in allPlayers List
-        
-
         //create a label for the player
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                
-                
+
                 label = new JLabel();
                 javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + num + ".png"));
                 label.setIcon(icon);
-                
+
                 //yes i know it's not the right place for setting these values, i'll fix it later
                 Constants.CarHeight = icon.getIconHeight();
                 Constants.CarWidth = icon.getIconWidth();
                 Constants.curPlayer = Player.getPlayer();
-                
-                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth-Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num-1)*20,
-                                icon.getIconWidth(), icon.getIconHeight());
-                
-                
+
+                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num - 1) * 20,
+                        icon.getIconWidth(), icon.getIconHeight());
+
                 Constants.gameWindow.getJlabel1().add(label);
                 Constants.gameWindow.getJlabel1().validate();
                 Constants.gameWindow.getJlabel1().repaint();
-                
-                
-                
-             
+
             }
         });
 
@@ -82,7 +75,7 @@ public class Player {
 
         Turn = (Turn + 1) % playersCount;
         Constants.curPlayer = getPlayer();
-       // Constants.curLabel = 
+        // Constants.curLabel = 
 
     }
 
@@ -120,7 +113,6 @@ public class Player {
 
 //    abstract boolean mortgage(int city, int mortgageCost);
 //    abstract boolean trade(int city1, int city2);
-    
     public void addMoney(int money) {
         this.money += money;
     }
