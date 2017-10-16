@@ -92,7 +92,13 @@ public class CarAndDiceSystem {
         JLabel playerJlbl = player.label;
 
 
-        //Setting car icon based on position (Right,Left,Up..)
+//        forget about all the constants and complex operations, 
+//        it's just to make the cars resizable and moving in a the exact places
+        
+//        simply, all the cars starts at fixed position, 
+//        this function moves the car one step(up left right depinding on current city) 
+//        by addin(or subtracting) Constants.CityWidth
+        
                if (player.currentCity >= 0 && player.currentCity <= 9) 
                    playerJlbl.setLocation(playerJlbl.getX() - Constants.CityWidth, 
                                         playerJlbl.getY());
@@ -117,7 +123,10 @@ public class CarAndDiceSystem {
         //beacuse there are 40 cities
         player.currentCity = player.currentCity % 40;
         
-     if (player.currentCity %10 == 0) //reached corner
+    //reached corner if currentCity is 10 20 30 OR zero, special case cause we can't just add CityWidth to Move,
+    //we shall change the car direction(Updatephoto) and move a larger step 
+    //corners are bigger (in pixels) than regular cities
+        if (player.currentCity %10 == 0) 
          Corner();
      
    

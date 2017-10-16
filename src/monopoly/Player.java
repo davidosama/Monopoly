@@ -50,10 +50,14 @@ public class Player {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                
+                
                 label = new JLabel();
                 javax.swing.ImageIcon icon = new javax.swing.ImageIcon
                                             (getClass().getResource("/drawables/CarLeft" + num + ".png"));
                 label.setIcon(icon);
+                
+                //yes i know it's not the right place for setting these values, i'll fix it later
                 Constants.CarHeight = icon.getIconHeight();
                 Constants.CarWidth = icon.getIconWidth();
                 Constants.curPlayer = Player.getPlayer();
@@ -79,6 +83,7 @@ public class Player {
 
         Turn = (Turn + 1) % playersCount;
         Constants.curPlayer = getPlayer();
+       // Constants.curLabel = 
 
     }
 

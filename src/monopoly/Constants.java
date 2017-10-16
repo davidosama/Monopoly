@@ -1,5 +1,9 @@
 package monopoly;
 
+import java.util.ArrayList;
+import javax.swing.JLabel;
+
+
 public class Constants {
 
     //Main window
@@ -26,7 +30,7 @@ public class Constants {
     public static int CornerWidth = ResizeFactor*108;
     public static int CornerHeight = ResizeFactor*108;
     public static Player curPlayer;
-    
+    public static JLabel curLabel;    
     
 
 }
