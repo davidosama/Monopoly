@@ -1,5 +1,6 @@
 package monopoly;
 
+import java.awt.Color;
 import java.util.Random;
 import javax.swing.JLabel;
 
@@ -10,6 +11,10 @@ public class JGameWindow extends javax.swing.JFrame {
      */
     public JGameWindow() {
         initComponents();
+        
+        //set btn to black for first player
+        jButton1.setBackground(Color.black);
+        
         Constants.BoardHeight = jLabel1.getHeight();
         Constants.BoardWidth = jLabel1.getWidth();
 
@@ -200,6 +205,27 @@ public class JGameWindow extends javax.swing.JFrame {
         } catch (Exception e) {
         }
 
+    }
+
+    public void setRollBtnClr(int playerNum) {
+        switch (playerNum) {
+            case 1:
+                jButton1.setBackground(Color.black);
+                break;
+            case 2:
+                jButton1.setBackground(Color.red);
+                break;
+            case 3:
+                jButton1.setBackground(Color.green);
+                break;
+            case 4:
+                jButton1.setBackground(Color.blue);
+                break;
+            case 5:
+                jButton1.setBackground(Color.yellow);
+                break;
+
+        }
     }
 
     /**
