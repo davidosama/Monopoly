@@ -35,7 +35,7 @@ public class CarAndDiceSystem {
             public void actionPerformed(ActionEvent e) {
 
                 Player p = Player.getPlayer();
-                MoveCarNCities(p, 1);
+                MoveOneCity();
                 Constants.gameWindow.drawCurrentCard(p.currentCity);
                 res--;
 
@@ -83,185 +83,99 @@ public class CarAndDiceSystem {
 
     public void GenerateDiceAndMove() {
 
-        /*useless tbh
-        if (Constants.carSys.t.isRunning()) {
-            return;
-        }*/
         Constants.gameWindow.disableRollDiceBtn();
 
         //Start Dice Throw
         diceTimerCounter = 5;
         diceTimer.start();
+
     }
 
     public ImageIcon loadImageOfDice(int dice) {
-        switch (dice) {
-            case 1:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/1.png"));
-            case 2:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/2.png"));
-            case 3:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/3.png"));
-            case 4:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/4.png"));
-            case 5:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/5.png"));
-            case 6:
-                return new javax.swing.ImageIcon(getClass().getResource("/drawables/6.png"));
-            default:
-                System.out.println("SOMETHING IS WRONG IN THE loadImageOfDice");
-        }
-        return new ImageIcon();
+        return new javax.swing.ImageIcon(getClass().getResource("/drawables/" + dice + ".png"));
+
     }
 
-    public void MoveCarNCities(Player player, int movesNum) {
+    public void LoadImageOfPlayer(String dist) {
+        JLabel playerJlbl = Constants.curPlayer.label;
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" + Constants.curPlayer.num + ".png"));
+        playerJlbl.setIcon(icon);
+        playerJlbl.setBounds(playerJlbl.getX(), playerJlbl.getY(), icon.getIconWidth(), icon.getIconHeight());
 
+    }
+
+    public void MoveOneCity() {
+
+        Player player = Constants.curPlayer;
         JLabel playerJlbl = player.label;
 
+//        forget about all the constants and complex operations, 
+//        it's just to make the cars resizable and moving in a the exact places
+//        simply, all the cars starts at fixed position, 
+//        this function moves the car one step(up left right depinding on current city) 
+//        by addin(or subtracting) Constants.CityWidth
+        if (player.currentCity >= 0 && player.currentCity <= 9) {
+            playerJlbl.setLocation(playerJlbl.getX() - Constants.CityWidth,
+                    playerJlbl.getY());
+        }
+
+        if (player.currentCity >= 10 && player.currentCity <= 19) {
+            playerJlbl.setLocation(playerJlbl.getX(),
+                    playerJlbl.getY() - Constants.CityWidth);
+        }
+
+        if (player.currentCity >= 20 && player.currentCity <= 29) {
+            playerJlbl.setLocation(playerJlbl.getX() + Constants.CityWidth,
+                    playerJlbl.getY());
+        }
+
+        if (player.currentCity >= 30 && player.currentCity <= 39) {
+            playerJlbl.setLocation(playerJlbl.getX(),
+                    playerJlbl.getY() + Constants.CityWidth);
+        }
+
         //increment the player current city by the extra moves (movesNum)
-        player.currentCity += movesNum;
+        player.currentCity++;
 
         //beacuse there are 40 cities
         player.currentCity = player.currentCity % 40;
 
-        //Setting car icon base on position (Right,Left,Up..)
-        if (player.currentCity >= 0 && player.currentCity <= 9) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + player.num + ".png")));
-        } else if (player.currentCity >= 10 && player.currentCity <= 19) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarUP" + player.num + ".png")));
-        } else if (player.currentCity >= 20 && player.currentCity <= 29) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarRight" + player.num + ".png")));
-        } else if (player.currentCity >= 30 && player.currentCity <= 39) {
-            playerJlbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/CarDown" + player.num + ".png")));
+        //reached corner if currentCity is 10 20 30 OR zero, special case cause we can't just add CityWidth to Move,
+        //we shall change the car direction(Updatephoto) and move a larger step 
+        //corners are bigger (in pixels) than regular cities
+        if (player.currentCity % 10 == 0) {
+            Corner();
         }
 
+    }
+
+    public void Corner() {
+        Player player = Constants.curPlayer;
+        JLabel playerJlbl = player.label;
         switch (player.currentCity) {
-            //bottom cities
-            case 1:
-                playerJlbl.setBounds(570, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 2:
-                playerJlbl.setBounds(510, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 3:
-                playerJlbl.setBounds(460, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 4:
-                playerJlbl.setBounds(400, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 5:
-                playerJlbl.setBounds(340, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 6:
-                playerJlbl.setBounds(290, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 7:
-                playerJlbl.setBounds(230, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 8:
-                playerJlbl.setBounds(180, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 9:
-                playerJlbl.setBounds(120, 590 + ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            //left cities
-            case 10:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 11:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 560, Constants.CarDim, Constants.CarDim);
-                break;
-            case 12:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 500, Constants.CarDim, Constants.CarDim);
-                break;
-            case 13:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 450, Constants.CarDim, Constants.CarDim);
-                break;
-            case 14:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 390, Constants.CarDim, Constants.CarDim);
-                break;
-            case 15:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 340, Constants.CarDim, Constants.CarDim);
-                break;
-            case 16:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 280, Constants.CarDim, Constants.CarDim);
-                break;
-            case 17:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 220, Constants.CarDim, Constants.CarDim);
-                break;
-            case 18:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 170, Constants.CarDim, Constants.CarDim);
-                break;
-            case 19:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 110, Constants.CarDim, Constants.CarDim);
-                break;
-            case 20:
-                playerJlbl.setBounds(75 - ((player.num - 1) * 20), 50, Constants.CarDim, Constants.CarDim);
-                break;
-            //UP cities
-            case 21:
-                playerJlbl.setBounds(120, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 22:
-                playerJlbl.setBounds(180, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 23:
-                playerJlbl.setBounds(230, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 24:
-                playerJlbl.setBounds(290, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 25:
-                playerJlbl.setBounds(340, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 26:
-                playerJlbl.setBounds(400, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 27:
-                playerJlbl.setBounds(460, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 28:
-                playerJlbl.setBounds(510, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            case 29:
-                playerJlbl.setBounds(570, 60 - ((player.num - 1) * 18), Constants.CarDim, Constants.CarDim);
-                break;
-            case 30:
-                playerJlbl.setBounds(640, 60 - ((player.num - 1) * 20), Constants.CarDim, Constants.CarDim);
-                break;
-            //Right cities
-            case 31:
-                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 110, Constants.CarDim, Constants.CarDim);
-                break;
-            case 32:
-                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 170, Constants.CarDim, Constants.CarDim);
-                break;
-            case 33:
-                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 220, Constants.CarDim, Constants.CarDim);
-                break;
-            case 34:
-                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 280, Constants.CarDim, Constants.CarDim);
-                break;
-            case 35:
-                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 340, Constants.CarDim, Constants.CarDim);
-                break;
-            case 36:
-                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 390, Constants.CarDim, Constants.CarDim);
-                break;
-            case 37:
-                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 450, Constants.CarDim, Constants.CarDim);
-                break;
-            case 38:
-                playerJlbl.setBounds(620 + ((player.num - 1) * 20), 500, Constants.CarDim, Constants.CarDim);
-                break;
-            case 39:
-                playerJlbl.setBounds(630 + ((player.num - 1) * 20), 560, Constants.CarDim, Constants.CarDim);
-                break;
             case 0:
-                playerJlbl.setBounds(630 + ((player.num - 1) * 20), 620, Constants.CarDim, Constants.CarDim);
+                LoadImageOfPlayer("Left");
+                playerJlbl.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth),
+                        Constants.BoardHeight - Constants.CarHeight - (player.num - 1) * 25);
                 break;
-            default:
+
+            case 10:
+                LoadImageOfPlayer("UP");
+                playerJlbl.setLocation(0 + (player.num - 1) * 25,
+                        Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth - Constants.CarWidth));
                 break;
+
+            case 20:
+                LoadImageOfPlayer("Right");
+                playerJlbl.setLocation(Constants.CornerWidth - Constants.CarWidth, 0 + (player.num - 1) * 25);
+                break;
+
+            case 30:
+                LoadImageOfPlayer("Down");
+                playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth + (player.num - 1) * 25, Constants.CornerHeight - Constants.CarWidth);
+                break;
+
         }
     }
+
 }
