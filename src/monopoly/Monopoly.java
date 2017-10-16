@@ -9,13 +9,18 @@ public class Monopoly {
     private static Dimension dim;
 
     public static void main(String[] args) {
-        
+
         Board board = new Board();
 
         //get dimens of screen
         dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-        startChoosePlayersWindow();
+         //For testing, start with 5 players
+        if (Constants.testing) {
+            CreatePlayers(5);
+        } else {
+            startChoosePlayersWindow();
+        }
     }
 
     private static void startChoosePlayersWindow() {
@@ -32,9 +37,9 @@ public class Monopoly {
 
         //Creates and add players into the array
         for (int i = 0; i < number; i++) {
-            new Player();
+            Player.playersList.add(new Player());
         }
-        
+
         startGameWindow();
     }
 

@@ -1,2 +1,10 @@
 /build/
+<<<<<<< HEAD
 /nbproject/
+=======
+/nbproject/private/
+>>>>>>> master
+nbproject/private/private.xml
+nbproject/private/private.xml
+nbproject/private/private.properties
+nbproject/private/private.xml
