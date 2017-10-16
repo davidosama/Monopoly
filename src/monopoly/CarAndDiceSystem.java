@@ -54,7 +54,7 @@ public class CarAndDiceSystem {
         d2 = rand.nextInt(6) + 1;
 
         //check if d1 == d2 to play again
-        d1 = 1; d2 = 1;
+        
         res = d1 + d2;
         
         //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
