@@ -12,10 +12,7 @@ public class JGameWindow extends javax.swing.JFrame {
         initComponents();
         Constants.BoardHeight = jLabel1.getHeight();
         Constants.BoardWidth = jLabel1.getWidth();
-             
 
-        
-        
     }
 
     /**
@@ -57,8 +54,12 @@ public class JGameWindow extends javax.swing.JFrame {
         d1_label.setBounds(250, 120, 110, 110);
         d1_label.getAccessibleContext().setAccessibleName("d1_label");
 
+        currentCardPanel.setBackground(new java.awt.Color(212, 232, 212));
+        currentCardPanel.setToolTipText("");
         currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
-        currentCardPanel.setPreferredSize(new java.awt.Dimension(252, 284));
+        currentCardPanel.setPreferredSize(new java.awt.Dimension(0, 0));
+
+        currentCardLabel.setBackground(new java.awt.Color(255, 255, 255));
         currentCardPanel.add(currentCardLabel);
 
         BoardPanel.add(currentCardPanel);
@@ -130,7 +131,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         if (!Constants.carSys.t.isRunning()) {
             Constants.carSys.GenerateDiceAndMove();
         }
@@ -158,29 +159,29 @@ public class JGameWindow extends javax.swing.JFrame {
     public JLabel getJlabel1() {
         return jLabel1;
     }
-    
+
     public javax.swing.JTextArea getjTextArea1() {
         return jTextArea1;
     }
-    
+
     public JLabel get_d2_label() {
         return d2_label;
     }
-    
+
     public JLabel get_d1_label() {
         return d1_label;
     }
-    
+
     public void disableRollDiceBtn() {
-        
+
         jButton1.setEnabled(false);
-        
-    }    
-    
+
+    }
+
     public void enableRollDiceBtn() {
-        
+
         jButton1.setEnabled(true);
-        
+
     }
 
     public void drawCity(int curPosition) {
@@ -193,11 +194,12 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public void drawCurrentCard(int curPosition) {
         // to-do, adding more images and loading the images to an array of icons at the beginning
-        
+
         try {
             currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Cards/" + curPosition + ".png")));
         } catch (Exception e) {
         }
+
     }
 
     /**
