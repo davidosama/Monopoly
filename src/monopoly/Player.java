@@ -53,8 +53,7 @@ public class Player {
                 
                 
                 label = new JLabel();
-                javax.swing.ImageIcon icon = new javax.swing.ImageIcon
-                                            (getClass().getResource("/drawables/CarLeft" + num + ".png"));
+                javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + num + ".png"));
                 label.setIcon(icon);
                 
                 //yes i know it's not the right place for setting these values, i'll fix it later
@@ -62,7 +61,7 @@ public class Player {
                 Constants.CarWidth = icon.getIconWidth();
                 Constants.curPlayer = Player.getPlayer();
                 
-                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth-Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - 20,
+                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth-Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num-1)*20,
                                 icon.getIconWidth(), icon.getIconHeight());
                 
                 
