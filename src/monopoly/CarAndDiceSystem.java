@@ -90,162 +90,65 @@ public class CarAndDiceSystem {
         Player player = Constants.curPlayer;
         JLabel playerJlbl = player.label;
 
+
+        //Setting car icon based on position (Right,Left,Up..)
+               if (player.currentCity >= 0 && player.currentCity <= 9) 
+                   playerJlbl.setLocation(playerJlbl.getX() - Constants.CityWidth, 
+                                        playerJlbl.getY());
+               
+               if(player.currentCity >= 10 && player.currentCity <= 19)
+                  playerJlbl.setLocation(playerJlbl.getX(),
+                                        playerJlbl.getY() - Constants.CityWidth);
+              
+               if(player.currentCity >= 20 && player.currentCity <= 29)
+                  playerJlbl.setLocation(playerJlbl.getX() + Constants.CityWidth,
+                                        playerJlbl.getY());
+               
+               if(player.currentCity >= 30 && player.currentCity <= 39)
+                  playerJlbl.setLocation(playerJlbl.getX(),
+                                        playerJlbl.getY() + Constants.CityWidth);
+ 
+            
+           
         //increment the player current city by the extra moves (movesNum)
         player.currentCity ++;
 
         //beacuse there are 40 cities
         player.currentCity = player.currentCity % 40;
-
-        //Setting car icon based on position (Right,Left,Up..)
-//      if (player.currentCity == 9 || player.currentCity == 19 || player.currentCity == 29 || player.currentCity == 39 )
-               switch(player.currentCity) 
+        
+ 
+     if (player.currentCity %10 == 0) //reached corner
+      {   
+          switch(player.currentCity) 
                {
+              
+                     case 0:
+                       UpdateImageOfPlayer("Left");
+                       playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth - Constants.CornerFactor,
+                                            Constants.BoardHeight - Constants.CarHeight - 20);
+                       break;
+                       
                    case 10:
                      UpdateImageOfPlayer("UP");
+                     playerJlbl.setLocation(0,
+                              Constants.BoardHeight - Constants.CarHeight - Constants.CornerFactor - 20);
                      break;
             
                    case 20:
                        UpdateImageOfPlayer("Right");
+                       playerJlbl.setLocation(Constants.CornerFactor,0);
                        break;
                        
                    case 30:
                        UpdateImageOfPlayer("Down");
+                       playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth, Constants.CornerFactor);
                        break;
-                   case 0:
-                       UpdateImageOfPlayer("Left");
-                       break;
+                       
+            
                 }
                
-               
-               //playerJlbl.setLocation(d1, Constants.BoardHeight );
-
-        switch (player.currentCity) {
-            //bottom cities
-            case 1:
-                playerJlbl.setBounds(570, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 2:
-                playerJlbl.setBounds(510, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 3:
-                playerJlbl.setBounds(460, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 4:
-                playerJlbl.setBounds(400, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 5:
-                playerJlbl.setBounds(340, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 6:
-                playerJlbl.setBounds(290, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 7:
-                playerJlbl.setBounds(230, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 8:
-                playerJlbl.setBounds(180, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 9:
-                playerJlbl.setBounds(120, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            //left cities
-            case 10:
-                playerJlbl.setBounds(60, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            case 11:
-                playerJlbl.setBounds(60, 560, Constants.CarDim, Constants.CarDim);
-                break;
-            case 12:
-                playerJlbl.setBounds(60, 500, Constants.CarDim, Constants.CarDim);
-                break;
-            case 13:
-                playerJlbl.setBounds(60, 450, Constants.CarDim, Constants.CarDim);
-                break;
-            case 14:
-                playerJlbl.setBounds(60, 390, Constants.CarDim, Constants.CarDim);
-                break;
-            case 15:
-                playerJlbl.setBounds(60, 340, Constants.CarDim, Constants.CarDim);
-                break;
-            case 16:
-                playerJlbl.setBounds(60, 280, Constants.CarDim, Constants.CarDim);
-                break;
-            case 17:
-                playerJlbl.setBounds(60, 220, Constants.CarDim, Constants.CarDim);
-                break;
-            case 18:
-                playerJlbl.setBounds(60, 170, Constants.CarDim, Constants.CarDim);
-                break;
-            case 19:
-                playerJlbl.setBounds(60, 110, Constants.CarDim, Constants.CarDim);
-                break;
-            case 20:
-                playerJlbl.setBounds(60, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            //UP cities
-            case 21:
-                playerJlbl.setBounds(120, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 22:
-                playerJlbl.setBounds(180, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 23:
-                playerJlbl.setBounds(230, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 24:
-                playerJlbl.setBounds(290, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 25:
-                playerJlbl.setBounds(340, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 26:
-                playerJlbl.setBounds(400, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 27:
-                playerJlbl.setBounds(460, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 28:
-                playerJlbl.setBounds(510, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 29:
-                playerJlbl.setBounds(570, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            case 30:
-                playerJlbl.setBounds(640, 50, Constants.CarDim, Constants.CarDim);
-                break;
-            //Right cities
-            case 31:
-                playerJlbl.setBounds(640, 110, Constants.CarDim, Constants.CarDim);
-                break;
-            case 32:
-                playerJlbl.setBounds(640, 170, Constants.CarDim, Constants.CarDim);
-                break;
-            case 33:
-                playerJlbl.setBounds(640, 220, Constants.CarDim, Constants.CarDim);
-                break;
-            case 34:
-                playerJlbl.setBounds(640, 280, Constants.CarDim, Constants.CarDim);
-                break;
-            case 35:
-                playerJlbl.setBounds(640, 340, Constants.CarDim, Constants.CarDim);
-                break;
-            case 36:
-                playerJlbl.setBounds(640, 390, Constants.CarDim, Constants.CarDim);
-                break;
-            case 37:
-                playerJlbl.setBounds(640, 450, Constants.CarDim, Constants.CarDim);
-                break;
-            case 38:
-                playerJlbl.setBounds(640, 500, Constants.CarDim, Constants.CarDim);
-                break;
-            case 39:
-                playerJlbl.setBounds(640, 560, Constants.CarDim, Constants.CarDim);
-                break;
-            case 0:
-                playerJlbl.setBounds(640, 620, Constants.CarDim, Constants.CarDim);
-                break;
-            default:
-                break;
-        }
+      }
+     
+   
     }
 }

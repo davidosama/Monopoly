@@ -17,22 +17,14 @@ public class Constants {
     public static int BoardWidth;
     public static int BoardHeight;
 
-    public static int CityWidth = 58;
+    public static int CityWidth = 60;
 
     public static int CarHeight;
     public static int CarWidth;
 
-    public static int CarDim = 64; // 28
-
+    public static int CornerFactor = 40;
     public static Player curPlayer;
     
     
-    public void swapCarDimensions()
-    {
-        int tmp = CarHeight;
-        CarHeight = CarWidth;
-        CarWidth = tmp;
-        
-    }
 
 }
