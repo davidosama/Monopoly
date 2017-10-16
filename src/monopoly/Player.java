@@ -54,7 +54,11 @@ public class Player {
                 javax.swing.ImageIcon icon = new javax.swing.ImageIcon
                                             (getClass().getResource("/drawables/CarLeft" + num + ".png"));
                 label.setIcon(icon);
-                label.setBounds(Constants.BoardWidth - icon.getIconWidth() - Constants.CornerFactor, Constants.BoardHeight - icon.getIconHeight() - 20,
+                Constants.CarHeight = icon.getIconHeight();
+                Constants.CarWidth = icon.getIconWidth();
+                Constants.curPlayer = Player.getPlayer();
+                
+                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth-Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - 20,
                                 icon.getIconWidth(), icon.getIconHeight());
                 
                 
@@ -62,10 +66,9 @@ public class Player {
                 Constants.gameWindow.getJlabel1().validate();
                 Constants.gameWindow.getJlabel1().repaint();
                 
-                Constants.curPlayer = Player.getPlayer();
                 
-                Constants.CarHeight = icon.getIconHeight();
-                Constants.CarWidth = icon.getIconWidth();
+                
+             
             }
         });
 

@@ -17,12 +17,14 @@ public class Constants {
     public static int BoardWidth;
     public static int BoardHeight;
 
-    public static int CityWidth = 60;
 
     public static int CarHeight;
     public static int CarWidth;
-
-    public static int CornerFactor = 40;
+    
+    public static int ResizeFactor = 1;
+    public static int CityWidth = ResizeFactor*56;
+    public static int CornerWidth = ResizeFactor*108;
+    public static int CornerHeight = ResizeFactor*108;
     public static Player curPlayer;
     
     

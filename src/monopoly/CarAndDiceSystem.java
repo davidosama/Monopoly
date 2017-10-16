@@ -15,6 +15,7 @@ public class CarAndDiceSystem {
 
     int d1, d2, res;
     javax.swing.Timer t;
+    
 
     public CarAndDiceSystem() {
 
@@ -53,8 +54,9 @@ public class CarAndDiceSystem {
         d2 = rand.nextInt(6) + 1;
 
         //check if d1 == d2 to play again
+        d1 = 1; d2 = 1;
         res = d1 + d2;
-
+        
         //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
         //load dice image
         ImageIcon icon = loadImageOfDice(d1);
@@ -75,7 +77,7 @@ public class CarAndDiceSystem {
             
     }
     
-    public void UpdateImageOfPlayer(String dist)
+    public void LoadImageOfPlayer(String dist)
     {
           JLabel playerJlbl = Constants.curPlayer.label;
             javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" +  Constants.curPlayer.num + ".png"));
@@ -84,7 +86,6 @@ public class CarAndDiceSystem {
         
     }
 
-    
     public void MoveOneCity() {
 
         Player player = Constants.curPlayer;
@@ -116,39 +117,45 @@ public class CarAndDiceSystem {
         //beacuse there are 40 cities
         player.currentCity = player.currentCity % 40;
         
- 
      if (player.currentCity %10 == 0) //reached corner
-      {   
-          switch(player.currentCity) 
+         Corner();
+     
+   
+    }
+    
+    
+    public void Corner()
+{
+    Player player = Constants.curPlayer;
+    JLabel playerJlbl = player.label;
+   switch(player.currentCity) 
                {
               
                      case 0:
-                       UpdateImageOfPlayer("Left");
-                       playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth - Constants.CornerFactor,
+                       LoadImageOfPlayer("Left");
+                       playerJlbl.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth-Constants.CarWidth),
                                             Constants.BoardHeight - Constants.CarHeight - 20);
                        break;
                        
                    case 10:
-                     UpdateImageOfPlayer("UP");
+                     LoadImageOfPlayer("UP");
                      playerJlbl.setLocation(0,
-                              Constants.BoardHeight - Constants.CarHeight - Constants.CornerFactor - 20);
+                              Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth-Constants.CarWidth));
                      break;
             
                    case 20:
-                       UpdateImageOfPlayer("Right");
-                       playerJlbl.setLocation(Constants.CornerFactor,0);
+                       LoadImageOfPlayer("Right");
+                       playerJlbl.setLocation(Constants.CornerWidth - Constants.CarWidth - (Constants.CityWidth-Constants.CarWidth),0);
                        break;
                        
                    case 30:
-                       UpdateImageOfPlayer("Down");
-                       playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth, Constants.CornerFactor);
+                       LoadImageOfPlayer("Down");
+                       playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth + (Constants.CityWidth-Constants.CarWidth), Constants.CornerHeight - Constants.CarWidth);
                        break;
                        
             
-                }
-               
-      }
-     
-   
-    }
+                } 
+}
+    
+    
 }
