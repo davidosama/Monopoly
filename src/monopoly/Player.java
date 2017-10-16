@@ -44,7 +44,7 @@ public class Player {
         num = ++playersCount;
 
         //add player in allPlayers List
-        playersList.add(this);
+        
 
         //create a label for the player
         SwingUtilities.invokeLater(new Runnable() {
