@@ -14,7 +14,9 @@ import java.awt.event.ActionListener;
 public class CarAndDiceSystem {
 
     int d1, d2, res;
-    javax.swing.Timer t;
+    protected javax.swing.Timer t;
+    private Random rand;
+    private Player player;
 
     //For dice shuffling
     private int diceTimerCounter;
@@ -29,19 +31,20 @@ public class CarAndDiceSystem {
         if (Constants.testing) {
             timerMs = 20;
         }
+        
+        rand = new Random();
 
         t = new javax.swing.Timer(timerMs, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Player p = Player.getPlayer();
                 MoveOneCity();
-                Constants.gameWindow.drawCurrentCard(p.currentCity);
+                Constants.gameWindow.drawCurrentCard(player.currentCity);
                 res--;
 
                 if (res == 0) {
                     Constants.gameWindow.enableRollDiceBtn();
-                    Constants.gameWindow.drawCity(p.currentCity);
+                    Constants.gameWindow.drawCity(player.currentCity);
                     if (!(d1 == d2)) {
                         Player.MoveTurn();
                     }
@@ -58,7 +61,6 @@ public class CarAndDiceSystem {
             public void actionPerformed(ActionEvent e) {
 
                 diceTimerCounter--;
-                Random rand = new Random();
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
@@ -85,6 +87,7 @@ public class CarAndDiceSystem {
 
         Constants.gameWindow.disableRollDiceBtn();
 
+        player = Constants.curPlayer;
         //Start Dice Throw
         diceTimerCounter = 5;
         diceTimer.start();
@@ -97,7 +100,7 @@ public class CarAndDiceSystem {
     }
 
     public void LoadImageOfPlayer(String dist) {
-        JLabel playerJlbl = Constants.curPlayer.label;
+        JLabel playerJlbl = player.label;
         javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" + Constants.curPlayer.num + ".png"));
         playerJlbl.setIcon(icon);
         playerJlbl.setBounds(playerJlbl.getX(), playerJlbl.getY(), icon.getIconWidth(), icon.getIconHeight());
@@ -105,8 +108,7 @@ public class CarAndDiceSystem {
     }
 
     public void MoveOneCity() {
-
-        Player player = Constants.curPlayer;
+        
         JLabel playerJlbl = player.label;
 
 //        forget about all the constants and complex operations, 
@@ -150,7 +152,7 @@ public class CarAndDiceSystem {
     }
 
     public void Corner() {
-        Player player = Constants.curPlayer;
+
         JLabel playerJlbl = player.label;
         switch (player.currentCity) {
             case 0:

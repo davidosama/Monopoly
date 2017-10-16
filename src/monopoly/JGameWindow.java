@@ -59,24 +59,10 @@ public class JGameWindow extends javax.swing.JFrame {
 
         currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
         currentCardPanel.setPreferredSize(new java.awt.Dimension(252, 284));
-
-        javax.swing.GroupLayout currentCardPanelLayout = new javax.swing.GroupLayout(currentCardPanel);
-        currentCardPanel.setLayout(currentCardPanelLayout);
-        currentCardPanelLayout.setHorizontalGroup(
-            currentCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(currentCardPanelLayout.createSequentialGroup()
-                .addComponent(currentCardLabel)
-                .addGap(0, 252, Short.MAX_VALUE))
-        );
-        currentCardPanelLayout.setVerticalGroup(
-            currentCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(currentCardPanelLayout.createSequentialGroup()
-                .addComponent(currentCardLabel)
-                .addGap(0, 284, Short.MAX_VALUE))
-        );
+        currentCardPanel.add(currentCardLabel);
 
         BoardPanel.add(currentCardPanel);
-        currentCardPanel.setBounds(250, 240, 252, 284);
+        currentCardPanel.setBounds(240, 240, 252, 284);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1280, 720));
