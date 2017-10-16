@@ -27,9 +27,9 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel = new javax.swing.JPanel();
         d2_label = new javax.swing.JLabel();
         d1_label = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -54,6 +54,13 @@ public class JGameWindow extends javax.swing.JFrame {
         d1_label.setBounds(250, 120, 110, 110);
         d1_label.getAccessibleContext().setAccessibleName("d1_label");
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(1280, 720));
+        jLabel1.setMinimumSize(new java.awt.Dimension(720, 720));
+        jLabel1.setPreferredSize(new java.awt.Dimension(720, 720));
+        BoardPanel.add(jLabel1);
+        jLabel1.setBounds(0, 0, 720, 720);
+
         currentCardPanel.setBackground(new java.awt.Color(212, 232, 212));
         currentCardPanel.setToolTipText("");
         currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
@@ -64,13 +71,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel.add(currentCardPanel);
         currentCardPanel.setBounds(240, 240, 252, 284);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(1280, 720));
-        jLabel1.setMinimumSize(new java.awt.Dimension(720, 720));
-        jLabel1.setPreferredSize(new java.awt.Dimension(720, 720));
-        BoardPanel.add(jLabel1);
-        jLabel1.setBounds(0, 0, 720, 720);
 
         jButton1.setText("Roll Dice");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
