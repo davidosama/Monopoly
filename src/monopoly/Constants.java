@@ -26,9 +26,9 @@ public class Constants {
     public static int CarWidth;
     
     public static int ResizeFactor = 1;
-    public static int CityWidth = ResizeFactor*56;
-    public static int CornerWidth = ResizeFactor*108;
-    public static int CornerHeight = ResizeFactor*108;
+    public static int CityWidth = ResizeFactor*59;
+    public static int CornerWidth = ResizeFactor*97;
+    public static int CornerHeight = ResizeFactor*97;
     public static Player curPlayer;
     public static JLabel curLabel;    
     
