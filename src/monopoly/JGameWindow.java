@@ -12,9 +12,6 @@ public class JGameWindow extends javax.swing.JFrame {
     public JGameWindow() {
         initComponents();
 
-        //set btn to black for first player
-        jLabel5.setBackground(Color.black);
-
         Constants.BoardHeight = jLabel1.getHeight();
         Constants.BoardWidth = jLabel1.getWidth();
 
@@ -170,6 +167,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
         if (!Constants.carSys.t.isRunning()) {
             Constants.carSys.GenerateDiceAndMove();
+            jLabel5.setVisible(false);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -262,6 +260,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
         System.out.println(icon_path + ".PNG");
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource(icon_path + ".PNG")));
+        jLabel5.setVisible(true);
     }
 
     /**
