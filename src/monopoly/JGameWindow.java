@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+import javax.swing.border.Border;
 
 public class JGameWindow extends javax.swing.JFrame {
 
