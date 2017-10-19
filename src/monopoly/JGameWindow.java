@@ -30,16 +30,16 @@ public class JGameWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -68,11 +68,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel.add(currentCardPanel);
         currentCardPanel.setBounds(245, 210, 240, 284);
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/rect1.PNG"))); // NOI18N
-        jLabel5.setPreferredSize(new java.awt.Dimension(100, 100));
-        BoardPanel.add(jLabel5);
-        jLabel5.setBounds(785, 305, 170, 70);
 
         jButton1.setText("Roll Dice");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,9 +107,10 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(jPanel1);
         jPanel1.setBounds(780, 400, 190, 140);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
-        BoardPanel.add(jLabel3);
-        jLabel3.setBounds(0, 0, 1280, 740);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/rect1.PNG"))); // NOI18N
+        jLabel5.setPreferredSize(new java.awt.Dimension(100, 100));
+        BoardPanel.add(jLabel5);
+        jLabel5.setBounds(785, 305, 170, 70);
 
         javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
         DicePanel.setLayout(DicePanelLayout);
@@ -142,6 +138,10 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel.add(DicePanel);
         DicePanel.setBounds(740, 110, 253, 160);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
+        BoardPanel.add(jLabel3);
+        jLabel3.setBounds(0, 0, 1280, 740);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
