@@ -3,6 +3,7 @@ package monopoly;
 import java.awt.Color;
 import java.util.Random;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
 
 public class JGameWindow extends javax.swing.JFrame {
 
@@ -11,12 +12,10 @@ public class JGameWindow extends javax.swing.JFrame {
      */
     public JGameWindow() {
         initComponents();
-        
-        //set btn to black for first player
-        jButton1.setBackground(Color.black);
-        
+
         Constants.BoardHeight = jLabel1.getHeight();
         Constants.BoardWidth = jLabel1.getWidth();
+        jButton1.setBorder(new LineBorder(Constants.colors[0], 3));
 
     }
 
@@ -71,6 +70,7 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(currentCardPanel);
         currentCardPanel.setBounds(245, 210, 240, 284);
 
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Roll Dice");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,14 +113,16 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(jLabel3);
         jLabel3.setBounds(0, 0, 1280, 740);
 
+        DicePanel.setBackground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
         DicePanel.setLayout(DicePanelLayout);
         DicePanelLayout.setHorizontalGroup(
             DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DicePanelLayout.createSequentialGroup()
-                .addContainerGap(235, Short.MAX_VALUE)
+                .addContainerGap(247, Short.MAX_VALUE)
                 .addComponent(d1_label)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(d2_label))
         );
         DicePanelLayout.setVerticalGroup(
@@ -138,7 +140,7 @@ public class JGameWindow extends javax.swing.JFrame {
         d2_label.getAccessibleContext().setAccessibleDescription("");
 
         BoardPanel.add(DicePanel);
-        DicePanel.setBounds(740, 110, 253, 160);
+        DicePanel.setBounds(728, 110, 253, 160);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,9 +164,11 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        jButton1.setBorder(null);
         if (!Constants.carSys.t.isRunning()) {
             Constants.carSys.GenerateDiceAndMove();
         }
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
     /* 
@@ -233,24 +237,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void setRollBtnClr(int playerNum) {
-        switch (playerNum) {
-            case 1:
-                jButton1.setBackground(Color.black);
-                break;
-            case 2:
-                jButton1.setBackground(Color.red);
-                break;
-            case 3:
-                jButton1.setBackground(Color.green);
-                break;
-            case 4:
-                jButton1.setBackground(Color.blue);
-                break;
-            case 5:
-                jButton1.setBackground(Color.yellow);
-                break;
-
-        }
+        jButton1.setBorder(new LineBorder(Constants.colors[playerNum - 1], 3));
     }
 
     /**

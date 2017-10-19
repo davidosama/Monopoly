@@ -1,13 +1,13 @@
 package monopoly;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 
 
 public class Constants {
 
-    //Main window
-    public static JGameWindow gameWindow = new JGameWindow();
+    
 
     //Players Number window
     public static JChoosePlayersWindow choosePlayersWindow = new JChoosePlayersWindow();
@@ -18,6 +18,7 @@ public class Constants {
     //Car and Dice System
     public static CarAndDiceSystem carSys = new CarAndDiceSystem();
 
+    public static Color [] colors = {Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
     public static int BoardWidth;
     public static int BoardHeight;
 
@@ -31,6 +32,9 @@ public class Constants {
     public static int CornerHeight = ResizeFactor*97;
     public static Player curPlayer;
     public static JLabel curLabel;    
+    
+    //Main window
+    public static JGameWindow gameWindow = new JGameWindow();
     
 
 }
