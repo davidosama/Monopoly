@@ -64,6 +64,7 @@ public class CarAndDiceSystem {
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
+                
                 res = d1 + d2;
                 //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
                 //load dice image
