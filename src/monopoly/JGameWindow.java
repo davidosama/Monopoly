@@ -3,6 +3,8 @@ package monopoly;
 import java.awt.Color;
 import java.util.Random;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.Border;
 
 public class JGameWindow extends javax.swing.JFrame {
 
@@ -14,6 +16,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
         Constants.BoardHeight = jLabel1.getHeight();
         Constants.BoardWidth = jLabel1.getWidth();
+        jButton1.setBorder(new LineBorder(Constants.colors[0], 3));
 
     }
 
@@ -35,11 +38,10 @@ public class JGameWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -69,6 +71,7 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(currentCardPanel);
         currentCardPanel.setBounds(245, 210, 240, 284);
 
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Roll Dice");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +92,7 @@ public class JGameWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -101,25 +104,26 @@ public class JGameWindow extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         BoardPanel.add(jPanel1);
         jPanel1.setBounds(780, 400, 190, 140);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/rect1.PNG"))); // NOI18N
-        jLabel5.setPreferredSize(new java.awt.Dimension(100, 100));
-        BoardPanel.add(jLabel5);
-        jLabel5.setBounds(785, 305, 170, 70);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
+        BoardPanel.add(jLabel3);
+        jLabel3.setBounds(0, 0, 1280, 740);
+
+        DicePanel.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
         DicePanel.setLayout(DicePanelLayout);
         DicePanelLayout.setHorizontalGroup(
             DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DicePanelLayout.createSequentialGroup()
-                .addContainerGap(235, Short.MAX_VALUE)
+                .addContainerGap(247, Short.MAX_VALUE)
                 .addComponent(d1_label)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(d2_label))
         );
         DicePanelLayout.setVerticalGroup(
@@ -137,11 +141,7 @@ public class JGameWindow extends javax.swing.JFrame {
         d2_label.getAccessibleContext().setAccessibleDescription("");
 
         BoardPanel.add(DicePanel);
-        DicePanel.setBounds(740, 110, 253, 160);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
-        BoardPanel.add(jLabel3);
-        jLabel3.setBounds(0, 0, 1280, 740);
+        DicePanel.setBounds(728, 110, 253, 160);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,10 +165,11 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        jButton1.setBorder(null);
         if (!Constants.carSys.t.isRunning()) {
             Constants.carSys.GenerateDiceAndMove();
-            jLabel5.setVisible(false);
         }
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
     /* 
@@ -237,30 +238,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void setRollBtnClr(int playerNum) {
-
-        String icon_path = "/drawables/rect";
-
-        switch (playerNum) {
-            case 1:
-                icon_path += "1";
-                break;
-            case 2:
-                icon_path += "2";
-                break;
-            case 3:
-                icon_path += "3";
-                break;
-            case 4:
-                icon_path += "4";
-                break;
-            case 5:
-                icon_path += "5";
-                break;
-        }
-
-        System.out.println(icon_path + ".PNG");
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource(icon_path + ".PNG")));
-        jLabel5.setVisible(true);
+        jButton1.setBorder(new LineBorder(Constants.colors[playerNum - 1], 3));
     }
 
     /**
@@ -312,7 +290,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

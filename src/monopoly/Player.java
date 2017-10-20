@@ -58,7 +58,7 @@ public class Player {
                 Constants.CarWidth = icon.getIconWidth();
                 Constants.curPlayer = Player.getPlayer();
 
-                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num - 1) * Constants.Carlvl,
+                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num - 1) * 20,
                         icon.getIconWidth(), icon.getIconHeight());
 
                 Constants.gameWindow.getJlabel1().add(label);
@@ -71,12 +71,14 @@ public class Player {
         //debugPrintPlayer();
     }
 
-    public static void MoveTurn() {
+    public static void MoveTurn(Boolean samePlayer) {
 
-        Turn = (Turn + 1) % playersCount;
-        Constants.curPlayer = getPlayer();
-        Constants.gameWindow.setRollBtnClr(Turn+1);
-        // Constants.curLabel = 
+        if (!samePlayer) {
+            Turn = (Turn + 1) % playersCount;
+            Constants.curPlayer = getPlayer();
+        }
+
+        Constants.gameWindow.setRollBtnClr(Turn + 1);
 
     }
 
