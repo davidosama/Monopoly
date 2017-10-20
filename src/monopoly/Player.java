@@ -79,15 +79,6 @@ public class Player {
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);
-
-<<<<<<< HEAD
-        Turn = (Turn + 1) % playersCount;
-        Constants.curPlayer = getPlayer();
-        Constants.gameWindow.setRollBtnClr(Turn+1);
-        // Constants.curLabel = 
-
-=======
->>>>>>> master
     }
 
     public static Player getPlayer() {

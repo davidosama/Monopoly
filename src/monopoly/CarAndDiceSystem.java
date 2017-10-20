@@ -31,11 +31,6 @@ public class CarAndDiceSystem {
         if (Constants.testing) {
             timerMs = 20;
         }
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> master
         rand = new Random();
 
         t = new javax.swing.Timer(timerMs, new ActionListener() {
@@ -49,16 +44,10 @@ public class CarAndDiceSystem {
                 if (res == 0) {
                     Constants.gameWindow.enableRollDiceBtn();
                     Constants.gameWindow.drawCity(player.currentCity);
-<<<<<<< HEAD
-                    if (!(d1 == d2)) {
-                        Player.MoveTurn();
-=======
-
                     if (!(d1 == d2)) {
                         Player.MoveTurn(false);
                     } else {
                         Player.MoveTurn(true);
->>>>>>> master
                     }
 
                     t.stop();
@@ -76,10 +65,6 @@ public class CarAndDiceSystem {
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
-<<<<<<< HEAD
-=======
-
->>>>>>> master
                 res = d1 + d2;
                 //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
                 //load dice image
@@ -122,11 +107,6 @@ public class CarAndDiceSystem {
         playerJlbl.setBounds(playerJlbl.getX(), playerJlbl.getY(), icon.getIconWidth(), icon.getIconHeight());
 
     }
-<<<<<<< HEAD
-=======
-
-    public void MoveOneCity() {
->>>>>>> master
 
     public void MoveOneCity() {
         
@@ -179,39 +159,23 @@ public class CarAndDiceSystem {
             case 0:
                 LoadImageOfPlayer("Left");
                 playerJlbl.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth),
-<<<<<<< HEAD
-                        Constants.BoardHeight - Constants.CarHeight - (player.num - 1) * 25);
-=======
                         Constants.BoardHeight - Constants.CarHeight - (player.num - 1) * Constants.Carlvl);
->>>>>>> master
                 break;
 
             case 10:
                 LoadImageOfPlayer("UP");
-<<<<<<< HEAD
-                playerJlbl.setLocation(0 + (player.num - 1) * 25,
-=======
                 playerJlbl.setLocation(0 + (player.num - 1) * Constants.Carlvl,
->>>>>>> master
                         Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth - Constants.CarWidth));
                 break;
 
             case 20:
                 LoadImageOfPlayer("Right");
-<<<<<<< HEAD
-                playerJlbl.setLocation(Constants.CornerWidth - Constants.CarWidth, 0 + (player.num - 1) * 25);
-=======
                 playerJlbl.setLocation(Constants.CornerWidth - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth) / 2, (player.num - 1) * Constants.Carlvl);
->>>>>>> master
                 break;
 
             case 30:
                 LoadImageOfPlayer("Down");
-<<<<<<< HEAD
-                playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth + (player.num - 1) * 25, Constants.CornerHeight - Constants.CarWidth);
-=======
                 playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth - (player.num - 1) * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
->>>>>>> master
                 break;
 
         }
