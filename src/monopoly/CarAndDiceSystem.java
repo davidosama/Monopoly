@@ -178,7 +178,7 @@ public class CarAndDiceSystem {
 
             case 30:
                 LoadImageOfPlayer("Down");
-                playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth - (player.num - 1) * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
+                playerJlbl.setLocation(Constants.BoardWidth - Constants.CarHeight - (player.num - 1) * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
                 break;
 
         }
