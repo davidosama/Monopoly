@@ -35,7 +35,6 @@ public class JGameWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
@@ -107,11 +106,6 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(jPanel1);
         jPanel1.setBounds(780, 400, 190, 140);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/rect1.PNG"))); // NOI18N
-        jLabel5.setPreferredSize(new java.awt.Dimension(100, 100));
-        BoardPanel.add(jLabel5);
-        jLabel5.setBounds(785, 305, 170, 70);
-
         javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
         DicePanel.setLayout(DicePanelLayout);
         DicePanelLayout.setHorizontalGroup(
@@ -167,7 +161,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         if (!Constants.carSys.t.isRunning()) {
             Constants.carSys.GenerateDiceAndMove();
-            jLabel5.setVisible(false);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -259,8 +252,6 @@ public class JGameWindow extends javax.swing.JFrame {
         }
 
         System.out.println(icon_path + ".PNG");
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource(icon_path + ".PNG")));
-        jLabel5.setVisible(true);
     }
 
     /**
@@ -312,7 +303,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
