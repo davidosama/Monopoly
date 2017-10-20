@@ -159,23 +159,23 @@ public class CarAndDiceSystem {
             case 0:
                 LoadImageOfPlayer("Left");
                 playerJlbl.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth),
-                        Constants.BoardHeight - Constants.CarHeight - (player.num - 1) * 25);
+                        Constants.BoardHeight - Constants.CarHeight - (player.num-1 ) * Constants.Carlvl);
                 break;
 
             case 10:
                 LoadImageOfPlayer("UP");
-                playerJlbl.setLocation(0 + (player.num - 1) * 25,
+                playerJlbl.setLocation(0 + (player.num-1) * Constants.Carlvl,
                         Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth - Constants.CarWidth));
                 break;
 
             case 20:
                 LoadImageOfPlayer("Right");
-                playerJlbl.setLocation(Constants.CornerWidth - Constants.CarWidth, 0 + (player.num - 1) * 25);
+                playerJlbl.setLocation(Constants.CornerWidth - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth)/2, (player.num-1) * Constants.Carlvl);
                 break;
 
             case 30:
                 LoadImageOfPlayer("Down");
-                playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth + (player.num - 1) * 25, Constants.CornerHeight - Constants.CarWidth);
+                playerJlbl.setLocation(Constants.BoardWidth - Constants.CarWidth - (player.num-1 ) * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
                 break;
 
         }

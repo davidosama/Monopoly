@@ -58,7 +58,7 @@ public class Player {
                 Constants.CarWidth = icon.getIconWidth();
                 Constants.curPlayer = Player.getPlayer();
 
-                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num - 1) * 20,
+                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num - 1) * Constants.Carlvl,
                         icon.getIconWidth(), icon.getIconHeight());
 
                 Constants.gameWindow.getJlabel1().add(label);
