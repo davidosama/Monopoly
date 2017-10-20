@@ -3,6 +3,7 @@ package monopoly;
 public abstract class City {
 
     String name;
+    int position;
     int price;
     int rent;
     int mortgage;
@@ -12,6 +13,7 @@ public abstract class City {
 class normalCity extends City {
 
     String color;
+    int colorID;
     int rent_1house;
     int rent_2house;
     int rent_3house;
@@ -19,9 +21,11 @@ class normalCity extends City {
     int rent_hotel;
     int houseCost;
 
-    public normalCity(String name, String color, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost) {
+    public normalCity(String name, int position, String color, int colorID, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost) {
         this.name = name;
+        this.position = position;
         this.color = color;
+        this.colorID = colorID;
         this.price = price;
         this.rent = rent;
         this.rent_1house = rent_1house;
@@ -40,8 +44,9 @@ class RailRoad extends City {
     int rent3;
     int rent4;
 
-    public RailRoad(String name, int price, int rent, int rent2, int rent3, int rent4, int mortgage) {
+    public RailRoad(String name, int position, int price, int rent, int rent2, int rent3, int rent4, int mortgage) {
         this.name = name;
+        this.position = position;
         this.price = price;
         this.rent = rent;
         this.rent2 = rent2;
@@ -53,8 +58,9 @@ class RailRoad extends City {
 
 class Company extends City {
 
-    public Company(String name, int price, int mortgage) {
+    public Company(String name, int position, int price, int mortgage) {
         this.name = name;
+        this.position = position;
         this.price = price;
         this.mortgage = mortgage;
 

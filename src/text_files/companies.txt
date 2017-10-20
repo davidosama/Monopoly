@@ -1,2 +1,2 @@
-Water company,200,60
-Electrical company,200,60
+Water company,6,200,60
+Electrical company,16,200,60
