@@ -71,13 +71,23 @@ public class Player {
         //debugPrintPlayer();
     }
 
-    public static void MoveTurn() {
+    public static void MoveTurn(Boolean samePlayer) {
 
+        if (!samePlayer) {
+            Turn = (Turn + 1) % playersCount;
+            Constants.curPlayer = getPlayer();
+        }
+
+        Constants.gameWindow.setRollBtnClr(Turn + 1);
+
+<<<<<<< HEAD
         Turn = (Turn + 1) % playersCount;
         Constants.curPlayer = getPlayer();
         Constants.gameWindow.setRollBtnClr(Turn+1);
         // Constants.curLabel = 
 
+=======
+>>>>>>> master
     }
 
     public static Player getPlayer() {
