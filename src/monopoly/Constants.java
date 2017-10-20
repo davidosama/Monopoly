@@ -32,5 +32,6 @@ public class Constants {
     public static Player curPlayer;
     public static JLabel curLabel;    
     
+    public static int Carlvl = 17;
 
 }
