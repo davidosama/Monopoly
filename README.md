@@ -6,11 +6,12 @@ Monopoly game made with Java for Agile Software Engineering course
 
 <h4>Credits go to the project team members:</h4>
 <ul>
-<li>Ahmed Mohamed Hamed</li>
-<li>Antoun George</li>
-<li>David Osama</li>
-<li>Hesham Akmal</li>
-<li>Khaled Kord</li>
-<li>Mina Wagdi</li>
-<li>Omar Mohamed Ashour</li>
+  <li>Ahmed Mohamed Hamed</li>
+  <li>Antoun George</li>
+  <li>David Osama</li>
+  <li>Hesham Akmal</li>
+  <li>Khaled Kord</li>
+  <li>Mina Wagdi</li>
+  <li>Mohamed Osama</li>
+  <li>Omar Mohamed Ashour</li>
 </ul>
