@@ -91,7 +91,7 @@ public class CarAndDiceSystem {
 
         Constants.gameWindow.disableRollDiceBtn();
 
-        player = Constants.curPlayer;
+        player = Player.curPlayer;
         //Start Dice Throw
         diceTimerCounter = 5;
         diceTimer.start();
@@ -104,23 +104,24 @@ public class CarAndDiceSystem {
     }
 
     public void LoadImageOfPlayer(String dist) {
-        JLabel playerJlbl = player.label;
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" + Constants.curPlayer.num + ".png"));
+        JLabel playerJlbl = JGameWindow.curLabel;
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" + Player.curPlayer.num + ".png"));
         playerJlbl.setIcon(icon);
         playerJlbl.setBounds(playerJlbl.getX(), playerJlbl.getY(), icon.getIconWidth(), icon.getIconHeight());
 
     }
 
     public void MoveOneCity() {
-
-        JLabel playerJlbl = player.label;
+        player = Player.curPlayer;
+        JLabel playerJlbl = JGameWindow.curLabel;
 
 //        forget about all the constants and complex operations, 
 //        it's just to make the cars resizable and moving in a the exact places
 //        simply, all the cars starts at fixed position, 
 //        this function moves the car one step(up left right depinding on current city) 
 //        by addin(or subtracting) Constants.CityWidth
-        if (player.currentCity >= 0 && player.currentCity <= 9) {
+    if (player.currentCity >= 0 && player.currentCity <= 9) {
+            
             playerJlbl.setLocation(playerJlbl.getX() - Constants.CityWidth,
                     playerJlbl.getY());
         }
@@ -139,6 +140,7 @@ public class CarAndDiceSystem {
             playerJlbl.setLocation(playerJlbl.getX(),
                     playerJlbl.getY() + Constants.CityWidth);
         }
+        
 
         //increment the player current city by the extra moves (movesNum)
         player.currentCity++;
@@ -157,7 +159,7 @@ public class CarAndDiceSystem {
 
     public void Corner() {
 
-        JLabel playerJlbl = player.label;
+        JLabel playerJlbl = JGameWindow.curLabel;
         switch (player.currentCity) {
             case 0:
                 LoadImageOfPlayer("Left");

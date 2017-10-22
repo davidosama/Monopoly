@@ -3,12 +3,15 @@ package monopoly;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JLabel;
+import static monopoly.JGameWindow.curLabel;
+import static monopoly.JGameWindow.playersLabels;
 
 public class Monopoly {
 
     private static Dimension dim;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Board board = new Board();
 
@@ -34,14 +37,21 @@ public class Monopoly {
 
     //Creates Players and starts Game window
     public static void CreatePlayers(int number) {
-
+        startGameWindow();
         //Creates and add players into the array
         for (int i = 0; i < number; i++) {
             Player.playersList.add(new Player());
+            JGameWindow.addLabel(new JLabel());
         }
+//wait for the thread that creates the cars, i think there might be a better solution i'll search for it later    
+try{Thread.sleep(400);}
+ catch (Exception e){}
 
-        startGameWindow();
-    }
+        curLabel = playersLabels.get(0);
+        Player.curPlayer = Player.playersList.get(0);
+
+}  
+       
 
     //starts Game window
     private static void startGameWindow() {

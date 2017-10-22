@@ -23,7 +23,7 @@ public class Player {
     private boolean active; //will be used if the player is in jail
 
     //Player label (pic)
-    public JLabel label;
+//    public JLabel label;
 
     //City Number
     public int currentCity;
@@ -32,6 +32,7 @@ public class Player {
     public static ArrayList<Player> playersList = new ArrayList<>();
 
     public static int playersCount = 0;
+    public static Player curPlayer;
 
     private static int Turn = 0;
 
@@ -45,37 +46,20 @@ public class Player {
 
         //add player in allPlayers List
         //create a label for the player
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
+      
 
-                label = new JLabel();
-                javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + num + ".png"));
-                label.setIcon(icon);
 
-                //yes i know it's not the right place for setting these values, i'll fix it later
-                Constants.CarHeight = icon.getIconHeight();
-                Constants.CarWidth = icon.getIconWidth();
-                Constants.curPlayer = Player.getPlayer();
-
-                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num - 1) * 20,
-                        icon.getIconWidth(), icon.getIconHeight());
-
-                Constants.gameWindow.getJlabel1().add(label);
-                Constants.gameWindow.getJlabel1().validate();
-                Constants.gameWindow.getJlabel1().repaint();
-
-            }
-        });
-
-        //debugPrintPlayer();
+//debugPrintPlayer();
     }
 
     public static void MoveTurn(Boolean samePlayer) {
 
         if (!samePlayer) {
             Turn = (Turn + 1) % playersCount;
-            Constants.curPlayer = getPlayer();
+            Player.curPlayer = getPlayer();
+            JGameWindow.curLabel = curPlayer.getLabel();
+
+
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);
@@ -84,6 +68,13 @@ public class Player {
 
     public static Player getPlayer() {
         return playersList.get(Turn);
+    }
+    
+    public JLabel getLabel()
+    {
+     
+        return JGameWindow.playersLabels.get(Turn);
+        
     }
 
     private void debugPrintPlayer() {

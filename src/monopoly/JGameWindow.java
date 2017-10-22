@@ -1,8 +1,12 @@
 package monopoly;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.border.Border;
 
@@ -11,13 +15,47 @@ public class JGameWindow extends javax.swing.JFrame {
     /**
      * Creates new form BoardWindow
      */
+    
+    static ArrayList<JLabel> playersLabels = new ArrayList();
+    public static JLabel curLabel;
+
     public JGameWindow() {
         initComponents();
 
-        Constants.BoardHeight = jLabel1.getHeight();
-        Constants.BoardWidth = jLabel1.getWidth();
-        jButton1.setBorder(new LineBorder(Constants.colors[0], 3));
+        Constants.BoardHeight = BoardLabel.getHeight();
+        Constants.BoardWidth = BoardLabel.getWidth();
+        RollDiceButton.setBorder(new LineBorder(Constants.colors[0], 3));
+        
+    }
+    
+    
+    public static void addLabel(JLabel label)
+    {
+        
+        
+       SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
 
+                javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + (playersLabels.size() + 1) + ".png"));
+                label.setIcon(icon);
+
+                //yes i know it's not the right place for setting these values, i'll fix it later
+                Constants.CarHeight = icon.getIconHeight();
+                Constants.CarWidth = icon.getIconWidth();
+
+                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (playersLabels.size()) * Constants.Carlvl - 5,
+                        icon.getIconWidth(), icon.getIconHeight());
+                
+                playersLabels.add(label);
+                Constants.gameWindow.getJlabel1().add(label);
+                Constants.gameWindow.getJlabel1().validate();
+                Constants.gameWindow.getJlabel1().repaint();
+
+            }
+        });   
+        
+        
     }
 
     /**
@@ -30,15 +68,15 @@ public class JGameWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         BoardPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        BoardLabel = new javax.swing.JLabel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        RollDiceButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
+        BackGround = new javax.swing.JLabel();
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
@@ -53,12 +91,12 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         BoardPanel.setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(1280, 720));
-        jLabel1.setMinimumSize(new java.awt.Dimension(720, 720));
-        jLabel1.setPreferredSize(new java.awt.Dimension(720, 720));
-        BoardPanel.add(jLabel1);
-        jLabel1.setBounds(0, 0, 720, 720);
+        BoardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
+        BoardLabel.setMaximumSize(new java.awt.Dimension(1280, 720));
+        BoardLabel.setMinimumSize(new java.awt.Dimension(720, 720));
+        BoardLabel.setPreferredSize(new java.awt.Dimension(720, 720));
+        BoardPanel.add(BoardLabel);
+        BoardLabel.setBounds(20, 10, 720, 720);
 
         currentCardPanel.setBackground(new java.awt.Color(212, 232, 212));
         currentCardPanel.setToolTipText("");
@@ -71,15 +109,14 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(currentCardPanel);
         currentCardPanel.setBounds(245, 210, 240, 284);
 
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Roll Dice");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        RollDiceButton.setText("Roll Dice");
+        RollDiceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                RollDiceButtonActionPerformed(evt);
             }
         });
-        BoardPanel.add(jButton1);
-        jButton1.setBounds(790, 310, 160, 60);
+        BoardPanel.add(RollDiceButton);
+        RollDiceButton.setBounds(790, 310, 160, 60);
 
         jLabel2.setText("DEBUGGING LOG");
 
@@ -110,9 +147,9 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(jPanel1);
         jPanel1.setBounds(780, 400, 190, 140);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
-        BoardPanel.add(jLabel3);
-        jLabel3.setBounds(0, 0, 1280, 740);
+        BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
+        BoardPanel.add(BackGround);
+        BackGround.setBounds(0, 0, 1280, 740);
 
         DicePanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -163,15 +200,15 @@ public class JGameWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void RollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RollDiceButtonActionPerformed
 
-        jButton1.setBorder(null);
+        RollDiceButton.setBorder(null);
         if (!Constants.carSys.t.isRunning()) {
             Constants.carSys.GenerateDiceAndMove();
         }
         
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_RollDiceButtonActionPerformed
     /* 
        the idea of move function is that
        CurPos Counter starts with zero end with 40 (from go to go)
@@ -192,7 +229,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
     //get monopoly label, to add cars on it programmatically
     public JLabel getJlabel1() {
-        return jLabel1;
+        return BoardLabel;
     }
 
     public javax.swing.JTextArea getjTextArea1() {
@@ -209,13 +246,13 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public void disableRollDiceBtn() {
 
-        jButton1.setEnabled(false);
+        RollDiceButton.setEnabled(false);
 
     }
 
     public void enableRollDiceBtn() {
 
-        jButton1.setEnabled(true);
+        RollDiceButton.setEnabled(true);
 
     }
 
@@ -238,7 +275,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void setRollBtnClr(int playerNum) {
-        jButton1.setBorder(new LineBorder(Constants.colors[playerNum - 1], 3));
+        RollDiceButton.setBorder(new LineBorder(Constants.colors[playerNum - 1], 3));
     }
 
     /**
@@ -280,16 +317,16 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BackGround;
+    private javax.swing.JLabel BoardLabel;
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JPanel DicePanel;
+    private javax.swing.JButton RollDiceButton;
     private javax.swing.JLabel currentCardLabel;
     private javax.swing.JPanel currentCardPanel;
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

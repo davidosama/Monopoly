@@ -26,8 +26,6 @@ public class Constants {
     public static int CityWidth = ResizeFactor * 59;
     public static int CornerWidth = ResizeFactor * 97;
     public static int CornerHeight = ResizeFactor * 97;
-    public static Player curPlayer;
-    public static JLabel curLabel;
 
     //Main window
     public static JGameWindow gameWindow = new JGameWindow();
