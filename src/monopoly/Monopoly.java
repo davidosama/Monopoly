@@ -18,7 +18,7 @@ public class Monopoly {
         //get dimens of screen
         dim = Toolkit.getDefaultToolkit().getScreenSize();
 
-         //For testing, start with 5 players
+        //For testing, start with 5 players
         if (Constants.testing) {
             CreatePlayers(5);
         } else {
@@ -41,17 +41,32 @@ public class Monopoly {
         //Creates and add players into the array
         for (int i = 0; i < number; i++) {
             Player.playersList.add(new Player());
-            JGameWindow.addLabel(new JLabel());
+            addLabel();
         }
-//wait for the thread that creates the cars, i think there might be a better solution i'll search for it later    
-try{Thread.sleep(400);}
- catch (Exception e){}
 
         curLabel = playersLabels.get(0);
         Player.curPlayer = Player.playersList.get(0);
+    }
 
-}  
-       
+    public static void addLabel() {
+
+        JLabel label = new JLabel();
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(Monopoly.class.getResource("/drawables/CarLeft" + (playersLabels.size() + 1) + ".png"));
+        label.setIcon(icon);
+
+        //yes i know it's not the right place for setting these values, i'll fix it later
+        Constants.CarHeight = icon.getIconHeight();
+        Constants.CarWidth = icon.getIconWidth();
+
+        label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (playersLabels.size()) * Constants.Carlvl - 5,
+                icon.getIconWidth(), icon.getIconHeight());
+
+        playersLabels.add(label);
+
+        Constants.gameWindow.getJlabel1().add(label);
+        Constants.gameWindow.getJlabel1().validate();
+        Constants.gameWindow.getJlabel1().repaint();
+    }
 
     //starts Game window
     private static void startGameWindow() {
