@@ -47,9 +47,9 @@ public class Player {
 
         //add player in allPlayers List
         //create a label for the player
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
 
                 label = new JLabel();
                 label.setName(num + "");
@@ -68,11 +68,9 @@ public class Player {
                 });
                 javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + num + ".png"));
                 label.setIcon(icon);
-
-                //yes i know it's not the right place for setting these values, i'll fix it later
                 Constants.CarHeight = icon.getIconHeight();
                 Constants.CarWidth = icon.getIconWidth();
-                Constants.curPlayer = Player.getPlayer();
+                
 
                 label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num - 1) * 20,
                         icon.getIconWidth(), icon.getIconHeight());
@@ -81,8 +79,8 @@ public class Player {
                 Constants.gameWindow.getJlabel1().validate();
                 Constants.gameWindow.getJlabel1().repaint();
 
-            }
-        });
+//            }
+//        });
 
         //debugPrintPlayer();
     }
@@ -91,7 +89,6 @@ public class Player {
 
         if (!samePlayer) {
             Turn = (Turn + 1) % playersCount;
-            Constants.curPlayer = getPlayer();
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);

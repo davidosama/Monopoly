@@ -67,7 +67,7 @@ public class CarAndDiceSystem {
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
-                
+
                 res = d1 + d2;
                 //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
                 //load dice image
@@ -89,9 +89,7 @@ public class CarAndDiceSystem {
 
     public void GenerateDiceAndMove() {
 
-        Constants.gameWindow.disableRollDiceBtn();
-
-        player = Constants.curPlayer;
+        player = Player.getPlayer();
         //Start Dice Throw
         diceTimerCounter = 5;
         diceTimer.start();
@@ -105,7 +103,7 @@ public class CarAndDiceSystem {
 
     public void LoadImageOfPlayer(String dist) {
         JLabel playerJlbl = player.label;
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" + Constants.curPlayer.num + ".png"));
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" + player.num + ".png"));
         playerJlbl.setIcon(icon);
         playerJlbl.setBounds(playerJlbl.getX(), playerJlbl.getY(), icon.getIconWidth(), icon.getIconHeight());
 

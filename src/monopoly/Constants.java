@@ -15,7 +15,7 @@ public class Constants {
     public static Boolean testing = false;
 
     //Car and Dice System
-    public static CarAndDiceSystem carSys = new CarAndDiceSystem();
+    public static CarAndDiceSystem carSys;
 
     public static Color [] colors = {Color.BLACK, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW};
     public static int BoardWidth;
@@ -28,7 +28,6 @@ public class Constants {
     public static int CityWidth = ResizeFactor * 59;
     public static int CornerWidth = ResizeFactor * 97;
     public static int CornerHeight = ResizeFactor * 97;
-    public static Player curPlayer;
 
 
     public static JLabel curLabel;
