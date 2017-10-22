@@ -5,6 +5,8 @@
  */
 package monopoly;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
@@ -50,6 +52,20 @@ public class Player {
             public void run() {
 
                 label = new JLabel();
+                label.setName(num + "");
+                label.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        JLabel lbl = (JLabel) e.getComponent();
+                        System.out.println(lbl.getName()); // open the player's properties window
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) { // closing the window
+                        super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                });
                 javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + num + ".png"));
                 label.setIcon(icon);
 
@@ -71,12 +87,14 @@ public class Player {
         //debugPrintPlayer();
     }
 
-    public static void MoveTurn() {
+    public static void MoveTurn(Boolean samePlayer) {
 
-        Turn = (Turn + 1) % playersCount;
-        Constants.curPlayer = getPlayer();
-        Constants.gameWindow.setRollBtnClr(Turn+1);
-        // Constants.curLabel = 
+        if (!samePlayer) {
+            Turn = (Turn + 1) % playersCount;
+            Constants.curPlayer = getPlayer();
+        }
+
+        Constants.gameWindow.setRollBtnClr(Turn + 1);
 
     }
 
