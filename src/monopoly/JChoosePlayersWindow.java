@@ -91,20 +91,36 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Monopoly.CreatePlayers(2);
+        startGameWindow();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Monopoly.CreatePlayers(3);
+        startGameWindow();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Monopoly.CreatePlayers(4);
+        startGameWindow();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Monopoly.CreatePlayers(5);
+        startGameWindow();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+     private void startGameWindow() {
+
+         
+        //Hide ChoosePlayersWindow
+        Constants.choosePlayersWindow.dispose();
+
+        Constants.gameWindow = new JGameWindow();
+        Constants.gameWindow.setLocationRelativeTo(null);
+
+        //Start gameWindow
+        Constants.gameWindow.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */

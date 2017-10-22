@@ -4,13 +4,12 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 
-
 public class Constants {
 
     
 
     //Players Number window
-    public static JChoosePlayersWindow choosePlayersWindow = new JChoosePlayersWindow();
+    public static JChoosePlayersWindow choosePlayersWindow ;
 
     //set true for fast debugging
     public static Boolean testing = false;
@@ -22,19 +21,20 @@ public class Constants {
     public static int BoardWidth;
     public static int BoardHeight;
 
-
     public static int CarHeight;
     public static int CarWidth;
-    
-    public static int ResizeFactor = 1;
-    public static int CityWidth = ResizeFactor*59;
-    public static int CornerWidth = ResizeFactor*97;
-    public static int CornerHeight = ResizeFactor*97;
-    public static Player curPlayer;
-    public static JLabel curLabel;    
-    
-    //Main window
-    public static JGameWindow gameWindow = new JGameWindow();
-    
 
+    public static int ResizeFactor = 1;
+    public static int CityWidth = ResizeFactor * 59;
+    public static int CornerWidth = ResizeFactor * 97;
+    public static int CornerHeight = ResizeFactor * 97;
+    public static Player curPlayer;
+
+
+    public static JLabel curLabel;
+
+    //Main window
+    public static JGameWindow gameWindow;
+
+    public static int Carlvl = 17;
 }

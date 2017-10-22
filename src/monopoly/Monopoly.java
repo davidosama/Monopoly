@@ -25,8 +25,9 @@ public class Monopoly {
 
     private static void startChoosePlayersWindow() {
 
+        Constants.choosePlayersWindow = new JChoosePlayersWindow();
         //Sets the ChoosePlayersWindow position to the screen center
-        Constants.choosePlayersWindow.setLocation(dim.width / 2 - Constants.choosePlayersWindow.getSize().width / 2, dim.height / 2 - Constants.choosePlayersWindow.getSize().height / 2);
+        Constants.choosePlayersWindow.setLocationRelativeTo(null);
 
         //Show ChoosePlayersWindow
         Constants.choosePlayersWindow.setVisible(true);
@@ -40,20 +41,10 @@ public class Monopoly {
             Player.playersList.add(new Player());
         }
 
-        startGameWindow();
+       
     }
 
     //starts Game window
-    private static void startGameWindow() {
-
-        //Hide ChoosePlayersWindow
-        Constants.choosePlayersWindow.setVisible(false);
-
-        //Sets the gameWindow position to the screen center
-        Constants.gameWindow.setLocation(dim.width / 2 - Constants.gameWindow.getSize().width / 2, dim.height / 2 - Constants.gameWindow.getSize().height / 2);
-
-        //Start gameWindow
-        Constants.gameWindow.setVisible(true);
-    }
+   
 
 }
