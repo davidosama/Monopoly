@@ -5,6 +5,8 @@
  */
 package monopoly;
 
+
+
 /**
  *
  * @author hesha
@@ -90,28 +92,37 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Monopoly.CreatePlayers(2);
+        createPlayers(2);
         startGameWindow();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Monopoly.CreatePlayers(3);
+        createPlayers(3);
         startGameWindow();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Monopoly.CreatePlayers(4);
+        createPlayers(4);
         startGameWindow();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Monopoly.CreatePlayers(5);
+        createPlayers(5);
         startGameWindow();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-     private void startGameWindow() {
 
-         
+    public void createPlayers(int number) {
+
+        //Creates and add players into the array
+        for (int i = 0; i < number; i++) {
+            Player.playersList.add(new Player());
+        }
+
+       
+    }
+    private void startGameWindow() {
+
         //Hide ChoosePlayersWindow
         Constants.choosePlayersWindow.dispose();
 
@@ -121,6 +132,7 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         //Start gameWindow
         Constants.gameWindow.setVisible(true);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -152,7 +164,12 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JChoosePlayersWindow().setVisible(true);
+                Board board = new Board();
+
+                Constants.choosePlayersWindow = new JChoosePlayersWindow();
+                Constants.choosePlayersWindow.setLocationRelativeTo(null);
+                Constants.choosePlayersWindow.setVisible(true);
+
             }
         });
     }
