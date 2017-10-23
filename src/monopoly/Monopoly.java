@@ -2,6 +2,7 @@ package monopoly;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import static monopoly.JGameWindow.curLabel;
@@ -11,9 +12,11 @@ public class Monopoly {
 
     private static Dimension dim;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
         Board board = new Board();
+
+        Cards.CreateAllCards();
 
         //get dimens of screen
         dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -24,6 +27,9 @@ public class Monopoly {
         } else {
             startChoosePlayersWindow();
         }
+        
+        //Cards.DoCards(Player.playersList); This will be moved after players are created
+        //Last line in CreatePlayers()
     }
 
     private static void startChoosePlayersWindow() {
@@ -46,6 +52,8 @@ public class Monopoly {
 
         curLabel = playersLabels.get(0);
         Player.curPlayer = Player.playersList.get(0);
+        
+        Cards.DoCards(Player.playersList);
     }
 
     public static void addLabel() {
