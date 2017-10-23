@@ -38,7 +38,13 @@ public class Board {
                 String[] cityValues = line.split(",");
 
                 String name = cityValues[0];
-                int position = Integer.parseInt(cityValues[1]);
+                
+                
+                //int position = Integer.parseInt(cityValues[1]);
+                int position = 0; //fix this david pls
+                
+                
+                
                 String color = cityValues[1];
                 int colorID = Integer.parseInt(cityValues[3]);
                 int price = Integer.parseInt(cityValues[2]);
