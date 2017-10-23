@@ -16,6 +16,7 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
      */
     public JChoosePlayersWindow() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -104,17 +105,15 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         startGameWindow(5);
     }//GEN-LAST:event_jButton4ActionPerformed
-
     
-
     private void startGameWindow(int playersCount) {
-
+        
         Constants.gameWindow = new JGameWindow();
         
         Constants.gameWindow.addPlayers(playersCount);
         //Hide ChoosePlayersWindow
-        Constants.choosePlayersWindow.dispose();
-
+        this.dispose();
+        
         Constants.gameWindow.setLocationRelativeTo(null);
 
         //Start gameWindow
@@ -153,13 +152,11 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Constants.board = new Board();
-
-                Constants.choosePlayersWindow = new JChoosePlayersWindow();
-                Constants.choosePlayersWindow.setLocationRelativeTo(null);
-                Constants.choosePlayersWindow.setVisible(true);
-
-                
-
+                if (Constants.testing) {
+                    new JChoosePlayersWindow().startGameWindow(5);
+                } else {  
+                    new JChoosePlayersWindow().setVisible(true);
+                }
             }
         });
     }

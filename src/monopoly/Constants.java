@@ -6,13 +6,11 @@ import javax.swing.JLabel;
 
 public class Constants {
 
-    //Players Number window
-    public static JChoosePlayersWindow choosePlayersWindow;
-    
+
     public static Board board;
 
     //set true for fast debugging
-    public static Boolean testing = false;
+    public static Boolean testing = true;
 
     //Car and Dice System
     public static CarAndDiceSystem carSys;
