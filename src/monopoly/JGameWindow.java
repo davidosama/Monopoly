@@ -239,11 +239,13 @@ public class JGameWindow extends javax.swing.JFrame {
     public void disableRollDiceBtn() {
         RollDiceButton.setEnabled(false);
         RollDiceButton.setVisible(false);
+        DicePanel.setVisible(true);
     }
 
     public void enableRollDiceBtn() {
         RollDiceButton.setEnabled(true);
         RollDiceButton.setVisible(true);
+        DicePanel.setVisible(false);
     }
 
     public void drawCity(int curPosition) {
