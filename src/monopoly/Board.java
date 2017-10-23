@@ -27,9 +27,9 @@ public class Board {
     }
 
     private void initializeAllCities() {
-        String fileCities = ".\\src\\text_files\\cities.txt";
-        String fileCompanies = ".\\src\\text_files\\companies.txt";
-        String fileRailroads = ".\\src\\text_files\\railroads.txt";
+        String fileCities = ".//src//text_files//cities.txt";
+        String fileCompanies = ".//src//text_files//companies.txt";
+        String fileRailroads = ".//src//text_files//railroads.txt";
 
         //reading cities file
         try (BufferedReader br = new BufferedReader(new FileReader(fileCities))) {

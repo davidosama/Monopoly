@@ -40,10 +40,11 @@ public class Player {
 
         //initialize current city to zero
         currentCity = 0;
-
+        money=1000;
         //initialize player number to the playersCount and increment
         num = ++playersCount;
-
+        
+        citiesOwned=new ArrayList();
         //add player in allPlayers List
         //create a label for the player
       
@@ -63,6 +64,16 @@ public class Player {
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);
+        Constants.gameWindow.PlayerInfoArea.setText("Money: \n"+curPlayer.money+"\nCities Owned : \n");
+        if(curPlayer.citiesOwned.size()==0)
+        {
+            Constants.gameWindow.PlayerInfoArea.append("No Cities");
+        }
+        for(int i=0;i<curPlayer.citiesOwned.size();i++)
+        {
+            City c = Monopoly.board.normalCities.get(curPlayer.citiesOwned.get(i));
+            Constants.gameWindow.PlayerInfoArea.append("Name:"+c.name+"Price: "+c.price+"Overall Rent"+c.OverallRent);
+        }
 
     }
 
@@ -76,7 +87,10 @@ public class Player {
         return JGameWindow.playersLabels.get(Turn);
         
     }
-
+    
+    public ArrayList getCitiesOwned(){
+        return this.citiesOwned;
+    }
     private void debugPrintPlayer() {
 
         System.out.print("\n\nplayer Number: " + num

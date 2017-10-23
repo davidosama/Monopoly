@@ -10,11 +10,12 @@ import static monopoly.JGameWindow.playersLabels;
 
 public class Monopoly {
 
+    static Board board;
     private static Dimension dim;
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        Board board = new Board();
+        board = new Board();
 
         Cards.CreateAllCards();
 
@@ -27,7 +28,7 @@ public class Monopoly {
         } else {
             startChoosePlayersWindow();
         }
-        
+
         //Cards.DoCards(Player.playersList); This will be moved after players are created
         //Last line in CreatePlayers()
     }
@@ -52,7 +53,7 @@ public class Monopoly {
 
         curLabel = playersLabels.get(0);
         Player.curPlayer = Player.playersList.get(0);
-        
+
         Cards.DoCards(Player.playersList);
     }
 
