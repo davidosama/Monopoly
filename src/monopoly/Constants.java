@@ -1,8 +1,7 @@
 package monopoly;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 
 public class Constants {
 
@@ -26,9 +25,6 @@ public class Constants {
     public static int CityWidth = ResizeFactor * 59;
     public static int CornerWidth = ResizeFactor * 97;
     public static int CornerHeight = ResizeFactor * 97;
-
-    //Main window
-    public static JGameWindow gameWindow;
 
     public static int Carlvl = 17;
 

@@ -15,6 +15,7 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
      * Creates new form JStartGameWindow
      */
     public JChoosePlayersWindow() {
+        setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -40,6 +41,12 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(520, 320));
         setMinimumSize(new java.awt.Dimension(520, 320));
         setPreferredSize(new java.awt.Dimension(520, 320));
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new java.awt.GridLayout(0, 1));
 
         jPanel3.setLayout(null);
@@ -103,6 +110,7 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         Constants.gameWindow = new JGameWindow();
 
         Constants.gameWindow.addPlayers(playersCount);
+
         //Hide ChoosePlayersWindow
         this.dispose();
 
