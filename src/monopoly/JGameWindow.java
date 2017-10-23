@@ -18,7 +18,10 @@ public class JGameWindow extends javax.swing.JFrame {
     public ArrayList<JLabel> playersLabels = new ArrayList();
     public JLabel curLabel;
     JPlayerInfo playerInfoWin;
+<<<<<<< HEAD
 >>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
+=======
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
 
     public void addLabel() {
 

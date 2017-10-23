@@ -22,10 +22,13 @@ public class Player {
     private boolean active; //will be used if the player is in jail
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     //Player label (pic)
 //    public JLabel label;
 =======
 >>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
+=======
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
     //City Number
     public int currentCity;
 
@@ -42,18 +45,25 @@ public class Player {
         currentCity = 0;
         money = 1000;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
 >>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
+=======
+        
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
         //initialize player number to the playersCount and increment
         num = ++playersCount;
 
         citiesOwned = new ArrayList();
 <<<<<<< HEAD
+<<<<<<< HEAD
         //add player in allPlayers List
         //create a label for the player
 =======
 >>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
+=======
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
 
         //debugPrintPlayer();
     }
@@ -68,7 +78,10 @@ public class Player {
             Constants.gameWindow.changeTurn(Turn);
 =======
             Constants.gameWindow.curLabel = curPlayer.getLabel();
+<<<<<<< HEAD
 >>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
+=======
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);
@@ -87,12 +100,18 @@ public class Player {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
     public JLabel getLabel() {
         return Constants.gameWindow.playersLabels.get(Turn);
     }
 
+<<<<<<< HEAD
 >>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
+=======
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
     public ArrayList getCitiesOwned() {
         return this.citiesOwned;
     }

@@ -6,7 +6,10 @@ import javax.swing.JFrame;
 public class Constants {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
     //Main window
     public static JGameWindow gameWindow;
 
@@ -35,10 +38,13 @@ public class Constants {
     public static int CornerHeight = ResizeFactor * 97;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 
 =======
 >>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
+=======
+>>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
     public static int Carlvl = 17;
 
 }
