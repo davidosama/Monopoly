@@ -6,12 +6,14 @@ import javax.swing.JLabel;
 
 public class Constants {
 
-
     public static Board board;
 
     //set true for fast debugging
     public static Boolean testing = true;
 
+    //Main window
+    public static JGameWindow gameWindow;
+    
     //Car and Dice System
     public static CarAndDiceSystem carSys;
 
@@ -27,8 +29,7 @@ public class Constants {
     public static int CornerWidth = ResizeFactor * 97;
     public static int CornerHeight = ResizeFactor * 97;
 
-    //Main window
-    public static JGameWindow gameWindow;
+    
 
     public static int Carlvl = 17;
 

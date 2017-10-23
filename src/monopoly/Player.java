@@ -24,7 +24,6 @@ public class Player {
 
     //Player label (pic)
 //    public JLabel label;
-
     //City Number
     public int currentCity;
 
@@ -33,22 +32,19 @@ public class Player {
 
     public static int playersCount = 0;
 
-
     private static int Turn = 0;
 
     public Player() {
 
         //initialize current city to zero
         currentCity = 0;
-        money=1000;
+        money = 1000;
         //initialize player number to the playersCount and increment
         num = ++playersCount;
-        
-        citiesOwned=new ArrayList();
+
+        citiesOwned = new ArrayList();
         //add player in allPlayers List
         //create a label for the player
-      
-
 
 //debugPrintPlayer();
     }
@@ -58,21 +54,17 @@ public class Player {
 
         if (!samePlayer) {
             Turn = (Turn + 1) % playersCount;
-            Constants.gameWindow.curLabel = curPlayer.getLabel();
-
-
+            Constants.gameWindow.changeTurn(Turn);
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);
-        Constants.gameWindow.PlayerInfoArea.setText("Money: \n"+curPlayer.money+"\nCities Owned : \n");
-        if(curPlayer.citiesOwned.size()==0)
-        {
+        Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
+        if (curPlayer.citiesOwned.size() == 0) {
             Constants.gameWindow.PlayerInfoArea.append("No Cities");
         }
-        for(int i=0;i<curPlayer.citiesOwned.size();i++)
-        {
+        for (int i = 0; i < curPlayer.citiesOwned.size(); i++) {
             City c = Constants.board.allCities.get(curPlayer.citiesOwned.get(i));
-            Constants.gameWindow.PlayerInfoArea.append("Name:"+c.name+"Price: "+c.price+"Overall Rent"+c.OverallRent);
+            Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
         }
 
     }
@@ -80,16 +72,11 @@ public class Player {
     public static Player getPlayer() {
         return playersList.get(Turn);
     }
-    
-    public JLabel getLabel()
-    {
-        return Constants.gameWindow.playersLabels.get(Turn);
-        
-    }
-    
-    public ArrayList getCitiesOwned(){
+
+    public ArrayList getCitiesOwned() {
         return this.citiesOwned;
     }
+
     private void debugPrintPlayer() {
 
         System.out.print("\n\nplayer Number: " + num

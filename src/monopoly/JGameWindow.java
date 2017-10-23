@@ -9,8 +9,8 @@ public class JGameWindow extends javax.swing.JFrame {
     /**
      * Creates new form BoardWindow
      */
-    public ArrayList<JLabel> playersLabels = new ArrayList();
-    public JLabel curLabel;
+    private ArrayList<JLabel> playersLabels = new ArrayList();
+    private int curTurn = 0;
 
     public void addLabel() {
 
@@ -32,6 +32,14 @@ public class JGameWindow extends javax.swing.JFrame {
         this.getJlabel1().repaint();
     }
 
+    public void changeTurn(int turn) {
+        curTurn = turn;
+    }
+
+    public JLabel getCarLabel() {
+        return playersLabels.get(curTurn);
+    }
+
     public void addPlayers(int number) {
 
         //Creates and add players into the array
@@ -39,7 +47,6 @@ public class JGameWindow extends javax.swing.JFrame {
             Player.playersList.add(new Player());
             addLabel();
         }
-        curLabel = playersLabels.get(0);
 
     }
 
