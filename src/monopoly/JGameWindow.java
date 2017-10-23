@@ -142,13 +142,14 @@ public class JGameWindow extends javax.swing.JFrame {
         BackGround.setBounds(0, 0, 1030, 740);
 
         DicePanel.setBackground(new java.awt.Color(255, 255, 255));
+        DicePanel.setPreferredSize(new java.awt.Dimension(240, 140));
 
         javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
         DicePanel.setLayout(DicePanelLayout);
         DicePanelLayout.setHorizontalGroup(
             DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DicePanelLayout.createSequentialGroup()
-                .addContainerGap(247, Short.MAX_VALUE)
+                .addContainerGap(234, Short.MAX_VALUE)
                 .addComponent(d1_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(d2_label))
@@ -158,7 +159,7 @@ public class JGameWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DicePanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(d2_label, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(d2_label, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(d1_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(70, 70, 70))
         );
@@ -168,7 +169,7 @@ public class JGameWindow extends javax.swing.JFrame {
         d2_label.getAccessibleContext().setAccessibleDescription("");
 
         BoardPanel.add(DicePanel);
-        DicePanel.setBounds(728, 110, 253, 160);
+        DicePanel.setBounds(235, 470, 240, 140);
 
         PlayerInfoArea.setColumns(20);
         PlayerInfoArea.setRows(5);
