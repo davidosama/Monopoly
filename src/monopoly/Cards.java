@@ -19,7 +19,7 @@ public class Cards {
         this.Key=Key;
         this.Value=Value;
     }
-    static void CreateAllCards() throws FileNotFoundException, IOException {
+    static void CreateAllCards() {
         group.add(new ArrayList <Cards>()); // creating arraylist for chance cards
         group.add(new ArrayList <Cards>()); // creating arraylist for community cards
         String fileCards = ".\\src\\text_files\\Cards.txt";
@@ -44,17 +44,19 @@ public class Cards {
                 }
                 }
             }
+        catch(Exception e){}
         Collections.shuffle(group.get(0));
         Collections.shuffle(group.get(1));
         }
     
     static int DoCards (ArrayList <Player>Players){ //to take a card 
-        int id = Player.curPlayer.num; // the number of the player
+        Player curPlayer = Player.getPlayer();
+        int id = curPlayer.num; // the number of the player
         int CardID = 0; // the id of the card chosen 
         String ToDo = ""; // the type of the card 
         int value =0; // the value of the card 
         //to determine whether chance or community card
-        if(Player.curPlayer.currentCity==7 || Player.curPlayer.currentCity==22 || Player.curPlayer.currentCity==36){
+        if(curPlayer.currentCity==7 || curPlayer.currentCity==22 || curPlayer.currentCity==36){
            CardID =group.get(0).get(0).id;
            ToDo = group.get(0).get(0).Key;
            value = group.get(0).get(0).Value;

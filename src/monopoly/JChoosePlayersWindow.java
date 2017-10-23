@@ -105,20 +105,13 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         startGameWindow(5);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void createPlayers(int number) {
-
-        //Creates and add players into the array
-        for (int i = 0; i < number; i++) {
-            Player.playersList.add(new Player());
-        }
-
-    }
+    
 
     private void startGameWindow(int playersCount) {
 
         Constants.gameWindow = new JGameWindow();
         
-        createPlayers(playersCount);
+        Constants.gameWindow.addPlayers(playersCount);
         //Hide ChoosePlayersWindow
         Constants.choosePlayersWindow.dispose();
 
@@ -159,7 +152,7 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Board board = new Board();
+                Constants.board = new Board();
 
                 Constants.choosePlayersWindow = new JChoosePlayersWindow();
                 Constants.choosePlayersWindow.setLocationRelativeTo(null);

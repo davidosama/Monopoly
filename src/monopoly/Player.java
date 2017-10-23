@@ -32,7 +32,7 @@ public class Player {
     public static ArrayList<Player> playersList = new ArrayList<>();
 
     public static int playersCount = 0;
-    public static Player curPlayer;
+
 
     private static int Turn = 0;
 
@@ -54,11 +54,11 @@ public class Player {
     }
 
     public static void MoveTurn(Boolean samePlayer) {
+        Player curPlayer = getPlayer();
 
         if (!samePlayer) {
             Turn = (Turn + 1) % playersCount;
-            Player.curPlayer = getPlayer();
-            JGameWindow.curLabel = curPlayer.getLabel();
+            Constants.gameWindow.curLabel = curPlayer.getLabel();
 
 
         }
@@ -71,7 +71,7 @@ public class Player {
         }
         for(int i=0;i<curPlayer.citiesOwned.size();i++)
         {
-            City c = Monopoly.board.normalCities.get(curPlayer.citiesOwned.get(i));
+            City c = Constants.board.allCities.get(curPlayer.citiesOwned.get(i));
             Constants.gameWindow.PlayerInfoArea.append("Name:"+c.name+"Price: "+c.price+"Overall Rent"+c.OverallRent);
         }
 
@@ -83,8 +83,7 @@ public class Player {
     
     public JLabel getLabel()
     {
-     
-        return JGameWindow.playersLabels.get(Turn);
+        return Constants.gameWindow.playersLabels.get(Turn);
         
     }
     

@@ -1,33 +1,59 @@
 package monopoly;
 
-import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
-import javax.swing.border.Border;
 
 public class JGameWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form BoardWindow
      */
-    static ArrayList<JLabel> playersLabels = new ArrayList();
-    public static JLabel curLabel;
+    public ArrayList<JLabel> playersLabels = new ArrayList();
+    public JLabel curLabel;
+
+    public void addLabel() {
+
+        JLabel label = new JLabel();
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + (playersLabels.size() + 1) + ".png"));
+        label.setIcon(icon);
+
+        //yes i know it's not the right place for setting these values, i'll fix it later
+        Constants.CarHeight = icon.getIconHeight();
+        Constants.CarWidth = icon.getIconWidth();
+
+        label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (playersLabels.size()) * Constants.Carlvl - 5,
+                icon.getIconWidth(), icon.getIconHeight());
+
+        playersLabels.add(label);
+
+        this.getJlabel1().add(label);
+        this.getJlabel1().validate();
+        this.getJlabel1().repaint();
+    }
+
+    public void addPlayers(int number) {
+
+        //Creates and add players into the array
+        for (int i = 0; i < number; i++) {
+            Player.playersList.add(new Player());
+            addLabel();
+        }
+        curLabel = playersLabels.get(0);
+
+    }
 
     public JGameWindow() {
         initComponents();
+        Constants.carSys = new CarAndDiceSystem();
 
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
         RollDiceButton.setBorder(new LineBorder(Constants.colors[0], 3));
         PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,7 +150,7 @@ public class JGameWindow extends javax.swing.JFrame {
         jScrollPane2.setViewportView(PlayerInfoArea);
 
         BoardPanel.add(jScrollPane2);
-        jScrollPane2.setBounds(1030, 10, 244, 730);
+        jScrollPane2.setBounds(1030, 10, 166, 730);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,10 +175,8 @@ public class JGameWindow extends javax.swing.JFrame {
     private void RollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RollDiceButtonActionPerformed
 
         RollDiceButton.setBorder(null);
-        if (!Constants.carSys.t.isRunning()) {
-            Constants.carSys.GenerateDiceAndMove();
-        }
-
+        disableRollDiceBtn();
+        Constants.carSys.GenerateDiceAndMove();
 
     }//GEN-LAST:event_RollDiceButtonActionPerformed
     /* 
@@ -177,7 +201,7 @@ public class JGameWindow extends javax.swing.JFrame {
     public JLabel getJlabel1() {
         return BoardLabel;
     }
-    
+
     public JLabel get_d2_label() {
         return d2_label;
     }
@@ -269,10 +293,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JPanel currentCardPanel;
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
