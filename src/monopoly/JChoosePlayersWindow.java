@@ -54,33 +54,37 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton1.setText("2 Players");
+        jButton1.setName("2"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
 
         jButton2.setText("3 Players");
+        jButton2.setName("3"); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonActionPerformed(evt);
             }
         });
         jPanel1.add(jButton2);
 
         jButton3.setText("4 Players");
+        jButton3.setName("4"); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonActionPerformed(evt);
             }
         });
         jPanel1.add(jButton3);
 
         jButton4.setText("5 Players");
+        jButton4.setName("5"); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonActionPerformed(evt);
             }
         });
         jPanel1.add(jButton4);
@@ -90,30 +94,18 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        startGameWindow(2);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActionPerformed
+        startGameWindow(Integer.parseInt(((javax.swing.JButton) evt.getSource()).getName()));
+    }//GEN-LAST:event_jButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        startGameWindow(3);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        startGameWindow(4);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        startGameWindow(5);
-    }//GEN-LAST:event_jButton4ActionPerformed
-    
     private void startGameWindow(int playersCount) {
-        
+
         Constants.gameWindow = new JGameWindow();
-        
+
         Constants.gameWindow.addPlayers(playersCount);
         //Hide ChoosePlayersWindow
         this.dispose();
-        
+
         Constants.gameWindow.setLocationRelativeTo(null);
 
         //Start gameWindow
@@ -154,7 +146,7 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
                 Constants.board = new Board();
                 if (Constants.testing) {
                     new JChoosePlayersWindow().startGameWindow(5);
-                } else {  
+                } else {
                     new JChoosePlayersWindow().setVisible(true);
                 }
             }
