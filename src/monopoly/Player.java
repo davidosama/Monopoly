@@ -7,7 +7,6 @@ package monopoly;
 
 import java.util.ArrayList;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
 
 public class Player {
 
@@ -22,8 +21,11 @@ public class Player {
 
     private boolean active; //will be used if the player is in jail
 
+<<<<<<< HEAD
     //Player label (pic)
 //    public JLabel label;
+=======
+>>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
     //City Number
     public int currentCity;
 
@@ -39,22 +41,34 @@ public class Player {
         //initialize current city to zero
         currentCity = 0;
         money = 1000;
+<<<<<<< HEAD
+=======
+        
+>>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
         //initialize player number to the playersCount and increment
         num = ++playersCount;
 
         citiesOwned = new ArrayList();
+<<<<<<< HEAD
         //add player in allPlayers List
         //create a label for the player
+=======
+>>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
 
-//debugPrintPlayer();
+        //debugPrintPlayer();
     }
 
     public static void MoveTurn(Boolean samePlayer) {
+        
         Player curPlayer = getPlayer();
 
         if (!samePlayer) {
             Turn = (Turn + 1) % playersCount;
+<<<<<<< HEAD
             Constants.gameWindow.changeTurn(Turn);
+=======
+            Constants.gameWindow.curLabel = curPlayer.getLabel();
+>>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);
@@ -66,13 +80,19 @@ public class Player {
             City c = Constants.board.allCities.get(curPlayer.citiesOwned.get(i));
             Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
         }
-
     }
 
     public static Player getPlayer() {
         return playersList.get(Turn);
     }
 
+<<<<<<< HEAD
+=======
+    public JLabel getLabel() {
+        return Constants.gameWindow.playersLabels.get(Turn);
+    }
+
+>>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
     public ArrayList getCitiesOwned() {
         return this.citiesOwned;
     }
@@ -119,5 +139,4 @@ public class Player {
             return false;
         }
     }
-
 }

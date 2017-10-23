@@ -1,15 +1,20 @@
 package monopoly;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 
 public class Constants {
 
+<<<<<<< HEAD
+=======
+    //Main window
+    public static JGameWindow gameWindow;
+
+>>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
     public static Board board;
 
     //set true for fast debugging
-    public static Boolean testing = true;
+    public static Boolean testing = false;
 
     //Main window
     public static JGameWindow gameWindow;
@@ -29,8 +34,11 @@ public class Constants {
     public static int CornerWidth = ResizeFactor * 97;
     public static int CornerHeight = ResizeFactor * 97;
 
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
     public static int Carlvl = 17;
 
 }
