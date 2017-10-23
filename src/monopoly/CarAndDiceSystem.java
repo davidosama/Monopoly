@@ -239,17 +239,8 @@ public class CarAndDiceSystem {
                 } else {
                     JOptionPane.showConfirmDialog(null, "You don't have enough money");
                 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
             }
-
-=======
-            }
->>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
-=======
-            }
->>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
         }
     }
 
@@ -259,21 +250,9 @@ public class CarAndDiceSystem {
             if (Player.playersList.get(i) == player) {
                 Player.playersList.get(i).deductMoney(Constants.board.allCities.get(city).OverallRent);
                 Player.playersList.get(Constants.board.allCities.get(city).owner).addMoney(Constants.board.allCities.get(city).OverallRent);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
             }
-
         }
-
-=======
-            }
-        }
->>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
-=======
-            }
-        }
->>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
     }
 
     public void askToBuy() {

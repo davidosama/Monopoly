@@ -11,17 +11,11 @@ public class JGameWindow extends javax.swing.JFrame {
     /**
      * Creates new form BoardWindow
      */
-<<<<<<< HEAD
     private ArrayList<JLabel> playersLabels = new ArrayList();
     private int curTurn = 0;
-=======
-    public ArrayList<JLabel> playersLabels = new ArrayList();
     public JLabel curLabel;
     JPlayerInfo playerInfoWin;
-<<<<<<< HEAD
->>>>>>> d0097f446724fcafa7f8ae5014fbd35e11e4fdf9
-=======
->>>>>>> 7738e57e2ff6c9d0d12648d7182a58e41722fb10
+
 
     public void addLabel() {
 
@@ -60,7 +54,6 @@ public class JGameWindow extends javax.swing.JFrame {
             }
         });
 
-        ///////////////
         this.getJlabel1().add(label);
         this.getJlabel1().validate();
         this.getJlabel1().repaint();
@@ -156,7 +149,7 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(BackGround);
         BackGround.setBounds(0, 0, 1030, 740);
 
-        DicePanel.setBackground(new java.awt.Color(255, 255, 255));
+        DicePanel.setBackground(new java.awt.Color(212, 232, 212));
         DicePanel.setPreferredSize(new java.awt.Dimension(240, 140));
 
         javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
