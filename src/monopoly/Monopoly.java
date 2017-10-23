@@ -8,12 +8,13 @@ import static monopoly.JGameWindow.curLabel;
 import static monopoly.JGameWindow.playersLabels;
 
 public class Monopoly {
-
+    
+    static Board board;
     private static Dimension dim;
 
     public static void main(String[] args) throws InterruptedException {
 
-        Board board = new Board();
+        board = new Board();
 
         //get dimens of screen
         dim = Toolkit.getDefaultToolkit().getScreenSize();

@@ -25,6 +25,7 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
         RollDiceButton.setBorder(new LineBorder(Constants.colors[0], 3));
+        PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
         
     }
     
@@ -80,6 +81,8 @@ public class JGameWindow extends javax.swing.JFrame {
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        PlayerInfoArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -149,7 +152,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
         BoardPanel.add(BackGround);
-        BackGround.setBounds(0, 0, 1280, 740);
+        BackGround.setBounds(0, 0, 1030, 740);
 
         DicePanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -179,6 +182,13 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel.add(DicePanel);
         DicePanel.setBounds(728, 110, 253, 160);
+
+        PlayerInfoArea.setColumns(20);
+        PlayerInfoArea.setRows(5);
+        jScrollPane2.setViewportView(PlayerInfoArea);
+
+        BoardPanel.add(jScrollPane2);
+        jScrollPane2.setBounds(1030, 10, 244, 730);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -321,6 +331,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel BoardLabel;
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JPanel DicePanel;
+    public javax.swing.JTextArea PlayerInfoArea;
     private javax.swing.JButton RollDiceButton;
     private javax.swing.JLabel currentCardLabel;
     private javax.swing.JPanel currentCardPanel;
@@ -329,6 +340,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
