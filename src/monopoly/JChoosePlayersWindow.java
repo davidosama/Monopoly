@@ -42,11 +42,6 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(520, 320));
         setPreferredSize(new java.awt.Dimension(520, 320));
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
         getContentPane().setLayout(new java.awt.GridLayout(0, 1));
 
         jPanel3.setLayout(null);

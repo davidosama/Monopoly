@@ -5,11 +5,13 @@ import javax.swing.JFrame;
 
 public class Constants {
 
+    //Main window
+    public static JGameWindow gameWindow;
 
     public static Board board;
 
     //set true for fast debugging
-    public static Boolean testing = true;
+    public static Boolean testing = false;
 
     //Car and Dice System
     public static CarAndDiceSystem carSys;
