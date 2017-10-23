@@ -43,6 +43,7 @@ public class CarAndDiceSystem {
                 res--;
                 
                 if (res == 0) {
+                    
                     Constants.gameWindow.enableRollDiceBtn();
                     Constants.gameWindow.drawCity(player.currentCity);
                     
@@ -68,19 +69,20 @@ public class CarAndDiceSystem {
                     }
                     else{
                         //NormalCities
-                    //check if it's owned by current Player
-                    Boolean isOwnedByCurrPlayer=checkIfOwnedByCurrPlayer(player.currentCity);
-                    if(isOwnedByCurrPlayer)
-                    {
-                        JOptionPane.showConfirmDialog(null, "Do you want to build ?");
-                        //Build Function() 
-                    }
-                    else if(isOwned(player.currentCity)){
-                        PayRent(player.currentCity,Player.curPlayer);
-                    }
-                    else{
-                        //If the city doesn't belong to him or to any Player
-                        askToBuy();
+                        //check if it's owned by current Player
+                        Boolean isOwnedByCurrPlayer=checkIfOwnedByCurrPlayer(player.currentCity);
+                        if(isOwnedByCurrPlayer)
+                        {
+                            JOptionPane.showConfirmDialog(null, "Do you want to build ?");
+                            //Build Function() 
+                        }
+                        else if(isOwned(player.currentCity)){
+                            PayRent(player.currentCity,Player.curPlayer);
+                        }
+                        else{
+                            //If the city doesn't belong to him or to any Player
+                            askToBuy();
+                        }
                     }
                     //Forwart to next Turn
                     if (!(d1 == d2)) {
@@ -88,9 +90,7 @@ public class CarAndDiceSystem {
                     } else {
                         Player.MoveTurn(true);
                     }
-
                     t.stop();
-                }
                 }
             }
         }
@@ -131,7 +131,6 @@ public class CarAndDiceSystem {
     public void GenerateDiceAndMove() {
 
         Constants.gameWindow.disableRollDiceBtn();
-
         player = Player.curPlayer;
         //Start Dice Throw
         diceTimerCounter = 5;
@@ -271,7 +270,7 @@ public class CarAndDiceSystem {
     
     public void PayRent(int city,Player player)
     {
-        JOptionPane.showConfirmDialog(null, "Unfortunately,This city is owned by Player "+Player.playersList.get(Monopoly.board.normalCities.get(city).owner).num+ " so you will have to pay him a rent");
+        JOptionPane.showMessageDialog(null, "Unfortunately,This city is owned by Player "+Player.playersList.get(Monopoly.board.normalCities.get(city).owner).num+ " so you will have to pay him a rent");
         for(int i=0;i<Player.playersList.size();i++)
         {   
             if(Player.playersList.get(i)==player){
