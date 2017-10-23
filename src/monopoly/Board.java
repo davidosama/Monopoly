@@ -38,7 +38,9 @@ public class Board {
                 String[] cityValues = line.split(",");
 
                 String name = cityValues[0];
+                int position = Integer.parseInt(cityValues[1]);
                 String color = cityValues[1];
+                int colorID = Integer.parseInt(cityValues[3]);
                 int price = Integer.parseInt(cityValues[2]);
                 int rent = Integer.parseInt(cityValues[3]);
                 int rent1 = Integer.parseInt(cityValues[4]);
@@ -49,7 +51,7 @@ public class Board {
                 int mortgage = Integer.parseInt(cityValues[9]);
                 int houseCost = Integer.parseInt(cityValues[10]);
 
-                normalCity city = new normalCity(name, color, price, rent, rent1, rent2, rent3, rent4, rent_h, mortgage, houseCost);
+                normalCity city = new normalCity(name, position, color, colorID, price, rent, rent1, rent2, rent3, rent4, rent_h, mortgage, houseCost);
                 normalCities.add(city);
             }
         } catch (IOException e) {
@@ -63,6 +65,7 @@ public class Board {
                 String[] railroadValue = line.split(",");
 
                 String name = railroadValue[0];
+                int position = Integer.parseInt(railroadValue[1]);
                 int price = Integer.parseInt(railroadValue[1]);
                 int rent = Integer.parseInt(railroadValue[2]);
                 int rent2 = Integer.parseInt(railroadValue[3]);
@@ -70,7 +73,7 @@ public class Board {
                 int rent4 = Integer.parseInt(railroadValue[5]);
                 int mortgage = Integer.parseInt(railroadValue[6]);
 
-                RailRoad railroad = new RailRoad(name, price, rent, rent2, rent3, rent4, mortgage);
+                RailRoad railroad = new RailRoad(name, position, price, rent, rent2, rent3, rent4, mortgage);
                 railRoads.add(railroad);
             }
         } catch (IOException e) {
@@ -84,10 +87,11 @@ public class Board {
                 String[] companyValue = line.split(",");
 
                 String name = companyValue[0];
+                int position = Integer.parseInt(companyValue[1]);
                 int price = Integer.parseInt(companyValue[1]);
                 int mortgage = Integer.parseInt(companyValue[2]);
 
-                Company company = new Company(name, price, mortgage);
+                Company company = new Company(name, position, price, mortgage);
                 companies.add(company);
             }
         } catch (IOException e) {
