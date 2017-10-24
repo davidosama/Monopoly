@@ -38,9 +38,7 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(520, 320));
         setMinimumSize(new java.awt.Dimension(520, 320));
-        setPreferredSize(new java.awt.Dimension(520, 320));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridLayout(0, 1));
 

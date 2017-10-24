@@ -13,7 +13,6 @@ public class JGameWindow extends javax.swing.JFrame {
      */
     private ArrayList<JLabel> playersLabels = new ArrayList();
     private int curTurn = 0;
-    public JLabel curLabel;
     JPlayerInfo playerInfoWin;
 
 
@@ -82,7 +81,7 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.carSys = new CarAndDiceSystem();
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
-        RollDiceButton.setBorder(new LineBorder(Constants.colors[0], 3));
+
         PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
     }
 
@@ -96,10 +95,10 @@ public class JGameWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         BoardPanel = new javax.swing.JPanel();
-        RollDiceButton = new javax.swing.JButton();
-        BoardLabel = new javax.swing.JLabel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
+        RollDiceButton = new javax.swing.JButton();
+        BoardLabel = new javax.swing.JLabel();
         BackGround = new javax.swing.JLabel();
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
@@ -118,7 +117,19 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         BoardPanel.setLayout(null);
 
+        currentCardPanel.setBackground(new java.awt.Color(210, 234, 220));
+        currentCardPanel.setToolTipText("");
+        currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
+        currentCardPanel.setPreferredSize(new java.awt.Dimension(0, 0));
+
+        currentCardLabel.setBackground(new java.awt.Color(255, 255, 255));
+        currentCardPanel.add(currentCardLabel);
+
+        BoardPanel.add(currentCardPanel);
+        currentCardPanel.setBounds(260, 230, 236, 280);
+
         RollDiceButton.setText("Roll Dice");
+        RollDiceButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         RollDiceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RollDiceButtonActionPerformed(evt);
@@ -134,22 +145,11 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(BoardLabel);
         BoardLabel.setBounds(20, 10, 720, 720);
 
-        currentCardPanel.setBackground(new java.awt.Color(212, 232, 212));
-        currentCardPanel.setToolTipText("");
-        currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
-        currentCardPanel.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        currentCardLabel.setBackground(new java.awt.Color(255, 255, 255));
-        currentCardPanel.add(currentCardLabel);
-
-        BoardPanel.add(currentCardPanel);
-        currentCardPanel.setBounds(245, 210, 240, 284);
-
         BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
         BoardPanel.add(BackGround);
         BackGround.setBounds(0, 0, 1030, 740);
 
-        DicePanel.setBackground(new java.awt.Color(212, 232, 212));
+        DicePanel.setBackground(new java.awt.Color(210, 234, 220));
         DicePanel.setPreferredSize(new java.awt.Dimension(240, 140));
 
         javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
@@ -209,6 +209,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private void RollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RollDiceButtonActionPerformed
 
         RollDiceButton.setBorder(null);
+        currentCardLabel.setIcon(null);
         disableRollDiceBtn();
         Constants.carSys.GenerateDiceAndMove();
 
