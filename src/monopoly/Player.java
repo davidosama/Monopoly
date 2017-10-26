@@ -7,7 +7,6 @@ package monopoly;
 
 import java.util.ArrayList;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
 
 public class Player {
 
@@ -22,8 +21,6 @@ public class Player {
 
     private boolean active; //will be used if the player is in jail
 
-    //Player label (pic)
-    public JLabel label;
 
     //City Number
     public int currentCity;
@@ -39,50 +36,46 @@ public class Player {
 
         //initialize current city to zero
         currentCity = 0;
+        money = 1000;
 
         //initialize player number to the playersCount and increment
         num = ++playersCount;
 
-        //add player in allPlayers List
-        //create a label for the player
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
+        citiesOwned = new ArrayList();
 
-                label = new JLabel();
-                javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + num + ".png"));
-                label.setIcon(icon);
-
-                //yes i know it's not the right place for setting these values, i'll fix it later
-                Constants.CarHeight = icon.getIconHeight();
-                Constants.CarWidth = icon.getIconWidth();
-                Constants.curPlayer = Player.getPlayer();
-
-                label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (num - 1) * 20,
-                        icon.getIconWidth(), icon.getIconHeight());
-
-                Constants.gameWindow.getJlabel1().add(label);
-                Constants.gameWindow.getJlabel1().validate();
-                Constants.gameWindow.getJlabel1().repaint();
-
-            }
-        });
 
         //debugPrintPlayer();
     }
 
     public static void MoveTurn(Boolean samePlayer) {
+        
+        Player curPlayer = getPlayer();
 
         if (!samePlayer) {
             Turn = (Turn + 1) % playersCount;
-            Constants.curPlayer = getPlayer();
+            Constants.gameWindow.changeTurn(Turn);
+
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);
+
+        Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
+        if (curPlayer.citiesOwned.size() == 0) {
+            Constants.gameWindow.PlayerInfoArea.append("No Cities");
+        }
+        for (int i = 0; i < curPlayer.citiesOwned.size(); i++) {
+            City c = Constants.board.allCities.get(curPlayer.citiesOwned.get(i));
+            Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
+        }
     }
 
     public static Player getPlayer() {
         return playersList.get(Turn);
+    }
+
+
+    public ArrayList getCitiesOwned() {
+        return this.citiesOwned;
     }
 
     private void debugPrintPlayer() {
@@ -127,5 +120,4 @@ public class Player {
             return false;
         }
     }
-
 }

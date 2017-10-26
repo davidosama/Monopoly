@@ -11,6 +11,7 @@ public class Board {
 
     public Board() {
         initializeAllCities();
+        Cards.CreateAllCards();
 
         //for testing reading files
         for (int i = 0; i < allCities.size(); i++) {
@@ -22,7 +23,7 @@ public class Board {
         String fileCities = "./src/text_files/cities.txt";
         String fileCompanies = "./src/text_files/companies.txt";
         String fileRailroads = "./src/text_files/railroads.txt";
-        
+
         //reading cities file
         try (BufferedReader br = new BufferedReader(new FileReader(fileCities))) {
             String line;
@@ -43,6 +44,7 @@ public class Board {
                 int houseCost = Integer.parseInt(cityValues[11]);
 
                 normalCity city = new normalCity(name, position, colorID, price, rent, rent1, rent2, rent3, rent4, rent_h, mortgage, houseCost);
+
                 allCities.add(city);
             }
         } catch (IOException e) {

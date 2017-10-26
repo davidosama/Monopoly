@@ -13,10 +13,13 @@ class Location {
 
 public abstract class City extends Location{
 
+    int owner;
     String name;
+    int position;
     int price;
     int rent;
     int mortgage;
+    int OverallRent;
     Boolean owned = false;
 
     public City() {
@@ -48,6 +51,7 @@ class normalCity extends City {
         this.mortgage = mortgage;
         this.houseCost = houseCost;
         this.type = "city";
+        OverallRent = this.rent + this.rent_1house + this.rent_2house + this.rent_3house + this.rent_4house + this.rent_hotel;
     }
 }
 
@@ -67,11 +71,12 @@ class RailRoad extends City {
         this.rent4 = rent4;
         this.mortgage = mortgage;
         this.type = "railroad";
+        OverallRent = rent + rent2 + rent3 + rent4;
     }
 }
 
 class Company extends City {
-    
+
     public Company(String name, int position, int price, int mortgage) {
         this.name = name;
         this.position = position;
