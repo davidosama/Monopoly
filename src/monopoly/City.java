@@ -15,7 +15,6 @@ public abstract class City extends Location{
 
     int owner;
     String name;
-    int position;
     int price;
     int rent;
     int mortgage;
