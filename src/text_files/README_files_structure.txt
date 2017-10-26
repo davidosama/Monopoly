@@ -15,5 +15,3 @@ order of railroad's values in the file
 name,position,price,rent,rent2,rent3,rent4,mortgage
 
 -----------------------------------------------------
-
-cards' file structure not ready yet
