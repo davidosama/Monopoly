@@ -7,12 +7,10 @@ import java.util.ArrayList;
 
 public class Board {
 
-    ArrayList<Card> allCards = new ArrayList<>();
     ArrayList<City> allCities = new ArrayList<>();
 
     public Board() {
         initializeAllCities();
-        initializeAllCards();
 
         //for testing reading files
         for (int i = 0; i < allCities.size(); i++) {
@@ -90,9 +88,5 @@ public class Board {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void initializeAllCards() {
-        
     }
 }
