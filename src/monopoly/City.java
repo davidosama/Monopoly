@@ -8,11 +8,11 @@ public abstract class City {
     int rent;
     int mortgage;
     Boolean owned = false;
+    String type;
 }
 
 class normalCity extends City {
 
-    String color;
     int colorID;
     int rent_1house;
     int rent_2house;
@@ -21,10 +21,9 @@ class normalCity extends City {
     int rent_hotel;
     int houseCost;
 
-    public normalCity(String name, int position, String color, int colorID, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost) {
+    public normalCity(String name, int position, int colorID, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost) {
         this.name = name;
         this.position = position;
-        this.color = color;
         this.colorID = colorID;
         this.price = price;
         this.rent = rent;
@@ -35,6 +34,7 @@ class normalCity extends City {
         this.rent_hotel = rent_hotel;
         this.mortgage = mortgage;
         this.houseCost = houseCost;
+        this.type = "city";
     }
 }
 
@@ -53,16 +53,18 @@ class RailRoad extends City {
         this.rent3 = rent3;
         this.rent4 = rent4;
         this.mortgage = mortgage;
+        this.type = "railroad";
     }
 }
 
 class Company extends City {
-
+    
     public Company(String name, int position, int price, int mortgage) {
         this.name = name;
         this.position = position;
         this.price = price;
         this.mortgage = mortgage;
+        this.type = "company";
 
         //rent is 4 times the amount shown on dice for 1 company & 10 times if the 2 companies are owned
         this.rent = 0;

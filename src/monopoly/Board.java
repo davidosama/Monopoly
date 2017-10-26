@@ -33,19 +33,18 @@ public class Board {
 
                 String name = cityValues[0];
                 int position = Integer.parseInt(cityValues[1]);
-                String color = cityValues[2];
-                int colorID = Integer.parseInt(cityValues[3]);
-                int price = Integer.parseInt(cityValues[4]);
-                int rent = Integer.parseInt(cityValues[5]);
-                int rent1 = Integer.parseInt(cityValues[6]);
-                int rent2 = Integer.parseInt(cityValues[7]);
-                int rent3 = Integer.parseInt(cityValues[8]);
-                int rent4 = Integer.parseInt(cityValues[9]);
-                int rent_h = Integer.parseInt(cityValues[10]);
-                int mortgage = Integer.parseInt(cityValues[11]);
-                int houseCost = Integer.parseInt(cityValues[12]);
+                int colorID = Integer.parseInt(cityValues[2]);
+                int price = Integer.parseInt(cityValues[3]);
+                int rent = Integer.parseInt(cityValues[4]);
+                int rent1 = Integer.parseInt(cityValues[5]);
+                int rent2 = Integer.parseInt(cityValues[6]);
+                int rent3 = Integer.parseInt(cityValues[7]);
+                int rent4 = Integer.parseInt(cityValues[8]);
+                int rent_h = Integer.parseInt(cityValues[9]);
+                int mortgage = Integer.parseInt(cityValues[10]);
+                int houseCost = Integer.parseInt(cityValues[11]);
 
-                normalCity city = new normalCity(name, position, color, colorID, price, rent, rent1, rent2, rent3, rent4, rent_h, mortgage, houseCost);
+                normalCity city = new normalCity(name, position, colorID, price, rent, rent1, rent2, rent3, rent4, rent_h, mortgage, houseCost);
                 allCities.add(city);
             }
         } catch (IOException e) {
@@ -94,22 +93,6 @@ public class Board {
     }
 
     private void initializeAllCards() {
-        String fileCards = "./src/text_files/cards.txt";
         
-        //TO BE FINISHED WHEN THE CARDS CLASS IS DONE FIRST
-        
-//        try (BufferedReader br = new BufferedReader(new FileReader(fileCards))) {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                String[] cardValue = line.split(",");
-//
-//                String name = cardValue[0];
-//
-//                Card card = new Card(name);
-//                allCards.add(card);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 }

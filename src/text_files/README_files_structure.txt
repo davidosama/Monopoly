@@ -1,6 +1,6 @@
 order of city's values in the file
 
-name,position,color,colorID,price,rent,rent_1house,rent_2house,rent_3house,rent_4house,rent_hotel,mortgage,houseCost
+name,position,colorID,price,rent,rent_1house,rent_2house,rent_3house,rent_4house,rent_hotel,mortgage,houseCost
 
 -----------------------------------------------------
 
