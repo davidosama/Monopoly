@@ -11,7 +11,7 @@ public class Board {
 
     public Board() {
         initializeAllCities();
-        Cards.CreateAllCards();
+        Card.CreateAllCards();
 
         //for testing reading files
         for (int i = 0; i < allCities.size(); i++) {

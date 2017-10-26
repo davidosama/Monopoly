@@ -39,7 +39,7 @@ public class Player {
         money = 1000;
 
         //initialize player number to the playersCount and increment
-        num = ++playersCount;
+        num = playersCount++;
 
         citiesOwned = new ArrayList();
 
@@ -52,12 +52,12 @@ public class Player {
         Player curPlayer = getPlayer();
 
         if (!samePlayer) {
-            Turn = (Turn + 1) % playersCount;
+            Turn = (Turn + 1) % playersList.size();
             Constants.gameWindow.changeTurn(Turn);
 
         }
 
-        Constants.gameWindow.setRollBtnClr(Turn + 1);
+        Constants.gameWindow.setRollBtnClr(Turn);
 
         Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
         if (curPlayer.citiesOwned.size() == 0) {
@@ -78,14 +78,6 @@ public class Player {
         return this.citiesOwned;
     }
 
-    private void debugPrintPlayer() {
-
-        System.out.print("\n\nplayer Number: " + num
-                + "\nplayers Count: " + playersCount
-                + "\nplayer Turn: " + Turn
-                + "\ncurrentCity: " + currentCity
-        );
-    }
 
     public boolean buy(int city, int cost) {
         if (money >= cost) {

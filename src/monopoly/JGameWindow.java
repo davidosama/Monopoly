@@ -11,28 +11,15 @@ public class JGameWindow extends javax.swing.JFrame {
     /**
      * Creates new form BoardWindow
      */
-    private ArrayList<JLabel> playersLabels = new ArrayList();
     private int curTurn = 0;
     JPlayerInfo playerInfoWin;
 
 
-    public void addLabel() {
+    public void addLabel(int playerNum) {
 
-        JLabel label = new JLabel();
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + (playersLabels.size() + 1) + ".png"));
-        label.setIcon(icon);
-
-        //yes i know it's not the right place for setting these values, i'll fix it later
-        Constants.CarHeight = icon.getIconHeight();
-        Constants.CarWidth = icon.getIconWidth();
-
-        label.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - (playersLabels.size()) * Constants.Carlvl - 5,
-                icon.getIconWidth(), icon.getIconHeight());
-
-        playersLabels.add(label);
-
+        CarLabel carLabel  = new CarLabel(playerNum);
         ///////////////Code for mouse hover over player
-        label.addMouseListener(new MouseAdapter() {
+        carLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
@@ -52,18 +39,16 @@ public class JGameWindow extends javax.swing.JFrame {
                 playerInfoWin.setVisible(true);
             }
         });
-
-        this.getJlabel1().add(label);
-        this.getJlabel1().validate();
-        this.getJlabel1().repaint();
+  
+        BoardLabel.add(carLabel);
     }
 
     public void changeTurn(int turn) {
         curTurn = turn;
     }
 
-    public JLabel getCarLabel() {
-        return playersLabels.get(curTurn);
+    public void moveCarLabel() {
+         ((CarLabel)BoardLabel.getComponent(curTurn)).MoveOneCity();
     }
 
     public void addPlayers(int number) {
@@ -71,7 +56,7 @@ public class JGameWindow extends javax.swing.JFrame {
         //Creates and add players into the array
         for (int i = 0; i < number; i++) {
             Player.playersList.add(new Player());
-            addLabel();
+            addLabel(i);
         }
 
     }
@@ -284,7 +269,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void setRollBtnClr(int playerNum) {
-        RollDiceButton.setBorder(new LineBorder(Constants.colors[playerNum - 1], 3));
+        RollDiceButton.setBorder(new LineBorder(Constants.colors[playerNum], 3));
     }
 
     /**

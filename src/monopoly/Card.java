@@ -5,86 +5,74 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Cards {
+public class Card {
 
     private int id;
     private String Key;
     private int Value;
-    private static ArrayList<ArrayList<Cards>> group = new ArrayList<ArrayList<Cards>>(2); //here exists 2 arraylists inside a bigger list
 
-    public Cards(int id, String Key, int Value) {
+    private static ArrayList<Card> communityCards, chanceCards;
+
+    public Card(int id, String Key, int Value) {
         this.id = id;
         this.Key = Key;
         this.Value = Value;
     }
 
     static void CreateAllCards() {
-        group.add(new ArrayList<Cards>()); // creating arraylist for chance cards
-        group.add(new ArrayList<Cards>()); // creating arraylist for community cards
         String fileCards = ".\\src\\text_files\\Cards.txt";
-        //reading Cards from file
+        //reading Card from file
+        communityCards = new ArrayList<Card>();
+        chanceCards = new ArrayList<Card>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileCards))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] CardValues = line.split(",");
-                int idd = Integer.parseInt(CardValues[0]);
-                String Keyy = CardValues[1];
-                int Value = Integer.parseInt(CardValues[2]);
+                String Key = CardValues[1];
                 String Type = CardValues[3];
                 int id = Integer.parseInt(CardValues[0]);
                 int value = Integer.parseInt(CardValues[2]);
-                Cards card = new Cards(id, Keyy, Value);
+                Card card = new Card(id, Key, value);
                 //inserting the card inside the arraylist
                 if (Type.equals("Chance")) {
-                    group.get(0).add(card);
+                    chanceCards.add(card);
                 } else {
-                    group.get(1).add(card);
+                    communityCards.add(card);
                 }
             }
         } catch (Exception e) {
         }
-        Collections.shuffle(group.get(0));
-        Collections.shuffle(group.get(1));
+        Collections.shuffle(chanceCards);
+        Collections.shuffle(communityCards);
     }
 
-    static int DoCards(ArrayList<Player> Players) { //to take a card 
+    static int DoCards(ArrayList<Player> Players, String type) { //to take a card 
         Player curPlayer = Player.getPlayer();
         int id = curPlayer.num; // the number of the player
         int CardID = 0; // the id of the card chosen 
         String ToDo = ""; // the type of the card 
         int value = 0; // the value of the card 
         //to determine whether chance or community card
-        if (curPlayer.currentCity == 7 || curPlayer.currentCity == 22 || curPlayer.currentCity == 36) {
-            CardID = group.get(0).get(0).id;
-            ToDo = group.get(0).get(0).Key;
-            value = group.get(0).get(0).Value;
-            group.get(0).remove(group.get(0).get(0));
-            Cards c1 = new Cards(CardID, ToDo, value);
-            group.get(0).add(c1);
+        Card curCard;
+        if (type.equals("chance")) {
+            curCard = chanceCards.get(0);
 
         } else {
-            CardID = group.get(1).get(0).id;
-            ToDo = group.get(1).get(0).Key;
-            value = group.get(1).get(0).Value;
-            group.get(1).remove(group.get(1).get(0));
-            Cards c2 = new Cards(CardID, ToDo, value);
-            group.get(1).add(c2);
+            curCard = communityCards.get(0);
         }
+
+       // group.get(1).remove(group.get(1).get(0));
+        Card c2 = new Card(CardID, ToDo, value);
+        //group.get(1).add(c2);
+
         // to do the commands of the card taken 
-        switch (ToDo) {
+        switch (curCard.Key) {
             case "Take":
-                for (int i = 0; i < Players.size(); i++) {
-                    if (Players.get(i).num == id) {
-                        Players.get(i).deductMoney(value);
-                    }
-                }
+                curPlayer.deductMoney(curCard.Value);
+
                 break;
             case "Give":
-                for (int i = 0; i < Players.size(); i++) {
-                    if (Players.get(i).num == id) {
-                        Players.get(i).addMoney(value);
-                    }
-                }
+                curPlayer.addMoney(curCard.Value);
                 break;
             case "GiveAll":
                 int toincrease = value;
@@ -95,6 +83,7 @@ public class Cards {
                     } else {
                         Players.get(i).deductMoney(value);
                     }
+
                     break;
 
                 }
@@ -104,13 +93,14 @@ public class Cards {
                 value = value * (Players.size() - 1);
                 for (int i = 0; i < Players.size(); i++) {
                     if (Players.get(i).num == id) {
-                        Players.get(i).addMoney(value);
+                        Players.get(id).addMoney(value);
                     } else {
                         Players.get(i).deductMoney(toreduce);
                     }
                 }
                 break;
             case "Go":
+                //needs work
                 return value;
 
         }
