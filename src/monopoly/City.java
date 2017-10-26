@@ -1,14 +1,27 @@
 package monopoly;
 
-public abstract class City {
+class Location {
+    
+    String type;
+    int position;
+
+    public Location(String type, int position) {
+        this.type = type;
+        this.position = position;
+    }
+}
+
+public abstract class City extends Location{
 
     String name;
-    int position;
     int price;
     int rent;
     int mortgage;
     Boolean owned = false;
-    String type;
+
+    public City() {
+        super(null, 0);
+    }
 }
 
 class normalCity extends City {
