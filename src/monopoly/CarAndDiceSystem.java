@@ -127,7 +127,7 @@ public class CarAndDiceSystem {
     }
 
     public ImageIcon loadImageOfDice(int dice) {
-        return new javax.swing.ImageIcon(getClass().getResource("/drawables/" + dice + ".png"));
+        return new javax.swing.ImageIcon(getClass().getResource("/drawables/d" + dice + ".png"));
 
     }
 
