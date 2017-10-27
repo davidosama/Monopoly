@@ -46,43 +46,50 @@ public class Card {
         Collections.shuffle(communityCards);
     }
 
-    static int DoCards(ArrayList<Player> Players, String type) { //to take a card 
-        Player curPlayer = Player.getPlayer();
-        int playerNum = curPlayer.num; // the number of the player
+    static int DoCards(String type) { //to take a card 
+        
+        ArrayList<Player> players = Player.playersList;
+        Player player = Player.getPlayer();
+        int playerNum = player.num; // the number of the player
 
-        //to determine whether chance or community card
+        
         Card curCard;
+        
         if (type.equals("chance")) {
-            curCard = chanceCards.get(0);
+            //removing a card and then adding it to the bottom
+            curCard = chanceCards.remove(0);
+            chanceCards.add(curCard);
 
         } else {
-            curCard = communityCards.get(0);
+            curCard = communityCards.remove(0);
+            communityCards.add(curCard);
         }
+        
+        Constants.gameWindow.drawChanceCard(curCard.id);
+        
 
-       // group.get(1).remove(group.get(1).get(0));
-        //Card c2 = new Card(CardID, ToDo, value);
-        //group.get(1).add(c2);
 
         // to do the commands of the card taken 
         int value;
+        
         switch (curCard.key) {
             case "Take":
-                curPlayer.deductMoney(curCard.value);
+                player.deductMoney(curCard.value);
                 break;
                 
             case "Give":
-                curPlayer.addMoney(curCard.value);
+                player.addMoney(curCard.value);
                 break;
                 
             case "GiveAll":
                 int toincrease = curCard.value;
-                value = curCard.value * (Players.size() - 1);
+                value = curCard.value * (players.size() - 1);
                 
-                for (int i = 0; i < Players.size(); i++) {
+                for (int i = 0; i < players.size(); i++) {
                     if (i != playerNum) {
-                        Players.get(i).addMoney(toincrease);
+                        players.get(i).addMoney(toincrease);
                     } else {
-                        Players.get(i).deductMoney(value);
+                        players.get(i).deductMoney(value);
                     }
 
                     break;
@@ -90,21 +97,23 @@ public class Card {
 
             case "TakeAll":
                 int toreduce = curCard.value;
-                value = curCard.value * (Players.size() - 1);
-                for (int i = 0; i < Players.size(); i++) {
+                value = curCard.value * (players.size() - 1);
+                for (int i = 0; i < players.size(); i++) {
                     if (i == playerNum) {
-                        Players.get(i).addMoney(value);
+                        players.get(i).addMoney(value);
                     } else {
-                        Players.get(i).deductMoney(toreduce);
+                        players.get(i).deductMoney(toreduce);
                     }
                 }
                 break;
                 
-            case "Go":
-                if(curCard.value > player.)
                 //needs work
+            case "Go":
+                if(curCard.value >= player.position)
+                    return curCard.value-player.position;
+                else
+                    return 40-(player.position-curCard.value);
                 
-
         }
         return -1;
 
