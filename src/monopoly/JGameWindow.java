@@ -257,6 +257,14 @@ public class JGameWindow extends javax.swing.JFrame {
             currentCardLabel.setIcon(null);
         }
     }
+    //drawing chance/community cards
+       public void drawChanceCard(int id) {
+        try {
+            currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Chance-Community-Cards/" + id + ".png")));
+        } catch (Exception e) {
+            currentCardLabel.setIcon(null);
+        }
+    }
 
     public void drawCurrentCard(int curPosition) {
         // to-do, adding more images and loading the images to an array of icons at the beginning
