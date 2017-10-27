@@ -1,7 +1,7 @@
 package monopoly;
 
 class Location {
-    
+
     String type;
     int position;
 
@@ -11,7 +11,7 @@ class Location {
     }
 }
 
-public abstract class City extends Location{
+public abstract class City extends Location {
 
     int owner;
     String name;

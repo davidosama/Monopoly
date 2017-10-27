@@ -22,8 +22,8 @@ import javax.swing.ImageIcon;
  */
 public class CarLabel extends JLabel {
 
-    public int position;
-    public int playerNum;
+    private int position;
+    private int playerNum;
 
     public CarLabel(int playerNum) {
 
@@ -49,7 +49,7 @@ public class CarLabel extends JLabel {
     }
 
     public ImageIcon rotateImage(ImageIcon icon, double angleDegrees) {
-        
+
         // converting an imageicon to a bufferedimage
         BufferedImage image = new BufferedImage(
                 icon.getIconWidth(),
@@ -58,10 +58,9 @@ public class CarLabel extends JLabel {
         Graphics g1 = image.createGraphics();
         icon.paintIcon(null, g1, 0, 0);
         g1.dispose();
-        
-        
+
         //rotating the image
-        double angle = (angleDegrees/180)*Math.PI;
+        double angle = (angleDegrees / 180) * Math.PI;
         double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
         int w = image.getWidth(), h = image.getHeight();
         int neww = (int) Math.floor(w * cos + h * sin), newh = (int) Math.floor(h * cos + w * sin);
@@ -76,7 +75,7 @@ public class CarLabel extends JLabel {
     }
 
     public void rotateCar() {
-        ImageIcon icon = rotateImage((ImageIcon) this.getIcon(),90);
+        ImageIcon icon = rotateImage((ImageIcon) this.getIcon(), 90);
         this.setIcon(icon);
         this.setSize(icon.getIconWidth(), icon.getIconHeight());
 

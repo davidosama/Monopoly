@@ -13,11 +13,10 @@ public class JGameWindow extends javax.swing.JFrame {
     private int curTurn = 0;
     JPlayerInfo playerInfoWin;
 
-
     public void addLabel(int playerNum) {
 
-        CarLabel carLabel  = new CarLabel(playerNum);
-        
+        CarLabel carLabel = new CarLabel(playerNum);
+
         ///////////////Code for mouse hover over player
         carLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -39,7 +38,7 @@ public class JGameWindow extends javax.swing.JFrame {
                 playerInfoWin.setVisible(true);
             }
         });
-  
+
         BoardLabel.add(carLabel);
     }
 
@@ -48,7 +47,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void moveCarLabel() {
-         ((CarLabel)BoardLabel.getComponent(curTurn)).MoveOneCity();
+        ((CarLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
     }
 
     public void addPlayers(int number) {
@@ -257,8 +256,9 @@ public class JGameWindow extends javax.swing.JFrame {
             currentCardLabel.setIcon(null);
         }
     }
+
     //drawing chance/community cards
-       public void drawChanceCard(int id) {
+    public void drawChanceCard(int id) {
         try {
             currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Chance-Community-Cards/" + id + ".png")));
         } catch (Exception e) {

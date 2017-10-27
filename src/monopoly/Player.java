@@ -20,7 +20,6 @@ public class Player {
 
     private boolean active; //will be used if the player is in jail
 
-
     //City Number
     public int position;
 
@@ -42,12 +41,11 @@ public class Player {
 
         citiesOwned = new ArrayList();
 
-
         //debugPrintPlayer();
     }
 
     public static void MoveTurn(Boolean samePlayer) {
-        
+
         Player curPlayer = getPlayer();
 
         if (!samePlayer) {
@@ -72,11 +70,9 @@ public class Player {
         return playersList.get(Turn);
     }
 
-
     public ArrayList getCitiesOwned() {
         return this.citiesOwned;
     }
-
 
     public boolean buy(int city, int cost) {
         if (money >= cost) {

@@ -4,8 +4,6 @@ import java.awt.Color;
 
 public class Constants {
 
-
-
     //Main window
     public static JGameWindow gameWindow;
 
@@ -13,7 +11,7 @@ public class Constants {
 
     //set true for fast debugging
     public static Boolean testing = true;
-    
+
     //Car and Dice System
     public static CarAndDiceSystem carSys;
 

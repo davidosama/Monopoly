@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Board {
 
@@ -13,6 +14,18 @@ public class Board {
         initializeAllCities();
         Card.CreateAllCards();
 
+        //sorting
+        allCities.sort(new Comparator<City>() {
+            @Override
+            public int compare(City a, City b) {
+                if (a.position < b.position) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+
+        });
         //for testing reading files
         for (int i = 0; i < allCities.size(); i++) {
             System.out.println(allCities.get(i).name);

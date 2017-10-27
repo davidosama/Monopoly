@@ -47,14 +47,13 @@ public class Card {
     }
 
     static int DoCards(String type) { //to take a card 
-        
+
         ArrayList<Player> players = Player.playersList;
         Player player = Player.getPlayer();
         int playerNum = player.num; // the number of the player
 
-        
         Card curCard;
-        
+
         if (type.equals("chance")) {
             //removing a card and then adding it to the bottom
             curCard = chanceCards.remove(0);
@@ -64,27 +63,25 @@ public class Card {
             curCard = communityCards.remove(0);
             communityCards.add(curCard);
         }
-        
-        Constants.gameWindow.drawChanceCard(curCard.id);
-        
 
+        Constants.gameWindow.drawChanceCard(curCard.id);
 
         // to do the commands of the card taken 
         int value;
-        
+
         switch (curCard.key) {
             case "Take":
                 player.deductMoney(curCard.value);
                 break;
-                
+
             case "Give":
                 player.addMoney(curCard.value);
                 break;
-                
+
             case "GiveAll":
                 int toincrease = curCard.value;
                 value = curCard.value * (players.size() - 1);
-                
+
                 for (int i = 0; i < players.size(); i++) {
                     if (i != playerNum) {
                         players.get(i).addMoney(toincrease);
@@ -106,14 +103,15 @@ public class Card {
                     }
                 }
                 break;
-                
-                //needs work
+
+            //needs work
             case "Go":
-                if(curCard.value >= player.position)
-                    return curCard.value-player.position;
-                else
-                    return 40-(player.position-curCard.value);
-                
+                if (curCard.value >= player.position) {
+                    return curCard.value - player.position;
+                } else {
+                    return 40 - (player.position - curCard.value);
+                }
+
         }
         return -1;
 

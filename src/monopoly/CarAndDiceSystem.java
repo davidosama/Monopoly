@@ -24,7 +24,7 @@ public class CarAndDiceSystem {
     private int timerMs = 150;
 
     Random rand;
-    
+
     public CarAndDiceSystem() {
 
         //For testing, speed things up
@@ -39,12 +39,11 @@ public class CarAndDiceSystem {
 
                 Constants.gameWindow.moveCarLabel();
                 res--;
-                
+
                 if (res == 0) {
                     Constants.gameWindow.enableRollDiceBtn();
-             
+
                     Constants.gameWindow.drawCity(curPlayer.position);
-                    
 
                     if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
                         //Community Cards Function
@@ -90,7 +89,6 @@ public class CarAndDiceSystem {
             public void actionPerformed(ActionEvent e) {
 
                 // 
-                
                 diceTimerCounter--;
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
@@ -104,9 +102,9 @@ public class CarAndDiceSystem {
                 icon = loadImageOfDice(d2);
                 Constants.gameWindow.get_d2_label().setIcon(icon);
 
-                if (diceTimerCounter == 0) {                   
-                    curPlayer.position+= res;
-                    curPlayer.position%= 40;
+                if (diceTimerCounter == 0) {
+                    curPlayer.position += res;
+                    curPlayer.position %= 40;
                     t.start();
                     diceTimer.stop();
                 }
@@ -129,7 +127,6 @@ public class CarAndDiceSystem {
 
     }
 
- 
     public Boolean checkIfOwnedByCurrPlayer(int CityNum) {
         //check if the city is owned by the current Player
         for (int i = 0; i < curPlayer.getCitiesOwned().size(); i++) {
