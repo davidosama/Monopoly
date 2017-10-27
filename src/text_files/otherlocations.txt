@@ -1,0 +1,12 @@
+0,GO,common
+2,COMMUNITY CHEST,community	
+4,INCOME TAX,incometax
+7,CHANCE,chance
+10,JAIL,jail
+17,COMMUNITY CHEST,community
+20,FREE PARKING,freeparking
+22,CHANCE,chance
+30,GO TO JAIL,gotojail
+33,COMMUNITY CHEST,community
+36,CHANCE,chance
+38,LUXURY TAX,supertax

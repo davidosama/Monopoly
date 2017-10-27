@@ -61,7 +61,7 @@ public class Player {
             Constants.gameWindow.PlayerInfoArea.append("No Cities");
         }
         for (int i = 0; i < curPlayer.citiesOwned.size(); i++) {
-            City c = Constants.board.allCities.get(curPlayer.citiesOwned.get(i));
+            City c = ((City) Constants.board.allCities.get(curPlayer.citiesOwned.get(i)));
             Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
         }
     }
@@ -95,6 +95,7 @@ public class Player {
 
 //    abstract boolean mortgage(int city, int mortgageCost);
 //    abstract boolean trade(int city1, int city2);
+    
     public void addMoney(int money) {
         this.money += money;
     }

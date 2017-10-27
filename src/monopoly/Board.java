@@ -8,16 +8,16 @@ import java.util.Comparator;
 
 public class Board {
 
-    ArrayList<City> allCities = new ArrayList<>();
+    ArrayList<Location> allCities = new ArrayList<>();
 
     public Board() {
         initializeAllCities();
         Card.CreateAllCards();
 
         //sorting
-        allCities.sort(new Comparator<City>() {
+        allCities.sort(new Comparator<Location>() {
             @Override
-            public int compare(City a, City b) {
+            public int compare(Location a, Location b) {
                 if (a.position < b.position) {
                     return -1;
                 } else {
@@ -30,9 +30,11 @@ public class Board {
         for (int i = 0; i < allCities.size(); i++) {
             System.out.println(allCities.get(i).name);
         }
+        System.out.println(allCities.size());
     }
 
     private void initializeAllCities() {
+        String fileLocations = "./src/text_files/otherlocations.txt";
         String fileCities = "./src/text_files/cities.txt";
         String fileCompanies = "./src/text_files/companies.txt";
         String fileRailroads = "./src/text_files/railroads.txt";
@@ -103,5 +105,22 @@ public class Board {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        //reading other locations
+        try (BufferedReader br = new BufferedReader(new FileReader(fileLocations))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] locationValue = line.split(",");
+                int position = Integer.parseInt(locationValue[0]);
+                String name = locationValue[1];
+                String type = locationValue[2];
+
+                Location location = new Location(position, name, type);
+                allCities.add(location);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

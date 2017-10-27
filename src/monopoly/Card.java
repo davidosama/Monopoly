@@ -104,7 +104,6 @@ public class Card {
                 }
                 break;
 
-            //needs work
             case "Go":
                 if (curCard.value >= player.position) {
                     return curCard.value - player.position;

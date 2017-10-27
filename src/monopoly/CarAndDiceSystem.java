@@ -139,7 +139,7 @@ public class CarAndDiceSystem {
     }
 
     public Boolean isOwned(int CityNum) {
-        if (Constants.board.allCities.get(CityNum).owned == true) {
+        if (((City) Constants.board.allCities.get(CityNum)).owned == true) {
             return true;
         }
         return false;
@@ -147,12 +147,12 @@ public class CarAndDiceSystem {
 
     public void BuyCity(int city, Player player) {
 
-        Constants.board.allCities.get(city).owned = true;
+        ((City) Constants.board.allCities.get(city)).owned = true;
 
         for (int i = 0; i < Player.playersList.size(); i++) {
             if (Player.playersList.get(i) == player) {
-                Boolean n = Player.playersList.get(i).buy(city, Constants.board.allCities.get(city).price);
-                Constants.board.allCities.get(city).owner = i;
+                Boolean n = Player.playersList.get(i).buy(city, ((City) Constants.board.allCities.get(city)).price);
+                ((City) Constants.board.allCities.get(city)).owner = i;
                 if (n) {
                     JOptionPane.showMessageDialog(null, "Congratulations, now you own " + Constants.board.allCities.get(city).name);
                 } else {
@@ -164,11 +164,11 @@ public class CarAndDiceSystem {
     }
 
     public void PayRent(int city, Player player) {
-        JOptionPane.showMessageDialog(null, "Unfortunately,This city is owned by Player " + Player.playersList.get(Constants.board.allCities.get(city).owner).num + " so you will have to pay him a rent");
+        JOptionPane.showMessageDialog(null, "Unfortunately,This city is owned by Player " + Player.playersList.get(((City) Constants.board.allCities.get(city)).owner).num + " so you will have to pay him a rent");
         for (int i = 0; i < Player.playersList.size(); i++) {
             if (Player.playersList.get(i) == player) {
-                Player.playersList.get(i).deductMoney(Constants.board.allCities.get(city).OverallRent);
-                Player.playersList.get(Constants.board.allCities.get(city).owner).addMoney(Constants.board.allCities.get(city).OverallRent);
+                Player.playersList.get(i).deductMoney(((City) Constants.board.allCities.get(city)).OverallRent);
+                Player.playersList.get(((City) Constants.board.allCities.get(city)).owner).addMoney(((City) Constants.board.allCities.get(city)).OverallRent);
 
             }
         }
