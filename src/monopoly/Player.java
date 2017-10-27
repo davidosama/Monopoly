@@ -6,7 +6,6 @@
 package monopoly;
 
 import java.util.ArrayList;
-import javax.swing.JLabel;
 
 public class Player {
 
@@ -23,7 +22,7 @@ public class Player {
 
 
     //City Number
-    public int currentCity;
+    public int position;
 
     //Array of all the players
     public static ArrayList<Player> playersList = new ArrayList<>();
@@ -35,7 +34,7 @@ public class Player {
     public Player() {
 
         //initialize current city to zero
-        currentCity = 0;
+        position = 0;
         money = 1000;
 
         //initialize player number to the playersCount and increment

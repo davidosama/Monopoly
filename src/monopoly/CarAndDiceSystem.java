@@ -8,7 +8,6 @@ package monopoly;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
@@ -17,7 +16,6 @@ public class CarAndDiceSystem {
     int d1, d2, res;
     protected javax.swing.Timer t;
     private Player curPlayer;
-    private CarLabel curLabel;
     //For dice shuffling
     private int diceTimerCounter;
     private javax.swing.Timer diceTimer;
@@ -44,31 +42,31 @@ public class CarAndDiceSystem {
                 
                 if (res == 0) {
                     Constants.gameWindow.enableRollDiceBtn();
-                    
-                    Constants.gameWindow.drawCity(curPlayer.currentCity);
+             
+                    Constants.gameWindow.drawCity(curPlayer.position);
                     
 
-                    if (curPlayer.currentCity == 2 || curPlayer.currentCity == 17 || curPlayer.currentCity == 33) {
+                    if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
                         //Community Cards Function
-                    } else if (curPlayer.currentCity == 7 || curPlayer.currentCity == 22 || curPlayer.currentCity == 36) {
+                    } else if (curPlayer.position == 7 || curPlayer.position == 22 || curPlayer.position == 36) {
                         //chance Cards Function
-                    } else if (curPlayer.currentCity == 5 || curPlayer.currentCity == 15 || curPlayer.currentCity == 25 || curPlayer.currentCity == 35) {
+                    } else if (curPlayer.position == 5 || curPlayer.position == 15 || curPlayer.position == 25 || curPlayer.position == 35) {
                         //RailRoads Function
-                    } else if (curPlayer.currentCity == 12 || curPlayer.currentCity == 28) {
+                    } else if (curPlayer.position == 12 || curPlayer.position == 28) {
                         //Company's Function
-                    } else if (curPlayer.currentCity == 4 || curPlayer.currentCity == 38) {
+                    } else if (curPlayer.position == 4 || curPlayer.position == 38) {
                         //Pay or income Tax ( 7aga kda ) 
-                    } else if (curPlayer.currentCity == 30) {
+                    } else if (curPlayer.position == 30) {
                         //Go to Jail
                     } else {
                         //NormalCities
                         //check if it's owned by current Player
-                        Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.currentCity);
+                        Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.position);
                         if (isOwnedByCurrPlayer) {
                             JOptionPane.showConfirmDialog(null, "Do you want to build ?");
                             //Build Function() 
-                        } else if (isOwned(curPlayer.currentCity)) {
-                            PayRent(curPlayer.currentCity, curPlayer);
+                        } else if (isOwned(curPlayer.position)) {
+                            PayRent(curPlayer.position, curPlayer);
                         } else {
                             //If the city doesn't belong to him or to any Player
                             askToBuy();
@@ -107,8 +105,8 @@ public class CarAndDiceSystem {
                 Constants.gameWindow.get_d2_label().setIcon(icon);
 
                 if (diceTimerCounter == 0) {                   
-                    curPlayer.currentCity+= res;
-                    curPlayer.currentCity%= 40;
+                    curPlayer.position+= res;
+                    curPlayer.position%= 40;
                     t.start();
                     diceTimer.stop();
                 }
@@ -135,7 +133,7 @@ public class CarAndDiceSystem {
     public Boolean checkIfOwnedByCurrPlayer(int CityNum) {
         //check if the city is owned by the current Player
         for (int i = 0; i < curPlayer.getCitiesOwned().size(); i++) {
-            if ((int) curPlayer.getCitiesOwned().get(i) == curPlayer.currentCity) {
+            if ((int) curPlayer.getCitiesOwned().get(i) == curPlayer.position) {
                 return true;
 
             }
@@ -180,7 +178,7 @@ public class CarAndDiceSystem {
     }
 
     public void askToBuy() {
-        normalCity currentCity = (normalCity) Constants.board.allCities.get(curPlayer.currentCity);
+        normalCity currentCity = (normalCity) Constants.board.allCities.get(curPlayer.position);
         String CityInfo = "\nPrice:" + currentCity.price
                 + "\nRent: " + currentCity.rent
                 + "\nRent of 1 house: " + currentCity.rent_1house
@@ -194,7 +192,7 @@ public class CarAndDiceSystem {
                 + CityInfo + "\nDo you want to buy it ?", "",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         if (choice == 0) {
-            BuyCity(curPlayer.currentCity, curPlayer);
+            BuyCity(curPlayer.position, curPlayer);
         }
     }
 

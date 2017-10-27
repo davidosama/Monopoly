@@ -2,7 +2,6 @@ package monopoly;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
@@ -18,6 +17,7 @@ public class JGameWindow extends javax.swing.JFrame {
     public void addLabel(int playerNum) {
 
         CarLabel carLabel  = new CarLabel(playerNum);
+        
         ///////////////Code for mouse hover over player
         carLabel.addMouseListener(new MouseAdapter() {
             @Override

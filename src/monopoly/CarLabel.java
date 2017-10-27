@@ -12,7 +12,6 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Transparency;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -133,20 +132,20 @@ public class CarLabel extends JLabel {
         switch (position) {
             case 0:
                 this.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth),
-                        Constants.BoardHeight - Constants.CarHeight - (playerNum) * Constants.Carlvl);
+                        Constants.BoardHeight - Constants.CarHeight - playerNum * Constants.Carlvl);
                 break;
 
             case 10:
-                this.setLocation(0 + (playerNum) * Constants.Carlvl,
+                this.setLocation(playerNum * Constants.Carlvl,
                         Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth - Constants.CarWidth));
                 break;
 
             case 20:
-                this.setLocation(Constants.CornerWidth - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth) / 2, (playerNum) * Constants.Carlvl);
+                this.setLocation(Constants.CornerWidth - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth) / 2, playerNum * Constants.Carlvl);
                 break;
 
             case 30:
-                this.setLocation(Constants.BoardWidth - Constants.CarHeight - (playerNum) * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
+                this.setLocation(Constants.BoardWidth - Constants.CarHeight - playerNum * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
                 break;
 
         }

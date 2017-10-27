@@ -1,7 +1,6 @@
 package monopoly;
 
 import java.awt.Color;
-import javax.swing.JFrame;
 
 public class Constants {
 

@@ -8,15 +8,15 @@ import java.util.Collections;
 public class Card {
 
     private int id;
-    private String Key;
-    private int Value;
+    private String key;
+    private int value;
 
     private static ArrayList<Card> communityCards, chanceCards;
 
     public Card(int id, String Key, int Value) {
         this.id = id;
-        this.Key = Key;
-        this.Value = Value;
+        this.key = Key;
+        this.value = Value;
     }
 
     static void CreateAllCards() {
@@ -48,10 +48,8 @@ public class Card {
 
     static int DoCards(ArrayList<Player> Players, String type) { //to take a card 
         Player curPlayer = Player.getPlayer();
-        int id = curPlayer.num; // the number of the player
-        int CardID = 0; // the id of the card chosen 
-        String ToDo = ""; // the type of the card 
-        int value = 0; // the value of the card 
+        int playerNum = curPlayer.num; // the number of the player
+
         //to determine whether chance or community card
         Card curCard;
         if (type.equals("chance")) {
@@ -62,46 +60,50 @@ public class Card {
         }
 
        // group.get(1).remove(group.get(1).get(0));
-        Card c2 = new Card(CardID, ToDo, value);
+        //Card c2 = new Card(CardID, ToDo, value);
         //group.get(1).add(c2);
 
         // to do the commands of the card taken 
-        switch (curCard.Key) {
+        int value;
+        switch (curCard.key) {
             case "Take":
-                curPlayer.deductMoney(curCard.Value);
-
+                curPlayer.deductMoney(curCard.value);
                 break;
+                
             case "Give":
-                curPlayer.addMoney(curCard.Value);
+                curPlayer.addMoney(curCard.value);
                 break;
+                
             case "GiveAll":
-                int toincrease = value;
-                value = value * (Players.size() - 1);
+                int toincrease = curCard.value;
+                value = curCard.value * (Players.size() - 1);
+                
                 for (int i = 0; i < Players.size(); i++) {
-                    if (Players.get(i).num != id) {
+                    if (i != playerNum) {
                         Players.get(i).addMoney(toincrease);
                     } else {
                         Players.get(i).deductMoney(value);
                     }
 
                     break;
-
                 }
 
             case "TakeAll":
-                int toreduce = value;
-                value = value * (Players.size() - 1);
+                int toreduce = curCard.value;
+                value = curCard.value * (Players.size() - 1);
                 for (int i = 0; i < Players.size(); i++) {
-                    if (Players.get(i).num == id) {
-                        Players.get(id).addMoney(value);
+                    if (i == playerNum) {
+                        Players.get(i).addMoney(value);
                     } else {
                         Players.get(i).deductMoney(toreduce);
                     }
                 }
                 break;
+                
             case "Go":
+                if(curCard.value > player.)
                 //needs work
-                return value;
+                
 
         }
         return -1;
