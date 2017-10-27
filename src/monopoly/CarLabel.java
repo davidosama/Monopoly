@@ -32,11 +32,8 @@ public class CarLabel extends JLabel {
         javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + playerNum + ".png"));
         this.setIcon(icon);
 
-        //yes i know it's not the right place for setting these values, i'll fix it later
-        Constants.CarHeight = icon.getIconHeight();
-        Constants.CarWidth = icon.getIconWidth();
 
-        this.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth), Constants.BoardHeight - icon.getIconHeight() - this.playerNum * Constants.Carlvl - 5,
+        this.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - icon.getIconWidth()), Constants.BoardHeight - icon.getIconHeight() - this.playerNum * Constants.Carlvl - 5,
                 icon.getIconWidth(), icon.getIconHeight());
 
     }
@@ -129,21 +126,21 @@ public class CarLabel extends JLabel {
         rotateCar();
         switch (position) {
             case 0:
-                this.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth),
-                        Constants.BoardHeight - Constants.CarHeight - playerNum * Constants.Carlvl);
+                this.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - this.getWidth()),
+                        Constants.BoardHeight - this.getHeight() - playerNum * Constants.Carlvl);
                 break;
 
             case 10:
                 this.setLocation(playerNum * Constants.Carlvl,
-                        Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth - Constants.CarWidth));
+                        Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth - this.getHeight()));
                 break;
 
             case 20:
-                this.setLocation(Constants.CornerWidth - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth) / 2, playerNum * Constants.Carlvl);
+                this.setLocation(Constants.CornerWidth - this.getWidth() - (Constants.CityWidth - this.getWidth()) / 2, playerNum * Constants.Carlvl);
                 break;
 
             case 30:
-                this.setLocation(Constants.BoardWidth - Constants.CarHeight - playerNum * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
+                this.setLocation(Constants.BoardWidth - this.getWidth() - playerNum * Constants.Carlvl, Constants.CornerHeight - this.getHeight() - (Constants.CityWidth - this.getHeight()));
                 break;
 
         }

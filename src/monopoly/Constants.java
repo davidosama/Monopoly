@@ -19,8 +19,6 @@ public class Constants {
     public static int BoardWidth;
     public static int BoardHeight;
 
-    public static int CarHeight;
-    public static int CarWidth;
 
     public static int ResizeFactor = 1;
     public static int CityWidth = ResizeFactor * 59;

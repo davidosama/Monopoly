@@ -45,6 +45,7 @@ public class CarAndDiceSystem {
 
                     Constants.gameWindow.drawCity(curPlayer.position);
 
+                    
                     if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
                         //Community Cards Function
                     } else if (curPlayer.position == 7 || curPlayer.position == 22 || curPlayer.position == 36) {
@@ -55,7 +56,7 @@ public class CarAndDiceSystem {
                         //Company's Function
                     } else if (curPlayer.position == 4 || curPlayer.position == 38) {
                         //Pay or income Tax ( 7aga kda ) 
-                    } else if (curPlayer.position == 30) {
+                    } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10|| curPlayer.position == 20) {
                         //Go to Jail
                     } else {
                         //NormalCities
