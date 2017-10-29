@@ -100,14 +100,6 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setName(""); // NOI18N
         BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         BoardPanel.setLayout(null);
-        BoardPanel.add(d2_label);
-        d2_label.setBounds(380, 120, 110, 110);
-        d2_label.getAccessibleContext().setAccessibleName("d2_label");
-        d2_label.getAccessibleContext().setAccessibleDescription("");
-
-        BoardPanel.add(d1_label);
-        d1_label.setBounds(250, 120, 110, 110);
-        d1_label.getAccessibleContext().setAccessibleName("d1_label");
 
         currentCardPanel.setBackground(new java.awt.Color(210, 234, 220));
         currentCardPanel.setToolTipText("");
@@ -143,28 +135,10 @@ public class JGameWindow extends javax.swing.JFrame {
 
         DicePanel.setBackground(new java.awt.Color(210, 234, 220));
         DicePanel.setPreferredSize(new java.awt.Dimension(240, 140));
-
-        javax.swing.GroupLayout DicePanelLayout = new javax.swing.GroupLayout(DicePanel);
-        DicePanel.setLayout(DicePanelLayout);
-        DicePanelLayout.setHorizontalGroup(
-            DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DicePanelLayout.createSequentialGroup()
-                .addContainerGap(234, Short.MAX_VALUE)
-                .addComponent(d1_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(d2_label))
-        );
-        DicePanelLayout.setVerticalGroup(
-            DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DicePanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(DicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(d2_label, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(d1_label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(70, 70, 70))
-        );
-
+        DicePanel.add(d1_label);
         d1_label.getAccessibleContext().setAccessibleName("d1_label");
+
+        DicePanel.add(d2_label);
         d2_label.getAccessibleContext().setAccessibleName("d2_label");
         d2_label.getAccessibleContext().setAccessibleDescription("");
 
