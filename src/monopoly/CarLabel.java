@@ -29,7 +29,7 @@ public class CarLabel extends JLabel {
         this.position = 0;
         this.playerNum = playerNum;
 
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/CarLeft" + playerNum + ".png"));
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/"+playerNum + ".png"));
         this.setIcon(icon);
 
 
