@@ -95,7 +95,6 @@ public class Player {
 
 //    abstract boolean mortgage(int city, int mortgageCost);
 //    abstract boolean trade(int city1, int city2);
-    
     public void addMoney(int money) {
         this.money += money;
     }
@@ -107,5 +106,14 @@ public class Player {
         } else {
             return false;
         }
+    }
+
+    public void move(int steps) {
+        if (this.position + steps >= 40) //reached or passed go
+        {
+            this.money += 200;
+        }
+        this.position += steps;
+        this.position %= 40;
     }
 }

@@ -104,8 +104,7 @@ public class CarAndDiceSystem {
                 Constants.gameWindow.get_d2_label().setIcon(icon);
 
                 if (diceTimerCounter == 0) {
-                    curPlayer.position += res;
-                    curPlayer.position %= 40;
+                    curPlayer.move(res);
                     t.start();
                     diceTimer.stop();
                 }

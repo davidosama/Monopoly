@@ -51,7 +51,6 @@ public class Card {
         ArrayList<Player> players = Player.playersList;
         Player player = Player.getPlayer();
         int playerNum = player.num; // the number of the player
-
         Card curCard;
 
         if (type.equals("chance")) {
