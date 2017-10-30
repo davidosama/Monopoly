@@ -5,6 +5,7 @@
  */
 package monopoly;
 
+import java.awt.Color;
 import javax.swing.JLabel;
 
 /**
@@ -17,12 +18,6 @@ public class JPlayerInfo extends javax.swing.JFrame {
      * Creates new form JPlayerInfo
      */
     public JPlayerInfo() {
-        setUndecorated(true);
-        initComponents();
-    }
-
-    public JPlayerInfo(int i) {
-
         setUndecorated(true);
         initComponents();
     }
@@ -110,19 +105,13 @@ public class JPlayerInfo extends javax.swing.JFrame {
         });
     }
 
-    /////////////////////////NOT GENERATED
-    /*public JLabel getbigCityLBL() {
-        return bigCityLBL;
-    }*/
     public void setBigCityLBL(int i) {
         try {
             bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cities/" + i + ".png")));
-
         } catch (Exception ex) {
-            bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/objects/5.png")));
+            bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cards/5.png")));
         }
     }
-
     ////////////////////////
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
