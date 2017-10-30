@@ -5,6 +5,8 @@
  */
 package monopoly;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author hesha
@@ -19,6 +21,13 @@ public class JPlayerInfo extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JPlayerInfo(int i) {
+
+        setUndecorated(true);
+        initComponents();
+        bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cities/" + i + ".png")));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,6 +38,7 @@ public class JPlayerInfo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        bigCityLBL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -39,11 +49,17 @@ public class JPlayerInfo extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
+                .addComponent(bigCityLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addComponent(bigCityLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,7 +111,14 @@ public class JPlayerInfo extends javax.swing.JFrame {
         });
     }
 
+    /////////////////////////NOT GENERATED
+    /*public JLabel getbigCityLBL() {
+        return bigCityLBL;
+    }*/
+    ////////////////////////
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bigCityLBL;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

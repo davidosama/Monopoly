@@ -8,6 +8,7 @@ public class Constants {
     public static JGameWindow gameWindow;
 
     public static Board board;
+    public static  JPlayerInfo playerInfoWin;
 
     //set true for fast debugging
     public static Boolean testing = true;

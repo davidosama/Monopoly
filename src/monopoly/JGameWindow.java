@@ -1,7 +1,11 @@
 package monopoly;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
@@ -11,7 +15,8 @@ public class JGameWindow extends javax.swing.JFrame {
      * Creates new form BoardWindow
      */
     private int curTurn = 0;
-    JPlayerInfo playerInfoWin;
+
+    private ArrayList<JLabel> mvhs;
 
     public void addLabel(int playerNum) {
 
@@ -23,7 +28,7 @@ public class JGameWindow extends javax.swing.JFrame {
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
 
-                playerInfoWin.dispose();
+                Constants.playerInfoWin.dispose();
             }
 
             @Override
@@ -31,11 +36,10 @@ public class JGameWindow extends javax.swing.JFrame {
                 super.mouseEntered(e); //To change body of generated methods, choose Tools | Templates.
 
                 JGameWindow gw = Constants.gameWindow;
+                Constants.playerInfoWin = new JPlayerInfo();
+                Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
+                Constants.playerInfoWin.setVisible(true);
 
-                playerInfoWin = new JPlayerInfo();
-
-                playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
-                playerInfoWin.setVisible(true);
             }
         });
 
@@ -67,6 +71,7 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.BoardWidth = BoardLabel.getWidth();
 
         PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
+        initMVH();
     }
 
     /**
@@ -79,6 +84,13 @@ public class JGameWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         BoardPanel = new javax.swing.JPanel();
+        BIGCITYLBL = new javax.swing.JLabel();
+        mvhPanel = new javax.swing.JPanel();
+        mvh1 = new javax.swing.JLabel();
+        mvh2 = new javax.swing.JLabel();
+        mvh3 = new javax.swing.JLabel();
+        mvh4 = new javax.swing.JLabel();
+        mvh5 = new javax.swing.JLabel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
         RollDiceButton = new javax.swing.JButton();
@@ -100,6 +112,36 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setName(""); // NOI18N
         BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         BoardPanel.setLayout(null);
+        BoardPanel.add(BIGCITYLBL);
+        BIGCITYLBL.setBounds(270, 220, 220, 290);
+
+        mvhPanel.setBackground(new java.awt.Color(0, 0, 0));
+        mvhPanel.setForeground(new java.awt.Color(0, 0, 0));
+        mvhPanel.setOpaque(false);
+        mvhPanel.setLayout(null);
+
+        mvh1.setToolTipText("");
+        mvhPanel.add(mvh1);
+        mvh1.setBounds(570, 620, 60, 100);
+
+        mvh2.setToolTipText("");
+        mvhPanel.add(mvh2);
+        mvh2.setBounds(510, 620, 60, 100);
+
+        mvh3.setToolTipText("");
+        mvhPanel.add(mvh3);
+        mvh3.setBounds(450, 620, 60, 100);
+
+        mvh4.setToolTipText("");
+        mvhPanel.add(mvh4);
+        mvh4.setBounds(390, 620, 60, 100);
+
+        mvh5.setToolTipText("");
+        mvhPanel.add(mvh5);
+        mvh5.setBounds(330, 620, 60, 100);
+
+        BoardPanel.add(mvhPanel);
+        mvhPanel.setBounds(20, 10, 720, 720);
 
         currentCardPanel.setBackground(new java.awt.Color(210, 234, 220));
         currentCardPanel.setToolTipText("");
@@ -254,6 +296,65 @@ public class JGameWindow extends javax.swing.JFrame {
         RollDiceButton.setBorder(new LineBorder(Constants.colors[playerNum], 3));
     }
 
+    //
+    int i;
+
+    private void initMVH() {
+
+        //mvh code
+        mvhPanel.setOpaque(true);
+        mvhPanel.setBackground(new Color(0, 0, 0, 0));
+
+        mvhs = new ArrayList<>();
+        mvhs.add(mvh1);
+        mvhs.add(mvh2);
+        mvhs.add(mvh3);
+        mvhs.add(mvh4);
+        mvhs.add(mvh5);
+
+        for (i = 0; i < mvhs.size(); i++) {
+            mvhs.get(i).addMouseListener(new MouseAdapter() {
+                public void mouseEntered(MouseEvent e) {
+                    try {
+                        JGameWindow gw = Constants.gameWindow;
+                        Constants.playerInfoWin = new JPlayerInfo(i);
+                        System.out.println("EX " + i + ".png");
+                        Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
+                        Constants.playerInfoWin.setVisible(true);
+                        System.out.println("ENTERED JLABEL CITY");
+                    } catch (Exception ex) {
+                        System.out.println("FAIL TO SHOW JLABEL CITY");
+                    }
+                }
+            });
+        }
+
+        for (i = 0; i < mvhs.size(); i++) {
+            mvhs.get(i).addMouseListener(new MouseAdapter() {
+                public void mouseExited(MouseEvent e) {
+                    Constants.playerInfoWin.dispose();
+                }
+            });
+        }
+    }
+
+    /*   i = 0;
+        JGameWindow gw = Constants.gameWindow;
+        for (JLabel j : mvhs) {
+            j.addMouseListener(new MouseAdapter() {
+                public void mouseEntered(MouseEvent e) {
+
+                    Constants.playerInfoWin = new JPlayerInfo(i + 1);
+                    System.out.println("EX " + (i + 1) + ".png");
+
+                    i++;
+                    //Constants.playerInfoWin.getbigCityLBL();
+                    // Constants.playerInfoWin.setBigCityLBL(i)
+                    // Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
+                    Constants.playerInfoWin.setVisible(true);
+                }
+            });
+        }*/
     /**
      * @param args the command line arguments
      */
@@ -268,16 +369,24 @@ public class JGameWindow extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JGameWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JGameWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JGameWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JGameWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JGameWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JGameWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JGameWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JGameWindow.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -293,6 +402,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BIGCITYLBL;
     private javax.swing.JLabel BackGround;
     private javax.swing.JLabel BoardLabel;
     private javax.swing.JPanel BoardPanel;
@@ -304,5 +414,11 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel mvh1;
+    private javax.swing.JLabel mvh2;
+    private javax.swing.JLabel mvh3;
+    private javax.swing.JLabel mvh4;
+    private javax.swing.JLabel mvh5;
+    private javax.swing.JPanel mvhPanel;
     // End of variables declaration//GEN-END:variables
 }
