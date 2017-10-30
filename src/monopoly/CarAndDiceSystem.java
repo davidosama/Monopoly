@@ -10,13 +10,15 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class CarAndDiceSystem {
 
     int d1, d2, res;
     protected javax.swing.Timer t;
-    private Player player;
+    private Player curPlayer;
+    private JLabel curLabel;
 
     //For dice shuffling
     private int diceTimerCounter;
@@ -32,54 +34,43 @@ public class CarAndDiceSystem {
             timerMs = 20;
         }
 
-        
-
         t = new javax.swing.Timer(timerMs, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 MoveOneCity();
-                Constants.gameWindow.drawCurrentCard(player.currentCity);
+                Constants.gameWindow.drawCurrentCard(curPlayer.currentCity);
                 res--;
-                
+
                 if (res == 0) {
-                    
+
                     Constants.gameWindow.enableRollDiceBtn();
-                    Constants.gameWindow.drawCity(player.currentCity);
-                    
-                    if(player.currentCity==2||player.currentCity==17||player.currentCity==33){
-                    //Community Cards Function
-                    }
-                    else if(player.currentCity==7||player.currentCity==22||player.currentCity==36){
+                    Constants.gameWindow.drawCity(curPlayer.currentCity);
+
+                    if (curPlayer.currentCity == 2 || curPlayer.currentCity == 17 || curPlayer.currentCity == 33) {
+                        //Community Cards Function
+                    } else if (curPlayer.currentCity == 7 || curPlayer.currentCity == 22 || curPlayer.currentCity == 36) {
                         //chance Cards Function
-                    }
-                    else if(player.currentCity==5||player.currentCity==15||player.currentCity==25||player.currentCity==35){
+                    } else if (curPlayer.currentCity==10) {
+                        //pay 3'arama maleya 3ashan beyzoor el segn ( da law ana faker el kanoon sa7 ya3ni )
+                    }else if (curPlayer.currentCity == 5 || curPlayer.currentCity == 15 || curPlayer.currentCity == 25 || curPlayer.currentCity == 35) {
                         //RailRoads Function
-                    }
-                    else if(player.currentCity==12||player.currentCity==28){
+                    } else if (curPlayer.currentCity == 12 || curPlayer.currentCity == 28) {
                         //Company's Function
-                    }
-                    else if(player.currentCity==4||player.currentCity==38)
-                    {
+                    } else if (curPlayer.currentCity == 4 || curPlayer.currentCity == 38) {
                         //Pay or income Tax ( 7aga kda ) 
-                    }
-                    else if(player.currentCity==30)
-                    {
+                    } else if (curPlayer.currentCity == 30) {
                         //Go to Jail
-                    }
-                    else{
+                    } else {
                         //NormalCities
                         //check if it's owned by current Player
-                        Boolean isOwnedByCurrPlayer=checkIfOwnedByCurrPlayer(player.currentCity);
-                        if(isOwnedByCurrPlayer)
-                        {
+                        Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.currentCity);
+                        if (isOwnedByCurrPlayer) {
                             JOptionPane.showConfirmDialog(null, "Do you want to build ?");
                             //Build Function() 
-                        }
-                        else if(isOwned(player.currentCity)){
-                            PayRent(player.currentCity,Player.curPlayer);
-                        }
-                        else{
+                        } else if (isOwned(curPlayer.currentCity)) {
+                            PayRent(curPlayer.currentCity, curPlayer);
+                        } else {
                             //If the city doesn't belong to him or to any Player
                             askToBuy();
                         }
@@ -100,7 +91,7 @@ public class CarAndDiceSystem {
         diceTimer = new javax.swing.Timer(timerMs, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 // I made it local, in the actionPerformed method because when using the random variable many times causes a bug 
                 //It's better to initialize a new random every time we want one.
                 Random rand = new Random();
@@ -125,13 +116,12 @@ public class CarAndDiceSystem {
             }
         }
         );
-
     }
-        
+
     public void GenerateDiceAndMove() {
 
-        Constants.gameWindow.disableRollDiceBtn();
-        player = Player.curPlayer;
+        curPlayer = Player.getPlayer();
+        curLabel = Constants.gameWindow.getCarLabel();
         //Start Dice Throw
         diceTimerCounter = 5;
         diceTimer.start();
@@ -144,54 +134,50 @@ public class CarAndDiceSystem {
     }
 
     public void LoadImageOfPlayer(String dist) {
-        JLabel playerJlbl = JGameWindow.curLabel;
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" + Player.curPlayer.num + ".png"));
-        playerJlbl.setIcon(icon);
-        playerJlbl.setBounds(playerJlbl.getX(), playerJlbl.getY(), icon.getIconWidth(), icon.getIconHeight());
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/Car" + dist + "" + curPlayer.num + ".png"));
+        curLabel.setIcon(icon);
+        curLabel.setBounds(curLabel.getX(), curLabel.getY(), icon.getIconWidth(), icon.getIconHeight());
 
     }
 
     public void MoveOneCity() {
-        player = Player.curPlayer;
-        JLabel playerJlbl = JGameWindow.curLabel;
 
 //        forget about all the constants and complex operations, 
 //        it's just to make the cars resizable and moving in a the exact places
 //        simply, all the cars starts at fixed position, 
 //        this function moves the car one step(up left right depinding on current city) 
 //        by addin(or subtracting) Constants.CityWidth
-    if (player.currentCity >= 0 && player.currentCity <= 9) {
-            
-            playerJlbl.setLocation(playerJlbl.getX() - Constants.CityWidth,
-                    playerJlbl.getY());
+        if (curPlayer.currentCity >= 0 && curPlayer.currentCity <= 9) {
+
+            curLabel.setLocation(curLabel.getX() - Constants.CityWidth,
+                    curLabel.getY());
         }
 
-        if (player.currentCity >= 10 && player.currentCity <= 19) {
-            playerJlbl.setLocation(playerJlbl.getX(),
-                    playerJlbl.getY() - Constants.CityWidth);
+        if (curPlayer.currentCity >= 10 && curPlayer.currentCity <= 19) {
+            curLabel.setLocation(curLabel.getX(),
+                    curLabel.getY() - Constants.CityWidth);
         }
 
-        if (player.currentCity >= 20 && player.currentCity <= 29) {
-            playerJlbl.setLocation(playerJlbl.getX() + Constants.CityWidth,
-                    playerJlbl.getY());
+        if (curPlayer.currentCity >= 20 && curPlayer.currentCity <= 29) {
+            curLabel.setLocation(curLabel.getX() + Constants.CityWidth,
+                    curLabel.getY());
         }
 
-        if (player.currentCity >= 30 && player.currentCity <= 39) {
-            playerJlbl.setLocation(playerJlbl.getX(),
-                    playerJlbl.getY() + Constants.CityWidth);
+        if (curPlayer.currentCity >= 30 && curPlayer.currentCity <= 39) {
+            curLabel.setLocation(curLabel.getX(),
+                    curLabel.getY() + Constants.CityWidth);
         }
-        
 
         //increment the player current city by the extra moves (movesNum)
-        player.currentCity++;
+        curPlayer.currentCity++;
 
         //beacuse there are 40 cities
-        player.currentCity = player.currentCity % 40;
+        curPlayer.currentCity = curPlayer.currentCity % 40;
 
         //reached corner if currentCity is 10 20 30 OR zero, special case cause we can't just add CityWidth to Move,
         //we shall change the car direction(Updatephoto) and move a larger step 
         //corners are bigger (in pixels) than regular cities
-        if (player.currentCity % 10 == 0) {
+        if (curPlayer.currentCity % 10 == 0) {
             Corner();
         }
 
@@ -199,106 +185,113 @@ public class CarAndDiceSystem {
 
     public void Corner() {
 
-        JLabel playerJlbl = JGameWindow.curLabel;
-        switch (player.currentCity) {
+        switch (curPlayer.currentCity) {
             case 0:
                 LoadImageOfPlayer("Left");
-                playerJlbl.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth),
-                        Constants.BoardHeight - Constants.CarHeight - (player.num - 1) * Constants.Carlvl);
+                curLabel.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - Constants.CarWidth),
+                        Constants.BoardHeight - Constants.CarHeight - (curPlayer.num - 1) * Constants.Carlvl);
                 break;
 
             case 10:
                 LoadImageOfPlayer("UP");
-                playerJlbl.setLocation(0 + (player.num - 1) * Constants.Carlvl,
+                curLabel.setLocation(0 + (curPlayer.num - 1) * Constants.Carlvl,
                         Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth - Constants.CarWidth));
                 break;
 
             case 20:
                 LoadImageOfPlayer("Right");
-                playerJlbl.setLocation(Constants.CornerWidth - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth) / 2, (player.num - 1) * Constants.Carlvl);
+                curLabel.setLocation(Constants.CornerWidth - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth) / 2, (curPlayer.num - 1) * Constants.Carlvl);
                 break;
 
             case 30:
                 LoadImageOfPlayer("Down");
-                playerJlbl.setLocation(Constants.BoardWidth - Constants.CarHeight - (player.num - 1) * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
+                curLabel.setLocation(Constants.BoardWidth - Constants.CarHeight - (curPlayer.num - 1) * Constants.Carlvl, Constants.CornerHeight - Constants.CarWidth - (Constants.CityWidth - Constants.CarWidth));
                 break;
 
         }
     }
-    
-    public Boolean checkIfOwnedByCurrPlayer(int CityNum)
-    {
+
+    public Boolean checkIfOwnedByCurrPlayer(int CityNum) {
         //check if the city is owned by the current Player
-        for(int i =0;i<player.getCitiesOwned().size();i++)
-        {
-            if((int)player.getCitiesOwned().get(i)==player.currentCity)
-            {
+        for (int i = 0; i < curPlayer.getCitiesOwned().size(); i++) {
+            if ((int) curPlayer.getCitiesOwned().get(i) == curPlayer.currentCity) {
                 return true;
 
             }
         }
         return false;
     }
-    
-    public Boolean isOwned(int CityNum)
-    {
-        if(Monopoly.board.normalCities.get(CityNum).owned==true)
+
+    public Boolean isOwned(int CityNum) {
+        if (Constants.board.allCities.get(CityNum).owned == true) {
             return true;
+        }
         return false;
     }
-    
-    public void BuyCity(int city,Player player){
-        
-        Monopoly.board.normalCities.get(city).owned=true;
-        
-        for(int i=0;i<Player.playersList.size();i++)
-        {   
-            if(Player.playersList.get(i)==player){
-                Boolean n = Player.playersList.get(i).buy(city, Monopoly.board.normalCities.get(city).price);
-                Monopoly.board.normalCities.get(city).owner=i;
-                if(n){
-                    JOptionPane.showMessageDialog(null, "Congratulations, now you own "+ Monopoly.board.normalCities.get(city).name);
-                }
-                else{
+
+    public void BuyCity(int city, Player player) {
+
+        Constants.board.allCities.get(city).owned = true;
+
+        for (int i = 0; i < Player.playersList.size(); i++) {
+            if (Player.playersList.get(i) == player) {
+                Boolean n = Player.playersList.get(i).buy(city, Constants.board.allCities.get(city).price);
+                Constants.board.allCities.get(city).owner = i;
+                if (n) {
+                    JOptionPane.showMessageDialog(null, "Congratulations, now you own " + Constants.board.allCities.get(city).name);
+                } else {
                     JOptionPane.showConfirmDialog(null, "You don't have enough money");
                 }
-                
+
             }
-                
+        }
+    }
+
+    public void PayRent(int city, Player player) {
+        JOptionPane.showMessageDialog(null, "Unfortunately,This city is owned by Player " + Player.playersList.get(Constants.board.allCities.get(city).owner).num + " so you will have to pay him a rent");
+        for (int i = 0; i < Player.playersList.size(); i++) {
+            if (Player.playersList.get(i) == player) {
+                Player.playersList.get(i).deductMoney(Constants.board.allCities.get(city).OverallRent);
+                Player.playersList.get(Constants.board.allCities.get(city).owner).addMoney(Constants.board.allCities.get(city).OverallRent);
+
+            }
         }
     }
     
-    public void PayRent(int city,Player player)
-    {
-        JOptionPane.showMessageDialog(null, "Unfortunately,This city is owned by Player "+Player.playersList.get(Monopoly.board.normalCities.get(city).owner).num+ " so you will have to pay him a rent");
-        for(int i=0;i<Player.playersList.size();i++)
-        {   
-            if(Player.playersList.get(i)==player){
-                Player.playersList.get(i).deductMoney(Monopoly.board.normalCities.get(city).OverallRent);
-                Player.playersList.get(Monopoly.board.normalCities.get(city).owner).addMoney(Monopoly.board.normalCities.get(city).OverallRent);
-                
-            }
-                
-        }
-        
+    public int Auction(){
+        int AuctionWinnerNum=Constants.gameWindow.startAuction(curPlayer.num);
+        return AuctionWinnerNum;
     }
     
-    public void askToBuy(){
-        normalCity currentCity = Monopoly.board.normalCities.get(player.currentCity);
-        String CityInfo = "\nPrice:"+currentCity.price+
-                                "\nRent: "+currentCity.rent+
-                                "\nRent of 1 house: "+currentCity.rent_1house+
-                                "\nRent of 2 houses: "+currentCity.rent_2house+
-                                "\nRent of 3 houses: "+currentCity.rent_3house+
-                                "\nRent of 4 houses: "+currentCity.rent_4house+
-                                "\nRent of Hotel:"+currentCity.rent_hotel;
-        String[] options = {"Buy", "Don't Buy"};
-        int choice=JOptionPane.showOptionDialog(null, "You stopped at "+
-                currentCity.name+
-                CityInfo+"\nDo you want to buy it ?","",
-                JOptionPane.DEFAULT_OPTION,JOptionPane.INFORMATION_MESSAGE, null ,options,options[0]);
-        if(choice==0){
-            BuyCity(player.currentCity,Player.curPlayer);
+    public void askToBuy() {
+        normalCity currentCity = (normalCity) Constants.board.allCities.get(curPlayer.currentCity);
+        String CityInfo = "\nPrice:" + currentCity.price
+                + "\nRent: " + currentCity.rent
+                + "\nRent of 1 house: " + currentCity.rent_1house
+                + "\nRent of 2 houses: " + currentCity.rent_2house
+                + "\nRent of 3 houses: " + currentCity.rent_3house
+                + "\nRent of 4 houses: " + currentCity.rent_4house
+                + "\nRent of Hotel:" + currentCity.rent_hotel;
+        String[] options = {"Buy", "Auction","Don't Buy"};
+        int choice = JOptionPane.showOptionDialog(null, "You stopped at "
+                + currentCity.name
+                + CityInfo + "\nDo you want to buy it ?", "",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        if (choice == 0) {
+            BuyCity(curPlayer.currentCity, curPlayer);
+        }
+        else if(choice==1)
+        {
+            System.out.println("askldaslkdjalskdjalskdjaslkdjalskdjalskdjalksjalksjdlaksjdl");
+            int Winner = Auction();
+            for(int i=0;i<Player.playersList.size();i++)
+            {
+                if(Player.playersList.get(i).num==Winner){
+                    Boolean t=Player.playersList.get(i).buy(curPlayer.currentCity,AuctionDialog.HighestAuctionPrice);
+                    if(t)
+                        JOptionPane.showMessageDialog(null, "Player "+Player.playersList.get(i).num+" has won the Auction");
+                }
+            }
         }
     }
 

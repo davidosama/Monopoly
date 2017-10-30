@@ -7,7 +7,6 @@ package monopoly;
 
 import java.util.ArrayList;
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
 
 public class Player {
 
@@ -22,8 +21,6 @@ public class Player {
 
     private boolean active; //will be used if the player is in jail
 
-    //Player label (pic)
-//    public JLabel label;
 
     //City Number
     public int currentCity;
@@ -32,7 +29,6 @@ public class Player {
     public static ArrayList<Player> playersList = new ArrayList<>();
 
     public static int playersCount = 0;
-    public static Player curPlayer;
 
     private static int Turn = 0;
 
@@ -40,57 +36,47 @@ public class Player {
 
         //initialize current city to zero
         currentCity = 0;
-        money=1000;
+        money = 1000;
+
         //initialize player number to the playersCount and increment
         num = ++playersCount;
-        
-        citiesOwned=new ArrayList();
-        //add player in allPlayers List
-        //create a label for the player
-      
+        System.out.println("askdasldkasldkasldkasjldkasldkjaslkdj Player"+num);
+        citiesOwned = new ArrayList();
 
 
-//debugPrintPlayer();
+        //debugPrintPlayer();
     }
 
     public static void MoveTurn(Boolean samePlayer) {
+        
+        Player curPlayer = getPlayer();
 
         if (!samePlayer) {
             Turn = (Turn + 1) % playersCount;
-            Player.curPlayer = getPlayer();
-            JGameWindow.curLabel = curPlayer.getLabel();
-
+            Constants.gameWindow.changeTurn(Turn);
 
         }
 
         Constants.gameWindow.setRollBtnClr(Turn + 1);
-        Constants.gameWindow.PlayerInfoArea.setText("Money: \n"+curPlayer.money+"\nCities Owned : \n");
-        if(curPlayer.citiesOwned.size()==0)
-        {
+        Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
+        if (curPlayer.citiesOwned.size() == 0) {
             Constants.gameWindow.PlayerInfoArea.append("No Cities");
         }
-        for(int i=0;i<curPlayer.citiesOwned.size();i++)
-        {
-            City c = Monopoly.board.normalCities.get(curPlayer.citiesOwned.get(i));
-            Constants.gameWindow.PlayerInfoArea.append("Name:"+c.name+"Price: "+c.price+"Overall Rent"+c.OverallRent);
+        for (int i = 0; i < curPlayer.citiesOwned.size(); i++) {
+            City c = Constants.board.allCities.get(curPlayer.citiesOwned.get(i));
+            Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
         }
-
     }
 
     public static Player getPlayer() {
         return playersList.get(Turn);
     }
-    
-    public JLabel getLabel()
-    {
-     
-        return JGameWindow.playersLabels.get(Turn);
-        
-    }
-    
-    public ArrayList getCitiesOwned(){
+
+
+    public ArrayList getCitiesOwned() {
         return this.citiesOwned;
     }
+
     private void debugPrintPlayer() {
 
         System.out.print("\n\nplayer Number: " + num
@@ -124,7 +110,11 @@ public class Player {
     public void addMoney(int money) {
         this.money += money;
     }
-
+    
+    public int getMoney(){
+        return money;
+    }
+    
     public boolean deductMoney(int money) {
         if (this.money >= money) {
             this.money -= money;
@@ -133,5 +123,4 @@ public class Player {
             return false;
         }
     }
-
 }
