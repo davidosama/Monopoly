@@ -25,7 +25,6 @@ public class JPlayerInfo extends javax.swing.JFrame {
 
         setUndecorated(true);
         initComponents();
-        bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cities/" + i + ".png")));
     }
 
     /**
@@ -115,6 +114,15 @@ public class JPlayerInfo extends javax.swing.JFrame {
     /*public JLabel getbigCityLBL() {
         return bigCityLBL;
     }*/
+    public void setBigCityLBL(int i) {
+        try {
+            bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cities/" + i + ".png")));
+
+        } catch (Exception ex) {
+            bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/objects/5.png")));
+        }
+    }
+
     ////////////////////////
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

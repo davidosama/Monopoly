@@ -17,13 +17,14 @@ public class JGameWindow extends javax.swing.JFrame {
     private int curTurn = 0;
 
     private ArrayList<JLabel> mvhs;
+    private ArrayList<JPlayerInfo> mv_refs;
 
     public void addLabel(int playerNum) {
 
         PieceLabel pieceLabel = new PieceLabel(playerNum);
 
         ///////////////Code for mouse hover over player
-        pieceLabel.addMouseListener(new MouseAdapter() {
+        /* pieceLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
@@ -41,8 +42,7 @@ public class JGameWindow extends javax.swing.JFrame {
                 Constants.playerInfoWin.setVisible(true);
 
             }
-        });
-
+        });*/
         BoardLabel.add(pieceLabel);
     }
 
@@ -312,19 +312,24 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhs.add(mvh4);
         mvhs.add(mvh5);
 
+        Constants.playerInfoWin = new JPlayerInfo();
+        
+        //JGameWindow gw = Constants.gameWindow;
+        //Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
+
         for (i = 0; i < mvhs.size(); i++) {
             mvhs.get(i).addMouseListener(new MouseAdapter() {
+                @Override
                 public void mouseEntered(MouseEvent e) {
-                    try {
-                        JGameWindow gw = Constants.gameWindow;
-                        Constants.playerInfoWin = new JPlayerInfo(i);
-                        System.out.println("EX " + i + ".png");
-                        Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
-                        Constants.playerInfoWin.setVisible(true);
-                        System.out.println("ENTERED JLABEL CITY");
-                    } catch (Exception ex) {
-                        System.out.println("FAIL TO SHOW JLABEL CITY");
-                    }
+
+                    //2 lines below should be out of the inner class
+                    JGameWindow gw = Constants.gameWindow;
+                    Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
+                    //
+
+                    System.out.println("i= " + i);
+                    Constants.playerInfoWin.setVisible(true);
+                    Constants.playerInfoWin.setBigCityLBL(i);
                 }
             });
         }
