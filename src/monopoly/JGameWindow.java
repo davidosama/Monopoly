@@ -548,7 +548,42 @@ public class JGameWindow extends javax.swing.JFrame {
             });
         }
     }
+    /////////auction
 
+    public int startAuction(int curPlayerNum) {
+
+        //Begin the Auction with the Player who initialized it
+        AuctionDialog a;
+        AuctionDialog.PlayerNumTurn = curPlayerNum;
+        a = new AuctionDialog(this, true);
+        a.setVisible(true);
+        boolean firstTourFinished = true;
+
+        for (int i = 0; i < Player.playersList.size(); i++) {
+            // if this is the number of the player who initialized the Auction,skip it in the first Tour only ( he already specified the amount of money )
+            if (Player.playersList.get(i).num == curPlayerNum && firstTourFinished) {
+                firstTourFinished = false;
+                continue;
+            }
+            AuctionDialog.PlayerNumTurn = Player.playersList.get(i).num;
+            System.out.println(AuctionDialog.PlayerNumTurn + "skdjalskdjalskdajklPLAYERNUMTURN");
+            AuctionDialog ad;
+            ad = new AuctionDialog(this, true);
+            ad.setVisible(true);
+
+            while (ad.isFocusOwner()) {
+                //Wait until this Dialog is closed and the player clicks submit in order to open a new one for another player to submit the amount of money
+            }
+            //Use this to make the loop run for ever 
+//            if(i==(Player.playersList.size()-1)){
+//                i=0;
+//            }
+        }
+        System.out.println("THE WINNER IS " + AuctionDialog.HighestAuctionPlayer);
+        return AuctionDialog.HighestAuctionPlayer;
+    }
+
+    /////////
     /**
      * @param args the command line arguments
      */

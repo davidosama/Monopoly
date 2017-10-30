@@ -99,6 +99,10 @@ public class Player {
         this.money += money;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public boolean deductMoney(int money) {
         if (this.money >= money) {
             this.money -= money;
