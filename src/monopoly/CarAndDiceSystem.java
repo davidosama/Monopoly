@@ -14,82 +14,77 @@ import javax.swing.JOptionPane;
 public class CarAndDiceSystem {
 
     int d1, d2, res;
-    protected javax.swing.Timer t;
     private Player curPlayer;
     //For dice shuffling
     private int diceTimerCounter;
     private javax.swing.Timer diceTimer;
 
-    //Timer milliseconds
-    private int timerMs = 150;
-
-    Random rand;
+    private Random rand;
+    
+    // runnable interface for the thread
+    private Runnable carRunnable;
 
     public CarAndDiceSystem() {
 
         //For testing, speed things up
         if (Constants.testing) {
-            timerMs = 20;
+            Constants.timerMs = 60;
         }
 
-        rand = new Random();
-        t = new javax.swing.Timer(timerMs, new ActionListener() {
+        carRunnable = new Runnable() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void run() {
 
-                Constants.gameWindow.moveCarLabel();
-                res--;
-
-                if (res == 0) {
-                    Constants.gameWindow.enableRollDiceBtn();
-
-                    Constants.gameWindow.drawCity(curPlayer.position);
-
-                    
-                    if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
-                        //Community Cards Function
-                    } else if (curPlayer.position == 7 || curPlayer.position == 22 || curPlayer.position == 36) {
-                        //chance Cards Function
-                    } else if (curPlayer.position == 5 || curPlayer.position == 15 || curPlayer.position == 25 || curPlayer.position == 35) {
-                        //RailRoads Function
-                    } else if (curPlayer.position == 12 || curPlayer.position == 28) {
-                        //Company's Function
-                    } else if (curPlayer.position == 4 || curPlayer.position == 38) {
-                        //Pay or income Tax ( 7aga kda ) 
-                    } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10|| curPlayer.position == 20) {
-                        //Go to Jail
+                for (int i = 0; i < res; i++) {
+                    Constants.gameWindow.moveCarLabel();
+                }
+                
+                curPlayer.move(res);
+                
+                Constants.gameWindow.enableRollDiceBtn();
+                Constants.gameWindow.drawCity(curPlayer.position);
+                if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
+                    //Community Cards Function
+                } else if (curPlayer.position == 7 || curPlayer.position == 22 || curPlayer.position == 36) {
+                    //chance Cards Function
+                } else if (curPlayer.position == 5 || curPlayer.position == 15 || curPlayer.position == 25 || curPlayer.position == 35) {
+                    //RailRoads Function
+                } else if (curPlayer.position == 12 || curPlayer.position == 28) {
+                    //Company's Function
+                } else if (curPlayer.position == 4 || curPlayer.position == 38) {
+                    //Pay or income Tax ( 7aga kda ) 
+                } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
+                    //Go to Jail
+                } else {
+                    //NormalCities
+                    //check if it's owned by current Player
+                    Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.position);
+                    if (isOwnedByCurrPlayer) {
+                        JOptionPane.showConfirmDialog(null, "Do you want to build ?");
+                        //Build Function() 
+                    } else if (isOwned(curPlayer.position)) {
+                        PayRent(curPlayer.position, curPlayer);
                     } else {
-                        //NormalCities
-                        //check if it's owned by current Player
-                        Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.position);
-                        if (isOwnedByCurrPlayer) {
-                            JOptionPane.showConfirmDialog(null, "Do you want to build ?");
-                            //Build Function() 
-                        } else if (isOwned(curPlayer.position)) {
-                            PayRent(curPlayer.position, curPlayer);
-                        } else {
-                            //If the city doesn't belong to him or to any Player
-                            askToBuy();
-                        }
+                        //If the city doesn't belong to him or to any Player
+                        askToBuy();
                     }
-                    //Forwart to next Turn
-                    if (!(d1 == d2)) {
-                        Player.MoveTurn(false);
-                    } else {
-                        Player.MoveTurn(true);
-                    }
-                    t.stop();
+                }
+                //Forwart to next Turn
+                if (!(d1 == d2)) {
+                    Player.MoveTurn(false);
+                } else {
+                    Player.MoveTurn(true);
                 }
             }
-        }
-        );
+
+        };
+        rand = new Random();
 
         //For dice shuffling
-        diceTimer = new javax.swing.Timer(timerMs, new ActionListener() {
+        diceTimer = new javax.swing.Timer(Constants.timerMs, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                // 
                 diceTimerCounter--;
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
@@ -104,7 +99,7 @@ public class CarAndDiceSystem {
                 Constants.gameWindow.get_d2_label().setIcon(icon);
 
                 if (diceTimerCounter == 0) {
-                    curPlayer.move(res);
+                    Thread t = new Thread(carRunnable);
                     t.start();
                     diceTimer.stop();
                 }

@@ -19,19 +19,18 @@ import javax.swing.ImageIcon;
  *
  * @author Kord
  */
-public class CarLabel extends JLabel {
+public class PieceLabel extends JLabel {
 
     private int position;
     private int playerNum;
 
-    public CarLabel(int playerNum) {
+    public PieceLabel(int playerNum) {
 
         this.position = 0;
         this.playerNum = playerNum;
 
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/objects/"+playerNum + ".png"));
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/objects/" + playerNum + ".png"));
         this.setIcon(icon);
-
 
         this.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - icon.getIconWidth()), Constants.BoardHeight - icon.getIconHeight() - this.playerNum * Constants.Carlvl - 5,
                 icon.getIconWidth(), icon.getIconHeight());
@@ -70,7 +69,7 @@ public class CarLabel extends JLabel {
         return new ImageIcon(result);
     }
 
-    public void rotateCar() {
+    public void rotatePiece() {
         ImageIcon icon = rotateImage((ImageIcon) this.getIcon(), 90);
         this.setIcon(icon);
         this.setSize(icon.getIconWidth(), icon.getIconHeight());
@@ -84,25 +83,30 @@ public class CarLabel extends JLabel {
 //        simply, all the cars starts at fixed position, 
 //        this function moves the car one step(up left right depinding on current city) 
 //        by addin(or subtracting) Constants.CityWidth
-        if (position >= 0 && position <= 9) {
+        for (int i = 0; i < Constants.CityWidth; i++) {
+            if (position >= 0 && position <= 9) {
+                this.setLocation(this.getX() - 1,
+                        this.getY());
+            }
 
-            this.setLocation(this.getX() - Constants.CityWidth,
-                    this.getY());
-        }
+            if (position >= 10 && position <= 19) {
+                this.setLocation(this.getX(),
+                        this.getY() - 1);
+            }
 
-        if (position >= 10 && position <= 19) {
-            this.setLocation(this.getX(),
-                    this.getY() - Constants.CityWidth);
-        }
+            if (position >= 20 && position <= 29) {
+                this.setLocation(this.getX() + 1,
+                        this.getY());
+            }
 
-        if (position >= 20 && position <= 29) {
-            this.setLocation(this.getX() + Constants.CityWidth,
-                    this.getY());
-        }
-
-        if (position >= 30 && position <= 39) {
-            this.setLocation(this.getX(),
-                    this.getY() + Constants.CityWidth);
+            if (position >= 30 && position <= 39) {
+                this.setLocation(this.getX(),
+                        this.getY() + 1);
+            }
+            try {
+                Thread.sleep(Constants.timerMs / Constants.CityWidth);
+            } catch (Exception e) {
+            }
         }
 
         //increment the player current city by the extra moves (movesNum)
@@ -123,7 +127,7 @@ public class CarLabel extends JLabel {
 
     public void Corner() {
 
-        rotateCar();
+        rotatePiece();
         switch (position) {
             case 0:
                 this.setLocation(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - this.getWidth()),

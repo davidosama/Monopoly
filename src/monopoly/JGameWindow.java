@@ -15,10 +15,10 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public void addLabel(int playerNum) {
 
-        CarLabel carLabel = new CarLabel(playerNum);
+        PieceLabel pieceLabel = new PieceLabel(playerNum);
 
         ///////////////Code for mouse hover over player
-        carLabel.addMouseListener(new MouseAdapter() {
+        pieceLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
@@ -39,7 +39,7 @@ public class JGameWindow extends javax.swing.JFrame {
             }
         });
 
-        BoardLabel.add(carLabel);
+        BoardLabel.add(pieceLabel);
     }
 
     public void changeTurn(int turn) {
@@ -47,7 +47,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void moveCarLabel() {
-        ((CarLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
+        ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
     }
 
     public void addPlayers(int number) {
