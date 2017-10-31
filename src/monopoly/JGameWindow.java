@@ -1,6 +1,7 @@
 package monopoly;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -15,6 +16,11 @@ public class JGameWindow extends javax.swing.JFrame {
     private int curTurn = 0;
 
     private ArrayList<JPlayerInfo> mv_refs;
+
+    private ImageIcon[] locationIcons = new ImageIcon[40];
+    private ImageIcon[] detailedIcons = new ImageIcon[40];
+    private ImageIcon[] diceIcons = new ImageIcon[6];
+    private ImageIcon[] chanceIcons = new ImageIcon[40];
 
     public void addLabel(int playerNum) {
 
@@ -69,6 +75,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
         PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
         initMVH();
+        initIcons();
     }
 
     /**
@@ -83,9 +90,6 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel = new javax.swing.JPanel();
         BIGCITYLBL = new javax.swing.JLabel();
         mvhPanel = new javax.swing.JPanel();
-        mvh10 = new javax.swing.JLabel();
-        mvh20 = new javax.swing.JLabel();
-        mvh30 = new javax.swing.JLabel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
         RollDiceButton = new javax.swing.JButton();
@@ -113,24 +117,6 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhPanel.setBackground(new java.awt.Color(0, 0, 0));
         mvhPanel.setOpaque(false);
         mvhPanel.setLayout(null);
-
-        mvh10.setToolTipText("");
-        mvh10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                mvh10MouseEntered(evt);
-            }
-        });
-        mvhPanel.add(mvh10);
-        mvh10.setBounds(0, 620, 100, 100);
-
-        mvh20.setToolTipText("");
-        mvhPanel.add(mvh20);
-        mvh20.setBounds(0, 0, 100, 100);
-
-        mvh30.setToolTipText("");
-        mvhPanel.add(mvh30);
-        mvh30.setBounds(630, 0, 90, 90);
-
         BoardPanel.add(mvhPanel);
         mvhPanel.setBounds(20, 10, 720, 720);
 
@@ -213,10 +199,6 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.carSys.GenerateDiceAndMove();
 
     }//GEN-LAST:event_RollDiceButtonActionPerformed
-
-    private void mvh10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mvh10MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mvh10MouseEntered
     /* 
        the idea of move function is that
        CurPos Counter starts with zero end with 40 (from go to go)
@@ -235,18 +217,6 @@ public class JGameWindow extends javax.swing.JFrame {
     
      */
 
-    //get monopoly label, to add cars on it programmatically
-    public JLabel getJlabel1() {
-        return BoardLabel;
-    }
-
-    public JLabel get_d2_label() {
-        return d2_label;
-    }
-
-    public JLabel get_d1_label() {
-        return d1_label;
-    }
 
     public void disableRollDiceBtn() {
         RollDiceButton.setEnabled(false);
@@ -260,9 +230,9 @@ public class JGameWindow extends javax.swing.JFrame {
         DicePanel.setVisible(false);
     }
 
-    public void drawCity(int curPosition) {
+    public void drawDetailedLocation(int curPosition) {
         try {
-            currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Cities/" + curPosition + ".png")));
+            currentCardLabel.setIcon(detailedIcons[curPosition]);
         } catch (Exception e) {
             currentCardLabel.setIcon(null);
         }
@@ -271,17 +241,17 @@ public class JGameWindow extends javax.swing.JFrame {
     //drawing chance/community cards
     public void drawChanceCard(int id) {
         try {
-            currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Chance-Community-Cards/" + id + ".png")));
+            currentCardLabel.setIcon(chanceIcons[id]);
         } catch (Exception e) {
             currentCardLabel.setIcon(null);
         }
     }
 
-    public void drawCurrentCard(int curPosition) {
+    public void drawCurrentLocation(int curPosition) {
         // to-do, adding more images and loading the images to an array of icons at the beginning
 
         try {
-            currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Cards/" + curPosition + ".png")));
+            currentCardLabel.setIcon(locationIcons[curPosition]);
         } catch (Exception e) {
             currentCardLabel.setIcon(null);
         }
@@ -313,17 +283,49 @@ public class JGameWindow extends javax.swing.JFrame {
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    JGameWindow.this.drawCurrentCard(j);
+                    JGameWindow.this.drawCurrentLocation(j);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    JGameWindow.this.drawCurrentCard(-1);
+                    JGameWindow.this.drawCurrentLocation(-1);
                 }
             });
 
         }
 
+    }
+
+    public void drawDice(int d1, int d2) {
+        d1_label.setIcon(diceIcons[d1 - 1]);
+        d2_label.setIcon(diceIcons[d2 - 1]);
+    }
+
+    public void initIcons() {
+        for (int i = 0; i < locationIcons.length; i++) {
+            try {
+                locationIcons[i] = new ImageIcon(getClass().getResource("/drawables/Cards/" + i + ".png"));
+            } catch (Exception e) {
+                locationIcons[i] = null;
+            }
+        }
+        for (int i = 0; i < detailedIcons.length; i++) {
+            try {
+                detailedIcons[i] = new ImageIcon(getClass().getResource("/drawables/Cities/" + i + ".png"));
+            } catch (Exception e) {
+                detailedIcons[i] = null;
+            }
+        }
+        for (int i = 0; i < diceIcons.length; i++) {
+            diceIcons[i] = new ImageIcon(getClass().getResource("/drawables/d" + (i + 1) + ".png"));
+        }
+        for (int i = 0; i < chanceIcons.length; i++) {
+            try {
+                chanceIcons[i] = new javax.swing.ImageIcon(getClass().getResource("/drawables/Chance-Community-Cards/" + i + ".png"));
+            } catch (Exception e) {
+                chanceIcons[i] = null;
+            }
+        }
     }
 
     /////////auction
@@ -420,9 +422,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel mvh10;
-    private javax.swing.JLabel mvh20;
-    private javax.swing.JLabel mvh30;
     private javax.swing.JPanel mvhPanel;
     // End of variables declaration//GEN-END:variables
 }

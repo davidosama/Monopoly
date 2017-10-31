@@ -42,7 +42,7 @@ public class CarAndDiceSystem {
                 curPlayer.move(res);
 
                 Constants.gameWindow.enableRollDiceBtn();
-                Constants.gameWindow.drawCity(curPlayer.position);
+                Constants.gameWindow.drawDetailedLocation(curPlayer.position);
                 if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
                     //Community Cards Function
                 } else if (curPlayer.position == 7 || curPlayer.position == 22 || curPlayer.position == 36) {
@@ -90,13 +90,8 @@ public class CarAndDiceSystem {
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
                 res = d1 + d2;
-                //Constants.window.getjTextArea1().setText("d1: " + d1 + "\nd2: " + d2);
-                //load dice image
-                ImageIcon icon = loadImageOfDice(d1);
-                Constants.gameWindow.get_d1_label().setIcon(icon);
-                //load dice image
-                icon = loadImageOfDice(d2);
-                Constants.gameWindow.get_d2_label().setIcon(icon);
+                
+                Constants.gameWindow.drawDice(d1, d2);
 
                 if (diceTimerCounter == 0) {
                     Thread t = new Thread(carRunnable);
@@ -117,10 +112,6 @@ public class CarAndDiceSystem {
 
     }
 
-    public ImageIcon loadImageOfDice(int dice) {
-        return new javax.swing.ImageIcon(getClass().getResource("/drawables/d" + dice + ".png"));
-
-    }
 
     public Boolean checkIfOwnedByCurrPlayer(int CityNum) {
         //check if the city is owned by the current Player

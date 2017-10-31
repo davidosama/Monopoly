@@ -121,7 +121,7 @@ public class PieceLabel extends JLabel {
         if (position % 10 == 0) {
             Corner();
         }
-        Constants.gameWindow.drawCurrentCard(position);
+        Constants.gameWindow.drawCurrentLocation(position);
 
     }
 
