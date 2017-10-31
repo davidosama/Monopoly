@@ -20,7 +20,7 @@ public class CarAndDiceSystem {
     private javax.swing.Timer diceTimer;
 
     private Random rand;
-    
+
     // runnable interface for the thread
     private Runnable carRunnable;
 
@@ -38,9 +38,9 @@ public class CarAndDiceSystem {
                 for (int i = 0; i < res; i++) {
                     Constants.gameWindow.moveCarLabel();
                 }
-                
+
                 curPlayer.move(res);
-                
+
                 Constants.gameWindow.enableRollDiceBtn();
                 Constants.gameWindow.drawCity(curPlayer.position);
                 if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
@@ -169,6 +169,11 @@ public class CarAndDiceSystem {
         }
     }
 
+    public int Auction() {
+        int AuctionWinnerNum = Constants.gameWindow.startAuction(curPlayer.num);
+        return AuctionWinnerNum;
+    }
+
     public void askToBuy() {
         normalCity currentCity = (normalCity) Constants.board.allCities.get(curPlayer.position);
         String CityInfo = "\nPrice:" + currentCity.price
@@ -178,14 +183,24 @@ public class CarAndDiceSystem {
                 + "\nRent of 3 houses: " + currentCity.rent_3house
                 + "\nRent of 4 houses: " + currentCity.rent_4house
                 + "\nRent of Hotel:" + currentCity.rent_hotel;
-        String[] options = {"Buy", "Don't Buy"};
+        String[] options = {"Buy", "Auction", "Don't Buy"};
         int choice = JOptionPane.showOptionDialog(null, "You stopped at "
                 + currentCity.name
                 + CityInfo + "\nDo you want to buy it ?", "",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         if (choice == 0) {
             BuyCity(curPlayer.position, curPlayer);
+        } else if (choice == 1) {
+            System.out.println("askldaslkdjalskdjalskdjaslkdjalskdjalskdjalksjalksjdlaksjdl");
+            int Winner = Auction();
+            for (int i = 0; i < Player.playersList.size(); i++) {
+                if (Player.playersList.get(i).num == Winner) {
+                    Boolean t = Player.playersList.get(i).buy(curPlayer.position, AuctionDialog.HighestAuctionPrice);
+                    if (t) {
+                        JOptionPane.showMessageDialog(null, "Player " + Player.playersList.get(i).num + " has won the Auction");
+                    }
+                }
+            }
         }
     }
-
 }

@@ -136,7 +136,7 @@ public class PieceLabel extends JLabel {
 
             case 10:
                 this.setLocation(playerNum * Constants.Carlvl,
-                        Constants.BoardHeight - Constants.CornerHeight + (Constants.CityWidth - this.getHeight()));
+                        Constants.BoardHeight - Constants.LocationHeight + (Constants.CityWidth - this.getHeight()));
                 break;
 
             case 20:
@@ -144,7 +144,7 @@ public class PieceLabel extends JLabel {
                 break;
 
             case 30:
-                this.setLocation(Constants.BoardWidth - this.getWidth() - playerNum * Constants.Carlvl, Constants.CornerHeight - this.getHeight() - (Constants.CityWidth - this.getHeight()));
+                this.setLocation(Constants.BoardWidth - this.getWidth() - playerNum * Constants.Carlvl, Constants.LocationHeight - this.getHeight() - (Constants.CityWidth - this.getHeight()));
                 break;
 
         }
