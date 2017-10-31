@@ -476,16 +476,32 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhPanel.setBackground(new Color(0, 0, 0, 0));
 
         mvhs = new ArrayList<>();
-        mvhs.add(mvh1);
-        mvhs.add(mvh2);
-        mvhs.add(mvh3);
-        mvhs.add(mvh4);
-        mvhs.add(mvh5);
-        mvhs.add(mvh6);
-        mvhs.add(mvh7);
-        mvhs.add(mvh8);
-        mvhs.add(mvh9);
-        mvhs.add(mvh10);
+        
+        
+        //it's better to go with loops like that, i'll modify the rest later or do it if you can
+           for (int i = 0; i < 40; i++) {
+                
+            JLabel mvh = new JLabel();
+            if (i > 0 && i <= 9) {
+                
+                mvh.setBounds(Constants.BoardWidth - Constants.CornerWidth, Constants.BoardHeight - Constants.LocationHeight, Constants.CityWidth, Constants.LocationHeight);
+                mvh.setLocation(mvh.getX() - i* Constants.CityWidth,mvh.getY());
+
+            }
+//
+//            if (i <= 19) {
+//                mvh.setLocation(mvh.getX(), mvh.getY() - 1);
+//            }
+//
+//            if (i <= 29) {
+//                mvh.setLocation(mvh.getX() + 1,mvh.getY());
+//            }
+//
+//            if (i <= 39) {
+//                mvh.setLocation(mvh.getX(),mvh.getY() + 1);
+//            }
+            mvhs.add(mvh);
+            }
         mvhs.add(mvh11);
         mvhs.add(mvh12);
         mvhs.add(mvh13);
