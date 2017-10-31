@@ -2,6 +2,7 @@ package monopoly;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,11 +21,12 @@ public class Card {
     }
 
     static void CreateAllCards() {
-        String fileCards = ".\\src\\text_files\\Cards.txt";
+        String fileCards = "/text_files/Cards.txt";
         //reading Card from file
         communityCards = new ArrayList<Card>();
         chanceCards = new ArrayList<Card>();
-        try (BufferedReader br = new BufferedReader(new FileReader(fileCards))) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(Card.class.getResourceAsStream(fileCards)));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] CardValues = line.split(",");

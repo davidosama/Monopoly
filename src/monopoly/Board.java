@@ -5,6 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 public class Board {
 
@@ -34,13 +37,14 @@ public class Board {
     }
 
     private void initializeAllCities() {
-        String fileLocations = "./src/text_files/otherlocations.txt";
-        String fileCities = "./src/text_files/cities.txt";
-        String fileCompanies = "./src/text_files/companies.txt";
-        String fileRailroads = "./src/text_files/railroads.txt";
+        String fileLocations = "/text_files/otherlocations.txt";
+        String fileCities = "/text_files/cities.txt";
+        String fileCompanies = "/text_files/companies.txt";
+        String fileRailroads = "/text_files/railroads.txt";
 
         //reading cities file
-        try (BufferedReader br = new BufferedReader(new FileReader(fileCities))) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(fileCities)));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] cityValues = line.split(",");
@@ -67,7 +71,8 @@ public class Board {
         }
 
         //reading railroads file
-        try (BufferedReader br = new BufferedReader(new FileReader(fileRailroads))) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(fileRailroads)));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] railroadValue = line.split(",");
@@ -89,7 +94,8 @@ public class Board {
         }
 
         //reading companies file
-        try (BufferedReader br = new BufferedReader(new FileReader(fileCompanies))) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(fileCompanies)));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] companyValue = line.split(",");
@@ -105,9 +111,10 @@ public class Board {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         //reading other locations
-        try (BufferedReader br = new BufferedReader(new FileReader(fileLocations))) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(fileLocations)));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] locationValue = line.split(",");
