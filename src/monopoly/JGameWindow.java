@@ -86,15 +86,6 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel = new javax.swing.JPanel();
         BIGCITYLBL = new javax.swing.JLabel();
         mvhPanel = new javax.swing.JPanel();
-        mvh1 = new javax.swing.JLabel();
-        mvh2 = new javax.swing.JLabel();
-        mvh3 = new javax.swing.JLabel();
-        mvh4 = new javax.swing.JLabel();
-        mvh5 = new javax.swing.JLabel();
-        mvh6 = new javax.swing.JLabel();
-        mvh7 = new javax.swing.JLabel();
-        mvh8 = new javax.swing.JLabel();
-        mvh9 = new javax.swing.JLabel();
         mvh10 = new javax.swing.JLabel();
         mvh11 = new javax.swing.JLabel();
         mvh12 = new javax.swing.JLabel();
@@ -150,45 +141,8 @@ public class JGameWindow extends javax.swing.JFrame {
         BIGCITYLBL.setBounds(270, 220, 220, 290);
 
         mvhPanel.setBackground(new java.awt.Color(0, 0, 0));
-        mvhPanel.setForeground(new java.awt.Color(0, 0, 0));
         mvhPanel.setOpaque(false);
         mvhPanel.setLayout(null);
-
-        mvh1.setToolTipText("");
-        mvhPanel.add(mvh1);
-        mvh1.setBounds(570, 620, 60, 100);
-
-        mvh2.setToolTipText("");
-        mvhPanel.add(mvh2);
-        mvh2.setBounds(510, 620, 60, 100);
-
-        mvh3.setToolTipText("");
-        mvhPanel.add(mvh3);
-        mvh3.setBounds(450, 620, 60, 100);
-
-        mvh4.setToolTipText("");
-        mvhPanel.add(mvh4);
-        mvh4.setBounds(390, 620, 60, 100);
-
-        mvh5.setToolTipText("");
-        mvhPanel.add(mvh5);
-        mvh5.setBounds(330, 620, 60, 100);
-
-        mvh6.setToolTipText("");
-        mvhPanel.add(mvh6);
-        mvh6.setBounds(270, 620, 60, 100);
-
-        mvh7.setToolTipText("");
-        mvhPanel.add(mvh7);
-        mvh7.setBounds(210, 620, 60, 100);
-
-        mvh8.setToolTipText("");
-        mvhPanel.add(mvh8);
-        mvh8.setBounds(160, 620, 50, 100);
-
-        mvh9.setToolTipText("");
-        mvhPanel.add(mvh9);
-        mvh9.setBounds(100, 620, 50, 100);
 
         mvh10.setToolTipText("");
         mvhPanel.add(mvh10);
@@ -479,11 +433,11 @@ public class JGameWindow extends javax.swing.JFrame {
         
         
         //it's better to go with loops like that, i'll modify the rest later or do it if you can
-           for (int i = 0; i < 40; i++) {
+           for (int i = 0; i < 10; i++) {
                 
             JLabel mvh = new JLabel();
+            mvhPanel.add(mvh);
             if (i > 0 && i <= 9) {
-                
                 mvh.setBounds(Constants.BoardWidth - Constants.CornerWidth, Constants.BoardHeight - Constants.LocationHeight, Constants.CityWidth, Constants.LocationHeight);
                 mvh.setLocation(mvh.getX() - i* Constants.CityWidth,mvh.getY());
 
@@ -500,9 +454,39 @@ public class JGameWindow extends javax.swing.JFrame {
 //            if (i <= 39) {
 //                mvh.setLocation(mvh.getX(),mvh.getY() + 1);
 //            }
+        Constants.playerInfoWin = new JPlayerInfo();
+            mvh.addMouseListener(new MouseAdapter() {
+                int num = mvhs.size();
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                    //2 lines below should be out of the inner class
+                    JGameWindow gw = Constants.gameWindow;
+                    Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
+                    //
+                    Constants.playerInfoWin.setVisible(true);
+
+                    //TODO, DRAW PIC BASED ON NUM
+                    // DEMO BELOW
+                    System.out.println(num);
+                    Constants.playerInfoWin.setBigCityLBL(num);
+                }
+                
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    Constants.playerInfoWin.dispose();
+                }
+            });
+            
             mvhs.add(mvh);
-            }
-        mvhs.add(mvh11);
+            
+            //mvhs.get(mvh)
+           }
+      
+           
+
+                   mvhs.add(mvh11);
         mvhs.add(mvh12);
         mvhs.add(mvh13);
         mvhs.add(mvh14);
@@ -531,12 +515,8 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhs.add(mvh37);
         mvhs.add(mvh38);
         mvhs.add(mvh39);
-
-        Constants.playerInfoWin = new JPlayerInfo();
-
-        //JGameWindow gw = Constants.gameWindow;
-        //Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
-        for (i = 0; i < mvhs.size(); i++) {
+        
+        for (i = 10; i < mvhs.size(); i++) {
             mvhs.get(i).addMouseListener(new MouseAdapter() {
                 int num = i;
 
@@ -555,16 +535,8 @@ public class JGameWindow extends javax.swing.JFrame {
                 }
             });
         }
-
-        for (i = 0; i < mvhs.size(); i++) {
-            mvhs.get(i).addMouseListener(new MouseAdapter() {
-                public void mouseExited(MouseEvent e) {
-                    Constants.playerInfoWin.dispose();
-                }
-            });
-        }
-    }
-    /////////auction
+ 
+    }    /////////auction
 
     public int startAuction(int curPlayerNum) {
 
@@ -659,7 +631,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel mvh1;
     private javax.swing.JLabel mvh10;
     private javax.swing.JLabel mvh11;
     private javax.swing.JLabel mvh12;
@@ -670,7 +641,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel mvh17;
     private javax.swing.JLabel mvh18;
     private javax.swing.JLabel mvh19;
-    private javax.swing.JLabel mvh2;
     private javax.swing.JLabel mvh20;
     private javax.swing.JLabel mvh21;
     private javax.swing.JLabel mvh22;
@@ -681,7 +651,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel mvh27;
     private javax.swing.JLabel mvh28;
     private javax.swing.JLabel mvh29;
-    private javax.swing.JLabel mvh3;
     private javax.swing.JLabel mvh30;
     private javax.swing.JLabel mvh31;
     private javax.swing.JLabel mvh32;
@@ -692,12 +661,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel mvh37;
     private javax.swing.JLabel mvh38;
     private javax.swing.JLabel mvh39;
-    private javax.swing.JLabel mvh4;
-    private javax.swing.JLabel mvh5;
-    private javax.swing.JLabel mvh6;
-    private javax.swing.JLabel mvh7;
-    private javax.swing.JLabel mvh8;
-    private javax.swing.JLabel mvh9;
     private javax.swing.JPanel mvhPanel;
     // End of variables declaration//GEN-END:variables
 }
