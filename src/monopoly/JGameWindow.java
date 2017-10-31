@@ -1,10 +1,8 @@
 package monopoly;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
@@ -86,35 +84,8 @@ public class JGameWindow extends javax.swing.JFrame {
         BIGCITYLBL = new javax.swing.JLabel();
         mvhPanel = new javax.swing.JPanel();
         mvh10 = new javax.swing.JLabel();
-        mvh11 = new javax.swing.JLabel();
-        mvh12 = new javax.swing.JLabel();
-        mvh13 = new javax.swing.JLabel();
-        mvh14 = new javax.swing.JLabel();
-        mvh15 = new javax.swing.JLabel();
-        mvh16 = new javax.swing.JLabel();
-        mvh17 = new javax.swing.JLabel();
-        mvh18 = new javax.swing.JLabel();
-        mvh19 = new javax.swing.JLabel();
         mvh20 = new javax.swing.JLabel();
-        mvh21 = new javax.swing.JLabel();
-        mvh22 = new javax.swing.JLabel();
-        mvh23 = new javax.swing.JLabel();
-        mvh24 = new javax.swing.JLabel();
-        mvh25 = new javax.swing.JLabel();
-        mvh26 = new javax.swing.JLabel();
-        mvh27 = new javax.swing.JLabel();
-        mvh28 = new javax.swing.JLabel();
-        mvh29 = new javax.swing.JLabel();
         mvh30 = new javax.swing.JLabel();
-        mvh31 = new javax.swing.JLabel();
-        mvh32 = new javax.swing.JLabel();
-        mvh33 = new javax.swing.JLabel();
-        mvh34 = new javax.swing.JLabel();
-        mvh35 = new javax.swing.JLabel();
-        mvh36 = new javax.swing.JLabel();
-        mvh37 = new javax.swing.JLabel();
-        mvh38 = new javax.swing.JLabel();
-        mvh39 = new javax.swing.JLabel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
         RollDiceButton = new javax.swing.JButton();
@@ -152,121 +123,13 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhPanel.add(mvh10);
         mvh10.setBounds(0, 620, 100, 100);
 
-        mvh11.setToolTipText("");
-        mvhPanel.add(mvh11);
-        mvh11.setBounds(0, 560, 100, 60);
-
-        mvh12.setToolTipText("");
-        mvhPanel.add(mvh12);
-        mvh12.setBounds(0, 510, 100, 50);
-
-        mvh13.setToolTipText("");
-        mvhPanel.add(mvh13);
-        mvh13.setBounds(0, 450, 100, 60);
-
-        mvh14.setToolTipText("");
-        mvhPanel.add(mvh14);
-        mvh14.setBounds(0, 390, 100, 50);
-
-        mvh15.setToolTipText("");
-        mvhPanel.add(mvh15);
-        mvh15.setBounds(0, 330, 100, 60);
-
-        mvh16.setToolTipText("");
-        mvhPanel.add(mvh16);
-        mvh16.setBounds(0, 270, 100, 60);
-
-        mvh17.setToolTipText("");
-        mvhPanel.add(mvh17);
-        mvh17.setBounds(0, 210, 100, 60);
-
-        mvh18.setToolTipText("");
-        mvhPanel.add(mvh18);
-        mvh18.setBounds(0, 160, 100, 60);
-
-        mvh19.setToolTipText("");
-        mvhPanel.add(mvh19);
-        mvh19.setBounds(0, 100, 100, 50);
-
         mvh20.setToolTipText("");
         mvhPanel.add(mvh20);
         mvh20.setBounds(0, 0, 100, 100);
 
-        mvh21.setToolTipText("");
-        mvhPanel.add(mvh21);
-        mvh21.setBounds(90, 0, 60, 100);
-
-        mvh22.setToolTipText("");
-        mvhPanel.add(mvh22);
-        mvh22.setBounds(150, 0, 60, 100);
-
-        mvh23.setToolTipText("");
-        mvhPanel.add(mvh23);
-        mvh23.setBounds(210, 0, 60, 100);
-
-        mvh24.setToolTipText("");
-        mvhPanel.add(mvh24);
-        mvh24.setBounds(270, 0, 60, 100);
-
-        mvh25.setToolTipText("");
-        mvhPanel.add(mvh25);
-        mvh25.setBounds(330, 0, 60, 100);
-
-        mvh26.setToolTipText("");
-        mvhPanel.add(mvh26);
-        mvh26.setBounds(390, 0, 60, 100);
-
-        mvh27.setToolTipText("");
-        mvhPanel.add(mvh27);
-        mvh27.setBounds(450, 0, 60, 100);
-
-        mvh28.setToolTipText("");
-        mvhPanel.add(mvh28);
-        mvh28.setBounds(510, 0, 50, 100);
-
-        mvh29.setToolTipText("");
-        mvhPanel.add(mvh29);
-        mvh29.setBounds(570, 0, 50, 100);
-
         mvh30.setToolTipText("");
         mvhPanel.add(mvh30);
         mvh30.setBounds(630, 0, 90, 90);
-
-        mvh31.setToolTipText("");
-        mvhPanel.add(mvh31);
-        mvh31.setBounds(630, 100, 90, 50);
-
-        mvh32.setToolTipText("");
-        mvhPanel.add(mvh32);
-        mvh32.setBounds(630, 150, 90, 60);
-
-        mvh33.setToolTipText("");
-        mvhPanel.add(mvh33);
-        mvh33.setBounds(630, 220, 90, 50);
-
-        mvh34.setToolTipText("");
-        mvhPanel.add(mvh34);
-        mvh34.setBounds(630, 270, 90, 60);
-
-        mvh35.setToolTipText("");
-        mvhPanel.add(mvh35);
-        mvh35.setBounds(630, 330, 90, 60);
-
-        mvh36.setToolTipText("");
-        mvhPanel.add(mvh36);
-        mvh36.setBounds(630, 390, 90, 60);
-
-        mvh37.setToolTipText("");
-        mvhPanel.add(mvh37);
-        mvh37.setBounds(630, 450, 90, 60);
-
-        mvh38.setToolTipText("");
-        mvhPanel.add(mvh38);
-        mvh38.setBounds(630, 510, 90, 50);
-
-        mvh39.setToolTipText("");
-        mvhPanel.add(mvh39);
-        mvh39.setBounds(630, 560, 90, 60);
 
         BoardPanel.add(mvhPanel);
         mvhPanel.setBounds(20, 10, 720, 720);
@@ -420,6 +283,7 @@ public class JGameWindow extends javax.swing.JFrame {
         try {
             currentCardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Cards/" + curPosition + ".png")));
         } catch (Exception e) {
+            currentCardLabel.setIcon(null);
         }
 
     }
@@ -428,90 +292,41 @@ public class JGameWindow extends javax.swing.JFrame {
         RollDiceButton.setBorder(new LineBorder(Constants.colors[playerNum], 3));
     }
 
-    //
-    int i;
-
     private void initMVH() {
 
-        //mvh code
-        mvhPanel.setOpaque(true);
-        mvhPanel.setBackground(new Color(0, 0, 0, 0));
-
-        
-        
         //it's better to go with loops like that, i'll modify the rest later or do it if you can
-           for (i = 0; i < 10; i++) {
-                
+        for (int i = 0; i < 40; i++) {
+            final int j = i;
             JLabel mvh = new JLabel();
             mvhPanel.add(mvh);
             if (i > 0 && i <= 9) {
-                mvh.setBounds(Constants.BoardWidth - Constants.CornerWidth, Constants.BoardHeight - Constants.LocationHeight, Constants.CityWidth, Constants.LocationHeight);
-                mvh.setLocation(mvh.getX() - i* Constants.CityWidth,mvh.getY());
-
+                mvh.setBounds(Constants.BoardWidth - Constants.CornerWidth - i * Constants.CityWidth, Constants.BoardHeight - Constants.LocationHeight, Constants.CityWidth, Constants.LocationHeight);
+            } else if (i > 10 && i <= 19) {
+                mvh.setBounds(0, Constants.BoardHeight - Constants.CornerWidth - (i % 10) * Constants.CityWidth, Constants.LocationHeight, Constants.CityWidth);
+            } else if (i > 20 && i <= 29) {
+                mvh.setBounds(Constants.CornerWidth + ((i - 1) % 20) * Constants.CityWidth, 0, Constants.CityWidth, Constants.LocationHeight);
+            } else if (i > 30 && i <= 39) {
+                mvh.setBounds(Constants.BoardWidth - Constants.LocationHeight, Constants.CornerWidth + ((i - 1) % 30) * Constants.CityWidth, Constants.LocationHeight, Constants.CityWidth);
             }
-//
-//            if (i <= 19) {
-//                mvh.setLocation(mvh.getX(), mvh.getY() - 1);
-//            }
-//
-//            if (i <= 29) {
-//                mvh.setLocation(mvh.getX() + 1,mvh.getY());
-//            }
-//
-//            if (i <= 39) {
-//                mvh.setLocation(mvh.getX(),mvh.getY() + 1);
-//            }
-        Constants.playerInfoWin = new JPlayerInfo();
-        
+
             mvh.addMouseListener(new MouseAdapter() {
-                int num = i;
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-
-                    //2 lines below should be out of the inner class
-                    JGameWindow gw = Constants.gameWindow;
-                    Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
-                    //
-                    Constants.playerInfoWin.setVisible(true);
-
-                    //TODO, DRAW PIC BASED ON NUM
-                    // DEMO BELOW
-                    System.out.println(num);
-                    Constants.playerInfoWin.setBigCityLBL(num);
+                    JGameWindow.this.drawCurrentCard(j);
                 }
-                
+
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    Constants.playerInfoWin.dispose();
+                    JGameWindow.this.drawCurrentCard(-1);
                 }
             });
-            
-           }
-        
-           
-        for (i = 0; i < mvhPanel.getComponentCount() - 10; i++) {
-            mvhPanel.getComponent(i).addMouseListener(new MouseAdapter() {
-                int num = i + 10;
 
-                @Override
-                public void mouseEntered(MouseEvent e) {
-
-                    //2 lines below should be out of the inner class
-                    JGameWindow gw = Constants.gameWindow;
-                    Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
-                    //
-                    Constants.playerInfoWin.setVisible(true);
-
-                    //TODO, DRAW PIC BASED ON NUM
-                    // DEMO BELOW
-                    Constants.playerInfoWin.setBigCityLBL(num);
-                }
-            });
         }
- 
-    }    /////////auction
 
+    }
+
+    /////////auction
     public int startAuction(int curPlayerNum) {
 
         //Begin the Auction with the Player who initialized it
@@ -606,35 +421,8 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel d2_label;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel mvh10;
-    private javax.swing.JLabel mvh11;
-    private javax.swing.JLabel mvh12;
-    private javax.swing.JLabel mvh13;
-    private javax.swing.JLabel mvh14;
-    private javax.swing.JLabel mvh15;
-    private javax.swing.JLabel mvh16;
-    private javax.swing.JLabel mvh17;
-    private javax.swing.JLabel mvh18;
-    private javax.swing.JLabel mvh19;
     private javax.swing.JLabel mvh20;
-    private javax.swing.JLabel mvh21;
-    private javax.swing.JLabel mvh22;
-    private javax.swing.JLabel mvh23;
-    private javax.swing.JLabel mvh24;
-    private javax.swing.JLabel mvh25;
-    private javax.swing.JLabel mvh26;
-    private javax.swing.JLabel mvh27;
-    private javax.swing.JLabel mvh28;
-    private javax.swing.JLabel mvh29;
     private javax.swing.JLabel mvh30;
-    private javax.swing.JLabel mvh31;
-    private javax.swing.JLabel mvh32;
-    private javax.swing.JLabel mvh33;
-    private javax.swing.JLabel mvh34;
-    private javax.swing.JLabel mvh35;
-    private javax.swing.JLabel mvh36;
-    private javax.swing.JLabel mvh37;
-    private javax.swing.JLabel mvh38;
-    private javax.swing.JLabel mvh39;
     private javax.swing.JPanel mvhPanel;
     // End of variables declaration//GEN-END:variables
 }
