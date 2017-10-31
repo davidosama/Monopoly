@@ -16,7 +16,6 @@ public class JGameWindow extends javax.swing.JFrame {
      */
     private int curTurn = 0;
 
-    private ArrayList<JLabel> mvhs;
     private ArrayList<JPlayerInfo> mv_refs;
 
     public void addLabel(int playerNum) {
@@ -145,6 +144,11 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhPanel.setLayout(null);
 
         mvh10.setToolTipText("");
+        mvh10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                mvh10MouseEntered(evt);
+            }
+        });
         mvhPanel.add(mvh10);
         mvh10.setBounds(0, 620, 100, 100);
 
@@ -346,6 +350,10 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.carSys.GenerateDiceAndMove();
 
     }//GEN-LAST:event_RollDiceButtonActionPerformed
+
+    private void mvh10MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mvh10MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mvh10MouseEntered
     /* 
        the idea of move function is that
        CurPos Counter starts with zero end with 40 (from go to go)
@@ -429,11 +437,10 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhPanel.setOpaque(true);
         mvhPanel.setBackground(new Color(0, 0, 0, 0));
 
-        mvhs = new ArrayList<>();
         
         
         //it's better to go with loops like that, i'll modify the rest later or do it if you can
-           for (int i = 0; i < 10; i++) {
+           for (i = 0; i < 10; i++) {
                 
             JLabel mvh = new JLabel();
             mvhPanel.add(mvh);
@@ -455,8 +462,9 @@ public class JGameWindow extends javax.swing.JFrame {
 //                mvh.setLocation(mvh.getX(),mvh.getY() + 1);
 //            }
         Constants.playerInfoWin = new JPlayerInfo();
+        
             mvh.addMouseListener(new MouseAdapter() {
-                int num = mvhs.size();
+                int num = i;
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
@@ -479,46 +487,12 @@ public class JGameWindow extends javax.swing.JFrame {
                 }
             });
             
-            mvhs.add(mvh);
-            
-            //mvhs.get(mvh)
            }
-      
-           
-
-                   mvhs.add(mvh11);
-        mvhs.add(mvh12);
-        mvhs.add(mvh13);
-        mvhs.add(mvh14);
-        mvhs.add(mvh15);
-        mvhs.add(mvh16);
-        mvhs.add(mvh17);
-        mvhs.add(mvh18);
-        mvhs.add(mvh19);
-        mvhs.add(mvh20);
-        mvhs.add(mvh21);
-        mvhs.add(mvh22);
-        mvhs.add(mvh23);
-        mvhs.add(mvh24);
-        mvhs.add(mvh25);
-        mvhs.add(mvh26);
-        mvhs.add(mvh27);
-        mvhs.add(mvh28);
-        mvhs.add(mvh29);
-        mvhs.add(mvh30);
-        mvhs.add(mvh31);
-        mvhs.add(mvh32);
-        mvhs.add(mvh33);
-        mvhs.add(mvh34);
-        mvhs.add(mvh35);
-        mvhs.add(mvh36);
-        mvhs.add(mvh37);
-        mvhs.add(mvh38);
-        mvhs.add(mvh39);
         
-        for (i = 10; i < mvhs.size(); i++) {
-            mvhs.get(i).addMouseListener(new MouseAdapter() {
-                int num = i;
+           
+        for (i = 0; i < mvhPanel.getComponentCount() - 10; i++) {
+            mvhPanel.getComponent(i).addMouseListener(new MouseAdapter() {
+                int num = i + 10;
 
                 @Override
                 public void mouseEntered(MouseEvent e) {

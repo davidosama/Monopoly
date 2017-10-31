@@ -107,7 +107,7 @@ public class JPlayerInfo extends javax.swing.JFrame {
 
     public void setBigCityLBL(int i) {
         try {
-            bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cities/" + i + ".png")));
+            bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cards/" + i + ".png")));
         } catch (Exception ex) {
             bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cards/5.png")));
         }
