@@ -65,16 +65,15 @@ public class CarAndDiceSystem {
                         askToBuy();
                     }
                 }
-                if(result != -1)
-                {
+                if (result != -1) {
                     res = result;
-                    // running a new thread while stopping this one
-                }
-
-                if (!(d1 == d2)) {
-                    Constants.gameWindow.enableEndTurnBtn(true);
+                    carRunnable.run();
                 } else {
-                    Constants.gameWindow.enableRollDiceBtn();
+                    if (!(d1 == d2)) {
+                        Constants.gameWindow.enableEndTurnBtn(true);
+                    } else {
+                        Constants.gameWindow.enableRollDiceBtn();
+                    }
                 }
             }
 
@@ -95,8 +94,8 @@ public class CarAndDiceSystem {
                 Constants.gameWindow.drawDice(d1, d2);
 
                 if (diceTimerCounter == 0) {
-                    Thread t = new Thread(carRunnable);
-                    t.start();
+                    Thread thread = new Thread(carRunnable);
+                    thread.start();
                     diceTimer.stop();
                 }
             }
