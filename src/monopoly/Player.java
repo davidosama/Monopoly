@@ -44,18 +44,16 @@ public class Player {
         //debugPrintPlayer();
     }
 
-    public static void MoveTurn(Boolean samePlayer) {
+    public static void MoveTurn() {
 
-        Player curPlayer = getPlayer();
+        
 
-        if (!samePlayer) {
-            Turn = (Turn + 1) % playersList.size();
-            Constants.gameWindow.changeTurn(Turn);
-
-        }
+        Turn = (Turn + 1) % playersList.size();
+        Constants.gameWindow.changeTurn(Turn);
 
         Constants.gameWindow.setRollBtnClr(Turn);
 
+        Player curPlayer = getPlayer();
         Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
         if (curPlayer.citiesOwned.size() == 0) {
             Constants.gameWindow.PlayerInfoArea.append("No Cities");

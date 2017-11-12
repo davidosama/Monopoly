@@ -5,7 +5,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import javax.swing.Icon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class JGameWindow extends javax.swing.JFrame {
@@ -72,6 +74,7 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.carSys = new CarAndDiceSystem();
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
+        EndTurnButton.setVisible(false);
 
         PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
         initMVH();
@@ -89,10 +92,11 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel = new javax.swing.JPanel();
         BIGCITYLBL = new javax.swing.JLabel();
+        RollDiceButton = new javax.swing.JButton();
+        EndTurnButton = new javax.swing.JButton();
         mvhPanel = new javax.swing.JPanel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
-        RollDiceButton = new javax.swing.JButton();
         BoardLabel = new javax.swing.JLabel();
         BackGround = new javax.swing.JLabel();
         DicePanel = new javax.swing.JPanel();
@@ -114,11 +118,31 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(BIGCITYLBL);
         BIGCITYLBL.setBounds(270, 220, 220, 290);
 
+        RollDiceButton.setText("Roll Dice");
+        RollDiceButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        RollDiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RollDiceButtonActionPerformed(evt);
+            }
+        });
+        BoardPanel.add(RollDiceButton);
+        RollDiceButton.setBounds(300, 550, 160, 60);
+
+        EndTurnButton.setText("End Turn");
+        EndTurnButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        EndTurnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EndTurnButtonActionPerformed(evt);
+            }
+        });
+        BoardPanel.add(EndTurnButton);
+        EndTurnButton.setBounds(300, 550, 160, 60);
+
         mvhPanel.setBackground(new java.awt.Color(0, 0, 0));
         mvhPanel.setOpaque(false);
         mvhPanel.setLayout(null);
         BoardPanel.add(mvhPanel);
-        mvhPanel.setBounds(20, 10, 720, 720);
+        mvhPanel.setBounds(10, 10, 720, 720);
 
         currentCardPanel.setBackground(new java.awt.Color(210, 234, 220));
         currentCardPanel.setToolTipText("");
@@ -130,16 +154,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel.add(currentCardPanel);
         currentCardPanel.setBounds(260, 230, 236, 280);
-
-        RollDiceButton.setText("Roll Dice");
-        RollDiceButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        RollDiceButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RollDiceButtonActionPerformed(evt);
-            }
-        });
-        BoardPanel.add(RollDiceButton);
-        RollDiceButton.setBounds(300, 550, 160, 60);
 
         BoardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         BoardLabel.setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -193,12 +207,15 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private void RollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RollDiceButtonActionPerformed
 
-        RollDiceButton.setBorder(null);
         currentCardLabel.setIcon(null);
         disableRollDiceBtn();
         Constants.carSys.GenerateDiceAndMove();
 
     }//GEN-LAST:event_RollDiceButtonActionPerformed
+
+    private void EndTurnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EndTurnButtonActionPerformed
+        Constants.carSys.switchTurn();
+    }//GEN-LAST:event_EndTurnButtonActionPerformed
     /* 
        the idea of move function is that
        CurPos Counter starts with zero end with 40 (from go to go)
@@ -217,10 +234,26 @@ public class JGameWindow extends javax.swing.JFrame {
     
      */
 
+<<<<<<< HEAD
+=======
+    public JLabel getBoardLabel()
+    {
+        return this.BoardLabel;
+    }
+>>>>>>> 059459b6a276b571741daafd9d8f1009b383b719
     public void disableRollDiceBtn() {
         RollDiceButton.setEnabled(false);
         RollDiceButton.setVisible(false);
         DicePanel.setVisible(true);
+    }
+
+    public void enableEndTurnBtn(boolean enable) {
+        EndTurnButton.setEnabled(enable);
+        EndTurnButton.setVisible(enable);
+    }
+
+    public void enableDicePanel(boolean enable) {
+        DicePanel.setVisible(enable);
     }
 
     public void enableRollDiceBtn() {
@@ -238,11 +271,11 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     //drawing chance/community cards
-    public void drawChanceCard(int id) {
+    public Icon getChanceCard(int id) {
         try {
-            currentCardLabel.setIcon(chanceIcons[id]);
+            return chanceIcons[id];
         } catch (Exception e) {
-            currentCardLabel.setIcon(null);
+            return null;
         }
     }
 
@@ -294,7 +327,12 @@ public class JGameWindow extends javax.swing.JFrame {
 
     }
 
+    public void endAuction(int Winner, int highestBid) {
+        Constants.carSys.endAuction(Winner, highestBid);
+    }
+
     public void drawDice(int d1, int d2) {
+
         d1_label.setIcon(diceIcons[d1 - 1]);
         d2_label.setIcon(diceIcons[d2 - 1]);
     }
@@ -319,45 +357,23 @@ public class JGameWindow extends javax.swing.JFrame {
         }
         for (int i = 0; i < chanceIcons.length; i++) {
             try {
-                chanceIcons[i] = new javax.swing.ImageIcon(getClass().getResource("/drawables/Chance-Community-Cards/" + i + ".png"));
+                chanceIcons[i] = new javax.swing.ImageIcon(getClass().getResource("/drawables/Chance/" + i + ".png"));
             } catch (Exception e) {
                 chanceIcons[i] = null;
             }
+            
+            
         }
     }
 
     /////////auction
-    public int startAuction(int curPlayerNum) {
+    public void startAuction(int curPlayerNum) {
 
-        //Begin the Auction with the Player who initialized it
         AuctionDialog a;
-        AuctionDialog.PlayerNumTurn = curPlayerNum;
-        a = new AuctionDialog(this, true);
+
+        a = new AuctionDialog(this, curPlayerNum, Player.playersCount);
         a.setVisible(true);
-        boolean firstTourFinished = true;
 
-        for (int i = 0; i < Player.playersList.size(); i++) {
-            // if this is the number of the player who initialized the Auction,skip it in the first Tour only ( he already specified the amount of money )
-            if (Player.playersList.get(i).num == curPlayerNum && firstTourFinished) {
-                firstTourFinished = false;
-                continue;
-            }
-            AuctionDialog.PlayerNumTurn = Player.playersList.get(i).num;
-            System.out.println(AuctionDialog.PlayerNumTurn + "skdjalskdjalskdajklPLAYERNUMTURN");
-            AuctionDialog ad;
-            ad = new AuctionDialog(this, true);
-            ad.setVisible(true);
-
-            while (ad.isFocusOwner()) {
-                //Wait until this Dialog is closed and the player clicks submit in order to open a new one for another player to submit the amount of money
-            }
-            //Use this to make the loop run for ever 
-//            if(i==(Player.playersList.size()-1)){
-//                i=0;
-//            }
-        }
-        System.out.println("THE WINNER IS " + AuctionDialog.HighestAuctionPlayer);
-        return AuctionDialog.HighestAuctionPlayer;
     }
 
     /////////
@@ -413,6 +429,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel BoardLabel;
     private javax.swing.JPanel BoardPanel;
     private javax.swing.JPanel DicePanel;
+    private javax.swing.JButton EndTurnButton;
     public javax.swing.JTextArea PlayerInfoArea;
     private javax.swing.JButton RollDiceButton;
     private javax.swing.JLabel currentCardLabel;
