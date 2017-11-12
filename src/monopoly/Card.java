@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.JOptionPane;
 
 public class Card {
 
@@ -53,20 +54,21 @@ public class Card {
         ArrayList<Player> players = Player.playersList;
         Player player = Player.getPlayer();
         int playerNum = player.num; // the number of the player
-        Card curCard;
+        Card curCard = null;
 
-        if (type.equals("chance")) {
+        if (type.equalsIgnoreCase("chance")) {
             //removing a card and then adding it to the bottom
             curCard = chanceCards.remove(0);
             chanceCards.add(curCard);
 
-        } else {
+        } else if (type.equalsIgnoreCase("community")) {
             curCard = communityCards.remove(0);
             communityCards.add(curCard);
+        } else {
+            //
         }
 
-        Constants.gameWindow.drawChanceCard(curCard.id);
-
+        JOptionPane.showMessageDialog(Constants.gameWindow.getBoardLabel(), null, null, JOptionPane.PLAIN_MESSAGE, Constants.gameWindow.getChanceCard(curCard.id));
         // to do the commands of the card taken 
         int value;
 

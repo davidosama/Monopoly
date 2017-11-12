@@ -35,18 +35,14 @@ public class CarAndDiceSystem {
             @Override
             public void run() {
 
-                for (int i = 0; i < res; i++) {
-                    Constants.gameWindow.moveCarLabel();
-                }
-
-                curPlayer.move(res);
-
-                Constants.gameWindow.enableRollDiceBtn();
+                move();
+                Constants.gameWindow.enableDicePanel(false);
                 Constants.gameWindow.drawDetailedLocation(curPlayer.position);
+                int result = -1;
                 if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
-                    //Community Cards Function
+                    result = Card.DoCards("community");
                 } else if (curPlayer.position == 7 || curPlayer.position == 22 || curPlayer.position == 36) {
-                    //chance Cards Function
+                    result = Card.DoCards("chance");
                 } else if (curPlayer.position == 5 || curPlayer.position == 15 || curPlayer.position == 25 || curPlayer.position == 35) {
                     //RailRoads Function
                 } else if (curPlayer.position == 12 || curPlayer.position == 28) {
@@ -69,11 +65,16 @@ public class CarAndDiceSystem {
                         askToBuy();
                     }
                 }
-                //Forwart to next Turn
+                if(result != -1)
+                {
+                    res = result;
+                    // running a new thread while stopping this one
+                }
+
                 if (!(d1 == d2)) {
-                    Player.MoveTurn(false);
+                    Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
-                    Player.MoveTurn(true);
+                    Constants.gameWindow.enableRollDiceBtn();
                 }
             }
 
@@ -90,7 +91,7 @@ public class CarAndDiceSystem {
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
                 res = d1 + d2;
-                
+
                 Constants.gameWindow.drawDice(d1, d2);
 
                 if (diceTimerCounter == 0) {
@@ -103,6 +104,13 @@ public class CarAndDiceSystem {
         );
     }
 
+    public void move() {
+        for (int i = 0; i < res; i++) {
+            Constants.gameWindow.moveCarLabel();
+        }
+        curPlayer.move(res);
+    }
+
     public void GenerateDiceAndMove() {
 
         curPlayer = Player.getPlayer();
@@ -112,6 +120,13 @@ public class CarAndDiceSystem {
 
     }
 
+    public void switchTurn() {
+        //Forwart to next Turn
+        Player.MoveTurn();
+        Constants.gameWindow.enableEndTurnBtn(false);
+        Constants.gameWindow.enableRollDiceBtn();
+
+    }
 
     public Boolean checkIfOwnedByCurrPlayer(int CityNum) {
         //check if the city is owned by the current Player
@@ -160,11 +175,6 @@ public class CarAndDiceSystem {
         }
     }
 
-    public int Auction() {
-        int AuctionWinnerNum = Constants.gameWindow.startAuction(curPlayer.num);
-        return AuctionWinnerNum;
-    }
-
     public void askToBuy() {
         normalCity currentCity = (normalCity) Constants.board.allCities.get(curPlayer.position);
         String CityInfo = "\nPrice:" + currentCity.price
@@ -182,16 +192,16 @@ public class CarAndDiceSystem {
         if (choice == 0) {
             BuyCity(curPlayer.position, curPlayer);
         } else if (choice == 1) {
-            System.out.println("askldaslkdjalskdjalskdjaslkdjalskdjalskdjalksjalksjdlaksjdl");
-            int Winner = Auction();
-            for (int i = 0; i < Player.playersList.size(); i++) {
-                if (Player.playersList.get(i).num == Winner) {
-                    Boolean t = Player.playersList.get(i).buy(curPlayer.position, AuctionDialog.HighestAuctionPrice);
-                    if (t) {
-                        JOptionPane.showMessageDialog(null, "Player " + Player.playersList.get(i).num + " has won the Auction");
-                    }
-                }
-            }
+            Constants.gameWindow.startAuction(curPlayer.num);
+
         }
     }
+
+    public void endAuction(int winner, int highestbid) {
+
+        Player.playersList.get(winner).buy(curPlayer.position, highestbid);
+        JOptionPane.showMessageDialog(null, "Player " + Player.playersList.get(winner).num + " has won the Auction");
+
+    }
+
 }
