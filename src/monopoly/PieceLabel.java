@@ -31,7 +31,6 @@ public class PieceLabel extends JLabel {
 
         javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/objects/" + playerNum + ".png"));
         this.setIcon(icon);
-
         this.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - icon.getIconWidth()), Constants.BoardHeight - icon.getIconHeight() - this.playerNum * Constants.Carlvl - 5,
                 icon.getIconWidth(), icon.getIconHeight());
 
@@ -43,17 +42,22 @@ public class PieceLabel extends JLabel {
         return gd.getDefaultConfiguration();
     }
 
-    public ImageIcon rotateImage(ImageIcon icon, double angleDegrees) {
-
-        // converting an imageicon to a bufferedimage
+    private BufferedImage getBufferedImage(ImageIcon icon) {
+        
         BufferedImage image = new BufferedImage(
                 icon.getIconWidth(),
                 icon.getIconHeight(),
                 BufferedImage.TYPE_INT_ARGB);
-        Graphics g1 = image.createGraphics();
-        icon.paintIcon(null, g1, 0, 0);
-        g1.dispose();
+        Graphics g = image.createGraphics();
+        icon.paintIcon(null, g, 0, 0);
+        g.dispose();
+        return image;
+    }
 
+    private ImageIcon rotateImageIcon(ImageIcon icon, double angleDegrees) {
+
+        // converting an imageicon to a bufferedimage
+        BufferedImage image = getBufferedImage(icon);
         //rotating the image
         double angle = (angleDegrees / 180) * Math.PI;
         double sin = Math.abs(Math.sin(angle)), cos = Math.abs(Math.cos(angle));
@@ -69,10 +73,10 @@ public class PieceLabel extends JLabel {
         return new ImageIcon(result);
     }
 
-    public void rotatePiece() {
-        ImageIcon icon = rotateImage((ImageIcon) this.getIcon(), 90);
-        this.setIcon(icon);
-        this.setSize(icon.getIconWidth(), icon.getIconHeight());
+    private void rotatePiece() {
+        ImageIcon rotatedIcon = rotateImageIcon((ImageIcon) this.getIcon(), 90);
+        this.setIcon(rotatedIcon);
+        this.setSize(rotatedIcon.getIconWidth(), rotatedIcon.getIconHeight());
 
     }
 
@@ -125,7 +129,7 @@ public class PieceLabel extends JLabel {
 
     }
 
-    public void Corner() {
+    private void Corner() {
 
         rotatePiece();
         switch (position) {

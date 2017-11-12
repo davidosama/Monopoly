@@ -217,7 +217,6 @@ public class JGameWindow extends javax.swing.JFrame {
     
      */
 
-
     public void disableRollDiceBtn() {
         RollDiceButton.setEnabled(false);
         RollDiceButton.setVisible(false);
@@ -248,7 +247,6 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void drawCurrentLocation(int curPosition) {
-        // to-do, adding more images and loading the images to an array of icons at the beginning
 
         try {
             currentCardLabel.setIcon(locationIcons[curPosition]);
