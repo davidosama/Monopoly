@@ -27,7 +27,7 @@ public class AuctionDialog extends javax.swing.JDialog {
     // the player with the highest AuctionPrice
     private int HighestAuctionPrice = 0;
     private int playersCount;
-    private int curPlayer;
+    private Integer curPlayer;
     private ArrayList<Integer> players = new ArrayList<Integer>();
 
     public AuctionDialog(java.awt.Frame parent, int curPlayer, int playersCount) {
@@ -203,7 +203,7 @@ public class AuctionDialog extends javax.swing.JDialog {
 
     private void switchPlayer() {
 
-        players.remove(new Integer(curPlayer));
+        players.remove(curPlayer);
         players.add(curPlayer);
         curPlayer = players.get(0);
         PlayerNameLabel.setText("Player " + curPlayer + " Auction");
@@ -235,7 +235,7 @@ public class AuctionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_DecrementAucBtnActionPerformed
 
     private void FoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FoldBtnActionPerformed
-        players.remove(new Integer(curPlayer));
+        players.remove(curPlayer);
         curPlayer = players.get(0);
         PlayerNameLabel.setText("Player " + curPlayer + " Auction");
         if (players.size() == 1) {

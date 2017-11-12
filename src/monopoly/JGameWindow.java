@@ -234,13 +234,12 @@ public class JGameWindow extends javax.swing.JFrame {
     
      */
 
-<<<<<<< HEAD
-=======
+
     public JLabel getBoardLabel()
     {
         return this.BoardLabel;
     }
->>>>>>> 059459b6a276b571741daafd9d8f1009b383b719
+
     public void disableRollDiceBtn() {
         RollDiceButton.setEnabled(false);
         RollDiceButton.setVisible(false);
