@@ -31,11 +31,6 @@
               <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="PlayerNameLabel" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                      <Component id="NoAuctionCheckBox" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -82,9 +77,7 @@
                   <Component id="SubmitBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="FoldBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="NoAuctionCheckBox" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,14 +117,6 @@
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="NoAuctionCheckBox">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="I don&apos;t want to participate in this Auction"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NoAuctionCheckBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="warningLbl">
     </Component>

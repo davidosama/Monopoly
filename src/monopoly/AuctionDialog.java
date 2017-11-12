@@ -71,7 +71,6 @@ public class AuctionDialog extends javax.swing.JDialog {
         DecrementAucBtn = new javax.swing.JButton();
         IncrementAucBtn = new javax.swing.JButton();
         PlayerNameLabel = new javax.swing.JLabel();
-        NoAuctionCheckBox = new javax.swing.JCheckBox();
         warningLbl = new javax.swing.JLabel();
         FoldBtn = new javax.swing.JButton();
 
@@ -105,13 +104,6 @@ public class AuctionDialog extends javax.swing.JDialog {
 
         PlayerNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        NoAuctionCheckBox.setText("I don't want to participate in this Auction");
-        NoAuctionCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NoAuctionCheckBoxActionPerformed(evt);
-            }
-        });
-
         FoldBtn.setText("Fold");
         FoldBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,10 +119,6 @@ public class AuctionDialog extends javax.swing.JDialog {
                 .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PlayerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(NoAuctionCheckBox)
-                        .addGap(53, 53, 53))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -167,9 +155,7 @@ public class AuctionDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SubmitBtn)
                     .addComponent(FoldBtn))
-                .addGap(18, 18, 18)
-                .addComponent(NoAuctionCheckBox)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
@@ -215,13 +201,6 @@ public class AuctionDialog extends javax.swing.JDialog {
         AuctionPricelbl.setText("" + price);
     }//GEN-LAST:event_IncrementAucBtnActionPerformed
 
-    private void NoAuctionCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoAuctionCheckBoxActionPerformed
-
-        IncrementAucBtn.setEnabled(false);
-        DecrementAucBtn.setEnabled(false);
-
-    }//GEN-LAST:event_NoAuctionCheckBoxActionPerformed
-
     private void DecrementAucBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DecrementAucBtnActionPerformed
         int price = Integer.parseInt(AuctionPricelbl.getText());
         int temp = price - 10;
@@ -252,7 +231,6 @@ public class AuctionDialog extends javax.swing.JDialog {
     private javax.swing.JButton DecrementAucBtn;
     private javax.swing.JButton FoldBtn;
     private javax.swing.JButton IncrementAucBtn;
-    private javax.swing.JCheckBox NoAuctionCheckBox;
     private javax.swing.JLabel PlayerNameLabel;
     private javax.swing.JButton SubmitBtn;
     private javax.swing.JLabel warningLbl;
