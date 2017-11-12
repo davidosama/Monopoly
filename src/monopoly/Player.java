@@ -46,8 +46,6 @@ public class Player {
 
     public static void MoveTurn() {
 
-        
-
         Turn = (Turn + 1) % playersList.size();
         Constants.gameWindow.changeTurn(Turn);
 

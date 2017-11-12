@@ -43,7 +43,7 @@ public class PieceLabel extends JLabel {
     }
 
     private BufferedImage getBufferedImage(ImageIcon icon) {
-        
+
         BufferedImage image = new BufferedImage(
                 icon.getIconWidth(),
                 icon.getIconHeight(),

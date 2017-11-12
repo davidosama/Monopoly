@@ -192,7 +192,6 @@ public class AuctionDialog extends javax.swing.JDialog {
             switchPlayer();
         }
 
-
     }//GEN-LAST:event_SubmitBtnActionPerformed
 
     private void loadArray() {
@@ -248,7 +247,6 @@ public class AuctionDialog extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AuctionPricelbl;
     private javax.swing.JButton DecrementAucBtn;

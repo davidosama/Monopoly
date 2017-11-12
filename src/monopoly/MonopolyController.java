@@ -7,11 +7,10 @@ package monopoly;
 
 import java.awt.event.ActionEvent;
 import java.util.Random;
-import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-public class CarAndDiceSystem {
+public class MonopolyController {
 
     int d1, d2, res;
     private Player curPlayer;
@@ -24,7 +23,7 @@ public class CarAndDiceSystem {
     // runnable interface for the thread
     private Runnable carRunnable;
 
-    public CarAndDiceSystem() {
+    public MonopolyController() {
 
         //For testing, speed things up
         if (Constants.testing) {
@@ -34,7 +33,6 @@ public class CarAndDiceSystem {
         carRunnable = new Runnable() {
             @Override
             public void run() {
-
                 move();
                 Constants.gameWindow.enableDicePanel(false);
                 Constants.gameWindow.drawDetailedLocation(curPlayer.position);

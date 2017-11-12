@@ -16,16 +16,16 @@ public class JGameWindow extends javax.swing.JFrame {
      * Creates new form BoardWindow
      */
     private int curTurn = 0;
-
+    
     private ArrayList<JPlayerInfo> mv_refs;
-
+    
     private ImageIcon[] locationIcons = new ImageIcon[40];
     private ImageIcon[] detailedIcons = new ImageIcon[40];
     private ImageIcon[] diceIcons = new ImageIcon[6];
     private ImageIcon[] chanceIcons = new ImageIcon[40];
-
+    
     public void addLabel(int playerNum) {
-
+        
         PieceLabel pieceLabel = new PieceLabel(playerNum);
 
         ///////////////Code for mouse hover over player
@@ -50,15 +50,15 @@ public class JGameWindow extends javax.swing.JFrame {
         });*/
         BoardLabel.add(pieceLabel);
     }
-
+    
     public void changeTurn(int turn) {
         curTurn = turn;
     }
-
+    
     public void moveCarLabel() {
         ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
     }
-
+    
     public void addPlayers(int number) {
 
         //Creates and add players into the array
@@ -66,16 +66,16 @@ public class JGameWindow extends javax.swing.JFrame {
             Player.playersList.add(new Player());
             addLabel(i);
         }
-
+        
     }
-
+    
     public JGameWindow() {
         initComponents();
-        Constants.carSys = new CarAndDiceSystem();
+        Constants.carSys = new MonopolyController();
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
         EndTurnButton.setVisible(false);
-
+        
         PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
         initMVH();
         initIcons();
@@ -206,7 +206,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RollDiceButtonActionPerformed
-
+        
         currentCardLabel.setIcon(null);
         disableRollDiceBtn();
         Constants.carSys.GenerateDiceAndMove();
@@ -233,34 +233,29 @@ public class JGameWindow extends javax.swing.JFrame {
                 after moving one step we check again if we reached the number of dice, if not, move again.
     
      */
-
-
-    public JLabel getBoardLabel()
-    {
+    
+    public JLabel getBoardLabel() {
         return this.BoardLabel;
     }
-
+    
     public void disableRollDiceBtn() {
-        RollDiceButton.setEnabled(false);
         RollDiceButton.setVisible(false);
         DicePanel.setVisible(true);
     }
-
+    
     public void enableEndTurnBtn(boolean enable) {
-        EndTurnButton.setEnabled(enable);
         EndTurnButton.setVisible(enable);
     }
-
+    
     public void enableDicePanel(boolean enable) {
         DicePanel.setVisible(enable);
     }
-
+    
     public void enableRollDiceBtn() {
-        RollDiceButton.setEnabled(true);
         RollDiceButton.setVisible(true);
         DicePanel.setVisible(false);
     }
-
+    
     public void drawDetailedLocation(int curPosition) {
         try {
             currentCardLabel.setIcon(detailedIcons[curPosition]);
@@ -277,21 +272,21 @@ public class JGameWindow extends javax.swing.JFrame {
             return null;
         }
     }
-
+    
     public void drawCurrentLocation(int curPosition) {
-
+        
         try {
             currentCardLabel.setIcon(locationIcons[curPosition]);
         } catch (Exception e) {
             currentCardLabel.setIcon(null);
         }
-
+        
     }
-
+    
     public void setRollBtnClr(int playerNum) {
         RollDiceButton.setBorder(new LineBorder(Constants.colors[playerNum], 3));
     }
-
+    
     private void initMVH() {
 
         //it's better to go with loops like that, i'll modify the rest later or do it if you can
@@ -308,34 +303,34 @@ public class JGameWindow extends javax.swing.JFrame {
             } else if (i > 30 && i <= 39) {
                 mvh.setBounds(Constants.BoardWidth - Constants.LocationHeight, Constants.CornerWidth + ((i - 1) % 30) * Constants.CityWidth, Constants.LocationHeight, Constants.CityWidth);
             }
-
+            
             mvh.addMouseListener(new MouseAdapter() {
-
+                
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     JGameWindow.this.drawCurrentLocation(j);
                 }
-
+                
                 @Override
                 public void mouseExited(MouseEvent e) {
                     JGameWindow.this.drawCurrentLocation(-1);
                 }
             });
-
+            
         }
-
+        
     }
-
-    public void endAuction(int Winner, int highestBid) {
-        Constants.carSys.endAuction(Winner, highestBid);
+    
+    public void endAuction(int winner, int highestBid) {
+        Constants.carSys.endAuction(winner, highestBid);
     }
-
+    
     public void drawDice(int d1, int d2) {
-
+        
         d1_label.setIcon(diceIcons[d1 - 1]);
         d2_label.setIcon(diceIcons[d2 - 1]);
     }
-
+    
     public void initIcons() {
         for (int i = 0; i < locationIcons.length; i++) {
             try {
@@ -361,18 +356,12 @@ public class JGameWindow extends javax.swing.JFrame {
                 chanceIcons[i] = null;
             }
             
-            
         }
     }
 
     /////////auction
     public void startAuction(int curPlayerNum) {
-
-        AuctionDialog a;
-
-        a = new AuctionDialog(this, curPlayerNum, Player.playersCount);
-        a.setVisible(true);
-
+        new AuctionDialog(this, curPlayerNum, Player.playersCount).setVisible(true);       
     }
 
     /////////
@@ -390,21 +379,21 @@ public class JGameWindow extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(JGameWindow.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(JGameWindow.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(JGameWindow.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JGameWindow.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
