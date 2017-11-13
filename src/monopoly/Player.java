@@ -39,7 +39,7 @@ public class Player {
         //initialize player number to the playersCount and increment
         num = playersCount++;
 
-        citiesOwned = new ArrayList();
+        citiesOwned = new ArrayList<>();
 
         //debugPrintPlayer();
     }
@@ -66,7 +66,7 @@ public class Player {
         return playersList.get(Turn);
     }
 
-    public ArrayList getCitiesOwned() {
+    public ArrayList<Integer> getCitiesOwned() {
         return this.citiesOwned;
     }
 

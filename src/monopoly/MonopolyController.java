@@ -83,7 +83,7 @@ public class MonopolyController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                diceTimerCounter--;
+                diceTimerCounter--; 
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
