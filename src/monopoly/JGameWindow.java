@@ -29,7 +29,7 @@ public class JGameWindow extends javax.swing.JFrame {
         PieceLabel pieceLabel = new PieceLabel(playerNum);
 
         ///////////////Code for mouse hover over player
-        /* pieceLabel.addMouseListener(new MouseAdapter() {
+         pieceLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
@@ -47,7 +47,7 @@ public class JGameWindow extends javax.swing.JFrame {
                 Constants.playerInfoWin.setVisible(true);
 
             }
-        });*/
+        });
         BoardLabel.add(pieceLabel);
     }
     
