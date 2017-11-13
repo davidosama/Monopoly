@@ -48,7 +48,6 @@ public class Player {
 
         Turn = (Turn + 1) % playersList.size();
         Constants.gameWindow.changeTurn(Turn);
-
         Constants.gameWindow.setRollBtnClr(Turn);
 
         Player curPlayer = getPlayer();
