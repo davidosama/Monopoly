@@ -361,7 +361,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
     /////////auction
     public void startAuction(int curPlayerNum) {
-        new AuctionDialog(this, curPlayerNum, Player.playersCount).setVisible(true);       
+        new AuctionDialog(this, curPlayerNum, Player.playersCount).setVisible(true);
     }
 
     /////////

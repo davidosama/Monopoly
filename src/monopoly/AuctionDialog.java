@@ -216,7 +216,7 @@ public class AuctionDialog extends javax.swing.JDialog {
         players.remove(curPlayer);
         curPlayer = players.get(0);     
         if (players.size() == 1) {
-            this.setVisible(false);
+            this.dispose();
             ((JGameWindow) (this.getParent())).endAuction(curPlayer, HighestAuctionPrice);          
         }
         PlayerNameLabel.setText("Player " + curPlayer + " Auction");
