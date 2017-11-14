@@ -118,12 +118,12 @@ public class Player {
         this.position %= 40;
     }
     
-    public int moveToJail(){
-        int i=0;
-        while(this.position!=10){
-            move(1);
-            i++;
-        }
-        return i;
-    }
+//    public int moveToJail(){
+//        int i=0;
+//        while(this.position!=10){
+//            move(1);
+//            i++;
+//        }
+//        return i;
+//    }
 }

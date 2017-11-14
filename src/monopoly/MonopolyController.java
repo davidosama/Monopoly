@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class MonopolyController {
 
-    int d1, d2, res;
+    int d1, d2, steps;
     private Player curPlayer;
     //For dice shuffling
     private int diceTimerCounter;
@@ -73,7 +73,7 @@ public class MonopolyController {
                         }
                     }
                     if (result != -1) {
-                        res = result;
+                        steps = result;
                         carRunnable.run();
                     } else {
                         if (!(d1 == d2)) {
@@ -97,7 +97,7 @@ public class MonopolyController {
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
-                res = d1 + d2;
+                steps = d1 + d2;
 
                 Constants.gameWindow.drawDice(d1, d2);
 
@@ -115,10 +115,8 @@ public class MonopolyController {
     }
 
     public void move() {
-        for (int i = 0; i < res; i++) {
-            Constants.gameWindow.moveCarLabel();
-        }
-        curPlayer.move(res);
+        Constants.gameWindow.moveCarLabel(steps);
+        curPlayer.move(steps);
 
 //        int m = 30-curPlayer.position;
 //        for (int i = 0; i < m; i++) {
@@ -128,11 +126,14 @@ public class MonopolyController {
     }
 
     public void moveToJail() {
-        int k = curPlayer.moveToJail();
-        for (int i = 0; i < k; i++) {
-            Constants.gameWindow.moveCarLabel();
 
+        if (curPlayer.position > 10) {
+            steps = 40 - (curPlayer.position - 10);
+        } else {
+            steps = 10 - curPlayer.position;
         }
+        move();
+
     }
 
     public void GenerateDiceAndMove() {
