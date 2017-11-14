@@ -26,11 +26,8 @@ public class Board {
             }
 
         });
-        //for testing reading files
-        for (int i = 0; i < allCities.size(); i++) {
-            System.out.println(allCities.get(i).name);
-        }
-        System.out.println(allCities.size());
+      
+        
     }
 
     private void initializeAllCities() {
@@ -127,4 +124,27 @@ public class Board {
         }
 
     }
+
+
+   //two seperate functions(getproperty and get propertyOwner cause no need to return the whole property in most cases
+    
+   public property getProperty(int x)
+    {
+        return ((property)allCities.get(x));
+    }
+   
+   public int getPropertyOwner(int x)
+    {
+        return ((property)allCities.get(x)).owner;
+    }
+    
+    public String getLocationType(int x)
+    {
+        return allCities.get(x).type;
+        
+    }
+    
+
+    
+
 }

@@ -6,6 +6,7 @@
 package monopoly;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
 
@@ -14,8 +15,10 @@ public class Player {
 
     private String name;
 
-    private ArrayList<Integer> citiesOwned;
-
+    private ArrayList<Integer> propertiesOwned;
+    private ArrayList<Integer> Groups;
+    public int numberOfCompanies;
+    public int numberOfRailRoads;
     private int money;
 
     private boolean active; //will be used if the player is in jail
@@ -39,7 +42,10 @@ public class Player {
         //initialize player number to the playersCount and increment
         num = playersCount++;
 
-        citiesOwned = new ArrayList();
+        propertiesOwned = new ArrayList();
+        Groups = new ArrayList();
+        numberOfCompanies = 0;
+        numberOfRailRoads=0;
 
         //debugPrintPlayer();
     }
@@ -52,11 +58,11 @@ public class Player {
 
         Player curPlayer = getPlayer();
         Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
-        if (curPlayer.citiesOwned.size() == 0) {
+        if (curPlayer.propertiesOwned.size() == 0) {
             Constants.gameWindow.PlayerInfoArea.append("No Cities");
         }
-        for (int i = 0; i < curPlayer.citiesOwned.size(); i++) {
-            City c = ((City) Constants.board.allCities.get(curPlayer.citiesOwned.get(i)));
+        for (int i = 0; i < curPlayer.propertiesOwned.size(); i++) {
+            property c = ((property) Constants.board.allCities.get(curPlayer.propertiesOwned.get(i)));
             Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
         }
     }
@@ -66,12 +72,12 @@ public class Player {
     }
 
     public ArrayList getCitiesOwned() {
-        return this.citiesOwned;
+        return this.propertiesOwned;
     }
 
     public boolean buy(int city, int cost) {
         if (money >= cost) {
-            citiesOwned.add(city);
+            propertiesOwned.add(city);
             money -= cost;
             return true;
         } else {
@@ -80,8 +86,8 @@ public class Player {
     }
 
     public boolean sell(int city, int cost) {
-        if (citiesOwned.contains(city)) {
-            citiesOwned.remove(new Integer(city));
+        if (propertiesOwned.contains(city)) {
+            propertiesOwned.remove(new Integer(city));
             money += cost;
             return true;
         }
@@ -115,4 +121,33 @@ public class Player {
         this.position += steps;
         this.position %= 40;
     }
+
+   
+    
+    public void updateGroups(int ColorID)
+    {
+     int occurences=0;
+     for(int i=0; i<propertiesOwned.size();i++)
+        {
+            //this function needs work
+            property p = Constants.board.getProperty(propertiesOwned.get(i));
+            if(p.type.equals("city"))
+            {
+             normalCity c = (normalCity) p;
+             if(c.colorID == ColorID) occurences++;
+            }
+            
+            if(occurences==3) {Groups.add(ColorID); break;}
+            
+            //i tried to replace 0 and 7 with enum but couldn't do it
+            if(occurences==2&&(ColorID==0||ColorID==7))
+            {Groups.add(ColorID);break;}
+            
+        }
+     
+     System.out.println(Groups);
+     
+     }
+    
+
 }
