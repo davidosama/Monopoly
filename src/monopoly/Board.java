@@ -38,6 +38,7 @@ public class Board {
         String fileCities = "/text_files/cities.txt";
         String fileCompanies = "/text_files/companies.txt";
         String fileRailroads = "/text_files/railroads.txt";
+        String fileJail = "/text_files/jail.txt";
 
         //reading cities file
         try {

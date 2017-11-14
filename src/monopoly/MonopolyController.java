@@ -33,7 +33,16 @@ public class MonopolyController {
         carRunnable = new Runnable() {
             @Override
             public void run() {
-                move();
+                
+                if(d1==d2){
+                    curPlayer.doubleDicesCount++;
+                        if(curPlayer.doubleDicesCount>=3){//Move player to jail in case of 3 double dices happened
+                            moveToJail();
+                        }
+                }else if (curPlayer.doubleDicesCount<3){
+                    move();
+                }
+                
                 Constants.gameWindow.enableDicePanel(false);
                 Constants.gameWindow.drawDetailedLocation(curPlayer.position);
                 int result = -1;
@@ -70,6 +79,7 @@ public class MonopolyController {
                     if (!(d1 == d2)) {
                         Constants.gameWindow.enableEndTurnBtn(true);
                     } else {
+                        
                         Constants.gameWindow.enableRollDiceBtn();
                     }
                 }
@@ -106,6 +116,15 @@ public class MonopolyController {
             Constants.gameWindow.moveCarLabel();
         }
         curPlayer.move(res);
+    }
+    
+    public void moveToJail(){
+        int k = curPlayer.moveToJail();
+        System.out.println(k);
+        for (int i = 0; i < k; i++) {
+            Constants.gameWindow.moveCarLabel();
+            
+        }
     }
 
     public void GenerateDiceAndMove() {

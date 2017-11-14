@@ -78,4 +78,52 @@ class Company extends City {
         super(-1, price, 0, mortgage, position, name, "company");
 
     }
+    
+//    
+// class Jail{
+//     String name;
+//     int position;
+//     String type = "jail";
+//     int escapePrice;
+//
+//        public Jail(String name, int position, int escapePrice) {
+//            this.name = name;
+//            this.position = position;
+//            this.escapePrice = escapePrice;
+//        }
+//
+//        public int getEscapePrice() {
+//            return escapePrice;
+//        }
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        public int getPosition() {
+//            return position;
+//        }
+//
+//        public String getType() {
+//            return type;
+//        }
+//
+//        public void setEscapePrice(int escapePrice) {
+//            this.escapePrice = escapePrice;
+//        }
+//
+//        public void setName(String name) {
+//            this.name = name;
+//        }
+//
+//        public void setPosition(int position) {
+//            this.position = position;
+//        }
+//
+//        public void setType(String type) {
+//            this.type = type;
+//        }
+//     
+//        
+// }
 }
