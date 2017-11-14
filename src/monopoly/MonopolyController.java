@@ -22,7 +22,7 @@ public class MonopolyController {
 
     // runnable interface for the thread
     private Runnable carRunnable;
-    private int doubleDicesCount = 2;
+    private int doubleDicesCount;
 
     public MonopolyController() {
 
@@ -34,19 +34,8 @@ public class MonopolyController {
         carRunnable = new Runnable() {
             @Override
             public void run() {
-                
-                if(d1==d2){
-                    doubleDicesCount++;
-                        if(doubleDicesCount>=3){//Move player to jail in case of 3 double dices happened
-                            moveToJail();
-                        }
-                }else if (doubleDicesCount<3 && d1!=d2){
-                    doubleDicesCount=0;
-                    move();
-                }else if (doubleDicesCount<3 && d1==d2){
-                    move();
-                }
-                
+
+                move();
                 Constants.gameWindow.enableDicePanel(false);
                 Constants.gameWindow.drawDetailedLocation(curPlayer.position);
                 int result = -1;
@@ -63,10 +52,9 @@ public class MonopolyController {
                 } else if (curPlayer.position == 30 || curPlayer.position == 10) {
                     //Go to Jail
                     moveToJail();
-                }else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
+                } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
                     ///////////
-                }
-                    else {
+                } else {
                     //NormalCities
                     //check if it's owned by current Player
                     Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.position);
@@ -87,8 +75,12 @@ public class MonopolyController {
                     if (!(d1 == d2)) {
                         Constants.gameWindow.enableEndTurnBtn(true);
                     } else {
-                        
-                        Constants.gameWindow.enableRollDiceBtn();
+                        doubleDicesCount++;
+                        if (doubleDicesCount == 3) {//Move player to jail in case of 3 double dices happened
+                            moveToJail();
+                        } else {
+                            Constants.gameWindow.enableRollDiceBtn();
+                        }
                     }
                 }
             }
@@ -101,7 +93,7 @@ public class MonopolyController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                diceTimerCounter--; 
+                diceTimerCounter--;
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
                 //check if d1 == d2 to play again
@@ -124,24 +116,27 @@ public class MonopolyController {
             Constants.gameWindow.moveCarLabel();
         }
         curPlayer.move(res);
-        
+
 //        int m = 30-curPlayer.position;
 //        for (int i = 0; i < m; i++) {
 //            Constants.gameWindow.moveCarLabel();
 //        }
 //        curPlayer.move(m);
     }
-    
-    public void moveToJail(){
+
+    public void moveToJail() {
         int k = curPlayer.moveToJail();
         for (int i = 0; i < k; i++) {
             Constants.gameWindow.moveCarLabel();
-            
+
         }
     }
 
     public void GenerateDiceAndMove() {
 
+        if (Player.getPlayer() != curPlayer) {
+            doubleDicesCount = 0;
+        }
         curPlayer = Player.getPlayer();
         //Start Dice Throw
         diceTimerCounter = 5;
