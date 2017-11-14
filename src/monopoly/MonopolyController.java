@@ -40,7 +40,6 @@ public class MonopolyController {
                     Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
                     move();
-                    Constants.gameWindow.enableDicePanel(false);
                     Constants.gameWindow.drawDetailedLocation(curPlayer.position);
                     int result = -1;
                     if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
@@ -117,6 +116,7 @@ public class MonopolyController {
     public void move() {
         Constants.gameWindow.moveCarLabel(steps);
         curPlayer.move(steps);
+        Constants.gameWindow.enableDicePanel(false);
 
 //        int m = 30-curPlayer.position;
 //        for (int i = 0; i < m; i++) {
