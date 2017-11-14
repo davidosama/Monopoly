@@ -22,6 +22,7 @@ public class MonopolyController {
 
     // runnable interface for the thread
     private Runnable carRunnable;
+    private int doubleDicesCount = 2;
 
     public MonopolyController() {
 
@@ -35,11 +36,14 @@ public class MonopolyController {
             public void run() {
                 
                 if(d1==d2){
-                    curPlayer.doubleDicesCount++;
-                        if(curPlayer.doubleDicesCount>=3){//Move player to jail in case of 3 double dices happened
+                    doubleDicesCount++;
+                        if(doubleDicesCount>=3){//Move player to jail in case of 3 double dices happened
                             moveToJail();
                         }
-                }else if (curPlayer.doubleDicesCount<3){
+                }else if (doubleDicesCount<3 && d1!=d2){
+                    doubleDicesCount=0;
+                    move();
+                }else if (doubleDicesCount<3 && d1==d2){
                     move();
                 }
                 
@@ -56,9 +60,13 @@ public class MonopolyController {
                     //Company's Function
                 } else if (curPlayer.position == 4 || curPlayer.position == 38) {
                     //Pay or income Tax ( 7aga kda ) 
-                } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
+                } else if (curPlayer.position == 30 || curPlayer.position == 10) {
                     //Go to Jail
-                } else {
+                    moveToJail();
+                }else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
+                    ///////////
+                }
+                    else {
                     //NormalCities
                     //check if it's owned by current Player
                     Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.position);
@@ -116,11 +124,16 @@ public class MonopolyController {
             Constants.gameWindow.moveCarLabel();
         }
         curPlayer.move(res);
+        
+//        int m = 30-curPlayer.position;
+//        for (int i = 0; i < m; i++) {
+//            Constants.gameWindow.moveCarLabel();
+//        }
+//        curPlayer.move(m);
     }
     
     public void moveToJail(){
         int k = curPlayer.moveToJail();
-        System.out.println(k);
         for (int i = 0; i < k; i++) {
             Constants.gameWindow.moveCarLabel();
             

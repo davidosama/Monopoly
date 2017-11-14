@@ -13,6 +13,7 @@
 20,Give,50,Community
 21,Take,10,Community
 22,Take,200,Community
+23,Go,10,Community
 24,Take,20,Community
 25,Take,100,Community
 26,Take,100,Community

@@ -110,8 +110,13 @@ public class Card {
                 if (curCard.value >= player.position) {
                     return curCard.value - player.position;
                 } else {
+                    if(curCard.id==23){// to remove the 200$ added on passing through the start again
+                        player.deductMoney(200);
+                    }
                     return 40 - (player.position - curCard.value);
                 }
+                
+                
 
         }
         return -1;

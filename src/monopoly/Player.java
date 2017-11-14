@@ -30,7 +30,6 @@ public class Player {
 
     private static int Turn = 0;
     
-    public int doubleDicesCount = 0;
 
     public Player() {
 
@@ -121,10 +120,9 @@ public class Player {
     
     public int moveToJail(){
         int i=0;
-        while(this.position!=30){//ADD CONDITION TO KEEP MOVING UNTIL FINDING THE JAIL
+        while(this.position!=10){
             move(1);
             i++;
-            System.out.println(i);
         }
         return i;
     }
