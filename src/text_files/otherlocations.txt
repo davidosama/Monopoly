@@ -1,5 +1,5 @@
 0,GO,common
-2,COMMUNITY CHEST,community	
+2,COMMUNITY CHEST,community
 4,INCOME TAX,incometax
 7,CHANCE,chance
 10,JAIL,jail
