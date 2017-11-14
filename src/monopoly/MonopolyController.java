@@ -22,7 +22,7 @@ public class MonopolyController {
 
     // runnable interface for the thread
     private Runnable carRunnable;
-    private int doubleDicesCount;
+    private int doubleDicesCount = 0;
 
     public MonopolyController() {
 
@@ -134,9 +134,6 @@ public class MonopolyController {
 
     public void GenerateDiceAndMove() {
 
-        if (Player.getPlayer() != curPlayer) {
-            doubleDicesCount = 0;
-        }
         curPlayer = Player.getPlayer();
         //Start Dice Throw
         diceTimerCounter = 5;
@@ -147,6 +144,7 @@ public class MonopolyController {
     public void switchTurn() {
         //Forwart to next Turn
         Player.MoveTurn();
+        doubleDicesCount = 0;
         Constants.gameWindow.enableEndTurnBtn(false);
         Constants.gameWindow.enableRollDiceBtn();
 
