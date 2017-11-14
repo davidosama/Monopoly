@@ -35,57 +35,57 @@ public class MonopolyController {
             @Override
             public void run() {
 
-                move();
-                Constants.gameWindow.enableDicePanel(false);
-                Constants.gameWindow.drawDetailedLocation(curPlayer.position);
-                int result = -1;
-                if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
-                    result = Card.DoCards("community");
-                } else if (curPlayer.position == 7 || curPlayer.position == 22 || curPlayer.position == 36) {
-                    result = Card.DoCards("chance");
-                } else if (curPlayer.position == 5 || curPlayer.position == 15 || curPlayer.position == 25 || curPlayer.position == 35) {
-                    //RailRoads Function
-                } else if (curPlayer.position == 12 || curPlayer.position == 28) {
-                    //Company's Function
-                } else if (curPlayer.position == 4 || curPlayer.position == 38) {
-                    //Pay or income Tax ( 7aga kda ) 
-                } else if (curPlayer.position == 30 || curPlayer.position == 10) {
-                    //Go to Jail
+                if (doubleDicesCount == 3) {//Move player to jail in case of 3 double dices happened
                     moveToJail();
-                } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
-                    ///////////
+                    Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
-                    //NormalCities
-                    //check if it's owned by current Player
-                    Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.position);
-                    if (isOwnedByCurrPlayer) {
-                        JOptionPane.showConfirmDialog(null, "Do you want to build ?");
-                        //Build Function() 
-                    } else if (isOwned(curPlayer.position)) {
-                        PayRent(curPlayer.position, curPlayer);
+                    move();
+                    Constants.gameWindow.enableDicePanel(false);
+                    Constants.gameWindow.drawDetailedLocation(curPlayer.position);
+                    int result = -1;
+                    if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
+                        result = Card.DoCards("community");
+                    } else if (curPlayer.position == 7 || curPlayer.position == 22 || curPlayer.position == 36) {
+                        result = Card.DoCards("chance");
+                    } else if (curPlayer.position == 5 || curPlayer.position == 15 || curPlayer.position == 25 || curPlayer.position == 35) {
+                        //RailRoads Function
+                    } else if (curPlayer.position == 12 || curPlayer.position == 28) {
+                        //Company's Function
+                    } else if (curPlayer.position == 4 || curPlayer.position == 38) {
+                        //Pay or income Tax ( 7aga kda ) 
+                    } else if (curPlayer.position == 30 || curPlayer.position == 10) {
+                        //Go to Jail
+                        moveToJail();
+                    } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
+                        ///////////
                     } else {
-                        //If the city doesn't belong to him or to any Player
-                        askToBuy();
+                        //NormalCities
+                        //check if it's owned by current Player
+                        Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.position);
+                        if (isOwnedByCurrPlayer) {
+                            JOptionPane.showConfirmDialog(null, "Do you want to build ?");
+                            //Build Function() 
+                        } else if (isOwned(curPlayer.position)) {
+                            PayRent(curPlayer.position, curPlayer);
+                        } else {
+                            //If the city doesn't belong to him or to any Player
+                            askToBuy();
+                        }
                     }
-                }
-                if (result != -1) {
-                    res = result;
-                    carRunnable.run();
-                } else {
-                    if (!(d1 == d2)) {
-                        Constants.gameWindow.enableEndTurnBtn(true);
+                    if (result != -1) {
+                        res = result;
+                        carRunnable.run();
                     } else {
-                        doubleDicesCount++;
-                        if (doubleDicesCount == 3) {//Move player to jail in case of 3 double dices happened
-                            moveToJail();
+                        if (!(d1 == d2)) {
+                            Constants.gameWindow.enableEndTurnBtn(true);
                         } else {
                             Constants.gameWindow.enableRollDiceBtn();
                         }
                     }
                 }
             }
-
         };
+
         rand = new Random();
 
         //For dice shuffling
@@ -102,6 +102,9 @@ public class MonopolyController {
                 Constants.gameWindow.drawDice(d1, d2);
 
                 if (diceTimerCounter == 0) {
+                    if (d1 == d2) {
+                        doubleDicesCount++;
+                    }
                     Thread thread = new Thread(carRunnable);
                     thread.start();
                     diceTimer.stop();
