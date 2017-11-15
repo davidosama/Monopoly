@@ -15,7 +15,6 @@ public class MonopolyController {
 
     int d1, d2, res;
     private Player curPlayer;
-   
     //For dice shuffling
     private int diceTimerCounter;
     private javax.swing.Timer diceTimer;
@@ -36,14 +35,15 @@ public class MonopolyController {
             @Override
             public void run() {
                 move();
+               
                 Constants.gameWindow.enableDicePanel(false);
                 Constants.gameWindow.drawDetailedLocation(curPlayer.position);
                 
                 int result = -1;
-                String type = Constants.board.getLocationType(curPlayer.position);
+                property p = Constants.board.getProperty(curPlayer.position);
                 
-                if(type.equals("community") || type.equals("chance")) result = doCard();
-                else if(type.equals("railroad")||type.equals("city") || type.equals("company")) property(type);
+                if(p.type.equals("community") || p.type.equals("chance")) result = doCard();
+                else if(p.type.equals("railroad")||p.type.equals("city") || p.type.equals("company")) property(p);
                
                 if (result != -1) {
                     res = result;
@@ -109,9 +109,8 @@ public class MonopolyController {
     }
 
     public void PayRent() {
-        int owner = Constants.board.getPropertyOwner(curPlayer.position);
         property p = Constants.board.getProperty(curPlayer.position);
-        JOptionPane.showMessageDialog(null, "Unfortunately,This property is owned by Player " + owner + " so you will have to pay him a rent");
+        JOptionPane.showMessageDialog(null, "Unfortunately,This property is owned by Player " + p.owner + " so you will have to pay him a rent");
 
         curPlayer.deductMoney(p.OverallRent);
         Player.playersList.get(p.owner).addMoney(p.OverallRent);
@@ -120,16 +119,14 @@ public class MonopolyController {
     }
 
     public void askToBuy() {
-        property currentProperty = (property) Constants.board.allCities.get(curPlayer.position);
+        property p = ((property)Constants.board.allCities.get(curPlayer.position));
         String[] options = {"Buy", "Auction", "Don't Buy"};
         int choice = JOptionPane.showOptionDialog(null, "You stopped at "
-                + currentProperty.name
+                + p.name
                 + "\nDo you want to buy it ?", "",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         if (choice == 0) {
-            int Location=curPlayer.position;
-            property p = ((property)Constants.board.allCities.get(Location));
-            boolean n = curPlayer.buy(Location,p.price);
+            boolean n = curPlayer.buy(p.position,p.price);
               if (n) {
                   p.owner=curPlayer.num;
                   if(p.type.equals("company"))
@@ -140,12 +137,12 @@ public class MonopolyController {
                   
                   else
                   {
-                      normalCity c = (normalCity)currentProperty;
+                      normalCity c = (normalCity)p;
                       curPlayer.updateGroups(c.colorID);
                   }
                   
-                  updateOverAllRent(Location);
-                    JOptionPane.showMessageDialog(null, "Congratulations, now you own " + Constants.board.allCities.get(Location).name);
+                  updateOverAllRent(p);
+                  JOptionPane.showMessageDialog(null, "Congratulations, now you own " + Constants.board.allCities.get(p.position).name);
                 } else {
                     JOptionPane.showConfirmDialog(null, "You don't have enough money");
                 }
@@ -162,23 +159,22 @@ public class MonopolyController {
 
     }
                
-    public void property(String type)
+    public void property(property p)
     {
-            int owner = Constants.board.getPropertyOwner(curPlayer.position);                        
-            if(type.equals("city")&&owner == curPlayer.num)
+
+            if(p.type.equals("city")&&p.owner == curPlayer.num)
                 JOptionPane.showConfirmDialog(null, "Do you want to build ?");
             
-            else if(owner == -1) {askToBuy();}
-            else if(owner!= curPlayer.num)
+            else if(p.owner == -1) {askToBuy();}
+            else if(p.owner!= curPlayer.num)
                 PayRent();
         
     }
 
- public int updateOverAllRent(int Location)
+ public int updateOverAllRent(property p)
     {
         
-        property p = Constants.board.getProperty(Location);
-        Player owner = Player.playersList.get(Constants.board.getPropertyOwner(Location));
+        Player owner = Player.playersList.get(p.owner);
         if(p.type.equals("company"))
         {
             if(owner.numberOfCompanies==1) return 4*res;

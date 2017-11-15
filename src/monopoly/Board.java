@@ -133,10 +133,7 @@ public class Board {
         return ((property)allCities.get(x));
     }
    
-   public int getPropertyOwner(int x)
-    {
-        return ((property)allCities.get(x)).owner;
-    }
+
     
     public String getLocationType(int x)
     {
