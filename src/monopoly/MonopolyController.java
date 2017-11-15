@@ -108,13 +108,24 @@ public class MonopolyController {
 
     }
 
-    public void PayRent() {
-        property p = Constants.board.getProperty(curPlayer.position);
+    public void PayRent(Player owner, property p) {
+       
         JOptionPane.showMessageDialog(null, "Unfortunately,This property is owned by Player " + p.owner + " so you will have to pay him a rent");
-
-        curPlayer.deductMoney(p.OverallRent);
-        Player.playersList.get(p.owner).addMoney(p.OverallRent);
-        
+       if(p.type.equals("company"))
+        {
+            int x;
+            if(owner.numberOfCompanies==1)
+                x = 4;
+            else x =10;
+            
+            curPlayer.deductMoney(x*res); owner.addMoney(x*res);
+        }
+       
+       else
+       {
+        curPlayer.deductMoney(p.rent);
+        owner.addMoney(p.rent);
+       }
 
     }
 
@@ -141,7 +152,7 @@ public class MonopolyController {
                       curPlayer.updateGroups(c.colorID);
                   }
                   
-                  updateOverAllRent(p);
+                  updateCurrentRent(p);
                   JOptionPane.showMessageDialog(null, "Congratulations, now you own " + Constants.board.allCities.get(p.position).name);
                 } else {
                     JOptionPane.showConfirmDialog(null, "You don't have enough money");
@@ -167,35 +178,27 @@ public class MonopolyController {
             
             else if(p.owner == -1) {askToBuy();}
             else if(p.owner!= curPlayer.num)
-                PayRent();
+            {
+                Player owner = Player.playersList.get(p.owner);
+                PayRent(owner,p);
+            }
         
     }
 
- public int updateOverAllRent(property p)
+ public void updateCurrentRent(property p)
     {
-        
-        Player owner = Player.playersList.get(p.owner);
-        if(p.type.equals("company"))
-        {
-            if(owner.numberOfCompanies==1) return 4*res;
-            else return 10*res;
-        }
-        
-        else if(p.type.equals("railroad"))
-        {
-            
-          return (owner.numberOfRailRoads*p.rent);
+        Player owner = Player.playersList.get(p.owner);        
+        if(p.type.equals("railroad"))            
+          p.curRent = (owner.numberOfRailRoads*p.rent);
 
-        }
+        
         
         else if(p.type.equals("city"))
-        {
-            
+        {            
          //tony   
         }
         
         
-    return 0;
     }   
    
     

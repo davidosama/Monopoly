@@ -18,6 +18,7 @@ public abstract class property extends Location {
 
     int price;
     int rent;
+    int curRent;
     int mortgage;
     int OverallRent;
     int owner = -1;
