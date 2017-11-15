@@ -120,7 +120,6 @@ public class MonopolyController {
             } else {
                 x = 10;
             }
-
             curPlayer.deductMoney(x * res);
             owner.addMoney(x * res);
         } else {
@@ -170,9 +169,8 @@ public class MonopolyController {
 
     public void property(property p) {
 
-        if (p.type.equals("city") && p.owner == curPlayer.num) {
-            JOptionPane.showConfirmDialog(null, "Do you want to build ?");
-        } else if (p.owner == -1) {
+
+         if (p.owner == -1) {
             askToBuy();
         } else if (p.owner != curPlayer.num) {
             Player owner = Player.playersList.get(p.owner);
