@@ -40,12 +40,12 @@ public class MonopolyController {
                 Constants.gameWindow.drawDetailedLocation(curPlayer.position);
 
                 int result = -1;
-                property p = Constants.board.getProperty(curPlayer.position);
+               Location L = Constants.board.getLocation(curPlayer.position);
 
-                if (p.type.equals("community") || p.type.equals("chance")) {
+                if (L.type.equals("community") || L.type.equals("chance")) {
                     result = doCard();
-                } else if (p.type.equals("railroad") || p.type.equals("city") || p.type.equals("company")) {
-                    property(p);
+                } else if (L.type.equals("railroad") || L.type.equals("city") || L.type.equals("company")) {
+                    property((Property)L);
                 }
 
                 if (result != -1) {
@@ -110,7 +110,7 @@ public class MonopolyController {
 
     }
 
-    public void PayRent(Player owner, property p) {
+    public void PayRent(Player owner, Property p) {
 
         JOptionPane.showMessageDialog(null, "Unfortunately,This property is owned by Player " + p.owner + " so you will have to pay him a rent");
         if (p.type.equals("company")) {
@@ -130,7 +130,7 @@ public class MonopolyController {
     }
 
     public void askToBuy() {
-        property p = ((property) Constants.board.allCities.get(curPlayer.position));
+        Property p = ((Property) Constants.board.allCities.get(curPlayer.position));
         String[] options = {"Buy", "Auction", "Don't Buy"};
         int choice = JOptionPane.showOptionDialog(null, "You stopped at "
                 + p.name
@@ -167,10 +167,9 @@ public class MonopolyController {
 
     }
 
-    public void property(property p) {
+    public void property(Property p) {
 
-
-         if (p.owner == -1) {
+        if (p.owner == -1) {
             askToBuy();
         } else if (p.owner != curPlayer.num) {
             Player owner = Player.playersList.get(p.owner);
@@ -179,7 +178,7 @@ public class MonopolyController {
 
     }
 
-    public void updateCurrentRent(property p) {
+    public void updateCurrentRent(Property p) {
         Player owner = Player.playersList.get(p.owner);
         if (p.type.equals("railroad")) {
             p.curRent = (owner.numberOfRailRoads * p.rent);
@@ -195,14 +194,14 @@ public class MonopolyController {
         Player player = Player.getPlayer();
         int playerNum = player.num; // the number of the player
         Card curCard = null;
-        String type = Constants.board.getLocationType(player.position);
+        Location L = Constants.board.getLocation(player.position);
 
-        if (type.equalsIgnoreCase("chance")) {
+        if (L.type.equalsIgnoreCase("chance")) {
             //removing a card and then adding it to the bottom
             curCard = Card.chanceCards.remove(0);
             Card.chanceCards.add(curCard);
 
-        } else if (type.equalsIgnoreCase("community")) {
+        } else if (L.type.equalsIgnoreCase("community")) {
             curCard = Card.communityCards.remove(0);
             Card.communityCards.add(curCard);
         } else {

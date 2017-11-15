@@ -126,18 +126,18 @@ public class Board {
     }
 
 
-   //two seperate functions(getproperty and get propertyOwner cause no need to return the whole property in most cases
+   //two seperate functions(getproperty and get propertyOwner cause no need to return the whole Property in most cases
     
-   public property getProperty(int x)
+   public Property getProperty(int x)
     {
-        return ((property)allCities.get(x));
+        return ((Property)allCities.get(x));
     }
    
 
     
-    public String getLocationType(int x)
+    public Location getLocation(int x)
     {
-        return allCities.get(x).type;
+        return allCities.get(x);
         
     }
     

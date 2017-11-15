@@ -62,7 +62,7 @@ public class Player {
             Constants.gameWindow.PlayerInfoArea.append("No Cities");
         }
         for (int i = 0; i < curPlayer.propertiesOwned.size(); i++) {
-            property c = ((property) Constants.board.allCities.get(curPlayer.propertiesOwned.get(i)));
+            Property c = ((Property) Constants.board.allCities.get(curPlayer.propertiesOwned.get(i)));
             Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
         }
     }
@@ -130,7 +130,7 @@ public class Player {
      for(int i=0; i<propertiesOwned.size();i++)
         {
             //this function needs work
-            property p = Constants.board.getProperty(propertiesOwned.get(i));
+            Property p = Constants.board.getProperty(propertiesOwned.get(i));
             if(p.type.equals("city"))
             {
              normalCity c = (normalCity) p;

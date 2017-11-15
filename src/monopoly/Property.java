@@ -14,7 +14,7 @@ class Location {
 
 }
 
-public abstract class property extends Location {
+public abstract class Property extends Location {
 
     int price;
     int rent;
@@ -23,7 +23,7 @@ public abstract class property extends Location {
     int OverallRent;
     int owner = -1;
 
-    public property(int owner, int price, int rent, int mortgage, int position, String name, String type) {
+    public Property(int owner, int price, int rent, int mortgage, int position, String name, String type) {
         super(position, name, type);
         this.owner = owner;
         this.price = price;
@@ -33,7 +33,7 @@ public abstract class property extends Location {
 
 }
 
-class normalCity extends property {
+class normalCity extends Property {
 
     int colorID;
     int rent_1house;
@@ -56,7 +56,7 @@ class normalCity extends property {
     }
 }
 
-class RailRoad extends property {
+class RailRoad extends Property {
 
     int rent2;
     int rent3;
@@ -71,7 +71,7 @@ class RailRoad extends property {
     }
 }
 
-class Company extends property {
+class Company extends Property {
 
     public Company(String name, int position, int price, int mortgage) {
         //rent is 4 times the amount shown on dice for 1 company & 10 times if the 2 companies are owned
