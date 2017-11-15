@@ -39,8 +39,7 @@ public class MonopolyController {
                     moveToJail();
                     Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
-                    move();
-                    Constants.gameWindow.drawDetailedLocation(curPlayer.position);
+                    move();                   
                     int result = -1;
                     if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
                         result = Card.DoCards("community");
@@ -58,6 +57,7 @@ public class MonopolyController {
                     } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
                         ///////////
                     } else {
+                        Constants.gameWindow.drawDetailedLocation(curPlayer.position);
                         //NormalCities
                         //check if it's owned by current Player
                         Boolean isOwnedByCurrPlayer = checkIfOwnedByCurrPlayer(curPlayer.position);

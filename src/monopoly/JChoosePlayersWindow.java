@@ -105,9 +105,7 @@ public class JChoosePlayersWindow extends javax.swing.JFrame {
         Constants.gameWindow.addPlayers(playersCount);
 
         //Hide ChoosePlayersWindow
-        this.dispose();
-
-        Constants.gameWindow.setLocationRelativeTo(null);
+        this.dispose();      
 
         //Start gameWindow
         Constants.gameWindow.setVisible(true);

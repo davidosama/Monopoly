@@ -5,18 +5,13 @@
  */
 package monopoly;
 
-import java.util.ArrayList;
-
 public class JPlayerInfo extends javax.swing.JFrame {
 
     /**
      * Creates new form JPlayerInfo
      */
-    public static int playerNum;
-
     public JPlayerInfo() {
         initComponents();
-        manualInit();
     }
 
     /**
@@ -89,22 +84,23 @@ public class JPlayerInfo extends javax.swing.JFrame {
     }
 
     //
-    public void manualInit() {
+    public void openWindow(int playerNum) {
         Player player = Player.playersList.get(playerNum);
 
-        String info = "Player " + (player.num + 1) + "<br>";
+        String info = "Player " + (player.num) + "<br>";
         info += "$" + player.getMoney() + "<br>";
 
-        if (player.getCitiesOwned().size() == 0) {
+        if (player.getCitiesOwned().isEmpty()) {
             info += "No owned cities" + "<br>";
         } else {
             info += "Cities owned: " + "<br>";
             for (Integer c : player.getCitiesOwned()) {
-                info += "City " + c + "<br>";
+                info += "City " + Constants.board.allCities.get(c).name + "<br>";
             }
         }
 
         jLabel1.setText("<html>" + info + "</html>");
+        this.setVisible(true);
     }
     ////////////////////////
 

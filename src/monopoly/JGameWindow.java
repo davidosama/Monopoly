@@ -1,13 +1,10 @@
 package monopoly;
 
-import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 public class JGameWindow extends javax.swing.JFrame {
@@ -22,6 +19,8 @@ public class JGameWindow extends javax.swing.JFrame {
     private ImageIcon[] diceIcons = new ImageIcon[6];
     private ImageIcon[] chanceIcons = new ImageIcon[40];
 
+    private JPlayerInfo playerInfoWin;
+
     public void addLabel(int playerNum) {
 
         PieceLabel pieceLabel = new PieceLabel(playerNum);
@@ -30,20 +29,12 @@ public class JGameWindow extends javax.swing.JFrame {
         pieceLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
-
-                Constants.playerInfoWin.dispose();
+                playerInfoWin.setVisible(false);
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e); //To change body of generated methods, choose Tools | Templates.
-
-                JGameWindow gw = Constants.gameWindow;
-                Constants.playerInfoWin.playerNum = playerNum;
-                Constants.playerInfoWin = new JPlayerInfo();
-                Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
-                Constants.playerInfoWin.setVisible(true);
+                playerInfoWin.openWindow(playerNum);
 
             }
         });
@@ -77,7 +68,9 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
         EndTurnButton.setVisible(false);
-
+        this.setLocationRelativeTo(null);
+        playerInfoWin = new JPlayerInfo();
+        playerInfoWin.setLocation(this.getX() + 126, this.getY() + 139);
         PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
         initMVH();
         initIcons();
