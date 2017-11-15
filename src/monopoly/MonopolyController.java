@@ -124,8 +124,8 @@ public class MonopolyController {
             curPlayer.deductMoney(x * res);
             owner.addMoney(x * res);
         } else {
-            curPlayer.deductMoney(p.rent);
-            owner.addMoney(p.rent);
+            curPlayer.deductMoney(p.curRent);
+            owner.addMoney(p.curRent);
         }
 
     }
