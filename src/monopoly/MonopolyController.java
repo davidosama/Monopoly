@@ -15,6 +15,7 @@ public class MonopolyController {
 
     int d1, d2, res;
     private Player curPlayer;
+   
     //For dice shuffling
     private int diceTimerCounter;
     private javax.swing.Timer diceTimer;
@@ -107,11 +108,13 @@ public class MonopolyController {
 
     }
 
-    public void PayRent(int Location, Player player) {
-        JOptionPane.showMessageDialog(null, "Unfortunately,This property is owned by Player " + Player.playersList.get(((property) Constants.board.allCities.get(Location)).owner).num + " so you will have to pay him a rent");
+    public void PayRent() {
+        int owner = Constants.board.getPropertyOwner(curPlayer.position);
+        property p = Constants.board.getProperty(curPlayer.position);
+        JOptionPane.showMessageDialog(null, "Unfortunately,This property is owned by Player " + owner + " so you will have to pay him a rent");
 
-        curPlayer.deductMoney(((property) Constants.board.allCities.get(Location)).OverallRent);
-        Player.playersList.get(Constants.board.getPropertyOwner(Location)).addMoney(((property) Constants.board.allCities.get(Location)).OverallRent);
+        curPlayer.deductMoney(p.OverallRent);
+        Player.playersList.get(p.owner).addMoney(p.OverallRent);
         
 
     }
@@ -167,7 +170,7 @@ public class MonopolyController {
             
             else if(owner == -1) {askToBuy();}
             else if(owner!= curPlayer.num)
-                PayRent(curPlayer.position, Player.playersList.get(owner));
+                PayRent();
         
     }
 
