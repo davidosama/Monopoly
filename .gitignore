@@ -1,4 +1,20 @@
 /build/
+<<<<<<< HEAD
 /nbproject/private/
 build/classes/monopoly/Monopoly.class
 build/classes/monopoly/Monopoly.class
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+/nbproject/
+=======
+/nbproject/private/
+>>>>>>> master
+nbproject/private/private.xml
+nbproject/private/private.xml
+nbproject/private/private.properties
+nbproject/private/private.xml
+=======
+/nbproject/private/
+>>>>>>> master
+>>>>>>> master

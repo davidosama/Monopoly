@@ -6,89 +6,85 @@
 package monopoly;
 
 import java.util.ArrayList;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import java.util.Collections;
 
 public class Player {
 
     //Player number
     public int num;
 
-    private String name;
+    public String name;
+    public String iconName;
 
-    private ArrayList<Integer> citiesOwned;
-
+    private ArrayList<Integer> propertiesOwned;
+    private ArrayList<Integer> Groups;
+    public int numberOfCompanies;
+    public int numberOfRailRoads;
     private int money;
 
     private boolean active; //will be used if the player is in jail
 
-    //Player label (pic)
-//    public JLabel label;
-
     //City Number
-    public int currentCity;
+    public int position;
 
     //Array of all the players
     public static ArrayList<Player> playersList = new ArrayList<>();
 
     public static int playersCount = 0;
-    public static Player curPlayer;
 
     private static int Turn = 0;
 
-    public Player() {
+    public Player(String name, String iconName) {
 
         //initialize current city to zero
-        currentCity = 0;
+        position = 0;
+        money = 1000;
+        
+        this.name = name;
 
         //initialize player number to the playersCount and increment
-        num = ++playersCount;
+        num = playersCount++;
 
-        //add player in allPlayers List
-        //create a label for the player
-      
+        propertiesOwned = new ArrayList();
+        Groups = new ArrayList();
+        numberOfCompanies = 0;
+        numberOfRailRoads=0;
 
-
-//debugPrintPlayer();
+        //debugPrintPlayer();
     }
 
-    public static void MoveTurn(Boolean samePlayer) {
+    public static void MoveTurn() {
 
-        if (!samePlayer) {
-            Turn = (Turn + 1) % playersCount;
-            Player.curPlayer = getPlayer();
-            JGameWindow.curLabel = curPlayer.getLabel();
+        Turn = (Turn + 1) % playersList.size();
+        Constants.gameWindow.changeTurn(Turn);
+        Constants.gameWindow.setRollBtnClr(Turn);
 
-
+        Player curPlayer = getPlayer();
+       /* Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
+        if (curPlayer.propertiesOwned.size() == 0) {
+            Constants.gameWindow.PlayerInfoArea.append("No Cities");
         }
-
-        Constants.gameWindow.setRollBtnClr(Turn + 1);
-
+        for (int i = 0; i < curPlayer.propertiesOwned.size(); i++) {
+            Property c = ((Property) Constants.board.allCities.get(curPlayer.propertiesOwned.get(i)));
+            Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
+        }*/
     }
 
     public static Player getPlayer() {
         return playersList.get(Turn);
     }
-    
-    public JLabel getLabel()
-    {
-     
-        return JGameWindow.playersLabels.get(Turn);
-        
+
+    public ArrayList getCitiesOwned() {
+        return this.propertiesOwned;
     }
-
-    private void debugPrintPlayer() {
-
-        System.out.print("\n\nplayer Number: " + num
-                + "\nplayers Count: " + playersCount
-                + "\nplayer Turn: " + Turn
-                + "\ncurrentCity: " + currentCity
-        );
+    
+     public ArrayList<Integer> getCitiesOwnedInt() {
+        return this.propertiesOwned;
     }
 
     public boolean buy(int city, int cost) {
         if (money >= cost) {
-            citiesOwned.add(city);
+            propertiesOwned.add(city);
             money -= cost;
             return true;
         } else {
@@ -97,8 +93,8 @@ public class Player {
     }
 
     public boolean sell(int city, int cost) {
-        if (citiesOwned.contains(city)) {
-            citiesOwned.remove(new Integer(city));
+        if (propertiesOwned.contains(city)) {
+            propertiesOwned.remove(new Integer(city));
             money += cost;
             return true;
         }
@@ -111,6 +107,10 @@ public class Player {
         this.money += money;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
     public boolean deductMoney(int money) {
         if (this.money >= money) {
             this.money -= money;
@@ -119,5 +119,44 @@ public class Player {
             return false;
         }
     }
+
+    public void move(int steps) {
+        if (this.position + steps >= 40) //reached or passed go
+        {
+            this.money += 200;
+        }
+        this.position += steps;
+        this.position %= 40;
+    }
+
+   
+    
+    public void updateGroups(int ColorID)
+    {
+     int occurences=0;
+     for(int i=0; i<propertiesOwned.size();i++)
+        {
+            //this function needs work
+            Property p = Constants.board.getProperty(propertiesOwned.get(i));
+            if(p.type.equals("city"))
+            {
+             normalCity c = (normalCity) p;
+             if(c.colorID == ColorID) occurences++;
+            }
+            
+            if(occurences==3) {Groups.add(ColorID); break;}
+            
+            //i tried to replace 0 and 7 with enum but couldn't do it
+            if(occurences==2&&(ColorID==0||ColorID==7))
+            {Groups.add(ColorID);break;}
+            
+        }
+     
+     System.out.println(Groups);
+     
+     }
+    
+    
+    
 
 }
