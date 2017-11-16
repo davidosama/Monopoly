@@ -8,11 +8,11 @@ import javax.swing.JOptionPane;
 
 public class Card {
 
-    public int id;
-    public String key;
-    public int value;
+    private int id;
+    private String key;
+    private int value;
 
-    public static ArrayList<Card> communityCards, chanceCards;
+    private static ArrayList<Card> communityCards, chanceCards;
 
     public Card(int id, String Key, int Value) {
         this.id = id;
@@ -48,4 +48,78 @@ public class Card {
         Collections.shuffle(communityCards);
     }
 
+    static int DoCards(String type) { //to take a card 
+
+        ArrayList<Player> players = Player.playersList;
+        Player player = Player.getPlayer();
+        int playerNum = player.num; // the number of the player
+        Card curCard = null;
+
+        if (type.equalsIgnoreCase("chance")) {
+            //removing a card and then adding it to the bottom
+            curCard = chanceCards.remove(0);
+            chanceCards.add(curCard);
+
+        } else if (type.equalsIgnoreCase("community")) {
+            curCard = communityCards.remove(0);
+            communityCards.add(curCard);
+        } else {
+            //
+        }
+
+        JOptionPane.showMessageDialog(Constants.gameWindow.getBoardLabel(), null, null, JOptionPane.PLAIN_MESSAGE, Constants.gameWindow.getChanceCard(curCard.id));
+        // to do the commands of the card taken 
+        int value;
+
+        switch (curCard.key) {
+            case "Take":
+                player.deductMoney(curCard.value);
+                break;
+
+            case "Give":
+                player.addMoney(curCard.value);
+                break;
+
+            case "GiveAll":
+                int toincrease = curCard.value;
+                value = curCard.value * (players.size() - 1);
+
+                for (int i = 0; i < players.size(); i++) {
+                    if (i != playerNum) {
+                        players.get(i).addMoney(toincrease);
+                    } else {
+                        players.get(i).deductMoney(value);
+                    }
+
+                    break;
+                }
+
+            case "TakeAll":
+                int toreduce = curCard.value;
+                value = curCard.value * (players.size() - 1);
+                for (int i = 0; i < players.size(); i++) {
+                    if (i == playerNum) {
+                        players.get(i).addMoney(value);
+                    } else {
+                        players.get(i).deductMoney(toreduce);
+                    }
+                }
+                break;
+
+            case "Go":
+                if (curCard.value >= player.position) {
+                    return curCard.value - player.position;
+                } else {
+                    if(curCard.id==23){// to remove the 200$ added on passing through the start again
+                        player.deductMoney(200);
+                    }
+                    return 40 - (player.position - curCard.value);
+                }
+                
+                
+
+        }
+        return -1;
+
+    }
 }

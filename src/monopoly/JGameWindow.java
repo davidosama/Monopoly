@@ -82,6 +82,13 @@ public class JGameWindow extends javax.swing.JFrame {
         curTurn = turn;
     }
 
+    public void moveCarLabel(int steps) {
+
+        for (int i = 0; i < steps; i++) {
+            ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
+        }
+    }
+
     public void moveCarLabel() {
         ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
     }
