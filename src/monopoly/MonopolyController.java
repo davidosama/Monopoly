@@ -68,10 +68,12 @@ public class MonopolyController {
                             Constants.gameWindow.enableEndTurnBtn(true);
                         }else if(curPlayer.inJail && curPlayer.turnsInJail<3 && d1==d2){
                             curPlayer.turnsInJail=0;
+                            curPlayer.inJail=false;
                             Constants.gameWindow.enableEndTurnBtn(true);
                         }else if(curPlayer.inJail && curPlayer.turnsInJail==3 && d1!=d2){
                             curPlayer.deductMoney(50);
                             curPlayer.turnsInJail=0;
+                            curPlayer.inJail=false;
                             Constants.gameWindow.enableEndTurnBtn(true);
                         }
                     } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
