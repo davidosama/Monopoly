@@ -181,12 +181,15 @@ public class MonopolyController {
     }
 
     public void askToBuy() {
+        int choice=Constants.gameWindow.startAskToBuyorAuction(curPlayer.position);
         Property p = ((Property) Constants.board.allCities.get(curPlayer.position));
-        String[] options = {"Buy", "Auction"};
-        int choice = JOptionPane.showOptionDialog(null, "You stopped at "
-                + p.name
-                + "\nDo you want to buy it ?", "",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+//        String[] options = {"Buy", "Auction"};
+//        int choice = JOptionPane.showOptionDialog(null, "You stopped at "
+//                + p.name
+//                + "\nDo you want to buy it ?", "",
+//                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        
         if (choice == 0) {
             boolean n = curPlayer.buy(p.position, p.price);
             if (n) {

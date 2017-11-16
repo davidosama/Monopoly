@@ -644,6 +644,12 @@ public class JGameWindow extends javax.swing.JFrame {
     public void startAuction(int curPlayerNum) {
         new AuctionDialog(this, curPlayerNum, Player.playersCount).setVisible(true);
     }
+    public int startAskToBuyorAuction(int currentPosition){
+        AskToBuyOrAuction.locationIcon=locationIcons[currentPosition];
+        AskToBuyOrAuction.detailedIcon=detailedIcons[currentPosition];
+        new AskToBuyOrAuction(this, true).setVisible(true);
+        return AskToBuyOrAuction.choice;
+    }
 
     /////////
     /**
