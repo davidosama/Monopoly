@@ -71,7 +71,8 @@ public class JGameWindow extends javax.swing.JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                playerInfoWin.setLocation(getX() + 126, getY() + 139);
+                
+                
                 playerInfoWin.openWindow(playerNum);
             }
         });
@@ -108,16 +109,18 @@ public class JGameWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         initMenu();
+        
     }
 
     //must be calle after specifying players number
     private void initGame() {
-        playerInfoWin = new JPlayerInfo();
+        playerInfoWin = new JPlayerInfo(); 
         ///
         initMVH();
         initIcons();
         MenuPanel.setVisible(false);
         BoardPanel.setVisible(true);
+        playerInfoWin.setLocation(getX() + 126, getY() + 139);
     }
 
     private void initMenu() {
