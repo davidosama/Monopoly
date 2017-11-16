@@ -13,7 +13,8 @@ public class Player {
     //Player number
     public int num;
 
-    private String name;
+    public String name;
+    public String iconName;
 
     private ArrayList<Integer> propertiesOwned;
     private ArrayList<Integer> Groups;
@@ -33,11 +34,13 @@ public class Player {
 
     private static int Turn = 0;
 
-    public Player() {
+    public Player(String name, String iconName) {
 
         //initialize current city to zero
         position = 0;
         money = 1000;
+        
+        this.name = name;
 
         //initialize player number to the playersCount and increment
         num = playersCount++;

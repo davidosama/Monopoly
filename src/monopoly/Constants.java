@@ -10,7 +10,7 @@ public class Constants {
     public static Board board;
 
     //set true for fast debugging
-    public static Boolean testing = false;
+    public static Boolean testing = true;
 
     //Car and Dice System
     public static MonopolyController carSys;
