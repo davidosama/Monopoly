@@ -24,12 +24,12 @@ public class PieceLabel extends JLabel {
     private int position;
     private int playerNum;
 
-    public PieceLabel(int playerNum) {
+    public PieceLabel(int playerNum, String iconName) {
 
         this.position = 0;
         this.playerNum = playerNum;
 
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/objects/" + playerNum + ".png"));
+        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/drawables/objects/" + iconName + ".png"));
         this.setIcon(icon);
         this.setBounds(Constants.BoardWidth - Constants.CornerWidth + (Constants.CityWidth - icon.getIconWidth()), Constants.BoardHeight - icon.getIconHeight() - this.playerNum * Constants.Carlvl - 5,
                 icon.getIconWidth(), icon.getIconHeight());

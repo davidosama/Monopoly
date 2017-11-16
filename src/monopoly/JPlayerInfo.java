@@ -85,7 +85,7 @@ public class JPlayerInfo extends javax.swing.JFrame {
 
     //
     public void openWindow(int playerNum) {
-        Player player = Player.playersList.get(playerNum-1);
+        Player player = Player.playersList.get(playerNum);
 
         String info = player.name + "<br>";
         info += "$" + player.getMoney() + "<br>";

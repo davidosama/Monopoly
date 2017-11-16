@@ -30,52 +30,32 @@ public class JGameWindow extends javax.swing.JFrame {
     private ImageIcon[] diceIcons = new ImageIcon[6];
     private ImageIcon[] chanceIcons = new ImageIcon[40];
 
+    private AskToBuyOrAuction buyorAuctionWindow;
     private JPlayerInfo playerInfoWin;
 
     public void addLabel(int playerNum, String iconName) {
 
         PieceLabel pieceLabel;
 
-        switch (iconName) {
-            case "Hat":
-                pieceLabel = new PieceLabel(0);
-                break;
-
-            case "Iron":
-                pieceLabel = new PieceLabel(1);
-                break;
-
-            case "Horse":
-                pieceLabel = new PieceLabel(2);
-                break;
-
-            case "Car":
-                pieceLabel = new PieceLabel(3);
-                break;
-
-            case "Ship":
-                pieceLabel = new PieceLabel(4);
-                break;
-
-            default:
-                pieceLabel = null;
-                break;
-        }
+        pieceLabel = new PieceLabel(playerNum, iconName);
 
         ///////////////Code for mouse hover over player
-        pieceLabel.addMouseListener(new MouseAdapter() {
+        pieceLabel.addMouseListener(
+                new MouseAdapter() {
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(MouseEvent e
+            ) {
                 playerInfoWin.setVisible(false);
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-                
-                
+            public void mouseEntered(MouseEvent e
+            ) {
+
                 playerInfoWin.openWindow(playerNum);
             }
-        });
+        }
+        );
         BoardLabel.add(pieceLabel);
     }
 
@@ -94,7 +74,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
         //Creates and add players into the array
         Player.playersList.add(new Player(name, iconName));
-        addLabel(Player.playersList.size(), iconName);
+        addLabel(Player.playersList.size() - 1, iconName);
 
     }
 
@@ -109,17 +89,18 @@ public class JGameWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         initMenu();
-        
+
     }
 
     //must be calle after specifying players number
     private void initGame() {
-        playerInfoWin = new JPlayerInfo(); 
+        playerInfoWin = new JPlayerInfo();
         ///
         initMVH();
         initIcons();
         MenuPanel.setVisible(false);
         BoardPanel.setVisible(true);
+        buyorAuctionWindow = new AskToBuyOrAuction(this);
         playerInfoWin.setLocation(getX() + 126, getY() + 139);
     }
 
@@ -201,14 +182,15 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel = new javax.swing.JPanel();
         RollDiceButton = new javax.swing.JButton();
         EndTurnButton = new javax.swing.JButton();
-        currentCardPanel = new javax.swing.JPanel();
-        currentCardLabel = new javax.swing.JLabel();
-        BoardLabel = new javax.swing.JLabel();
-        mvhPanel = new javax.swing.JPanel();
-        BackGround = new javax.swing.JLabel();
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
+        currentCardPanel = new javax.swing.JPanel();
+        currentCardLabel = new javax.swing.JLabel();
+        detailedCardLabel = new javax.swing.JLabel();
+        BoardLabel = new javax.swing.JLabel();
+        mvhPanel = new javax.swing.JPanel();
+        BackGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -224,7 +206,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Create Players");
         chs_plyrs_nms.add(jLabel3);
@@ -311,7 +292,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Choose Number of Players");
         chs_plyrs_pnl.add(jLabel2);
         jLabel2.setBounds(410, 110, 460, 135);
@@ -391,16 +371,30 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(EndTurnButton);
         EndTurnButton.setBounds(300, 550, 160, 60);
 
+        DicePanel.setBackground(new java.awt.Color(210, 234, 220));
+        DicePanel.setPreferredSize(new java.awt.Dimension(240, 140));
+        DicePanel.add(d1_label);
+        d1_label.getAccessibleContext().setAccessibleName("d1_label");
+
+        DicePanel.add(d2_label);
+        d2_label.getAccessibleContext().setAccessibleName("d2_label");
+        d2_label.getAccessibleContext().setAccessibleDescription("");
+
+        BoardPanel.add(DicePanel);
+        DicePanel.setBounds(230, 500, 240, 120);
+
         currentCardPanel.setBackground(new java.awt.Color(210, 234, 220));
         currentCardPanel.setToolTipText("");
         currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
+        currentCardPanel.setOpaque(false);
         currentCardPanel.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        currentCardLabel.setBackground(new java.awt.Color(255, 255, 255));
         currentCardPanel.add(currentCardLabel);
 
+        detailedCardLabel.setBackground(new java.awt.Color(210, 234, 220));
+        currentCardPanel.add(detailedCardLabel);
+
         BoardPanel.add(currentCardPanel);
-        currentCardPanel.setBounds(260, 230, 236, 280);
+        currentCardPanel.setBounds(190, 220, 410, 280);
 
         BoardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         BoardLabel.setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -418,18 +412,6 @@ public class JGameWindow extends javax.swing.JFrame {
         BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Menu.jpg"))); // NOI18N
         BoardPanel.add(BackGround);
         BackGround.setBounds(-10, -80, 1320, 950);
-
-        DicePanel.setBackground(new java.awt.Color(210, 234, 220));
-        DicePanel.setPreferredSize(new java.awt.Dimension(240, 140));
-        DicePanel.add(d1_label);
-        d1_label.getAccessibleContext().setAccessibleName("d1_label");
-
-        DicePanel.add(d2_label);
-        d2_label.getAccessibleContext().setAccessibleName("d2_label");
-        d2_label.getAccessibleContext().setAccessibleDescription("");
-
-        BoardPanel.add(DicePanel);
-        DicePanel.setBounds(235, 470, 240, 140);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -539,9 +521,9 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public void drawDetailedLocation(int curPosition) {
         try {
-            currentCardLabel.setIcon(detailedIcons[curPosition]);
+            detailedCardLabel.setIcon(detailedIcons[curPosition]);
         } catch (Exception e) {
-            currentCardLabel.setIcon(null);
+            detailedCardLabel.setIcon(null);
         }
     }
 
@@ -590,11 +572,14 @@ public class JGameWindow extends javax.swing.JFrame {
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     JGameWindow.this.drawCurrentLocation(j);
+                    JGameWindow.this.drawDetailedLocation(j);
                 }
 
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void mouseExited(MouseEvent e) { 
+                    
                     JGameWindow.this.drawCurrentLocation(-1);
+                    JGameWindow.this.drawDetailedLocation(-1);
                 }
             });
 
@@ -644,11 +629,10 @@ public class JGameWindow extends javax.swing.JFrame {
     public void startAuction(int curPlayerNum) {
         new AuctionDialog(this, curPlayerNum, Player.playersCount).setVisible(true);
     }
-    public int startAskToBuyorAuction(int currentPosition){
-        AskToBuyOrAuction.locationIcon=locationIcons[currentPosition];
-        AskToBuyOrAuction.detailedIcon=detailedIcons[currentPosition];
-        new AskToBuyOrAuction(this, true).setVisible(true);
-        return AskToBuyOrAuction.choice;
+
+    public int startAskToBuyorAuction(int curPosition) {
+        int choice = buyorAuctionWindow.startBuyorAuction(locationIcons[curPosition], detailedIcons[curPosition]);
+        return choice;
     }
 
     /////////
@@ -714,6 +698,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JPanel currentCardPanel;
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
+    private javax.swing.JLabel detailedCardLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

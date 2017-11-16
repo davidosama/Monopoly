@@ -5,6 +5,7 @@
  */
 package monopoly;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -25,9 +27,9 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
      */
     static ImageIcon locationIcon;
     static ImageIcon detailedIcon;
-    static int choice; //0 for buy , 1 for Auction ( 3ashan yet2ayef ma3 el code el adim ) 
-    public AskToBuyOrAuction(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    private int choice; //0 for buy , 1 for Auction ( 3ashan yet2ayef ma3 el code el adim ) 
+    public AskToBuyOrAuction(java.awt.Frame parent) {
+        super(parent, true);
         
         try {
             Image BackgroundImage = ImageIO.read(AuctionDialog.class.getResource("/drawables/BackGround.jpg"));
@@ -44,9 +46,21 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         }
         
         initComponents();
-        ForSaleLabel.setIcon(new ImageIcon(getClass().getResource("/drawables/ForSale.png")));
+        this.setLocation(parent.getX() + 136, parent.getY() + 144);
+        this.setResizable(false);
+        
+        
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+    }
+    public int startBuyorAuction(ImageIcon locationIcon, ImageIcon detailedIcon)
+    {
+        
+        //ForSaleLabel.setIcon(new ImageIcon(getClass().getResource("/drawables/ForSale.png")));
         locationLabel.setIcon(locationIcon);
         detailedLabel.setIcon(detailedIcon);
+        this.setVisible(true);  
+        return choice;
     }
 
     /**
@@ -58,23 +72,17 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ForSaleLabel = new javax.swing.JLabel();
         locationLabel = new javax.swing.JLabel();
-        detailedLabel = new javax.swing.JLabel();
         BuyButton = new javax.swing.JButton();
         AuctionButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        detailedLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 150, 0, 0));
 
-        ForSaleLabel.setBackground(new java.awt.Color(51, 51, 255));
-        ForSaleLabel.setForeground(new java.awt.Color(51, 51, 255));
-        ForSaleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ForSaleLabel.setText("FOR SALE");
-        ForSaleLabel.setPreferredSize(new java.awt.Dimension(15, 10));
-        ForSaleLabel.setSize(new java.awt.Dimension(100, 16));
-
         BuyButton.setText("Buy");
+        BuyButton.setFocusable(false);
         BuyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuyButtonActionPerformed(evt);
@@ -82,50 +90,53 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         });
 
         AuctionButton.setText("Auction");
+        AuctionButton.setFocusable(false);
         AuctionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AuctionButtonActionPerformed(evt);
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(210, 234, 220));
+        jPanel1.setMinimumSize(new java.awt.Dimension(252, 284));
+        jPanel1.setPreferredSize(new java.awt.Dimension(252, 284));
+
+        detailedLabel.setBackground(new java.awt.Color(210, 234, 220));
+        jPanel1.add(detailedLabel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(AuctionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(locationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(detailedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(locationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BuyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(95, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(ForSaleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(237, 237, 237))
+                        .addComponent(AuctionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(BuyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(ForSaleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(detailedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
                         .addComponent(locationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AuctionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BuyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -133,12 +144,12 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
 
     private void AuctionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuctionButtonActionPerformed
         choice=1;
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_AuctionButtonActionPerformed
 
     private void BuyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuyButtonActionPerformed
         choice=0;
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_BuyButtonActionPerformed
 
     /**
@@ -169,25 +180,14 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AskToBuyOrAuction dialog = new AskToBuyOrAuction(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AuctionButton;
     private javax.swing.JButton BuyButton;
-    private javax.swing.JLabel ForSaleLabel;
     private javax.swing.JLabel detailedLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel locationLabel;
     // End of variables declaration//GEN-END:variables
 }
