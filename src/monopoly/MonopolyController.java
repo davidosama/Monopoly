@@ -13,12 +13,14 @@ import javax.swing.JOptionPane;
 
 public class MonopolyController {
 
-    int d1, d2, res;
+    private static int JAILPOSITION = 10;
+    int d1, d2, steps;
     private Player curPlayer;
     //For dice shuffling
     private int diceTimerCounter;
     private javax.swing.Timer diceTimer;
 
+    private int doubleDiceCount = 0;
     private Random rand;
 
     // runnable interface for the thread
@@ -34,30 +36,54 @@ public class MonopolyController {
         carRunnable = new Runnable() {
             @Override
             public void run() {
-                move();
-
-                Constants.gameWindow.enableDicePanel(false);
-                Constants.gameWindow.drawDetailedLocation(curPlayer.position);
-
-                int result = -1;
-               Location L = Constants.board.getLocation(curPlayer.position);
-
-                if (L.type.equals("community") || L.type.equals("chance")) {
-                    result = doCard();
-                } else if (L.type.equals("railroad") || L.type.equals("city") || L.type.equals("company")) {
-                    property((Property)L);
-                }
-
-                if (result != -1) {
-                    res = result;
-                    carRunnable.run();
+                if (doubleDiceCount == 3) {//Move player to jail in case of 3 double dices happened
+                    moveToJail();
+                    Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
+                    if (!curPlayer.inJail) {
+                        move();
+                    }
+                    Constants.gameWindow.drawDetailedLocation(curPlayer.position);
+                    Location L = Constants.board.getLocation(curPlayer.position);
+
+                    if (L.type.equals("community") || L.type.equals("chance")) {
+                        doCard();
+                    } else if (L.type.equals("railroad") || L.type.equals("city") || L.type.equals("company")) {
+                        property((Property) L);
+                    } else if (L.type.equals("gotojail")) {
+                        moveToJail();
+                        Constants.gameWindow.enableEndTurnBtn(true);
+                        return;
+                    } else if (L.type.equals("jail") && curPlayer.inJail) {
+                        if (curPlayer.turnsInJail < 3 && d1 != d2) {
+                            curPlayer.turnsInJail++;
+                            String[] options = {"Yes", "No"};
+                            int choice = JOptionPane.showOptionDialog(null, "Pay 50$ to exit from jail?", "",
+                                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                            if (choice == 0) {
+                                curPlayer.deductMoney(50);
+                                curPlayer.turnsInJail = 0;
+                                curPlayer.inJail = false;
+                            }
+                            Constants.gameWindow.enableEndTurnBtn(true);
+                        } else if (curPlayer.turnsInJail < 3 && d1 == d2) {
+                            curPlayer.turnsInJail = 0;
+                            Constants.gameWindow.enableEndTurnBtn(true);
+                        } else if (curPlayer.turnsInJail == 3 && d1 != d2) {
+                            curPlayer.deductMoney(50);
+                            curPlayer.turnsInJail = 0;
+                            Constants.gameWindow.enableEndTurnBtn(true);
+                        }
+
+                    }
+
                     if (!(d1 == d2)) {
                         Constants.gameWindow.enableEndTurnBtn(true);
                     } else {
                         Constants.gameWindow.enableRollDiceBtn();
                     }
                 }
+
             }
 
         };
@@ -71,12 +97,15 @@ public class MonopolyController {
                 diceTimerCounter--;
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
-                res = d1 + d2;
+                steps = d1 + d2;
                 //just for testing
 
                 Constants.gameWindow.drawDice(d1, d2);
 
                 if (diceTimerCounter == 0) {
+                    if (d1 == d2) {
+                        doubleDiceCount++;
+                    }
                     Thread thread = new Thread(carRunnable);
                     thread.start();
                     diceTimer.stop();
@@ -87,10 +116,10 @@ public class MonopolyController {
     }
 
     public void move() {
-        for (int i = 0; i < res; i++) {
-            Constants.gameWindow.moveCarLabel();
-        }
-        curPlayer.move(res);
+
+        Constants.gameWindow.moveCarLabel(steps);
+        curPlayer.move(steps);
+        Constants.gameWindow.enableDicePanel(false);
     }
 
     public void GenerateDiceAndMove() {
@@ -107,6 +136,18 @@ public class MonopolyController {
         Player.MoveTurn();
         Constants.gameWindow.enableEndTurnBtn(false);
         Constants.gameWindow.enableRollDiceBtn();
+        doubleDiceCount = 0;
+
+    }
+
+    public void moveToJail() {
+        if (curPlayer.position > JAILPOSITION) {
+            steps = 40 - (curPlayer.position - JAILPOSITION);
+        } else {
+            steps = JAILPOSITION - curPlayer.position;
+        }
+        curPlayer.inJail = true;
+        move();
 
     }
 
@@ -120,8 +161,8 @@ public class MonopolyController {
             } else {
                 x = 10;
             }
-            curPlayer.deductMoney(x * res);
-            owner.addMoney(x * res);
+            curPlayer.deductMoney(x * steps);
+            owner.addMoney(x * steps);
         } else {
             curPlayer.deductMoney(p.curRent);
             owner.addMoney(p.curRent);
@@ -131,7 +172,7 @@ public class MonopolyController {
 
     public void askToBuy() {
         Property p = ((Property) Constants.board.allCities.get(curPlayer.position));
-        String[] options = {"Buy", "Auction", "Don't Buy"};
+        String[] options = {"Buy", "Auction"};
         int choice = JOptionPane.showOptionDialog(null, "You stopped at "
                 + p.name
                 + "\nDo you want to buy it ?", "",
@@ -188,13 +229,12 @@ public class MonopolyController {
 
     }
 
-    static int doCard() { //to take a card 
+    private void doCard() { //to take a card 
 
         ArrayList<Player> players = Player.playersList;
-        Player player = Player.getPlayer();
-        int playerNum = player.num; // the number of the player
+        int playerNum = curPlayer.num; // the number of the player
         Card curCard = null;
-        Location L = Constants.board.getLocation(player.position);
+        Location L = Constants.board.getLocation(curPlayer.position);
 
         if (L.type.equalsIgnoreCase("chance")) {
             //removing a card and then adding it to the bottom
@@ -204,8 +244,6 @@ public class MonopolyController {
         } else if (L.type.equalsIgnoreCase("community")) {
             curCard = Card.communityCards.remove(0);
             Card.communityCards.add(curCard);
-        } else {
-            //
         }
 
         JOptionPane.showMessageDialog(Constants.gameWindow.getBoardLabel(), null, null, JOptionPane.PLAIN_MESSAGE, Constants.gameWindow.getChanceCard(curCard.id));
@@ -214,11 +252,11 @@ public class MonopolyController {
 
         switch (curCard.key) {
             case "Take":
-                player.deductMoney(curCard.value);
+                curPlayer.addMoney(curCard.value);
                 break;
 
             case "Give":
-                player.addMoney(curCard.value);
+                curPlayer.deductMoney(curCard.value);
                 break;
 
             case "GiveAll":
@@ -248,14 +286,14 @@ public class MonopolyController {
                 break;
 
             case "Go":
-                if (curCard.value >= player.position) {
-                    return curCard.value - player.position;
+                if (curCard.value >= curPlayer.position) {
+                    steps = curCard.value - curPlayer.position;
                 } else {
-                    return 40 - (player.position - curCard.value);
+                    steps = 40 - (curPlayer.position - curCard.value);
                 }
+                carRunnable.run();
 
         }
-        return -1;
 
     }
 

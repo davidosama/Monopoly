@@ -1,5 +1,5 @@
 2,Take,100,Community
-3,Go,40,Chance
+3,Go,39,Chance
 5,Take,50,Chance
 4,Go,11,Chance
 6,Go,0,Chance

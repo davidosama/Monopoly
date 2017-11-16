@@ -80,10 +80,13 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public void changeTurn(int turn) {
         curTurn = turn;
+        this.setRollBtnClr(turn);
     }
 
-    public void moveCarLabel() {
-        ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
+    public void moveCarLabel(int steps) {
+        for (int i = 0; i < steps; i++) {
+            ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
+        }
     }
 
     public void addPlayer(String name, String iconName) {

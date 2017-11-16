@@ -22,8 +22,6 @@ public class Player {
     public int numberOfRailRoads;
     private int money;
 
-    private boolean active; //will be used if the player is in jail
-
     //City Number
     public int position;
 
@@ -34,12 +32,16 @@ public class Player {
 
     private static int Turn = 0;
 
+    //Jail variable needed
+    public boolean inJail = false;
+    public int turnsInJail = 0;
+
     public Player(String name, String iconName) {
 
         //initialize current city to zero
         position = 0;
         money = 1000;
-        
+
         this.name = name;
 
         //initialize player number to the playersCount and increment
@@ -48,26 +50,14 @@ public class Player {
         propertiesOwned = new ArrayList();
         Groups = new ArrayList();
         numberOfCompanies = 0;
-        numberOfRailRoads=0;
+        numberOfRailRoads = 0;
 
         //debugPrintPlayer();
     }
 
     public static void MoveTurn() {
-
         Turn = (Turn + 1) % playersList.size();
         Constants.gameWindow.changeTurn(Turn);
-        Constants.gameWindow.setRollBtnClr(Turn);
-
-        Player curPlayer = getPlayer();
-       /* Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
-        if (curPlayer.propertiesOwned.size() == 0) {
-            Constants.gameWindow.PlayerInfoArea.append("No Cities");
-        }
-        for (int i = 0; i < curPlayer.propertiesOwned.size(); i++) {
-            Property c = ((Property) Constants.board.allCities.get(curPlayer.propertiesOwned.get(i)));
-            Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
-        }*/
     }
 
     public static Player getPlayer() {
@@ -77,8 +67,8 @@ public class Player {
     public ArrayList getCitiesOwned() {
         return this.propertiesOwned;
     }
-    
-     public ArrayList<Integer> getCitiesOwnedInt() {
+
+    public ArrayList<Integer> getCitiesOwnedInt() {
         return this.propertiesOwned;
     }
 
@@ -129,34 +119,33 @@ public class Player {
         this.position %= 40;
     }
 
-   
-    
-    public void updateGroups(int ColorID)
-    {
-     int occurences=0;
-     for(int i=0; i<propertiesOwned.size();i++)
-        {
+    public void updateGroups(int ColorID) {
+        int occurences = 0;
+        for (int i = 0; i < propertiesOwned.size(); i++) {
             //this function needs work
             Property p = Constants.board.getProperty(propertiesOwned.get(i));
-            if(p.type.equals("city"))
-            {
-             normalCity c = (normalCity) p;
-             if(c.colorID == ColorID) occurences++;
+            if (p.type.equals("city")) {
+                normalCity c = (normalCity) p;
+                if (c.colorID == ColorID) {
+                    occurences++;
+                }
             }
-            
-            if(occurences==3) {Groups.add(ColorID); break;}
-            
+
+            if (occurences == 3) {
+                Groups.add(ColorID);
+                break;
+            }
+
             //i tried to replace 0 and 7 with enum but couldn't do it
-            if(occurences==2&&(ColorID==0||ColorID==7))
-            {Groups.add(ColorID);break;}
-            
+            if (occurences == 2 && (ColorID == 0 || ColorID == 7)) {
+                Groups.add(ColorID);
+                break;
+            }
+
         }
-     
-     System.out.println(Groups);
-     
-     }
-    
-    
-    
+
+        System.out.println(Groups);
+
+    }
 
 }
