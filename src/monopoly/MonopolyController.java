@@ -53,7 +53,27 @@ public class MonopolyController {
                         //Pay or income Tax ( 7aga kda ) 
                     } else if (curPlayer.position == 30 || curPlayer.position == 10) {
                         //Go to Jail
-                        moveToJail();
+                        if(!curPlayer.inJail){
+                            moveToJail();
+                        }else if(curPlayer.inJail && curPlayer.turnsInJail<3 && d1!=d2){
+                            curPlayer.turnsInJail++;
+                            String[] options = {"Yes", "No"};
+                            int choice = JOptionPane.showOptionDialog(null, "Pay 50$ to exit from jail?", "",
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                            if(choice==0){
+                                curPlayer.deductMoney(50);
+                                curPlayer.turnsInJail=0;
+                                curPlayer.inJail=false;
+                            }
+                            Constants.gameWindow.enableEndTurnBtn(true);
+                        }else if(curPlayer.inJail && curPlayer.turnsInJail<3 && d1==d2){
+                            curPlayer.turnsInJail=0;
+                            Constants.gameWindow.enableEndTurnBtn(true);
+                        }else if(curPlayer.inJail && curPlayer.turnsInJail==3 && d1!=d2){
+                            curPlayer.deductMoney(50);
+                            curPlayer.turnsInJail=0;
+                            Constants.gameWindow.enableEndTurnBtn(true);
+                        }
                     } else if (curPlayer.position == 30 || curPlayer.position == 0 || curPlayer.position == 10 || curPlayer.position == 20) {
                         ///////////
                     } else {
@@ -132,6 +152,8 @@ public class MonopolyController {
         } else {
             steps = 10 - curPlayer.position;
         }
+        
+        curPlayer.inJail=true;
         move();
 
     }
