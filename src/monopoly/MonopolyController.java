@@ -50,7 +50,7 @@ public class MonopolyController {
                         doCard();
                     } else if (L.type.equals("railroad") || L.type.equals("city") || L.type.equals("company")) {
                         property((Property) L);
-                    } else if (L.type.equals("gotojail")) {
+                    } else if ((L.type.equals("gotojail") || L.type.equals("jail")) && !curPlayer.inJail) {
                         moveToJail();
                         Constants.gameWindow.enableEndTurnBtn(true);
                         return;
@@ -77,6 +77,17 @@ public class MonopolyController {
                             Constants.gameWindow.enableEndTurnBtn(true);
                         }
 
+                    }else if(L.type.equals("supertax")){
+                        curPlayer.deductMoney(75);
+                    }else if(L.type.equals("incometax")){
+                            String[] options = {"Pay 200$", "Pay 10%"};
+                        int choice = JOptionPane.showOptionDialog(null, "Choose either to pay 200$ or 10% from your total money.", "",
+                                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+                            if (choice == 0) {
+                                curPlayer.deductMoney(200);
+                            }else{
+                                curPlayer.deductMoney(curPlayer.getMoney()*(1/10));
+                            }
                     }
 
                     if (!(d1 == d2)) {
