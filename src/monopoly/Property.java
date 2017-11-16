@@ -10,18 +10,18 @@ class Location {
         this.position = position;
         this.name = name;
         this.type = type;
-    }
+    }   
 
 }
 
 public abstract class Property extends Location {
 
-    int owner;
     int price;
     int rent;
+    int curRent;
     int mortgage;
     int OverallRent;
-    Boolean owned = false;
+    int owner = -1;
 
     public Property(int owner, int price, int rent, int mortgage, int position, String name, String type) {
         super(position, name, type);
@@ -76,5 +76,6 @@ class Company extends Property {
     public Company(String name, int position, int price, int mortgage) {
         //rent is 4 times the amount shown on dice for 1 company & 10 times if the 2 companies are owned
         super(-1, price, 0, mortgage, position, name, "company");
+
     }
 }
