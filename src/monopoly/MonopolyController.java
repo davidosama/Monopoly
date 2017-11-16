@@ -128,6 +128,29 @@ public class MonopolyController {
         }
 
     }
+     public void WinnerDeterminer(){
+        int maximum=0;
+        int save=0;
+        for(int i=0;i<Player.playersList.size();i++){
+            int wealth = Player.playersList.get(i).getMoney();
+            ArrayList<Integer>Properties= Player.playersList.get(i).getCitiesOwned();
+            for(int j=0;j<Properties.size();j++){
+             if(Constants.board.getProperty(Properties.get(i)).type.equals("city")){
+                 wealth+=Constants.board.getProperty(Properties.get(i)).price;
+             }
+             else if(Constants.board.getProperty(Properties.get(i)).type.equals("railroad")){
+                 wealth+=Constants.board.getProperty(Properties.get(i)).price;
+             }
+             else{
+                 wealth+=Constants.board.getProperty(Properties.get(i)).price;
+             }
+            }
+            if(wealth>maximum){
+                maximum=wealth;
+                save=i+1;
+            }
+        }
+    }
 
     public void askToBuy() {
         Property p = ((Property) Constants.board.allCities.get(curPlayer.position));
