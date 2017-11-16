@@ -30,7 +30,10 @@ public class Player {
 
     private static int Turn = 0;
     
-
+    //Jail variable needed
+    public boolean inJail = false;
+    public int turnsInJail = 0;
+    
     public Player() {
 
         //initialize current city to zero

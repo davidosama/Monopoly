@@ -22,7 +22,7 @@ public class MonopolyController {
 
     // runnable interface for the thread
     private Runnable carRunnable;
-    private int doubleDicesCount = 0;
+    private int doubleDicesCount = 2;
 
     public MonopolyController() {
 
@@ -39,7 +39,9 @@ public class MonopolyController {
                     moveToJail();
                     Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
-                    move();                   
+                    if(!curPlayer.inJail){
+                    move();
+                    }
                     int result = -1;
                     if (curPlayer.position == 2 || curPlayer.position == 17 || curPlayer.position == 33) {
                         result = Card.DoCards("community");
@@ -154,7 +156,7 @@ public class MonopolyController {
         } else {
             steps = 10 - curPlayer.position;
         }
-        
+        doubleDicesCount = 0;
         curPlayer.inJail=true;
         move();
 
