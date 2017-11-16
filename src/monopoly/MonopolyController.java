@@ -66,12 +66,14 @@ public class MonopolyController {
                                 curPlayer.inJail = false;
                             }
                             Constants.gameWindow.enableEndTurnBtn(true);
-                        } else if (curPlayer.turnsInJail < 3 && d1 == d2) {
+                        } else if (curPlayer.inJail && curPlayer.turnsInJail < 3 && d1 == d2) {
                             curPlayer.turnsInJail = 0;
+                            curPlayer.inJail = false;
                             Constants.gameWindow.enableEndTurnBtn(true);
-                        } else if (curPlayer.turnsInJail == 3 && d1 != d2) {
+                        } else if (curPlayer.inJail && curPlayer.turnsInJail == 3 && d1 != d2) {
                             curPlayer.deductMoney(50);
                             curPlayer.turnsInJail = 0;
+                            curPlayer.inJail = false;
                             Constants.gameWindow.enableEndTurnBtn(true);
                         }
 
