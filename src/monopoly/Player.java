@@ -6,16 +6,20 @@
 package monopoly;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
 
     //Player number
     public int num;
 
-    private String name;
+    public String name;
+    public String iconName;
 
-    private ArrayList<Integer> citiesOwned;
-
+    private ArrayList<Integer> propertiesOwned;
+    private ArrayList<Integer> Groups;
+    public int numberOfCompanies;
+    public int numberOfRailRoads;
     private int money;
 
     private boolean active; //will be used if the player is in jail
@@ -29,18 +33,22 @@ public class Player {
     public static int playersCount = 0;
 
     private static int Turn = 0;
-    
 
-    public Player() {
+    public Player(String name, String iconName) {
 
         //initialize current city to zero
         position = 0;
         money = 1000;
+        
+        this.name = name;
 
         //initialize player number to the playersCount and increment
         num = playersCount++;
 
-        citiesOwned = new ArrayList<>();
+        propertiesOwned = new ArrayList();
+        Groups = new ArrayList();
+        numberOfCompanies = 0;
+        numberOfRailRoads=0;
 
         //debugPrintPlayer();
     }
@@ -49,16 +57,15 @@ public class Player {
 
         Turn = (Turn + 1) % playersList.size();
         Constants.gameWindow.changeTurn(Turn);
-
         Constants.gameWindow.setRollBtnClr(Turn);
 
         Player curPlayer = getPlayer();
         Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
-        if (curPlayer.citiesOwned.size() == 0) {
+        if (curPlayer.propertiesOwned.size() == 0) {
             Constants.gameWindow.PlayerInfoArea.append("No Cities");
         }
-        for (int i = 0; i < curPlayer.citiesOwned.size(); i++) {
-            City c = ((City) Constants.board.allCities.get(curPlayer.citiesOwned.get(i)));
+        for (int i = 0; i < curPlayer.propertiesOwned.size(); i++) {
+            Property c = ((Property) Constants.board.allCities.get(curPlayer.propertiesOwned.get(i)));
             Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
         }
     }
@@ -67,13 +74,17 @@ public class Player {
         return playersList.get(Turn);
     }
 
-    public ArrayList<Integer> getCitiesOwned() {
-        return this.citiesOwned;
+    public ArrayList getCitiesOwned() {
+        return this.propertiesOwned;
+    }
+    
+     public ArrayList<Integer> getCitiesOwnedInt() {
+        return this.propertiesOwned;
     }
 
     public boolean buy(int city, int cost) {
         if (money >= cost) {
-            citiesOwned.add(city);
+            propertiesOwned.add(city);
             money -= cost;
             return true;
         } else {
@@ -82,8 +93,8 @@ public class Player {
     }
 
     public boolean sell(int city, int cost) {
-        if (citiesOwned.contains(city)) {
-            citiesOwned.remove(new Integer(city));
+        if (propertiesOwned.contains(city)) {
+            propertiesOwned.remove(new Integer(city));
             money += cost;
             return true;
         }
@@ -117,13 +128,35 @@ public class Player {
         this.position += steps;
         this.position %= 40;
     }
+
+   
     
-//    public int moveToJail(){
-//        int i=0;
-//        while(this.position!=10){
-//            move(1);
-//            i++;
-//        }
-//        return i;
-//    }
+    public void updateGroups(int ColorID)
+    {
+     int occurences=0;
+     for(int i=0; i<propertiesOwned.size();i++)
+        {
+            //this function needs work
+            Property p = Constants.board.getProperty(propertiesOwned.get(i));
+            if(p.type.equals("city"))
+            {
+             normalCity c = (normalCity) p;
+             if(c.colorID == ColorID) occurences++;
+            }
+            
+            if(occurences==3) {Groups.add(ColorID); break;}
+            
+            //i tried to replace 0 and 7 with enum but couldn't do it
+            if(occurences==2&&(ColorID==0||ColorID==7))
+            {Groups.add(ColorID);break;}
+            
+        }
+     
+     System.out.println(Groups);
+     
+     }
+    
+    
+    
+
 }

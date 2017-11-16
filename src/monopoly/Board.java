@@ -26,11 +26,8 @@ public class Board {
             }
 
         });
-        //for testing reading files
-        for (int i = 0; i < allCities.size(); i++) {
-            System.out.println(allCities.get(i).name);
-        }
-        System.out.println(allCities.size());
+      
+        
     }
 
     private void initializeAllCities() {
@@ -38,7 +35,6 @@ public class Board {
         String fileCities = "/text_files/cities.txt";
         String fileCompanies = "/text_files/companies.txt";
         String fileRailroads = "/text_files/railroads.txt";
-        String fileJail = "/text_files/jail.txt";
 
         //reading cities file
         try {
@@ -128,4 +124,24 @@ public class Board {
         }
 
     }
+
+
+   //two seperate functions(getproperty and get propertyOwner cause no need to return the whole Property in most cases
+    
+   public Property getProperty(int x)
+    {
+        return ((Property)allCities.get(x));
+    }
+   
+
+    
+    public Location getLocation(int x)
+    {
+        return allCities.get(x);
+        
+    }
+    
+
+    
+
 }

@@ -85,16 +85,16 @@ public class JPlayerInfo extends javax.swing.JFrame {
 
     //
     public void openWindow(int playerNum) {
-        Player player = Player.playersList.get(playerNum);
+        Player player = Player.playersList.get(playerNum-1);
 
-        String info = "Player " + (player.num) + "<br>";
+        String info = player.name + "<br>";
         info += "$" + player.getMoney() + "<br>";
 
         if (player.getCitiesOwned().isEmpty()) {
             info += "No owned cities" + "<br>";
         } else {
-            info += "Cities owned: " + "<br>";
-            for (Integer c : player.getCitiesOwned()) {
+            info += "Cities owned:" + "<br>";
+            for (Integer c : player.getCitiesOwnedInt()) {
                 info += "City " + Constants.board.allCities.get(c).name + "<br>";
             }
         }
