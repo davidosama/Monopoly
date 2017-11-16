@@ -203,8 +203,6 @@ public class JGameWindow extends javax.swing.JFrame {
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        PlayerInfoArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -411,9 +409,9 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(mvhPanel);
         mvhPanel.setBounds(10, 10, 720, 720);
 
-        BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
+        BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Menu.jpg"))); // NOI18N
         BoardPanel.add(BackGround);
-        BackGround.setBounds(0, 0, 1030, 740);
+        BackGround.setBounds(-10, -80, 1320, 950);
 
         DicePanel.setBackground(new java.awt.Color(210, 234, 220));
         DicePanel.setPreferredSize(new java.awt.Dimension(240, 140));
@@ -426,14 +424,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel.add(DicePanel);
         DicePanel.setBounds(235, 470, 240, 140);
-
-        PlayerInfoArea.setEditable(false);
-        PlayerInfoArea.setColumns(20);
-        PlayerInfoArea.setRows(5);
-        jScrollPane2.setViewportView(PlayerInfoArea);
-
-        BoardPanel.add(jScrollPane2);
-        jScrollPane2.setBounds(1030, 10, 240, 730);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -705,7 +695,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JPanel DicePanel;
     private javax.swing.JButton EndTurnButton;
     private javax.swing.JPanel MenuPanel;
-    public javax.swing.JTextArea PlayerInfoArea;
     private javax.swing.JButton RollDiceButton;
     private javax.swing.JPanel chs_plyrs_nms;
     private javax.swing.JPanel chs_plyrs_pnl;
@@ -727,7 +716,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

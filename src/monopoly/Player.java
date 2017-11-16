@@ -60,14 +60,14 @@ public class Player {
         Constants.gameWindow.setRollBtnClr(Turn);
 
         Player curPlayer = getPlayer();
-        Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
+       /* Constants.gameWindow.PlayerInfoArea.setText("Money: \n" + curPlayer.money + "\nCities Owned : \n");
         if (curPlayer.propertiesOwned.size() == 0) {
             Constants.gameWindow.PlayerInfoArea.append("No Cities");
         }
         for (int i = 0; i < curPlayer.propertiesOwned.size(); i++) {
             Property c = ((Property) Constants.board.allCities.get(curPlayer.propertiesOwned.get(i)));
             Constants.gameWindow.PlayerInfoArea.append("Name:" + c.name + "Price: " + c.price + "Overall Rent" + c.OverallRent);
-        }
+        }*/
     }
 
     public static Player getPlayer() {
