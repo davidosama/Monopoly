@@ -22,6 +22,7 @@ public abstract class Property extends Location {
     int mortgage;
     int OverallRent;
     int owner = -1;
+    boolean isMortgaged;
 
     public Property(int owner, int price, int rent, int mortgage, int position, String name, String type) {
         super(position, name, type);
@@ -29,6 +30,7 @@ public abstract class Property extends Location {
         this.price = price;
         this.rent = rent;
         this.mortgage = mortgage;
+        isMortgaged = false;
     }
 
 }
@@ -42,6 +44,7 @@ class normalCity extends Property {
     int rent_4house;
     int rent_hotel;
     int houseCost;
+    int houses_count;
 
     public normalCity(String name, int position, int colorID, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost) {
         super(-1, price, rent, mortgage, position, name, "city");
@@ -53,6 +56,7 @@ class normalCity extends Property {
         this.rent_hotel = rent_hotel;
         this.houseCost = houseCost;
         this.OverallRent = this.rent + this.rent_1house + this.rent_2house + this.rent_3house + this.rent_4house + this.rent_hotel;
+        this.houses_count = 0;
     }
 }
 
