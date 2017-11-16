@@ -5,20 +5,12 @@
  */
 package monopoly;
 
-import java.awt.Color;
-import javax.swing.JLabel;
-
-/**
- *
- * @author hesha
- */
 public class JPlayerInfo extends javax.swing.JFrame {
 
     /**
      * Creates new form JPlayerInfo
      */
     public JPlayerInfo() {
-        setUndecorated(true);
         initComponents();
     }
 
@@ -32,40 +24,26 @@ public class JPlayerInfo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        bigCityLBL = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(123, 157, 224));
+        jPanel1.setLayout(null);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
-                .addComponent(bigCityLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(133, 133, 133))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
-                .addComponent(bigCityLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
-        );
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 20, 510, 490);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 529, 525));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,17 +83,29 @@ public class JPlayerInfo extends javax.swing.JFrame {
         });
     }
 
-    public void setBigCityLBL(int i) {
-        try {
-            bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cards/" + i + ".png")));
-        } catch (Exception ex) {
-            bigCityLBL.setIcon(new javax.swing.ImageIcon(JGameWindow.class.getResource("/drawables/Cards/5.png")));
+    //
+    public void openWindow(int playerNum) {
+        Player player = Player.playersList.get(playerNum);
+
+        String info = "Player " + (player.num) + "<br>";
+        info += "$" + player.getMoney() + "<br>";
+
+        if (player.getCitiesOwned().isEmpty()) {
+            info += "No owned cities" + "<br>";
+        } else {
+            info += "Cities owned:" + "<br>";
+            for (Integer c : player.getCitiesOwnedInt()) {
+                info += "City " + Constants.board.allCities.get(c).name + "<br>";
+            }
         }
+
+        jLabel1.setText("<html>" + info + "</html>");
+        this.setVisible(true);
     }
     ////////////////////////
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel bigCityLBL;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

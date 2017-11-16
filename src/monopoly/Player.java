@@ -74,6 +74,10 @@ public class Player {
     public ArrayList getCitiesOwned() {
         return this.propertiesOwned;
     }
+    
+     public ArrayList<Integer> getCitiesOwnedInt() {
+        return this.propertiesOwned;
+    }
 
     public boolean buy(int city, int cost) {
         if (money >= cost) {

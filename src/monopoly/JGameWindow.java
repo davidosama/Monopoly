@@ -24,30 +24,25 @@ public class JGameWindow extends javax.swing.JFrame {
     private ImageIcon[] diceIcons = new ImageIcon[6];
     private ImageIcon[] chanceIcons = new ImageIcon[40];
     
+   private JPlayerInfo playerInfoWin;
+
     public void addLabel(int playerNum) {
-        
+
         PieceLabel pieceLabel = new PieceLabel(playerNum);
 
         ///////////////Code for mouse hover over player
-        /* pieceLabel.addMouseListener(new MouseAdapter() {
+        pieceLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseExited(MouseEvent e) {
-                super.mouseExited(e); //To change body of generated methods, choose Tools | Templates.
-
-                Constants.playerInfoWin.dispose();
+                playerInfoWin.setVisible(false);
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e); //To change body of generated methods, choose Tools | Templates.
-
-                JGameWindow gw = Constants.gameWindow;
-                Constants.playerInfoWin = new JPlayerInfo();
-                Constants.playerInfoWin.setLocation(gw.getX() + 126, gw.getY() + 139);
-                Constants.playerInfoWin.setVisible(true);
-
+                playerInfoWin.setLocation(getX() + 126, getY() + 139);
+                playerInfoWin.openWindow(playerNum);
             }
-        });*/
+        });
         BoardLabel.add(pieceLabel);
     }
     
@@ -75,8 +70,12 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
         EndTurnButton.setVisible(false);
-        
+        this.setLocationRelativeTo(null);
+        ///
+        playerInfoWin = new JPlayerInfo();
+        playerInfoWin.setLocation(this.getX() + 126, this.getY() + 139);
         PlayerInfoArea.setText("Money: 1000\nCities Owned: No cities");
+        ///
         initMVH();
         initIcons();
     }
@@ -91,13 +90,12 @@ public class JGameWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         BoardPanel = new javax.swing.JPanel();
-        BIGCITYLBL = new javax.swing.JLabel();
         RollDiceButton = new javax.swing.JButton();
         EndTurnButton = new javax.swing.JButton();
+        BoardLabel = new javax.swing.JLabel();
         mvhPanel = new javax.swing.JPanel();
         currentCardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
-        BoardLabel = new javax.swing.JLabel();
         BackGround = new javax.swing.JLabel();
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
@@ -115,8 +113,6 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setName(""); // NOI18N
         BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         BoardPanel.setLayout(null);
-        BoardPanel.add(BIGCITYLBL);
-        BIGCITYLBL.setBounds(270, 220, 220, 290);
 
         RollDiceButton.setText("Roll Dice");
         RollDiceButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
@@ -138,6 +134,13 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(EndTurnButton);
         EndTurnButton.setBounds(300, 550, 160, 60);
 
+        BoardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
+        BoardLabel.setMaximumSize(new java.awt.Dimension(1280, 720));
+        BoardLabel.setMinimumSize(new java.awt.Dimension(720, 720));
+        BoardLabel.setPreferredSize(new java.awt.Dimension(720, 720));
+        BoardPanel.add(BoardLabel);
+        BoardLabel.setBounds(20, 10, 720, 720);
+
         mvhPanel.setBackground(new java.awt.Color(0, 0, 0));
         mvhPanel.setOpaque(false);
         mvhPanel.setLayout(null);
@@ -154,13 +157,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
         BoardPanel.add(currentCardPanel);
         currentCardPanel.setBounds(260, 230, 236, 280);
-
-        BoardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
-        BoardLabel.setMaximumSize(new java.awt.Dimension(1280, 720));
-        BoardLabel.setMinimumSize(new java.awt.Dimension(720, 720));
-        BoardLabel.setPreferredSize(new java.awt.Dimension(720, 720));
-        BoardPanel.add(BoardLabel);
-        BoardLabel.setBounds(20, 10, 720, 720);
 
         BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
         BoardPanel.add(BackGround);
@@ -412,7 +408,6 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel BIGCITYLBL;
     private javax.swing.JLabel BackGround;
     private javax.swing.JLabel BoardLabel;
     private javax.swing.JPanel BoardPanel;
