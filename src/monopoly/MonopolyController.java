@@ -29,7 +29,7 @@ public class MonopolyController {
     public MonopolyController() {
 
         curPlayer = Player.getPlayer();
-        
+
         //For testing, speed things up
         if (Constants.testing) {
             Constants.timerMs = 60;
@@ -134,7 +134,7 @@ public class MonopolyController {
     }
 
     public void GenerateDiceAndMove() {
-     //Start Dice Throw
+        //Start Dice Throw
         diceTimerCounter = 5;
         diceTimer.start();
 
@@ -185,35 +185,33 @@ public class MonopolyController {
         int choice = Constants.gameWindow.startAskToBuyorAuction(curPlayer.position);
         Property p = ((Property) Constants.board.allCities.get(curPlayer.position));
 
-        if (choice == 0) {
-            boolean n = curPlayer.buy(p.position, p.price);
-            if (n) {
-                p.owner = curPlayer.num;
-                if (p.type.equals("company")) {
-                    curPlayer.numberOfCompanies++;
-                } else if (p.type.equals("railroad")) {
-                    curPlayer.numberOfRailRoads++;
-                } else {
-                    normalCity c = (normalCity) p;
-                    curPlayer.updateGroups(c.colorID);
-                }
-
-                updateCurrentRent(p);
-                JOptionPane.showMessageDialog(null, "Congratulations, now you own " + Constants.board.allCities.get(p.position).name);
-            } else {
-                JOptionPane.showConfirmDialog(null, "You don't have enough money");
-            }
-        } else if (choice == 1) {
-            Constants.gameWindow.startAuction(curPlayer.num);
-
+        int price = p.price;
+        Player buyer = curPlayer;
+        if (choice == 1) {
+            int [] arr = Constants.gameWindow.startAuction(curPlayer.num); // this function returns 2 values, the winner and the highest bid
+            int winner = arr[0];
+            JOptionPane.showMessageDialog(null, Player.getName(winner) + " has won the auction");
+            buyer = Player.playersList.get(winner);
+            price = arr[1];
         }
-    }
 
-    public void endAuction(int winner, int highestbid) {
+        boolean n = buyer.buy(p.position, price);
+        if (n) {
+            p.owner = buyer.num;
+            if (p.type.equals("company")) {
+                buyer.numberOfCompanies++;
+            } else if (p.type.equals("railroad")) {
+                buyer.numberOfRailRoads++;
+            } else {
+                normalCity c = (normalCity) p;
+                buyer.updateGroups(c.colorID);
+            }
 
-        Player.playersList.get(winner).buy(curPlayer.position, highestbid);
-        JOptionPane.showMessageDialog(null, Player.getName(winner)+ " has won the auction");
-
+            updateCurrentRent(p);
+            JOptionPane.showMessageDialog(null, "Congratulations, now you own " + Constants.board.allCities.get(p.position).name);
+        } else {
+            JOptionPane.showConfirmDialog(null, "You don't have enough money");
+        }
     }
 
     public void property(Property p) {
@@ -384,8 +382,8 @@ public class MonopolyController {
                 winner = i;
             }
         }
-        JOptionPane.showMessageDialog(null, Player.getName(winner)+ " has won with a net worth of: " + maximum);
+        JOptionPane.showMessageDialog(null, Player.getName(winner) + " has won with a net worth of: " + maximum);
         System.exit(0);
     }
-    
+
 }

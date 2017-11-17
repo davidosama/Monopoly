@@ -428,9 +428,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Roll Dice"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder thickness="3"/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
@@ -446,9 +444,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="End Turn"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder thickness="3"/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>

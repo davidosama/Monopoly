@@ -25,17 +25,17 @@ public class AuctionDialog extends javax.swing.JDialog {
      * Creates new form AuctionDialog
      */
     // the player with the highest AuctionPrice
-    private int HighestAuctionPrice = 0;
+    private static int HighestAuctionPrice;
     private int playersCount;
-    private Integer curPlayer;
+    private static Integer curPlayer;
     private ArrayList<Integer> players = new ArrayList<Integer>();
 
-    public AuctionDialog(java.awt.Frame parent, int curPlayer, int playersCount) {
-        super(parent, true);
+    public AuctionDialog(int curPlayer, int playersCount) {
+
+        HighestAuctionPrice = 0;
         this.playersCount = playersCount;
         this.curPlayer = curPlayer;
         loadArray();
-        
 
         //Setting Background
         try {
@@ -51,12 +51,16 @@ public class AuctionDialog extends javax.swing.JDialog {
         } catch (Exception e) {
             Logger.getLogger(AuctionDialog.class.getName()).log(Level.SEVERE, null, e);
         }
-
         initComponents();
-        PlayerNameLabel.setText(Player.getName(curPlayer)+"'s " + "turn");
+        PlayerNameLabel.setText(Player.getName(curPlayer) + "'s " + "turn");
         AuctionPricelbl.setText("" + this.HighestAuctionPrice);
-        this.setLocationRelativeTo(((JGameWindow)parent).getBoardLabel());
+        this.setLocationRelativeTo(Constants.gameWindow.getBoardLabel());
 
+    }
+
+    public static int[] startAuctionDialog(int currentPlayer, int playersCount) {
+        new AuctionDialog(currentPlayer, playersCount).setVisible(true);
+        return new int[]{curPlayer, HighestAuctionPrice};
     }
 
     /**
@@ -79,6 +83,9 @@ public class AuctionDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Auction");
         setBounds(new java.awt.Rectangle(500, 370, 0, 0));
+        setModal(true);
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(520, 198));
         setResizable(false);
 
         SubmitBtn.setText("Submit");
@@ -123,7 +130,7 @@ public class AuctionDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PlayerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(SubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +201,7 @@ public class AuctionDialog extends javax.swing.JDialog {
         players.remove(curPlayer);
         players.add(curPlayer);
         curPlayer = players.get(0);
-        PlayerNameLabel.setText(Player.getName(curPlayer)+"'s " + "turn");
+        PlayerNameLabel.setText(Player.getName(curPlayer) + "'s " + "turn");
     }
     private void IncrementAucBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncrementAucBtnActionPerformed
         //If there is a warning , remove it untill the player submits again
@@ -220,9 +227,8 @@ public class AuctionDialog extends javax.swing.JDialog {
         curPlayer = players.get(0);
         if (players.size() == 1) {
             this.dispose();
-            ((JGameWindow) (this.getParent())).endAuction(curPlayer, HighestAuctionPrice);
         }
-        PlayerNameLabel.setText(Player.getName(curPlayer)+"'s " + "turn");
+        PlayerNameLabel.setText(Player.getName(curPlayer) + "'s " + "turn");
 
     }//GEN-LAST:event_FoldBtnActionPerformed
 

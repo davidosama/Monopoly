@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -26,9 +25,7 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
      */
     private int choice; //0 for buy , 1 for Auction ( 3ashan yet2ayef ma3 el code el adim ) 
 
-    public AskToBuyOrAuction(java.awt.Frame parent) {
-        super(parent, true);
-
+    public AskToBuyOrAuction() {  
         try {
             Image BackgroundImage = ImageIO.read(AuctionDialog.class.getResource("/drawables/BackGround.jpg"));
             JPanel p = new JPanel() {
@@ -42,15 +39,13 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         } catch (Exception e) {
             Logger.getLogger(AuctionDialog.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
         initComponents();
         
-        
-
     }
-
+    
     public int startBuyorAuction(ImageIcon locationIcon, ImageIcon detailedIcon) {
-      
+        
         locationLabel.setIcon(locationIcon);
         detailedLabel.setIcon(detailedIcon);
         this.setLocationRelativeTo(Constants.gameWindow.getBoardLabel());
@@ -75,6 +70,8 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 150, 0, 0));
+        setModal(true);
+        setUndecorated(true);
         setResizable(false);
 
         BuyButton.setText("Buy");

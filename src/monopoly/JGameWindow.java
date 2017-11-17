@@ -64,13 +64,13 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public void changeTurn(int turn) {
         curTurn = turn;
-        this.setRollBtnClr(turn);
     }
 
     public void moveCarLabel(int steps) {
         for (int i = 0; i < steps; i++) {
             ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
         }
+        Constants.gameWindow.drawCurrentLocation(-1);
     }
 
     public void addPlayer(String name, String iconName) {
@@ -103,7 +103,7 @@ public class JGameWindow extends javax.swing.JFrame {
         initIcons();
         MenuPanel.setVisible(false);
         BoardPanel.setVisible(true);
-        buyorAuctionWindow = new AskToBuyOrAuction(this);
+        buyorAuctionWindow = new AskToBuyOrAuction();
     }
 
     private void initMenu() {
@@ -360,7 +360,7 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setLayout(null);
 
         RollDiceButton.setText("Roll Dice");
-        RollDiceButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        RollDiceButton.setBorder(null);
         RollDiceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RollDiceButtonActionPerformed(evt);
@@ -370,7 +370,7 @@ public class JGameWindow extends javax.swing.JFrame {
         RollDiceButton.setBounds(300, 550, 160, 60);
 
         EndTurnButton.setText("End Turn");
-        EndTurnButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        EndTurnButton.setBorder(null);
         EndTurnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EndTurnButtonActionPerformed(evt);
@@ -751,10 +751,6 @@ public class JGameWindow extends javax.swing.JFrame {
 
     }
 
-    public void endAuction(int winner, int highestBid) {
-        Constants.carSys.endAuction(winner, highestBid);
-    }
-
     public void drawDice(int d1, int d2) {
 
         d1_label.setIcon(diceIcons[d1 - 1]);
@@ -790,8 +786,8 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     /////////auction
-    public void startAuction(int curPlayerNum) {
-        new AuctionDialog(this, curPlayerNum, Player.playersCount).setVisible(true);
+    public int [] startAuction(int curPlayerNum) {
+        return AuctionDialog.startAuctionDialog(curPlayerNum, Player.playersCount);
     }
 
     public int startAskToBuyorAuction(int curPosition) {
