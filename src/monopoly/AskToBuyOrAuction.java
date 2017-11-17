@@ -5,7 +5,6 @@
  */
 package monopoly;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -56,6 +55,7 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
     public int startBuyorAuction(ImageIcon locationIcon, ImageIcon detailedIcon) {
 
         //ForSaleLabel.setIcon(new ImageIcon(getClass().getResource("/drawables/ForSale.png")));
+        
         this.setLocation(parent.getX() + 136, parent.getY() + 144);
         locationLabel.setIcon(locationIcon);
         detailedLabel.setIcon(detailedIcon);

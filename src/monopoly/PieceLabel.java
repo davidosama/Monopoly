@@ -126,6 +126,7 @@ public class PieceLabel extends JLabel {
             Corner();
         }
         Constants.gameWindow.drawCurrentLocation(position);
+        Constants.gameWindow.drawDetailedLocation(-1);
 
     }
 

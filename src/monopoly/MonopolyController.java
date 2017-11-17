@@ -28,6 +28,8 @@ public class MonopolyController {
 
     public MonopolyController() {
 
+        curPlayer = Player.getPlayer();
+        
         //For testing, speed things up
         if (Constants.testing) {
             Constants.timerMs = 60;
@@ -43,6 +45,7 @@ public class MonopolyController {
                     if (!curPlayer.inJail) {
                         move();
                     }
+                    Constants.gameWindow.hidePlayerInfoWindow();
                     Location L = Constants.board.getLocation(curPlayer.position);
 
                     if (L.type.equals("community") || L.type.equals("chance")) {
@@ -131,9 +134,7 @@ public class MonopolyController {
     }
 
     public void GenerateDiceAndMove() {
-
-        curPlayer = Player.getPlayer();
-        //Start Dice Throw
+     //Start Dice Throw
         diceTimerCounter = 5;
         diceTimer.start();
 
@@ -386,4 +387,5 @@ public class MonopolyController {
         JOptionPane.showMessageDialog(null, Player.playersList.get(winner).name + " has won with a net worth of: " + maximum);
         System.exit(0);
     }
+    
 }

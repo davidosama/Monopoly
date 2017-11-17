@@ -21,7 +21,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private int curTurn = 0;
 
     //panels for choosing players names and icons
-    boolean BuildHouse, Mortgage, SellHouse, Unmortgage;
+    boolean BuildHouse, Mortgage, SellHouse, Unmortgage, moving = false;
     ArrayList<JPanel> pnls = new ArrayList<>();
     ArrayList<JTextField> txt_filds = new ArrayList<>();
     ArrayList<JComboBox> cmb_bxs = new ArrayList<>();
@@ -44,20 +44,22 @@ public class JGameWindow extends javax.swing.JFrame {
         pieceLabel.addMouseListener(
                 new MouseAdapter() {
             @Override
-            public void mouseExited(MouseEvent e
-            ) {
+            public void mouseExited(MouseEvent e) {
                 playerInfoWin.setVisible(false);
             }
 
             @Override
-            public void mouseEntered(MouseEvent e
-            ) {
-
+            public void mouseEntered(MouseEvent e) {
+                playerInfoWin.setLocation(getX() + 126, getY() + 139);
                 playerInfoWin.openWindow(playerNum);
             }
         }
         );
         BoardLabel.add(pieceLabel);
+    }
+
+    public void hidePlayerInfoWindow() {
+        playerInfoWin.setVisible(false);
     }
 
     public void changeTurn(int turn) {
@@ -69,6 +71,7 @@ public class JGameWindow extends javax.swing.JFrame {
         for (int i = 0; i < steps; i++) {
             ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
         }
+        moving = false;
     }
 
     public void addPlayer(String name, String iconName) {
@@ -83,7 +86,6 @@ public class JGameWindow extends javax.swing.JFrame {
         initComponents();
         Constants.gameWindow = this;
         Constants.board = new Board();
-        Constants.carSys = new MonopolyController();
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
         EndTurnButton.setVisible(false);
@@ -97,12 +99,13 @@ public class JGameWindow extends javax.swing.JFrame {
     private void initGame() {
         playerInfoWin = new JPlayerInfo();
         ///
+        Constants.carSys = new MonopolyController();
         initMVH();
         initIcons();
+
         MenuPanel.setVisible(false);
         BoardPanel.setVisible(true);
         buyorAuctionWindow = new AskToBuyOrAuction(this);
-        playerInfoWin.setLocation(getX() + 126, getY() + 139);
     }
 
     private void initMenu() {
@@ -187,8 +190,8 @@ public class JGameWindow extends javax.swing.JFrame {
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
         cardPanel = new javax.swing.JPanel();
-        currentCardLabel = new javax.swing.JLabel();
         detailedCardLabel = new javax.swing.JLabel();
+        currentCardLabel = new javax.swing.JLabel();
         BoardLabel = new javax.swing.JLabel();
         mvhPanel = new javax.swing.JPanel();
         functionsPanel = new javax.swing.JPanel();
@@ -395,10 +398,10 @@ public class JGameWindow extends javax.swing.JFrame {
         cardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
         cardPanel.setOpaque(false);
         cardPanel.setPreferredSize(new java.awt.Dimension(0, 0));
-        cardPanel.add(currentCardLabel);
 
         detailedCardLabel.setBackground(new java.awt.Color(210, 234, 220));
         cardPanel.add(detailedCardLabel);
+        cardPanel.add(currentCardLabel);
 
         BoardPanel.add(cardPanel);
         cardPanel.setBounds(190, 220, 410, 280);
@@ -522,14 +525,18 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private void RollDiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RollDiceButtonActionPerformed
 
-        currentCardLabel.setIcon(null);
-        disableRollDiceBtn();
-        Constants.carSys.GenerateDiceAndMove();
+        if (!(BuildHouse || Mortgage || SellHouse || Unmortgage)) {
+            disableRollDiceBtn();
+            moving = true;
+            Constants.carSys.GenerateDiceAndMove();
+        }
 
     }//GEN-LAST:event_RollDiceButtonActionPerformed
 
     private void EndTurnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EndTurnButtonActionPerformed
-        Constants.carSys.switchTurn();
+        if (!(BuildHouse || Mortgage || SellHouse || Unmortgage)) {
+            Constants.carSys.switchTurn();
+        }
     }//GEN-LAST:event_EndTurnButtonActionPerformed
 
     private void jButton1jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1jButtonActionPerformed
@@ -569,20 +576,24 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private void buildHouseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildHouseButtonActionPerformed
 
-        if (!BuildHouse) {
-            buildHouseButton.setText("Stop");
-            BuildHouse = true;
-            enableButtons(buildHouseButton, false);
-        } else {
-            buildHouseButton.setText("Build House");
-            BuildHouse = false;
-            enableButtons(buildHouseButton, true);
+        if (!moving) {
+            if (!BuildHouse) {
+                buildHouseButton.setText("Stop");
+                BuildHouse = true;
+                enableButtons(buildHouseButton, false);
+            } else {
+                buildHouseButton.setText("Build House");
+                BuildHouse = false;
+                enableButtons(buildHouseButton, true);
+            }
         }
 
     }//GEN-LAST:event_buildHouseButtonActionPerformed
 
     private void endGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endGameButtonActionPerformed
-        Constants.carSys.endGame();
+        if (!moving) {
+            Constants.carSys.endGame();
+        }
     }//GEN-LAST:event_endGameButtonActionPerformed
 
     private void sellHouseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellHouseButtonActionPerformed
@@ -591,26 +602,30 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private void mortgageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mortgageButtonActionPerformed
 
-        if (!Mortgage) {
-            mortgageButton.setText("Stop");
-            Mortgage = true;
-            enableButtons(mortgageButton, false);
-        } else {
-            mortgageButton.setText("Mortgage");
-            Mortgage = false;
-            enableButtons(mortgageButton, true);
+        if (!moving) {
+            if (!Mortgage) {
+                mortgageButton.setText("Stop");
+                Mortgage = true;
+                enableButtons(mortgageButton, false);
+            } else {
+                mortgageButton.setText("Mortgage");
+                Mortgage = false;
+                enableButtons(mortgageButton, true);
+            }
         }
     }//GEN-LAST:event_mortgageButtonActionPerformed
 
     private void unmortgageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unmortgageButtonActionPerformed
-        if (!Unmortgage) {
-            unmortgageButton.setText("Stop");
-            Unmortgage = true;
-            enableButtons(unmortgageButton, false);
-        } else {
-            unmortgageButton.setText("Mortgage");
-            Unmortgage = false;
-            enableButtons(unmortgageButton, true);
+        if (!moving) {
+            if (!Unmortgage) {
+                unmortgageButton.setText("Stop");
+                Unmortgage = true;
+                enableButtons(unmortgageButton, false);
+            } else {
+                unmortgageButton.setText("Mortgage");
+                Unmortgage = false;
+                enableButtons(unmortgageButton, true);
+            }
         }
     }//GEN-LAST:event_unmortgageButtonActionPerformed
     /* 
@@ -716,15 +731,19 @@ public class JGameWindow extends javax.swing.JFrame {
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    JGameWindow.this.drawCurrentLocation(j);
-                    JGameWindow.this.drawDetailedLocation(j);
+                    if (!moving) {
+                        JGameWindow.this.drawCurrentLocation(j);
+                        JGameWindow.this.drawDetailedLocation(j);
+                    }
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
 
-                    JGameWindow.this.drawCurrentLocation(-1);
-                    JGameWindow.this.drawDetailedLocation(-1);
+                    if (!moving) {
+                        JGameWindow.this.drawCurrentLocation(-1);
+                        JGameWindow.this.drawDetailedLocation(-1);
+                    }
                 }
             });
 

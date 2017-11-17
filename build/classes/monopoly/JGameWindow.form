@@ -512,14 +512,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="currentCardLabel">
-            </Component>
             <Component class="javax.swing.JLabel" name="detailedCardLabel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="dc" green="ea" red="d2" type="rgb"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="currentCardLabel">
             </Component>
           </SubComponents>
         </Container>
