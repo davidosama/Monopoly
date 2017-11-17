@@ -44,16 +44,16 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         }
 
         initComponents();
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        
 
     }
 
     public int startBuyorAuction(ImageIcon locationIcon, ImageIcon detailedIcon) {
-
-        this.setLocation(this.getParent().getX() + 136, this.getParent().getY() + 144);
+      
         locationLabel.setIcon(locationIcon);
         detailedLabel.setIcon(detailedIcon);
+        this.setLocationRelativeTo(Constants.gameWindow.getBoardLabel());
         this.setVisible(true);
         return choice;
     }
@@ -73,8 +73,9 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         detailedLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 150, 0, 0));
+        setResizable(false);
 
         BuyButton.setText("Buy");
         BuyButton.setFocusable(false);

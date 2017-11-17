@@ -21,8 +21,8 @@ public class Constants {
 
     public static int ResizeFactor = 1;
     public static int CityWidth = ResizeFactor * 59;
-    public static int CornerWidth = ResizeFactor * 97;
-    public static int LocationHeight = ResizeFactor * 97;
+    public static int CornerWidth = ResizeFactor * 95;
+    public static int LocationHeight = ResizeFactor * 95;
 
     //Timer milliseconds
     public static int timerMs = 180;

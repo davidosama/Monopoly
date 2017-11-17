@@ -35,6 +35,7 @@ public class AuctionDialog extends javax.swing.JDialog {
         this.playersCount = playersCount;
         this.curPlayer = curPlayer;
         loadArray();
+        
 
         //Setting Background
         try {
@@ -54,6 +55,7 @@ public class AuctionDialog extends javax.swing.JDialog {
         initComponents();
         PlayerNameLabel.setText(Player.getName(curPlayer)+"'s " + "turn");
         AuctionPricelbl.setText("" + this.HighestAuctionPrice);
+        this.setLocationRelativeTo(((JGameWindow)parent).getBoardLabel());
 
     }
 
@@ -74,9 +76,10 @@ public class AuctionDialog extends javax.swing.JDialog {
         warningLbl = new javax.swing.JLabel();
         FoldBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Auction");
         setBounds(new java.awt.Rectangle(500, 370, 0, 0));
+        setResizable(false);
 
         SubmitBtn.setText("Submit");
         SubmitBtn.addActionListener(new java.awt.event.ActionListener() {

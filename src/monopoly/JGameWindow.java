@@ -50,7 +50,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                playerInfoWin.setLocation(getX() + 126, getY() + 139);
+                playerInfoWin.setLocationRelativeTo(JGameWindow.this.getBoardLabel());
                 playerInfoWin.openWindow(playerNum);
             }
         }

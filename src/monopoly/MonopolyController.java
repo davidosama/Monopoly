@@ -60,7 +60,7 @@ public class MonopolyController {
                         if (curPlayer.turnsInJail < 3 && d1 != d2) {
                             curPlayer.turnsInJail++;
                             String[] options = {"Yes", "No"};
-                            int choice = JOptionPane.showOptionDialog(null, "Pay 50$ to exit from jail?", "",
+                            int choice = JOptionPane.showOptionDialog(null, "Pay $50 to exit from jail?", "",
                                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
                             if (choice == 0) {
                                 curPlayer.deductMoney(50);
@@ -80,10 +80,10 @@ public class MonopolyController {
                         }
 
                     } else if (L.type.equals("supertax")) {
-                        JOptionPane.showMessageDialog(null, "You have to pay a tax of 75$");
+                        JOptionPane.showMessageDialog(null, "You have to pay a tax of $75");
                         curPlayer.deductMoney(75);
                     } else if (L.type.equals("incometax")) {
-                        JOptionPane.showMessageDialog(null, "You have to pay a tax of 200$");
+                        JOptionPane.showMessageDialog(null, "You have to pay a tax of $200");
                         curPlayer.deductMoney(200);
 
                     }
