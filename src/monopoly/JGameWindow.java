@@ -64,6 +64,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public void changeTurn(int turn) {
         curTurn = turn;
+        playerNameLabel.setText(Player.getName(turn)+"'s Turn");
     }
 
     public void moveCarLabel(int steps) {
@@ -103,6 +104,7 @@ public class JGameWindow extends javax.swing.JFrame {
         initIcons();
         MenuPanel.setVisible(false);
         BoardPanel.setVisible(true);
+        playerNameLabel.setText(Player.getName(0)+"'s Turn");
         buyorAuctionWindow = new AskToBuyOrAuction();
     }
 
@@ -198,6 +200,7 @@ public class JGameWindow extends javax.swing.JFrame {
         mortgageButton = new javax.swing.JButton();
         unmortgageButton = new javax.swing.JButton();
         endGameButton = new javax.swing.JButton();
+        playerNameLabel = new javax.swing.JLabel();
         BackGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -454,6 +457,8 @@ public class JGameWindow extends javax.swing.JFrame {
             }
         });
 
+        playerNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout functionsPanelLayout = new javax.swing.GroupLayout(functionsPanel);
         functionsPanel.setLayout(functionsPanelLayout);
         functionsPanelLayout.setHorizontalGroup(
@@ -461,6 +466,7 @@ public class JGameWindow extends javax.swing.JFrame {
             .addGroup(functionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(functionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(playerNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buildHouseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sellHouseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mortgageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -471,7 +477,9 @@ public class JGameWindow extends javax.swing.JFrame {
         functionsPanelLayout.setVerticalGroup(
             functionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(functionsPanelLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
+                .addComponent(playerNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(buildHouseButton)
                 .addGap(18, 18, 18)
                 .addComponent(sellHouseButton)
@@ -481,7 +489,7 @@ public class JGameWindow extends javax.swing.JFrame {
                 .addComponent(unmortgageButton)
                 .addGap(18, 18, 18)
                 .addComponent(endGameButton)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         BoardPanel.add(functionsPanel);
@@ -883,6 +891,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JButton mortgageButton;
     private javax.swing.JPanel mvhPanel;
+    private javax.swing.JLabel playerNameLabel;
     private javax.swing.JPanel pnl1;
     private javax.swing.JPanel pnl2;
     private javax.swing.JPanel pnl3;
