@@ -91,11 +91,11 @@ public class JPlayerInfo extends javax.swing.JFrame {
         info += "$" + player.getMoney() + "<br>";
 
         if (player.getCitiesOwned().isEmpty()) {
-            info += "No owned cities" + "<br>";
+            info += "No owned Properties" + "<br>";
         } else {
-            info += "Cities owned:" + "<br>";
+            info += "Properties owned:" + "<br>";
             for (Integer c : player.getCitiesOwnedInt()) {
-                info += "City " + Constants.board.allCities.get(c).name + "<br>";
+                info += Constants.board.allCities.get(c).name + "<br>";
             }
         }
 

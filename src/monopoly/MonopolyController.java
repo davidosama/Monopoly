@@ -44,8 +44,7 @@ public class MonopolyController {
                 } else {
                     if (!curPlayer.inJail) {
                         move();
-                    }
-                    Constants.gameWindow.hidePlayerInfoWindow();
+                    }                   
                     Location L = Constants.board.getLocation(curPlayer.position);
 
                     if (L.type.equals("community") || L.type.equals("chance")) {
