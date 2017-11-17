@@ -160,7 +160,7 @@ public class Player {
                     }
                 }
                 Property p = Constants.board.getProperty(city);
-                 this.addMoney(p.mortgage);
+                this.addMoney(p.mortgage);
                 p.isMortgaged = true;
                 JOptionPane.showMessageDialog(null, p.name + " is now mortgaged.");
                 return true;
