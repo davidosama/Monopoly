@@ -164,7 +164,7 @@ public class MonopolyController {
 
     public void PayRent(Player owner, Property p) {
         if (!p.isMortgaged) { //check if the property is not mortgaged
-            JOptionPane.showMessageDialog(null, "Unfortunately, This property is owned by " + owner.name + " so you will have to pay him a rent");
+            JOptionPane.showMessageDialog(null, "Unfortunately, This property is owned by " + owner.name + ", so you will have to pay him a rent");
             if (p.type.equals("company")) {
                 int x;
                 if (owner.numberOfCompanies == 1) {
