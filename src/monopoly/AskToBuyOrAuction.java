@@ -24,14 +24,11 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
     /**
      * Creates new form AskToBuyOrAuction
      */
-
-    private java.awt.Frame parent;
     private int choice; //0 for buy , 1 for Auction ( 3ashan yet2ayef ma3 el code el adim ) 
 
     public AskToBuyOrAuction(java.awt.Frame parent) {
         super(parent, true);
 
-        this.parent = parent;
         try {
             Image BackgroundImage = ImageIO.read(AuctionDialog.class.getResource("/drawables/BackGround.jpg"));
             JPanel p = new JPanel() {
@@ -54,9 +51,7 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
 
     public int startBuyorAuction(ImageIcon locationIcon, ImageIcon detailedIcon) {
 
-        //ForSaleLabel.setIcon(new ImageIcon(getClass().getResource("/drawables/ForSale.png")));
-        
-        this.setLocation(parent.getX() + 136, parent.getY() + 144);
+        this.setLocation(this.getParent().getX() + 136, this.getParent().getY() + 144);
         locationLabel.setIcon(locationIcon);
         detailedLabel.setIcon(detailedIcon);
         this.setVisible(true);
