@@ -403,7 +403,7 @@ public class JGameWindow extends javax.swing.JFrame {
         cardPanel.add(currentCardLabel);
 
         BoardPanel.add(cardPanel);
-        cardPanel.setBounds(190, 220, 410, 280);
+        cardPanel.setBounds(170, 220, 410, 280);
 
         BoardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         BoardLabel.setMaximumSize(new java.awt.Dimension(1280, 720));
