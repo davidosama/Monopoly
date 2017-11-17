@@ -38,7 +38,7 @@ public class MonopolyController {
         carRunnable = new Runnable() {
             @Override
             public void run() {
-                if (doubleDiceCount == 1) {//Move player to jail in case of 3 double dices happened
+                if (doubleDiceCount == 3) {//Move player to jail in case of 3 double dices happened
                     moveToJail();
                     Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
@@ -164,7 +164,7 @@ public class MonopolyController {
 
     public void PayRent(Player owner, Property p) {
         if (!p.isMortgaged) { //check if the property is not mortgaged
-            JOptionPane.showMessageDialog(null, "Unfortunately,This property is owned by Player " + p.owner + " so you will have to pay him a rent");
+            JOptionPane.showMessageDialog(null, "Unfortunately, This property is owned by " + owner.name + " so you will have to pay him a rent");
             if (p.type.equals("company")) {
                 int x;
                 if (owner.numberOfCompanies == 1) {
@@ -212,7 +212,7 @@ public class MonopolyController {
     public void endAuction(int winner, int highestbid) {
 
         Player.playersList.get(winner).buy(curPlayer.position, highestbid);
-        JOptionPane.showMessageDialog(null, "Player " + Player.playersList.get(winner).num + " has won the Auction");
+        JOptionPane.showMessageDialog(null, Player.getName(winner)+ " has won the auction");
 
     }
 
@@ -384,7 +384,7 @@ public class MonopolyController {
                 winner = i;
             }
         }
-        JOptionPane.showMessageDialog(null, Player.playersList.get(winner).name + " has won with a net worth of: " + maximum);
+        JOptionPane.showMessageDialog(null, Player.getName(winner)+ " has won with a net worth of: " + maximum);
         System.exit(0);
     }
     

@@ -158,27 +158,19 @@ public class Player {
                         JOptionPane.showMessageDialog(null, "Sell all houses first before mortgaging the city.");
                         return false;   //city must have zero houses on it
                     }
-                    this.addMoney(c.mortgage);
-                    c.isMortgaged = true;
-                    Constants.board.allCities.remove(city); //remove the old city with isMortgaged=false
-                    Constants.board.allCities.add(city, c); //add the same city with isMortgaged=true
-                    JOptionPane.showMessageDialog(null, "" + c.name + " is now mortgaged.");
-                    return true;
-                } else if (Constants.board.getProperty(city).type.equals("railroad") || Constants.board.getProperty(city).type.equals("company")) {
-                    Property p = Constants.board.getProperty(city);
-                    this.addMoney(p.mortgage);
-                    p.isMortgaged = true;
-                    Constants.board.allCities.remove(city); //remove the old property with isMortgaged=false
-                    Constants.board.allCities.add(city, p); //add the same property with isMortgaged=true
-                    JOptionPane.showMessageDialog(null, "" + p.name + " is now mortgaged.");
-                    return true;
                 }
+                Property p = Constants.board.getProperty(city);
+                this.addMoney(p.mortgage);
+                p.isMortgaged = true;
+                JOptionPane.showMessageDialog(null, p.name + " is now mortgaged.");
+                return true;
             } else {
                 JOptionPane.showMessageDialog(null, "This property is already mortgaged.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "You don't own this property to mortgage.");
         }
+
         return false;
     }
 
@@ -188,9 +180,7 @@ public class Player {
                 Property p = Constants.board.getProperty(city);
                 this.deductMoney(p.mortgage);
                 p.isMortgaged = false;
-                Constants.board.allCities.remove(city); //remove the old property with isMortgaged=false
-                Constants.board.allCities.add(city, p); //adding the same property with isMortgaged=true
-                JOptionPane.showMessageDialog(null, "" + p.name + " unmortgaged.");
+                JOptionPane.showMessageDialog(null, p.name + " unmortgaged.");
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "This property is already NOT mortgaged.");
@@ -209,5 +199,9 @@ public class Player {
         } else {
             return false;
         }
+    }
+
+    public static String getName(int playerNumber) {
+        return playersList.get(playerNumber).name;
     }
 }

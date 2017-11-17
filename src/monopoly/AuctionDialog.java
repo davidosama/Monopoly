@@ -52,7 +52,7 @@ public class AuctionDialog extends javax.swing.JDialog {
         }
 
         initComponents();
-        PlayerNameLabel.setText("Player " + curPlayer + " Auction");
+        PlayerNameLabel.setText(Player.getName(curPlayer)+"'s " + "turn");
         AuctionPricelbl.setText("" + this.HighestAuctionPrice);
 
     }
@@ -191,7 +191,7 @@ public class AuctionDialog extends javax.swing.JDialog {
         players.remove(curPlayer);
         players.add(curPlayer);
         curPlayer = players.get(0);
-        PlayerNameLabel.setText("Player " + curPlayer + " Auction");
+        PlayerNameLabel.setText(Player.getName(curPlayer)+"'s " + "turn");
     }
     private void IncrementAucBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncrementAucBtnActionPerformed
         //If there is a warning , remove it untill the player submits again
@@ -219,7 +219,7 @@ public class AuctionDialog extends javax.swing.JDialog {
             this.dispose();
             ((JGameWindow) (this.getParent())).endAuction(curPlayer, HighestAuctionPrice);
         }
-        PlayerNameLabel.setText("Player " + curPlayer + " Auction");
+        PlayerNameLabel.setText(Player.getName(curPlayer)+"'s " + "turn");
 
     }//GEN-LAST:event_FoldBtnActionPerformed
 

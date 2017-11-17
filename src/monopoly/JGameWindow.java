@@ -621,7 +621,7 @@ public class JGameWindow extends javax.swing.JFrame {
                 Unmortgage = true;
                 enableButtons(unmortgageButton, false);
             } else {
-                unmortgageButton.setText("Mortgage");
+                unmortgageButton.setText("Unmortgage");
                 Unmortgage = false;
                 enableButtons(unmortgageButton, true);
             }
