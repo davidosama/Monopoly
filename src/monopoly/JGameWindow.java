@@ -68,12 +68,9 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void moveCarLabel(int steps) {
-        moving = true;
         for (int i = 0; i < steps; i++) {
             ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
         }
-        moving = false;
-        this.hidePlayerInfoWindow();
     }
 
     public void addPlayer(String name, String iconName) {
@@ -658,6 +655,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void enableEndTurnBtn(boolean enable) {
+        moving = false;
         EndTurnButton.setVisible(enable);
     }
 
@@ -666,6 +664,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     public void enableRollDiceBtn() {
+        moving = false;
         RollDiceButton.setVisible(true);
         DicePanel.setVisible(false);
     }
