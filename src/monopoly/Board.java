@@ -26,8 +26,7 @@ public class Board {
             }
 
         });
-      
-        
+
     }
 
     private void initializeAllCities() {
@@ -125,23 +124,14 @@ public class Board {
 
     }
 
-
-   //two seperate functions(getproperty and get propertyOwner cause no need to return the whole Property in most cases
-    
-   public Property getProperty(int x)
-    {
-        return ((Property)allCities.get(x));
+    //two seperate functions(getproperty and get propertyOwner cause no need to return the whole Property in most cases
+    public Property getProperty(int x) {
+        return ((Property) allCities.get(x));
     }
-   
 
-    
-    public Location getLocation(int x)
-    {
+    public Location getLocation(int x) {
         return allCities.get(x);
-        
-    }
-    
 
-    
+    }
 
 }

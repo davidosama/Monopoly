@@ -148,13 +148,13 @@ public class Player {
         System.out.println(Groups);
 
     }
-    
-    public boolean mortgage (int city){
-        if(this.getCitiesOwnedInt().contains(city)){
-            if(!((Property)Constants.board.getProperty(city)).isMortgaged){
-                if(Constants.board.getProperty(city).type.equals("city")){
-                    normalCity c = (normalCity)Constants.board.getProperty(city);
-                    if(c.houses_count != 0){
+
+    public boolean mortgage(int city) {
+        if (this.getCitiesOwnedInt().contains(city)) {
+            if (!((Property) Constants.board.getProperty(city)).isMortgaged) {
+                if (Constants.board.getProperty(city).type.equals("city")) {
+                    normalCity c = (normalCity) Constants.board.getProperty(city);
+                    if (c.houses_count != 0) {
                         JOptionPane.showMessageDialog(null, "Sell all houses first before mortgaging the city.");
                         return false;   //city must have zero houses on it
                     }
@@ -162,59 +162,52 @@ public class Player {
                     c.isMortgaged = true;
                     Constants.board.allCities.remove(city); //remove the old city with isMortgaged=false
                     Constants.board.allCities.add(city, c); //add the same city with isMortgaged=true
-                    JOptionPane.showMessageDialog(null, ""+c.name+" is now mortgaged.");
+                    JOptionPane.showMessageDialog(null, "" + c.name + " is now mortgaged.");
                     return true;
-                }
-                else if (Constants.board.getProperty(city).type.equals("railroad") || Constants.board.getProperty(city).type.equals("company")){
+                } else if (Constants.board.getProperty(city).type.equals("railroad") || Constants.board.getProperty(city).type.equals("company")) {
                     Property p = Constants.board.getProperty(city);
                     this.addMoney(p.mortgage);
                     p.isMortgaged = true;
                     Constants.board.allCities.remove(city); //remove the old property with isMortgaged=false
                     Constants.board.allCities.add(city, p); //add the same property with isMortgaged=true
-                    JOptionPane.showMessageDialog(null, ""+p.name+" is now mortgaged.");
+                    JOptionPane.showMessageDialog(null, "" + p.name + " is now mortgaged.");
                     return true;
                 }
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "This property is already mortgaged.");
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "You don't own this property to mortgage.");
         }
         return false;
     }
-    
-    public boolean unmortgage(int city){
-        if(this.getCitiesOwnedInt().contains(city)){
-            if (Constants.board.getProperty(city).isMortgaged){
+
+    public boolean unmortgage(int city) {
+        if (this.getCitiesOwnedInt().contains(city)) {
+            if (Constants.board.getProperty(city).isMortgaged) {
                 Property p = Constants.board.getProperty(city);
                 this.deductMoney(p.mortgage);
                 p.isMortgaged = false;
                 Constants.board.allCities.remove(city); //remove the old property with isMortgaged=false
                 Constants.board.allCities.add(city, p); //adding the same property with isMortgaged=true
-                JOptionPane.showMessageDialog(null, ""+p.name+" unmortgaged.");
+                JOptionPane.showMessageDialog(null, "" + p.name + " unmortgaged.");
                 return true;
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "This property is already NOT mortgaged.");
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "You don't own this property to unmortgage.");
         }
         return false;
     }
-    
-    public boolean buyhouse(int city,int housesCost){
-        if(money>=housesCost){
-            ((normalCity)Constants.board.allCities.get(city)).houses_count++;
+
+    public boolean buyhouse(int city, int housesCost) {
+        if (money >= housesCost) {
+            ((normalCity) Constants.board.allCities.get(city)).houses_count++;
             money -= housesCost;
             return true;
-        }
-        else{
+        } else {
             return false;
         }
-    }   
+    }
 }
-

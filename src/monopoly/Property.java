@@ -10,7 +10,7 @@ class Location {
         this.position = position;
         this.name = name;
         this.type = type;
-    }   
+    }
 
 }
 

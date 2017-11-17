@@ -1,13 +1,13 @@
 package monopoly;
 
-import java.awt.Color;
-import java.awt.Panel;
+import java.awt.Component;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.JComboBox;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -21,6 +21,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private int curTurn = 0;
 
     //panels for choosing players names and icons
+    boolean BuildHouse, Mortgage, SellHouse, Unmortgage;
     ArrayList<JPanel> pnls = new ArrayList<>();
     ArrayList<JTextField> txt_filds = new ArrayList<>();
     ArrayList<JComboBox> cmb_bxs = new ArrayList<>();
@@ -185,11 +186,17 @@ public class JGameWindow extends javax.swing.JFrame {
         DicePanel = new javax.swing.JPanel();
         d1_label = new javax.swing.JLabel();
         d2_label = new javax.swing.JLabel();
-        currentCardPanel = new javax.swing.JPanel();
+        cardPanel = new javax.swing.JPanel();
         currentCardLabel = new javax.swing.JLabel();
         detailedCardLabel = new javax.swing.JLabel();
         BoardLabel = new javax.swing.JLabel();
         mvhPanel = new javax.swing.JPanel();
+        functionsPanel = new javax.swing.JPanel();
+        buildHouseButton = new javax.swing.JButton();
+        sellHouseButton = new javax.swing.JButton();
+        mortgageButton = new javax.swing.JButton();
+        unmortgageButton = new javax.swing.JButton();
+        endGameButton = new javax.swing.JButton();
         BackGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -383,18 +390,18 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.add(DicePanel);
         DicePanel.setBounds(230, 500, 240, 120);
 
-        currentCardPanel.setBackground(new java.awt.Color(210, 234, 220));
-        currentCardPanel.setToolTipText("");
-        currentCardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
-        currentCardPanel.setOpaque(false);
-        currentCardPanel.setPreferredSize(new java.awt.Dimension(0, 0));
-        currentCardPanel.add(currentCardLabel);
+        cardPanel.setBackground(new java.awt.Color(210, 234, 220));
+        cardPanel.setToolTipText("");
+        cardPanel.setMinimumSize(new java.awt.Dimension(252, 284));
+        cardPanel.setOpaque(false);
+        cardPanel.setPreferredSize(new java.awt.Dimension(0, 0));
+        cardPanel.add(currentCardLabel);
 
         detailedCardLabel.setBackground(new java.awt.Color(210, 234, 220));
-        currentCardPanel.add(detailedCardLabel);
+        cardPanel.add(detailedCardLabel);
 
-        BoardPanel.add(currentCardPanel);
-        currentCardPanel.setBounds(190, 220, 410, 280);
+        BoardPanel.add(cardPanel);
+        cardPanel.setBounds(190, 220, 410, 280);
 
         BoardLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/board.jpg"))); // NOI18N
         BoardLabel.setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -408,6 +415,76 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhPanel.setLayout(null);
         BoardPanel.add(mvhPanel);
         mvhPanel.setBounds(10, 10, 720, 720);
+
+        functionsPanel.setOpaque(false);
+
+        buildHouseButton.setText("Build House");
+        buildHouseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buildHouseButtonActionPerformed(evt);
+            }
+        });
+
+        sellHouseButton.setText("Sell House");
+        sellHouseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sellHouseButtonActionPerformed(evt);
+            }
+        });
+
+        mortgageButton.setText("Mortgage");
+        mortgageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mortgageButtonActionPerformed(evt);
+            }
+        });
+
+        unmortgageButton.setText("Unmortgage");
+        unmortgageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unmortgageButtonActionPerformed(evt);
+            }
+        });
+
+        endGameButton.setText("End Game");
+        endGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endGameButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout functionsPanelLayout = new javax.swing.GroupLayout(functionsPanel);
+        functionsPanel.setLayout(functionsPanelLayout);
+        functionsPanelLayout.setHorizontalGroup(
+            functionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(functionsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(functionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buildHouseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sellHouseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mortgageButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(endGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(unmortgageButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        functionsPanelLayout.setVerticalGroup(
+            functionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(functionsPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(buildHouseButton)
+                .addGap(18, 18, 18)
+                .addComponent(sellHouseButton)
+                .addGap(18, 18, 18)
+                .addComponent(mortgageButton)
+                .addGap(18, 18, 18)
+                .addComponent(unmortgageButton)
+                .addGap(18, 18, 18)
+                .addComponent(endGameButton)
+                .addContainerGap(201, Short.MAX_VALUE))
+        );
+
+        BoardPanel.add(functionsPanel);
+        functionsPanel.setBounds(790, 30, 170, 420);
 
         BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/Menu.jpg"))); // NOI18N
         BoardPanel.add(BackGround);
@@ -479,6 +556,63 @@ public class JGameWindow extends javax.swing.JFrame {
 
         initGame();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    public void enableButtons(JButton button, boolean enable) {
+
+        for (Component c : functionsPanel.getComponents()) {
+            if (!c.equals(button)) {
+                c.setEnabled(enable);
+            }
+
+        }
+    }
+
+    private void buildHouseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildHouseButtonActionPerformed
+
+        if (!BuildHouse) {
+            buildHouseButton.setText("Stop");
+            BuildHouse = true;
+            enableButtons(buildHouseButton, false);
+        } else {
+            buildHouseButton.setText("Build House");
+            BuildHouse = false;
+            enableButtons(buildHouseButton, true);
+        }
+
+    }//GEN-LAST:event_buildHouseButtonActionPerformed
+
+    private void endGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endGameButtonActionPerformed
+        Constants.carSys.endGame();
+    }//GEN-LAST:event_endGameButtonActionPerformed
+
+    private void sellHouseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sellHouseButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sellHouseButtonActionPerformed
+
+    private void mortgageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mortgageButtonActionPerformed
+
+        if (!Mortgage) {
+            mortgageButton.setText("Stop");
+            Mortgage = true;
+            enableButtons(mortgageButton, false);
+        } else {
+            mortgageButton.setText("Mortgage");
+            Mortgage = false;
+            enableButtons(mortgageButton, true);
+        }
+    }//GEN-LAST:event_mortgageButtonActionPerformed
+
+    private void unmortgageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unmortgageButtonActionPerformed
+        if (!Unmortgage) {
+            unmortgageButton.setText("Stop");
+            Unmortgage = true;
+            enableButtons(unmortgageButton, false);
+        } else {
+            unmortgageButton.setText("Mortgage");
+            Unmortgage = false;
+            enableButtons(unmortgageButton, true);
+        }
+    }//GEN-LAST:event_unmortgageButtonActionPerformed
     /* 
        the idea of move function is that
        CurPos Counter starts with zero end with 40 (from go to go)
@@ -568,6 +702,17 @@ public class JGameWindow extends javax.swing.JFrame {
             }
 
             mvh.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (BuildHouse) {
+                        Constants.carSys.buildHouse(j);
+                    } else if (SellHouse) {
+                    } else if (Mortgage) {
+                        Constants.carSys.Mortgage(j);
+                    } else if (Unmortgage) {
+                        Constants.carSys.UnMortgage(j);
+                    }
+                }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
@@ -576,8 +721,8 @@ public class JGameWindow extends javax.swing.JFrame {
                 }
 
                 @Override
-                public void mouseExited(MouseEvent e) { 
-                    
+                public void mouseExited(MouseEvent e) {
+
                     JGameWindow.this.drawCurrentLocation(-1);
                     JGameWindow.this.drawDetailedLocation(-1);
                 }
@@ -692,13 +837,16 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JButton EndTurnButton;
     private javax.swing.JPanel MenuPanel;
     private javax.swing.JButton RollDiceButton;
+    private javax.swing.JButton buildHouseButton;
+    private javax.swing.JPanel cardPanel;
     private javax.swing.JPanel chs_plyrs_nms;
     private javax.swing.JPanel chs_plyrs_pnl;
     private javax.swing.JLabel currentCardLabel;
-    private javax.swing.JPanel currentCardPanel;
     private javax.swing.JLabel d1_label;
     private javax.swing.JLabel d2_label;
     private javax.swing.JLabel detailedCardLabel;
+    private javax.swing.JButton endGameButton;
+    private javax.swing.JPanel functionsPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -718,11 +866,14 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton mortgageButton;
     private javax.swing.JPanel mvhPanel;
     private javax.swing.JPanel pnl1;
     private javax.swing.JPanel pnl2;
     private javax.swing.JPanel pnl3;
     private javax.swing.JPanel pnl4;
     private javax.swing.JPanel pnl5;
+    private javax.swing.JButton sellHouseButton;
+    private javax.swing.JButton unmortgageButton;
     // End of variables declaration//GEN-END:variables
 }

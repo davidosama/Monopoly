@@ -214,10 +214,10 @@ public class AuctionDialog extends javax.swing.JDialog {
 
     private void FoldBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FoldBtnActionPerformed
         players.remove(curPlayer);
-        curPlayer = players.get(0);     
+        curPlayer = players.get(0);
         if (players.size() == 1) {
             this.dispose();
-            ((JGameWindow) (this.getParent())).endAuction(curPlayer, HighestAuctionPrice);          
+            ((JGameWindow) (this.getParent())).endAuction(curPlayer, HighestAuctionPrice);
         }
         PlayerNameLabel.setText("Player " + curPlayer + " Auction");
 

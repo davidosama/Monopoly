@@ -25,12 +25,14 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
     /**
      * Creates new form AskToBuyOrAuction
      */
-    static ImageIcon locationIcon;
-    static ImageIcon detailedIcon;
+
+    private java.awt.Frame parent;
     private int choice; //0 for buy , 1 for Auction ( 3ashan yet2ayef ma3 el code el adim ) 
+
     public AskToBuyOrAuction(java.awt.Frame parent) {
         super(parent, true);
-        
+
+        this.parent = parent;
         try {
             Image BackgroundImage = ImageIO.read(AuctionDialog.class.getResource("/drawables/BackGround.jpg"));
             JPanel p = new JPanel() {
@@ -44,22 +46,20 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         } catch (Exception e) {
             Logger.getLogger(AuctionDialog.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         initComponents();
-        this.setLocation(parent.getX() + 136, parent.getY() + 144);
         this.setResizable(false);
-        
-        
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
     }
-    public int startBuyorAuction(ImageIcon locationIcon, ImageIcon detailedIcon)
-    {
-        
+
+    public int startBuyorAuction(ImageIcon locationIcon, ImageIcon detailedIcon) {
+
         //ForSaleLabel.setIcon(new ImageIcon(getClass().getResource("/drawables/ForSale.png")));
+        this.setLocation(parent.getX() + 136, parent.getY() + 144);
         locationLabel.setIcon(locationIcon);
         detailedLabel.setIcon(detailedIcon);
-        this.setVisible(true);  
+        this.setVisible(true);
         return choice;
     }
 
@@ -143,12 +143,12 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AuctionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AuctionButtonActionPerformed
-        choice=1;
+        choice = 1;
         this.setVisible(false);
     }//GEN-LAST:event_AuctionButtonActionPerformed
 
     private void BuyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuyButtonActionPerformed
-        choice=0;
+        choice = 0;
         this.setVisible(false);
     }//GEN-LAST:event_BuyButtonActionPerformed
 
@@ -180,7 +180,6 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

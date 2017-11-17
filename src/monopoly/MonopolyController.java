@@ -43,7 +43,6 @@ public class MonopolyController {
                     if (!curPlayer.inJail) {
                         move();
                     }
-                    Constants.gameWindow.drawDetailedLocation(curPlayer.position);
                     Location L = Constants.board.getLocation(curPlayer.position);
 
                     if (L.type.equals("community") || L.type.equals("chance")) {
@@ -143,6 +142,7 @@ public class MonopolyController {
     public void switchTurn() {
         //Forwart to next Turn
         Player.MoveTurn();
+        curPlayer = Player.getPlayer();
         Constants.gameWindow.enableEndTurnBtn(false);
         Constants.gameWindow.enableRollDiceBtn();
         doubleDiceCount = 0;
@@ -162,7 +162,7 @@ public class MonopolyController {
     }
 
     public void PayRent(Player owner, Property p) {
-        if (!p.isMortgaged){ //check if the property is not mortgaged
+        if (!p.isMortgaged) { //check if the property is not mortgaged
             JOptionPane.showMessageDialog(null, "Unfortunately,This property is owned by Player " + p.owner + " so you will have to pay him a rent");
             if (p.type.equals("company")) {
                 int x;
@@ -183,7 +183,7 @@ public class MonopolyController {
     public void askToBuy() {
         int choice = Constants.gameWindow.startAskToBuyorAuction(curPlayer.position);
         Property p = ((Property) Constants.board.allCities.get(curPlayer.position));
-        
+
         if (choice == 0) {
             boolean n = curPlayer.buy(p.position, p.price);
             if (n) {
@@ -230,27 +230,30 @@ public class MonopolyController {
         Player owner = Player.playersList.get(p.owner);
         if (p.type.equals("railroad")) {
             p.curRent = (owner.numberOfRailRoads * p.rent);
-        } 
-        else if (p.type.equals("city")) {    
-            switch (((normalCity)p).houses_count) {
+        } else if (p.type.equals("city")) {
+            switch (((normalCity) p).houses_count) {
+
+                case 0:
+                    p.curRent = ((normalCity) p).rent;
+                    break;
                 case 1:
-                    p.curRent = ((normalCity)p).rent_1house ;
+                    p.curRent = ((normalCity) p).rent_1house;
                     break;
                 case 2:
-                    p.curRent = ((normalCity)p).rent_2house ;
+                    p.curRent = ((normalCity) p).rent_2house;
                     break;
                 case 3:
-                    p.curRent = ((normalCity)p).rent_3house ;
+                    p.curRent = ((normalCity) p).rent_3house;
                     break;
                 case 4:
-                    p.curRent = ((normalCity)p).rent_4house ;
+                    p.curRent = ((normalCity) p).rent_4house;
                     break;
                 case 5:
-                    p.curRent = ((normalCity)p).rent_hotel ;
+                    p.curRent = ((normalCity) p).rent_hotel;
                     break;
                 default:
                     break;
-            }   
+            }
         }
     }
 
@@ -322,45 +325,65 @@ public class MonopolyController {
 
     }
 
-    public void BuildCity (int city, Player player){
+    public void Mortgage(int city) {
+        curPlayer.mortgage(city);
 
-        int chosenColorID ;
-        if(Constants.board.allCities.get(city).type.equals("city")){
-          
-            if(!(player.getCitiesOwned().contains(city))){     
+    }
+
+    public void UnMortgage(int city) {
+        curPlayer.unmortgage(city);
+
+    }
+
+    public boolean buildHouse(int city) {
+
+        int chosenColorID;
+        if (Constants.board.allCities.get(city).type.equals("city")) {
+
+            if (!(curPlayer.getCitiesOwned().contains(city))) {
                 JOptionPane.showMessageDialog(null, "You don't own this city to build on it");
-                return;
-            }
-                    
-            else if(((normalCity)Constants.board.allCities.get(city)).isMortgaged){
+            } else if (((normalCity) Constants.board.allCities.get(city)).isMortgaged) {
                 JOptionPane.showMessageDialog(null, "You have to unmortgage the city first to build on it");
-                return;
-            }
-            
-            else if (((normalCity)Constants.board.allCities.get(city)).houses_count>=5){
+            } else if (((normalCity) Constants.board.allCities.get(city)).houses_count >= 5) {
                 JOptionPane.showMessageDialog(null, "You are not allowed to build any more buildings");
-                return;
-            }
-            
-            else{
-                chosenColorID =  ((normalCity)Constants.board.allCities.get(city)).colorID;
-
-                if(!player.Groups.contains(chosenColorID)){
+            } else {
+                chosenColorID = ((normalCity) Constants.board.allCities.get(city)).colorID;
+                if (!curPlayer.Groups.contains(chosenColorID)) {
                     JOptionPane.showMessageDialog(null, "You don't own the whole group to build on this city");
-                    return;
-                }
-
-                else{
-                    Boolean acceptedBuilding = player.buyhouse(city, ((normalCity)Constants.board.allCities.get(city)).houseCost);
+                } else {
+                    Boolean acceptedBuilding = curPlayer.buyhouse(city, ((normalCity) Constants.board.allCities.get(city)).houseCost);
                     if (acceptedBuilding) {
-                        updateCurrentRent(((normalCity)Constants.board.allCities.get(city)) );
+                        updateCurrentRent(((normalCity) Constants.board.allCities.get(city)));
                         JOptionPane.showMessageDialog(null, "Congratulations, now you build on" + Constants.board.allCities.get(city).name);
-                    } 
-                    else {
+                        return true;
+                    } else {
                         JOptionPane.showMessageDialog(null, "You don't have enough money");
                     }
                 }
             }
         }
+        return false;
+    }
+
+    public void endGame() {
+        int maximum = 0;
+        int winner = -1;
+        for (int i = 0; i < Player.playersList.size(); i++) {
+            int wealth = Player.playersList.get(i).getMoney();
+            ArrayList<Integer> Properties = Player.playersList.get(i).getCitiesOwned();
+            for (int j = 0; j < Properties.size(); j++) {
+                Property p = Constants.board.getProperty(Properties.get(i));
+                if (p.type.equals("city")) {
+                    wealth += ((normalCity) p).houseCost * ((normalCity) p).houses_count;
+                }
+                wealth += p.price;
+            }
+            if (wealth > maximum) {
+                maximum = wealth;
+                winner = i;
+            }
+        }
+        JOptionPane.showMessageDialog(null, Player.playersList.get(winner).name + " has won with a net worth of: " + maximum);
+        System.exit(0);
     }
 }
