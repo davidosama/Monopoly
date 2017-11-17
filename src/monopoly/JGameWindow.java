@@ -101,7 +101,6 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.carSys = new MonopolyController();
         initMVH();
         initIcons();
-
         MenuPanel.setVisible(false);
         BoardPanel.setVisible(true);
         buyorAuctionWindow = new AskToBuyOrAuction(this);
@@ -416,7 +415,7 @@ public class JGameWindow extends javax.swing.JFrame {
         mvhPanel.setOpaque(false);
         mvhPanel.setLayout(null);
         BoardPanel.add(mvhPanel);
-        mvhPanel.setBounds(10, 10, 720, 720);
+        mvhPanel.setBounds(20, 10, 720, 720);
 
         functionsPanel.setOpaque(false);
 
