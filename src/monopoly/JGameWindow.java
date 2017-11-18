@@ -303,9 +303,10 @@ public class JGameWindow extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Choose Number of Players");
         chs_plyrs_pnl.add(jLabel2);
-        jLabel2.setBounds(410, 110, 460, 135);
+        jLabel2.setBounds(-10, 110, 1260, 135);
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));

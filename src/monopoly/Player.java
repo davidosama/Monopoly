@@ -112,7 +112,7 @@ public class Player {
     }
 
     public void move(int steps) {
-        if (this.position + steps >= 40) //reached or passed go
+        if (this.position + steps >= 40&&!this.inJail) //reached or passed go
         {
             this.money += 200;
         }
@@ -155,20 +155,20 @@ public class Player {
                 if (Constants.board.getProperty(city).type.equals("city")) {
                     normalCity c = (normalCity) Constants.board.getProperty(city);
                     if (c.houses_count != 0) {
-                        JOptionPane.showMessageDialog(null, "Sell all houses first before mortgaging the city.");
+                        MonopolyController.showDialog("Sell all houses first before mortgaging the city.");
                         return false;   //city must have zero houses on it
                     }
                 }
                 Property p = Constants.board.getProperty(city);
                  this.addMoney(p.mortgage);
                 p.isMortgaged = true;
-                JOptionPane.showMessageDialog(null, p.name + " is now mortgaged.");
+                MonopolyController.showDialog(p.name + " is now mortgaged.");
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "This property is already mortgaged.");
+               MonopolyController.showDialog("This property is already mortgaged.");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "You don't own this property to mortgage.");
+            MonopolyController.showDialog("You don't own this property to mortgage.");
         }
 
         return false;
@@ -180,13 +180,13 @@ public class Player {
                 Property p = Constants.board.getProperty(city);
                 this.deductMoney(p.mortgage);
                 p.isMortgaged = false;
-                JOptionPane.showMessageDialog(null, p.name + " unmortgaged.");
+                MonopolyController.showDialog(p.name + " unmortgaged.");
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "This property is already NOT mortgaged.");
+                MonopolyController.showDialog("This property is already NOT mortgaged.");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "You don't own this property to unmortgage.");
+           MonopolyController.showDialog("You don't own this property to unmortgage.");
         }
         return false;
     }

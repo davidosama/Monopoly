@@ -111,6 +111,7 @@ public class PieceLabel extends JLabel {
                 Thread.sleep(Constants.timerMs / Constants.CityWidth);
             } catch (Exception e) {
             }
+            
         }
 
         //increment the player current city by the extra moves (movesNum)
@@ -118,7 +119,9 @@ public class PieceLabel extends JLabel {
 
         //beacuse there are 40 cities
         position = position % 40;
-
+        if(position==0 && !Player.getPlayer().inJail){
+            MonopolyController.showDialog("Congratulations, you've earned $200");
+        }
         //reached corner if currentCity is 10 20 30 OR zero, special case cause we can't just add CityWidth to Move,
         //we shall change the car direction(Updatephoto) and move a larger step 
         //corners are bigger (in pixels) than regular cities
