@@ -38,7 +38,7 @@ public class MonopolyController {
         carRunnable = new Runnable() {
             @Override
             public void run() {
-                if (doubleDiceCount == 3) {//Move player to jail in case of 3 double dices happened
+                if (doubleDiceCount == 1) {//Move player to jail in case of 3 double dices happened
                     moveToJail();
                     Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
@@ -67,23 +67,25 @@ public class MonopolyController {
                                 curPlayer.turnsInJail = 0;
                                 curPlayer.inJail = false;
                             }
-                            Constants.gameWindow.enableEndTurnBtn(true);
+                            
                         } else if (curPlayer.turnsInJail < 3 && d1 == d2) {
                             curPlayer.turnsInJail = 0;
                             curPlayer.inJail = false;
-                            Constants.gameWindow.enableEndTurnBtn(true);
+                            
                         } else if (curPlayer.turnsInJail == 3 && d1 != d2) {
                             curPlayer.deductMoney(50);
                             curPlayer.turnsInJail = 0;
                             curPlayer.inJail = false;
-                            Constants.gameWindow.enableEndTurnBtn(true);
+                            
+                            
                         }
-
+                        Constants.gameWindow.enableDicePanel(false);
+                        
                     } else if (L.type.equals("supertax")) {
-                        JOptionPane.showMessageDialog(null, "You have to pay a tax of $75");
+                        showDialog( "You have to pay a tax of $75");
                         curPlayer.deductMoney(75);
                     } else if (L.type.equals("incometax")) {
-                        JOptionPane.showMessageDialog(null, "You have to pay a tax of $200");
+                        showDialog( "You have to pay a tax of $200");
                         curPlayer.deductMoney(200);
 
                     }
@@ -151,20 +153,21 @@ public class MonopolyController {
     }
 
     public void moveToJail() {
-        JOptionPane.showMessageDialog(null, "You're going to jail");
+        showDialog( "You're going to jail");
         if (curPlayer.position > JAILPOSITION) {
             steps = 40 - (curPlayer.position - JAILPOSITION);
         } else {
             steps = JAILPOSITION - curPlayer.position;
         }
         curPlayer.inJail = true;
+        
         move();
 
     }
 
     public void PayRent(Player owner, Property p) {
         if (!p.isMortgaged) { //check if the property is not mortgaged
-            JOptionPane.showMessageDialog(null, "Unfortunately, This property is owned by " + owner.name + ", so you will have to pay him a rent");
+            showDialog( "Unfortunately, This property is owned by " + owner.name + ", so you will have to pay him a rent");
             if (p.type.equals("company")) {
                 int x;
                 if (owner.numberOfCompanies == 1) {
@@ -190,7 +193,7 @@ public class MonopolyController {
         if (choice == 1) {
             int[] arr = Constants.gameWindow.startAuction(); // this function returns 2 values, the winner and the highest bid
             int winner = arr[0];
-            JOptionPane.showMessageDialog(null, Player.getName(winner) + " has won the auction");
+            showDialog( Player.getName(winner) + " has won the auction");
             buyer = Player.playersList.get(winner);
             price = arr[1];
         }
@@ -208,9 +211,9 @@ public class MonopolyController {
             }
 
             updateCurrentRent(p);
-            JOptionPane.showMessageDialog(null, "Congratulations, now you own " + Constants.board.allCities.get(p.position).name);
+            showDialog( "Congratulations, now you own " + Constants.board.allCities.get(p.position).name);
         } else {
-            JOptionPane.showConfirmDialog(null, "You don't have enough money");
+            showDialog("You don't have enough money");
         }
     }
 
@@ -339,23 +342,23 @@ public class MonopolyController {
         if (Constants.board.allCities.get(city).type.equals("city")) {
 
             if (!(curPlayer.getCitiesOwned().contains(city))) {
-                JOptionPane.showMessageDialog(null, "You don't own this city to build on it");
+                showDialog( "You don't own this city to build on it");
             } else if (((normalCity) Constants.board.allCities.get(city)).isMortgaged) {
-                JOptionPane.showMessageDialog(null, "You have to unmortgage the city first to build on it");
+                showDialog( "You have to unmortgage the city first to build on it");
             } else if (((normalCity) Constants.board.allCities.get(city)).houses_count >= 5) {
-                JOptionPane.showMessageDialog(null, "You are not allowed to build any more buildings");
+                showDialog( "You are not allowed to build any more buildings");
             } else {
                 chosenColorID = ((normalCity) Constants.board.allCities.get(city)).colorID;
                 if (!curPlayer.Groups.contains(chosenColorID)) {
-                    JOptionPane.showMessageDialog(null, "You don't own the whole group to build on this city");
+                    showDialog( "You don't own the whole group to build on this city");
                 } else {
                     Boolean acceptedBuilding = curPlayer.buyhouse(city, ((normalCity) Constants.board.allCities.get(city)).houseCost);
                     if (acceptedBuilding) {
                         updateCurrentRent(((normalCity) Constants.board.allCities.get(city)));
-                        JOptionPane.showMessageDialog(null, "Congratulations, now you build on" + Constants.board.allCities.get(city).name);
+                        showDialog( "Congratulations, now you build on" + Constants.board.allCities.get(city).name);
                         return true;
                     } else {
-                        JOptionPane.showMessageDialog(null, "You don't have enough money");
+                        showDialog( "You don't have enough money");
                     }
                 }
             }
@@ -370,7 +373,7 @@ public class MonopolyController {
             int wealth = Player.playersList.get(i).getMoney();
             ArrayList<Integer> Properties = Player.playersList.get(i).getCitiesOwned();
             for (int j = 0; j < Properties.size(); j++) {
-                Property p = Constants.board.getProperty(Properties.get(i));
+                Property p = Constants.board.getProperty(Properties.get(j));
                 if (p.type.equals("city")) {
                     wealth += ((normalCity) p).houseCost * ((normalCity) p).houses_count;
                 }
@@ -381,8 +384,11 @@ public class MonopolyController {
                 winner = i;
             }
         }
-        JOptionPane.showMessageDialog(null, Player.getName(winner) + " has won with a net worth of: " + maximum);
+        showDialog( Player.getName(winner) + " has won with a net worth of: " + maximum);
         System.exit(0);
+    }
+    public static void showDialog(String s){
+        JOptionPane.showMessageDialog(Constants.gameWindow.getBoardLabel(), s);
     }
 
 }
