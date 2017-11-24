@@ -38,7 +38,7 @@ public class MonopolyController {
         carRunnable = new Runnable() {
             @Override
             public void run() {
-                if (doubleDiceCount == 1) {//Move player to jail in case of 3 double dices happened
+                if (doubleDiceCount == 3) {//Move player to jail in case of 3 double dices happened
                     moveToJail();
                     Constants.gameWindow.enableEndTurnBtn(true);
                 } else {
