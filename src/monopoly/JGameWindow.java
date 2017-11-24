@@ -33,6 +33,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
     private AskToBuyOrAuction buyorAuctionWindow;
     private JPlayerInfo playerInfoWin;
+    private AuctionDialog auctionDialog;
 
     public void addLabel(int playerNum, String iconName) {
 
@@ -106,6 +107,7 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setVisible(true);
         playerNameLabel.setText(Player.getName(0)+"'s Turn");
         buyorAuctionWindow = new AskToBuyOrAuction();
+        auctionDialog = new AuctionDialog();
     }
 
     private void initMenu() {
@@ -794,13 +796,12 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     /////////auction
-    public int [] startAuction(int curPlayerNum) {
-        return AuctionDialog.startAuctionDialog(curPlayerNum, Player.playersCount);
+    public int [] startAuction() {
+        return auctionDialog.start();
     }
 
     public int startAskToBuyorAuction(int curPosition) {
-        int choice = buyorAuctionWindow.startBuyorAuction(locationIcons[curPosition], detailedIcons[curPosition]);
-        return choice;
+        return buyorAuctionWindow.startBuyorAuction(locationIcons[curPosition], detailedIcons[curPosition]);
     }
 
     /////////

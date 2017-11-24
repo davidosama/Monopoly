@@ -188,7 +188,7 @@ public class MonopolyController {
         int price = p.price;
         Player buyer = curPlayer;
         if (choice == 1) {
-            int [] arr = Constants.gameWindow.startAuction(curPlayer.num); // this function returns 2 values, the winner and the highest bid
+            int[] arr = Constants.gameWindow.startAuction(); // this function returns 2 values, the winner and the highest bid
             int winner = arr[0];
             JOptionPane.showMessageDialog(null, Player.getName(winner) + " has won the auction");
             buyer = Player.playersList.get(winner);
@@ -289,16 +289,14 @@ public class MonopolyController {
             case "GiveAll":
                 int toincrease = curCard.value;
                 value = curCard.value * (players.size() - 1);
-
                 for (int i = 0; i < players.size(); i++) {
                     if (i != playerNum) {
                         players.get(i).addMoney(toincrease);
                     } else {
                         players.get(i).deductMoney(value);
                     }
-
-                    break;
                 }
+                break;
 
             case "TakeAll":
                 int toreduce = curCard.value;
@@ -319,6 +317,7 @@ public class MonopolyController {
                     steps = 40 - (curPlayer.position - curCard.value);
                 }
                 carRunnable.run();
+                break;
 
         }
 

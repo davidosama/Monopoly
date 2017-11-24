@@ -6,7 +6,6 @@
 package monopoly;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.JOptionPane;
 
 public class Player {
@@ -31,7 +30,7 @@ public class Player {
 
     public static int playersCount = 0;
 
-    private static int Turn = 0;
+    private static int turn = 0;
 
     //Jail variable needed
     public boolean inJail = false;
@@ -57,12 +56,12 @@ public class Player {
     }
 
     public static void MoveTurn() {
-        Turn = (Turn + 1) % playersList.size();
-        Constants.gameWindow.changeTurn(Turn);
+        turn = (turn + 1) % playersList.size();
+        Constants.gameWindow.changeTurn(turn);
     }
 
     public static Player getPlayer() {
-        return playersList.get(Turn);
+        return playersList.get(turn);
     }
 
     public ArrayList getCitiesOwned() {
@@ -160,7 +159,7 @@ public class Player {
                     }
                 }
                 Property p = Constants.board.getProperty(city);
-                 this.addMoney(p.mortgage);
+                this.addMoney(p.mortgage);
                 p.isMortgaged = true;
                 JOptionPane.showMessageDialog(null, p.name + " is now mortgaged.");
                 return true;
@@ -204,4 +203,9 @@ public class Player {
     public static String getName(int playerNumber) {
         return playersList.get(playerNumber).name;
     }
+
+    public static int getTurn() {
+        return turn;
+    }
+
 }

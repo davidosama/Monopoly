@@ -25,17 +25,11 @@ public class AuctionDialog extends javax.swing.JDialog {
      * Creates new form AuctionDialog
      */
     // the player with the highest AuctionPrice
-    private static int HighestAuctionPrice;
-    private int playersCount;
-    private static Integer curPlayer;
-    private ArrayList<Integer> players = new ArrayList<Integer>();
+    private int HighestAuctionPrice;
+    private Integer curPlayer;
+    private ArrayList<Integer> players;
 
-    public AuctionDialog(int curPlayer, int playersCount) {
-
-        HighestAuctionPrice = 0;
-        this.playersCount = playersCount;
-        this.curPlayer = curPlayer;
-        loadArray();
+    public AuctionDialog() {
 
         //Setting Background
         try {
@@ -52,14 +46,17 @@ public class AuctionDialog extends javax.swing.JDialog {
             Logger.getLogger(AuctionDialog.class.getName()).log(Level.SEVERE, null, e);
         }
         initComponents();
-        PlayerNameLabel.setText(Player.getName(curPlayer) + "'s " + "turn");
-        AuctionPricelbl.setText("" + this.HighestAuctionPrice);
-        this.setLocationRelativeTo(Constants.gameWindow.getBoardLabel());
 
     }
 
-    public static int[] startAuctionDialog(int currentPlayer, int playersCount) {
-        new AuctionDialog(currentPlayer, playersCount).setVisible(true);
+    public int[] start() {
+        this.HighestAuctionPrice = 0;
+        this.curPlayer = Player.getTurn();
+        loadArray();
+        PlayerNameLabel.setText(Player.getName(curPlayer) + "'s " + "turn");
+        AuctionPricelbl.setText("" + this.HighestAuctionPrice);
+        this.setLocationRelativeTo(Constants.gameWindow.getBoardLabel());
+        this.setVisible(true);
         return new int[]{curPlayer, HighestAuctionPrice};
     }
 
@@ -191,6 +188,8 @@ public class AuctionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_SubmitBtnActionPerformed
 
     private void loadArray() {
+        int playersCount = Player.playersList.size();
+        players = new ArrayList();
         for (int i = 0; i < playersCount; i++) {
             players.add(i);
         }
@@ -226,7 +225,7 @@ public class AuctionDialog extends javax.swing.JDialog {
         players.remove(curPlayer);
         curPlayer = players.get(0);
         if (players.size() == 1) {
-            this.dispose();
+            this.setVisible(false);
         }
         PlayerNameLabel.setText(Player.getName(curPlayer) + "'s " + "turn");
 
