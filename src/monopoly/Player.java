@@ -6,7 +6,6 @@
 package monopoly;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public class Player {
 
@@ -111,7 +110,7 @@ public class Player {
     }
 
     public void move(int steps) {
-        if (this.position + steps >= 40&&!this.inJail) //reached or passed go
+        if (this.position + steps >= 40 && !this.inJail) //reached or passed go
         {
             this.money += 200;
         }
@@ -164,7 +163,7 @@ public class Player {
                 MonopolyController.showDialog(p.name + " is now mortgaged.");
                 return true;
             } else {
-               MonopolyController.showDialog("This property is already mortgaged.");
+                MonopolyController.showDialog("This property is already mortgaged.");
             }
         } else {
             MonopolyController.showDialog("You don't own this property to mortgage.");
@@ -185,7 +184,7 @@ public class Player {
                 MonopolyController.showDialog("This property is already NOT mortgaged.");
             }
         } else {
-           MonopolyController.showDialog("You don't own this property to unmortgage.");
+            MonopolyController.showDialog("You don't own this property to unmortgage.");
         }
         return false;
     }

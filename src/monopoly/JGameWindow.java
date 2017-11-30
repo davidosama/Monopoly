@@ -65,14 +65,14 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public void changeTurn(int turn) {
         curTurn = turn;
-        playerNameLabel.setText(Player.getName(turn)+"'s Turn");
+        playerNameLabel.setText(Player.getName(turn) + "'s Turn");
     }
 
     public void moveCarLabel(int steps) {
         for (int i = 0; i < steps; i++) {
             ((PieceLabel) BoardLabel.getComponent(curTurn)).MoveOneCity();
         }
-        Constants.gameWindow.drawCurrentLocation(-1);
+        this.drawCurrentLocation(-1);
     }
 
     public void addPlayer(String name, String iconName) {
@@ -105,7 +105,7 @@ public class JGameWindow extends javax.swing.JFrame {
         initIcons();
         MenuPanel.setVisible(false);
         BoardPanel.setVisible(true);
-        playerNameLabel.setText(Player.getName(0)+"'s Turn");
+        playerNameLabel.setText(Player.getName(0) + "'s Turn");
         buyorAuctionWindow = new AskToBuyOrAuction();
         auctionDialog = new AuctionDialog();
     }
@@ -797,7 +797,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }
 
     /////////auction
-    public int [] startAuction() {
+    public int[] startAuction() {
         return auctionDialog.start();
     }
 
