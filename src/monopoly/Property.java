@@ -35,7 +35,7 @@ public abstract class Property extends Location {
 
 }
 
-class normalCity extends Property {
+class City extends Property {
 
     int colorID;
     int rent_1house;
@@ -46,7 +46,7 @@ class normalCity extends Property {
     int houseCost;
     int houses_count;
 
-    public normalCity(String name, int position, int colorID, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost) {
+    public City(String name, int position, int colorID, int price, int rent, int rent_1house, int rent_2house, int rent_3house, int rent_4house, int rent_hotel, int mortgage, int houseCost) {
         super(-1, price, rent, mortgage, position, name, "city");
         this.colorID = colorID;
         this.rent_1house = rent_1house;
