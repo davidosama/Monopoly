@@ -60,10 +60,16 @@ public class Player {
         Constants.gameWindow.changeTurn(turn);
     }
 
-    public static Player getPlayer() {
+    public static Player getCurrentPlayer() {
         return playersList.get(turn);
     }
-
+    
+    public static Player getPlayer(int n)
+    {
+        
+     return playersList.get(n);
+    }
+    
     public ArrayList getCitiesOwned() {
         return this.propertiesOwned;
     }
@@ -125,7 +131,7 @@ public class Player {
             //this function needs work
             Property p = Constants.board.getProperty(propertiesOwned.get(i));
             if (p.type.equals("city")) {
-                normalCity c = (normalCity) p;
+                City c = (City) p;
                 if (c.colorID == ColorID) {
                     occurences++;
                 }
@@ -144,7 +150,6 @@ public class Player {
 
         }
 
-        System.out.println(Groups);
 
     }
 
@@ -152,7 +157,7 @@ public class Player {
         if (this.getCitiesOwnedInt().contains(city)) {
             if (!((Property) Constants.board.getProperty(city)).isMortgaged) {
                 if (Constants.board.getProperty(city).type.equals("city")) {
-                    normalCity c = (normalCity) Constants.board.getProperty(city);
+                    City c = (City) Constants.board.getProperty(city);
                     if (c.houses_count != 0) {
                         MonopolyController.showDialog("Sell all houses first before mortgaging the city.");
                         return false;   //city must have zero houses on it
@@ -192,7 +197,7 @@ public class Player {
 
     public boolean buyhouse(int city, int housesCost) {
         if (money >= housesCost) {
-            ((normalCity) Constants.board.allCities.get(city)).houses_count++;
+            ((City) Constants.board.allCities.get(city)).houses_count++;
             money -= housesCost;
             return true;
         } else {
@@ -208,4 +213,41 @@ public class Player {
         return turn;
     }
 
+    
+    public boolean giveMoney(int p2, int cash)
+    {
+        if(deductMoney(cash))
+        {
+            Player p = getPlayer(p2);
+            p.addMoney(cash);
+            return true;
+        }
+        else return false;
+        
+    }
+    
+    
+    public boolean giveProperty(int p2, int property)
+    {
+        
+        Property prop = Constants.board.getProperty(property);
+        if(prop.owner == num)
+        {
+            //you should first check if there are built houses
+            prop.owner = p2;
+            propertiesOwned.remove(prop);
+            if(prop instanceof City)
+            {
+             City c = (City) prop;
+                
+             for(int i=0; i<Groups.size();i++)
+                 if(c.colorID == Groups.get(i))
+                     Groups.remove(i);
+            }
+            
+            return true;
+        }
+       
+        return false;
+    }
 }

@@ -28,7 +28,7 @@ public class MonopolyController {
 
     public MonopolyController() {
 
-        curPlayer = Player.getPlayer();
+        curPlayer = Player.getCurrentPlayer();
 
         //For testing, speed things up
         if (Constants.testing) {
@@ -145,7 +145,7 @@ public class MonopolyController {
     public void switchTurn() {
         //Forwart to next Turn
         Player.MoveTurn();
-        curPlayer = Player.getPlayer();
+        curPlayer = Player.getCurrentPlayer();
         Constants.gameWindow.enableEndTurnBtn(false);
         Constants.gameWindow.enableRollDiceBtn();
         doubleDiceCount = 0;
@@ -206,7 +206,7 @@ public class MonopolyController {
             } else if (p.type.equals("railroad")) {
                 buyer.numberOfRailRoads++;
             } else {
-                normalCity c = (normalCity) p;
+                City c = (City) p;
                 buyer.updateGroups(c.colorID);
             }
 
@@ -233,25 +233,25 @@ public class MonopolyController {
         if (p.type.equals("railroad")) {
             p.curRent = (owner.numberOfRailRoads * p.rent);
         } else if (p.type.equals("city")) {
-            switch (((normalCity) p).houses_count) {
+            switch (((City) p).houses_count) {
 
                 case 0:
-                    p.curRent = ((normalCity) p).rent;
+                    p.curRent = ((City) p).rent;
                     break;
                 case 1:
-                    p.curRent = ((normalCity) p).rent_1house;
+                    p.curRent = ((City) p).rent_1house;
                     break;
                 case 2:
-                    p.curRent = ((normalCity) p).rent_2house;
+                    p.curRent = ((City) p).rent_2house;
                     break;
                 case 3:
-                    p.curRent = ((normalCity) p).rent_3house;
+                    p.curRent = ((City) p).rent_3house;
                     break;
                 case 4:
-                    p.curRent = ((normalCity) p).rent_4house;
+                    p.curRent = ((City) p).rent_4house;
                     break;
                 case 5:
-                    p.curRent = ((normalCity) p).rent_hotel;
+                    p.curRent = ((City) p).rent_hotel;
                     break;
                 default:
                     break;
@@ -343,18 +343,18 @@ public class MonopolyController {
 
             if (!(curPlayer.getCitiesOwned().contains(city))) {
                 showDialog( "You don't own this city to build on it");
-            } else if (((normalCity) Constants.board.allCities.get(city)).isMortgaged) {
+            } else if (((City) Constants.board.allCities.get(city)).isMortgaged) {
                 showDialog( "You have to unmortgage the city first to build on it");
-            } else if (((normalCity) Constants.board.allCities.get(city)).houses_count >= 5) {
+            } else if (((City) Constants.board.allCities.get(city)).houses_count >= 5) {
                 showDialog( "You are not allowed to build any more buildings");
             } else {
-                chosenColorID = ((normalCity) Constants.board.allCities.get(city)).colorID;
+                chosenColorID = ((City) Constants.board.allCities.get(city)).colorID;
                 if (!curPlayer.Groups.contains(chosenColorID)) {
                     showDialog( "You don't own the whole group to build on this city");
                 } else {
-                    Boolean acceptedBuilding = curPlayer.buyhouse(city, ((normalCity) Constants.board.allCities.get(city)).houseCost);
+                    Boolean acceptedBuilding = curPlayer.buyhouse(city, ((City) Constants.board.allCities.get(city)).houseCost);
                     if (acceptedBuilding) {
-                        updateCurrentRent(((normalCity) Constants.board.allCities.get(city)));
+                        updateCurrentRent(((City) Constants.board.allCities.get(city)));
                         showDialog( "Congratulations, now you build on" + Constants.board.allCities.get(city).name);
                         return true;
                     } else {
@@ -375,7 +375,7 @@ public class MonopolyController {
             for (int j = 0; j < Properties.size(); j++) {
                 Property p = Constants.board.getProperty(Properties.get(j));
                 if (p.type.equals("city")) {
-                    wealth += ((normalCity) p).houseCost * ((normalCity) p).houses_count;
+                    wealth += ((City) p).houseCost * ((City) p).houses_count;
                 }
                 wealth += p.price;
             }

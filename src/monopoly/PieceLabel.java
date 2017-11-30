@@ -119,7 +119,7 @@ public class PieceLabel extends JLabel {
 
         //beacuse there are 40 cities
         position = position % 40;
-        if(position==0 && !Player.getPlayer().inJail){
+        if(position==0 && !Player.getCurrentPlayer().inJail){
             MonopolyController.showDialog("Congratulations, you've earned $200");
         }
         //reached corner if currentCity is 10 20 30 OR zero, special case cause we can't just add CityWidth to Move,

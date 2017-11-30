@@ -55,7 +55,7 @@ public class Board {
                 int mortgage = Integer.parseInt(cityValues[10]);
                 int houseCost = Integer.parseInt(cityValues[11]);
 
-                normalCity city = new normalCity(name, position, colorID, price, rent, rent1, rent2, rent3, rent4, rent_h, mortgage, houseCost);
+                City city = new City(name, position, colorID, price, rent, rent1, rent2, rent3, rent4, rent_h, mortgage, houseCost);
 
                 allCities.add(city);
             }
