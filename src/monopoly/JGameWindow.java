@@ -140,13 +140,10 @@ public class JGameWindow extends javax.swing.JFrame {
         }
     }
 
-    
-    private void trade()
-    {
-        
-        
+    private void trade() {
+
     }
-    
+
     private void chs_plyrs_nms(int plyrs_num) {
         chs_plyrs_pnl.setVisible(false);
         chs_plyrs_nms.setVisible(true);

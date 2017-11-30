@@ -145,7 +145,6 @@ public class AskToBuyOrAuction extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_BuyButtonActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AuctionButton;
     private javax.swing.JButton BuyButton;

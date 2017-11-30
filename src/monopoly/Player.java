@@ -62,13 +62,12 @@ public class Player {
     public static Player getCurrentPlayer() {
         return playersList.get(turn);
     }
-    
-    public static Player getPlayer(int n)
-    {
-        
-     return playersList.get(n);
+
+    public static Player getPlayer(int n) {
+
+        return playersList.get(n);
     }
-    
+
     public ArrayList getCitiesOwned() {
         return this.propertiesOwned;
     }
@@ -149,7 +148,6 @@ public class Player {
 
         }
 
-
     }
 
     public boolean mortgage(int city) {
@@ -212,41 +210,37 @@ public class Player {
         return turn;
     }
 
-    
-    public boolean giveMoney(int p2, int cash)
-    {
-        if(deductMoney(cash))
-        {
+    public boolean giveMoney(int p2, int cash) {
+        if (deductMoney(cash)) {
             Player p = getPlayer(p2);
             p.addMoney(cash);
             return true;
+        } else {
+            return false;
         }
-        else return false;
-        
+
     }
-    
-    
-    public boolean giveProperty(int p2, int property)
-    {
-        
+
+    public boolean giveProperty(int p2, int property) {
+
         Property prop = Constants.board.getProperty(property);
-        if(prop.owner == num)
-        {
+        if (prop.owner == num) {
             //you should first check if there are built houses
             prop.owner = p2;
             propertiesOwned.remove(prop);
-            if(prop instanceof City)
-            {
-             City c = (City) prop;
-                
-             for(int i=0; i<Groups.size();i++)
-                 if(c.colorID == Groups.get(i))
-                     Groups.remove(i);
+            if (prop instanceof City) {
+                City c = (City) prop;
+
+                for (int i = 0; i < Groups.size(); i++) {
+                    if (c.colorID == Groups.get(i)) {
+                        Groups.remove(i);
+                    }
+                }
             }
-            
+
             return true;
         }
-       
+
         return false;
     }
 }
