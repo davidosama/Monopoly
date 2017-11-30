@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -91,8 +92,7 @@ public class JGameWindow extends javax.swing.JFrame {
         Constants.BoardHeight = BoardLabel.getHeight();
         Constants.BoardWidth = BoardLabel.getWidth();
         EndTurnButton.setVisible(false);
-        tradePanel.setVisible(false);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
+        //jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawables/BackGround.jpg"))); // NOI18N
 
         this.setLocationRelativeTo(null);
 
@@ -167,6 +167,7 @@ public class JGameWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tradeDialog = new javax.swing.JDialog();
         MenuPanel = new javax.swing.JPanel();
         chs_plyrs_nms = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -197,8 +198,6 @@ public class JGameWindow extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         BackGround2 = new javax.swing.JLabel();
         BoardPanel = new javax.swing.JPanel();
-        tradePanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         RollDiceButton = new javax.swing.JButton();
         EndTurnButton = new javax.swing.JButton();
         DicePanel = new javax.swing.JPanel();
@@ -218,6 +217,17 @@ public class JGameWindow extends javax.swing.JFrame {
         playerNameLabel = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         BackGround = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout tradeDialogLayout = new javax.swing.GroupLayout(tradeDialog.getContentPane());
+        tradeDialog.getContentPane().setLayout(tradeDialogLayout);
+        tradeDialogLayout.setHorizontalGroup(
+            tradeDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        tradeDialogLayout.setVerticalGroup(
+            tradeDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Monopoly");
@@ -378,18 +388,6 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setName(""); // NOI18N
         BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         BoardPanel.setLayout(null);
-
-        tradePanel.setBackground(new java.awt.Color(0, 0, 0));
-        tradePanel.setToolTipText("");
-        tradePanel.setMinimumSize(new java.awt.Dimension(252, 284));
-        tradePanel.setOpaque(false);
-        tradePanel.setPreferredSize(new java.awt.Dimension(0, 0));
-
-        jLabel1.setText("jLabel1");
-        tradePanel.add(jLabel1);
-
-        BoardPanel.add(tradePanel);
-        tradePanel.setBounds(120, 100, 520, 530);
 
         RollDiceButton.setText("Roll Dice");
         RollDiceButton.setBorder(null);
@@ -675,7 +673,8 @@ public class JGameWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_unmortgageButtonActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        tradePanel.setVisible(true);
+
+        tradeDialog.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
     /* 
        the idea of move function is that
@@ -923,7 +922,6 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
@@ -942,7 +940,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JPanel pnl4;
     private javax.swing.JPanel pnl5;
     private javax.swing.JButton sellHouseButton;
-    private javax.swing.JPanel tradePanel;
+    private javax.swing.JDialog tradeDialog;
     private javax.swing.JButton unmortgageButton;
     // End of variables declaration//GEN-END:variables
 }
