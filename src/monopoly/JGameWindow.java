@@ -517,13 +517,13 @@ public class JGameWindow extends javax.swing.JFrame {
                 .addComponent(sellHouseButton)
                 .addGap(18, 18, 18)
                 .addComponent(mortgageButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(unmortgageButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(endGameButton)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         BoardPanel.add(functionsPanel);
