@@ -65,6 +65,10 @@ public class JGameWindow extends javax.swing.JFrame {
         playerInfoWin.setVisible(false);
     }
 
+    public void showWithdrawButton(boolean show) {
+        WithdrawBtn.setVisible(show);
+    }
+
     public void changeTurn(int turn) {
         curTurn = turn;
         playerNameLabel.setText(Player.getName(turn) + "'s Turn");
@@ -77,6 +81,11 @@ public class JGameWindow extends javax.swing.JFrame {
         this.drawCurrentLocation(-1);
     }
 
+    public void removeLabel(int num) {
+        BoardLabel.remove(num);
+        BoardLabel.repaint();
+    }
+
     public void addPlayer(String name, String iconName) {
 
         //Creates and add players into the array
@@ -87,6 +96,7 @@ public class JGameWindow extends javax.swing.JFrame {
 
     public JGameWindow() {
         initComponents();
+        WithdrawBtn.setVisible(false);
         Constants.gameWindow = this;
         Constants.board = new Board();
         Constants.BoardHeight = BoardLabel.getHeight();
@@ -195,6 +205,7 @@ public class JGameWindow extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         BackGround2 = new javax.swing.JLabel();
         BoardPanel = new javax.swing.JPanel();
+        WithdrawBtn = new javax.swing.JButton();
         RollDiceButton = new javax.swing.JButton();
         EndTurnButton = new javax.swing.JButton();
         DicePanel = new javax.swing.JPanel();
@@ -386,6 +397,15 @@ public class JGameWindow extends javax.swing.JFrame {
         BoardPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         BoardPanel.setLayout(null);
 
+        WithdrawBtn.setText("Declare Bankruptcy");
+        WithdrawBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WithdrawBtnActionPerformed(evt);
+            }
+        });
+        BoardPanel.add(WithdrawBtn);
+        WithdrawBtn.setBounds(300, 550, 160, 60);
+
         RollDiceButton.setText("Roll Dice");
         RollDiceButton.setBorder(null);
         RollDiceButton.addActionListener(new java.awt.event.ActionListener() {
@@ -574,6 +594,7 @@ public class JGameWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_RollDiceButtonActionPerformed
 
     private void EndTurnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EndTurnButtonActionPerformed
+
         if (!(BuildHouse || Mortgage || SellHouse || Unmortgage)) {
             Constants.carSys.switchTurn();
         }
@@ -673,6 +694,14 @@ public class JGameWindow extends javax.swing.JFrame {
 
         tradeDialog.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void WithdrawBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WithdrawBtnActionPerformed
+        removeLabel(Player.turn);
+        Constants.carSys.removePlayer(Player.turn);
+        WithdrawBtn.setVisible(false);
+        EndTurnButtonActionPerformed(evt);
+
+    }//GEN-LAST:event_WithdrawBtnActionPerformed
     /* 
        the idea of move function is that
        CurPos Counter starts with zero end with 40 (from go to go)
@@ -898,6 +927,7 @@ public class JGameWindow extends javax.swing.JFrame {
     private javax.swing.JButton EndTurnButton;
     private javax.swing.JPanel MenuPanel;
     private javax.swing.JButton RollDiceButton;
+    private javax.swing.JButton WithdrawBtn;
     private javax.swing.JButton buildHouseButton;
     private javax.swing.JPanel cardPanel;
     private javax.swing.JPanel chs_plyrs_nms;

@@ -20,6 +20,7 @@ public class Player {
     public int numberOfCompanies;
     public int numberOfRailRoads;
     private int money;
+    private boolean bankrupt = false;
 
     //City Number
     public int position;
@@ -29,7 +30,7 @@ public class Player {
 
     public static int playersCount = 0;
 
-    private static int turn = 0;
+    public static int turn = 0;
 
     //Jail variable needed
     public boolean inJail = false;
@@ -99,19 +100,40 @@ public class Player {
 //    abstract boolean trade(int city1, int city2);
     public void addMoney(int money) {
         this.money += money;
+        if (bankrupt && this.money > 0) {
+            bankrupt = false;
+            Constants.gameWindow.showWithdrawButton(false);
+
+        }
     }
 
     public int getMoney() {
         return money;
     }
 
-    public boolean deductMoney(int money) {
+    public boolean deductMoney(int money, boolean isBuying) {
         if (this.money >= money) {
             this.money -= money;
             return true;
         } else {
+
+            if (isBuying) {
+                return false;
+            } else {
+                this.money -= money;
+                bankrupt = true;
+                MonopolyController.showDialog("you must mortgage properties");
+                Constants.gameWindow.showWithdrawButton(true);
+
+            }
             return false;
         }
+
+    }
+
+    public boolean deductMoney(int money) {
+
+        return this.deductMoney(money, false);
     }
 
     public void move(int steps) {

@@ -12,29 +12,29 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class MonopolyController {
-
+    
     private static int JAILPOSITION = 10;
     int d1, d2, steps;
     private Player curPlayer;
     //For dice shuffling
     private int diceTimerCounter;
     private javax.swing.Timer diceTimer;
-
+    
     private int doubleDiceCount = 0;
     private Random rand;
 
     // runnable interface for the thread
     private Runnable carRunnable;
-
+    
     public MonopolyController() {
-
+        
         curPlayer = Player.getCurrentPlayer();
 
         //For testing, speed things up
         if (Constants.testing) {
             Constants.timerMs = 60;
         }
-
+        
         carRunnable = new Runnable() {
             @Override
             public void run() {
@@ -47,7 +47,7 @@ public class MonopolyController {
                     }
                     Constants.gameWindow.hidePlayerInfoWindow();
                     Location L = Constants.board.getLocation(curPlayer.position);
-
+                    
                     if (L.type.equals("community") || L.type.equals("chance")) {
                         doCard();
                     } else if (L.type.equals("railroad") || L.type.equals("city") || L.type.equals("company")) {
@@ -67,37 +67,37 @@ public class MonopolyController {
                                 curPlayer.turnsInJail = 0;
                                 curPlayer.inJail = false;
                             }
-
+                            
                         } else if (curPlayer.turnsInJail < 3 && d1 == d2) {
                             curPlayer.turnsInJail = 0;
                             curPlayer.inJail = false;
-
+                            
                         } else if (curPlayer.turnsInJail == 3 && d1 != d2) {
                             curPlayer.deductMoney(50);
                             curPlayer.turnsInJail = 0;
                             curPlayer.inJail = false;
-
+                            
                         }
                         Constants.gameWindow.enableDicePanel(false);
-
+                        
                     } else if (L.type.equals("supertax")) {
                         showDialog("You have to pay a tax of $75");
                         curPlayer.deductMoney(75);
                     } else if (L.type.equals("incometax")) {
                         showDialog("You have to pay a tax of $200");
                         curPlayer.deductMoney(200);
-
+                        
                     }
-
+                    
                     if (!(d1 == d2)) {
                         Constants.gameWindow.enableEndTurnBtn(true);
                     } else {
                         Constants.gameWindow.enableRollDiceBtn();
                     }
                 }
-
+                
             }
-
+            
         };
         rand = new Random();
 
@@ -105,7 +105,7 @@ public class MonopolyController {
         diceTimer = new javax.swing.Timer(Constants.timerMs, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                
                 diceTimerCounter--;
                 d1 = rand.nextInt(6) + 1;
                 d2 = rand.nextInt(6) + 1;
@@ -113,7 +113,7 @@ public class MonopolyController {
                 //just for testing
 
                 Constants.gameWindow.drawDice(d1, d2);
-
+                
                 if (diceTimerCounter == 0) {
                     if (d1 == d2) {
                         doubleDiceCount++;
@@ -126,21 +126,21 @@ public class MonopolyController {
         }
         );
     }
-
+    
     public void move() {
-
+        
         Constants.gameWindow.moveCarLabel(steps);
         curPlayer.move(steps);
         Constants.gameWindow.enableDicePanel(false);
     }
-
+    
     public void GenerateDiceAndMove() {
         //Start Dice Throw
         diceTimerCounter = 5;
         diceTimer.start();
-
+        
     }
-
+    
     public void switchTurn() {
         //Forwart to next Turn
         Player.MoveTurn();
@@ -148,9 +148,9 @@ public class MonopolyController {
         Constants.gameWindow.enableEndTurnBtn(false);
         Constants.gameWindow.enableRollDiceBtn();
         doubleDiceCount = 0;
-
+        
     }
-
+    
     public void moveToJail() {
         showDialog("You're going to jail");
         if (curPlayer.position > JAILPOSITION) {
@@ -159,11 +159,11 @@ public class MonopolyController {
             steps = JAILPOSITION - curPlayer.position;
         }
         curPlayer.inJail = true;
-
+        
         move();
-
+        
     }
-
+    
     public void PayRent(Player owner, Property p) {
         if (!p.isMortgaged) { //check if the property is not mortgaged
             showDialog("Unfortunately, This property is owned by " + owner.name + ", so you will have to pay him a rent");
@@ -182,11 +182,11 @@ public class MonopolyController {
             }
         }
     }
-
+    
     public void askToBuy() {
         int choice = Constants.gameWindow.startAskToBuyorAuction(curPlayer.position);
         Property p = ((Property) Constants.board.allCities.get(curPlayer.position));
-
+        
         int price = p.price;
         Player buyer = curPlayer;
         if (choice == 1) {
@@ -196,7 +196,7 @@ public class MonopolyController {
             buyer = Player.playersList.get(winner);
             price = arr[1];
         }
-
+        
         boolean n = buyer.buy(p.position, price);
         if (n) {
             p.owner = buyer.num;
@@ -208,32 +208,32 @@ public class MonopolyController {
                 City c = (City) p;
                 buyer.updateGroups(c.colorID);
             }
-
+            
             updateCurrentRent(p);
             showDialog("Congratulations, now you own " + Constants.board.allCities.get(p.position).name);
         } else {
             showDialog("You don't have enough money");
         }
     }
-
+    
     public void property(Property p) {
-
+        
         if (p.owner == -1) {
             askToBuy();
         } else if (p.owner != curPlayer.num) {
             Player owner = Player.playersList.get(p.owner);
             PayRent(owner, p);
         }
-
+        
     }
-
+    
     public void updateCurrentRent(Property p) {
         Player owner = Player.playersList.get(p.owner);
         if (p.type.equals("railroad")) {
             p.curRent = (owner.numberOfRailRoads * p.rent);
         } else if (p.type.equals("city")) {
             switch (((City) p).houses_count) {
-
+                
                 case 0:
                     p.curRent = ((City) p).rent;
                     break;
@@ -257,37 +257,37 @@ public class MonopolyController {
             }
         }
     }
-
+    
     private void doCard() { //to take a card 
 
         ArrayList<Player> players = Player.playersList;
         int playerNum = curPlayer.num; // the number of the player
         Card curCard = null;
         Location L = Constants.board.getLocation(curPlayer.position);
-
+        
         if (L.type.equalsIgnoreCase("chance")) {
             //removing a card and then adding it to the bottom
             curCard = Card.chanceCards.remove(0);
             Card.chanceCards.add(curCard);
-
+            
         } else if (L.type.equalsIgnoreCase("community")) {
             curCard = Card.communityCards.remove(0);
             Card.communityCards.add(curCard);
         }
-
+        
         JOptionPane.showMessageDialog(Constants.gameWindow.getBoardLabel(), null, null, JOptionPane.PLAIN_MESSAGE, Constants.gameWindow.getChanceCard(curCard.id));
         // to do the commands of the card taken 
         int value;
-
+        
         switch (curCard.key) {
             case "Take":
                 curPlayer.addMoney(curCard.value);
                 break;
-
+            
             case "Give":
                 curPlayer.deductMoney(curCard.value);
                 break;
-
+            
             case "GiveAll":
                 int toincrease = curCard.value;
                 value = curCard.value * (players.size() - 1);
@@ -299,7 +299,7 @@ public class MonopolyController {
                     }
                 }
                 break;
-
+            
             case "TakeAll":
                 int toreduce = curCard.value;
                 value = curCard.value * (players.size() - 1);
@@ -311,7 +311,7 @@ public class MonopolyController {
                     }
                 }
                 break;
-
+            
             case "Go":
                 if (curCard.value >= curPlayer.position) {
                     steps = curCard.value - curPlayer.position;
@@ -320,26 +320,26 @@ public class MonopolyController {
                 }
                 carRunnable.run();
                 break;
-
+            
         }
-
+        
     }
-
+    
     public void Mortgage(int city) {
         curPlayer.mortgage(city);
-
+        
     }
-
+    
     public void UnMortgage(int city) {
         curPlayer.unmortgage(city);
-
+        
     }
-
+    
     public boolean buildHouse(int city) {
-
+        
         int chosenColorID;
         if (Constants.board.allCities.get(city).type.equals("city")) {
-
+            
             if (!(curPlayer.getCitiesOwned().contains(city))) {
                 showDialog("You don't own this city to build on it");
             } else if (((City) Constants.board.allCities.get(city)).isMortgaged) {
@@ -364,7 +364,7 @@ public class MonopolyController {
         }
         return false;
     }
-
+    
     public void endGame() {
         int maximum = 0;
         int winner = -1;
@@ -386,9 +386,23 @@ public class MonopolyController {
         showDialog(Player.getName(winner) + " has won with a net worth of: " + maximum);
         System.exit(0);
     }
-
+    
+    public void removePlayer(int num) {
+        Player p = Player.getCurrentPlayer();
+        for (Integer city : p.getCitiesOwnedInt()) {
+            Property property = Constants.board.getProperty(city);
+            property.owner = -1;
+        }
+        Player.playersList.remove(num);
+        if (Player.playersList.size() == 1) {
+            showDialog(Player.playersList.get(0).name + " has won the game");
+            System.exit(0);
+        }
+        
+    }
+    
     public static void showDialog(String s) {
         JOptionPane.showMessageDialog(Constants.gameWindow.getBoardLabel(), s, null, JOptionPane.PLAIN_MESSAGE);
     }
-
+    
 }
